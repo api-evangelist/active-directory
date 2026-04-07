@@ -7,12 +7,12 @@ created: '2024'
 modified: '2024'
 specificationVersion: '0.18'
 tags:
-  - active directory
-  - authentication
-  - ldap
-  - identity management
-  - windows server
-  - domain services
+  - Active Directory
+  - Authentication
+  - Domain Services
+  - Identity Management
+  - Ldap
+  - Windows Server
 apis:
   - name: Active Directory Domain Services (AD DS)
     description: >-
@@ -22,13 +22,12 @@ apis:
     humanURL: https://docs.microsoft.com/windows-server/identity/ad-ds/
     baseURL: ldap://domain-controller.example.com:389
     tags:
-      - ldap
-      - domain services
-      - authentication
+      - Authentication
+      - Domain Services
+      - Ldap
     properties:
       - type: Documentation
-        url: 
-          https://docs.microsoft.com/windows-server/identity/ad-ds/get-started/virtual-dc/active-directory-domain-services-overview
+        url: https://docs.microsoft.com/windows-server/identity/ad-ds/get-started/virtual-dc/active-directory-domain-services-overview
       - type: LDAP Protocol
         url: ldap://domain-controller.example.com:389
       - type: LDAPS Protocol
@@ -41,17 +40,15 @@ apis:
   - name: Active Directory Lightweight Directory Services (AD LDS)
     description: >-
       Lightweight LDAP directory service for directory-enabled applications.
-    humanURL: 
-      https://docs.microsoft.com/previous-versions/windows/it-pro/windows-server-2012-R2-and-2012/hh831593(v=ws.11)
+    humanURL: https://docs.microsoft.com/previous-versions/windows/it-pro/windows-server-2012-R2-and-2012/hh831593(v=ws.11)
     baseURL: ldap://adlds-server.example.com:389
     tags:
-      - ldap
-      - directory services
-      - application directory
+      - Application Directory
+      - Directory Services
+      - Ldap
     properties:
       - type: Documentation
-        url: 
-          https://docs.microsoft.com/previous-versions/windows/it-pro/windows-server-2012-R2-and-2012/hh831593(v=ws.11)
+        url: https://docs.microsoft.com/previous-versions/windows/it-pro/windows-server-2012-R2-and-2012/hh831593(v=ws.11)
       - type: LDAP Endpoint
         url: ldap://adlds-server.example.com:389
   - name: Active Directory PowerShell Module
@@ -60,19 +57,17 @@ apis:
     humanURL: https://docs.microsoft.com/powershell/module/activedirectory/
     baseURL: https://powershell.example.com/ad
     tags:
-      - powershell
-      - automation
-      - scripting
-      - management
+      - Automation
+      - Management
+      - Powershell
+      - Scripting
     properties:
       - type: Documentation
         url: https://docs.microsoft.com/powershell/module/activedirectory/
       - type: API Reference
-        url: 
-          https://docs.microsoft.com/powershell/module/activedirectory/?view=windowsserver2022-ps
+        url: https://docs.microsoft.com/powershell/module/activedirectory/?view=windowsserver2022-ps
       - type: Examples
-        url: 
-          https://docs.microsoft.com/powershell/scripting/samples/sample-scripts-for-administration
+        url: https://docs.microsoft.com/powershell/scripting/samples/sample-scripts-for-administration
     operations:
       - name: Get-ADUser
         description: Gets one or more Active Directory users
@@ -94,10 +89,10 @@ apis:
     humanURL: https://docs.microsoft.com/graph/api/resources/azure-ad-overview
     baseURL: https://graph.microsoft.com/v1.0
     tags:
-      - rest api
-      - azure ad
-      - graph api
-      - cloud
+      - Azure Ad
+      - Cloud
+      - Graph Api
+      - Rest Api
     properties:
       - type: Documentation
         url: https://docs.microsoft.com/graph/api/resources/azure-ad-overview
@@ -138,17 +133,16 @@ apis:
     humanURL: https://ldap.com/
     baseURL: ldap://domain-controller.example.com:389
     tags:
-      - ldap
-      - protocol
-      - directory access
+      - Directory Access
+      - Ldap
+      - Protocol
     properties:
       - type: Protocol Specification
         url: https://datatracker.ietf.org/doc/html/rfc4511
       - type: Documentation
         url: https://ldap.com/ldap-specifications/
       - type: Best Practices
-        url: 
-          https://docs.microsoft.com/troubleshoot/windows-server/identity/best-practices-for-ldap-client-settings
+        url: https://docs.microsoft.com/troubleshoot/windows-server/identity/best-practices-for-ldap-client-settings
     operations:
       - name: Bind
         description: Authenticate to the directory
@@ -165,23 +159,20 @@ apis:
   - name: Kerberos Authentication Protocol
     description: >-
       Network authentication protocol for secure authentication in AD environments.
-    humanURL: 
-      https://docs.microsoft.com/windows-server/security/kerberos/kerberos-authentication-overview
+    humanURL: https://docs.microsoft.com/windows-server/security/kerberos/kerberos-authentication-overview
     baseURL: kerberos://domain-controller.example.com:88
     tags:
-      - kerberos
-      - authentication
-      - security
-      - protocol
+      - Authentication
+      - Kerberos
+      - Protocol
+      - Security
     properties:
       - type: Documentation
-        url: 
-          https://docs.microsoft.com/windows-server/security/kerberos/kerberos-authentication-overview
+        url: https://docs.microsoft.com/windows-server/security/kerberos/kerberos-authentication-overview
       - type: RFC Specification
         url: https://datatracker.ietf.org/doc/html/rfc4120
       - type: Troubleshooting
-        url: 
-          https://docs.microsoft.com/troubleshoot/windows-server/windows-security/kerberos-authentication-troubleshooting-guidance
+        url: https://docs.microsoft.com/troubleshoot/windows-server/windows-security/kerberos-authentication-troubleshooting-guidance
 common:
   - type: Terms of Service
     url: https://www.microsoft.com/servicesagreement
@@ -190,8 +181,7 @@ common:
   - type: Support
     url: https://support.microsoft.com
   - type: Blog
-    url: 
-      https://techcommunity.microsoft.com/t5/microsoft-security-and/bg-p/MicrosoftSecurityandCompliance
+    url: https://techcommunity.microsoft.com/t5/microsoft-security-and/bg-p/MicrosoftSecurityandCompliance
 maintainers:
   - name: Microsoft Corporation
     email: support@microsoft.com
