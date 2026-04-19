@@ -1,0 +1,19 @@
+{
+  "id": "45b7d2e7-b882-4a80-ba97-10b7a63b8fa4",
+  "displayName": "All Company",
+  "description": "All company employees — Microsoft 365 group for company-wide communication",
+  "mail": "allcompany@contoso.com",
+  "mailNickname": "allcompany",
+  "mailEnabled": true,
+  "securityEnabled": false,
+  "groupTypes": ["Unified"],
+  "visibility": "Public",
+  "membershipRule": null,
+  "membershipRuleProcessingState": null,
+  "onPremisesSyncEnabled": false,
+  "createdDateTime": "2024-01-10T09:00:00Z",
+  "renewedDateTime": "2025-01-10T09:00:00Z",
+  "expirationDateTime": "2026-01-10T09:00:00Z",
+  "preferredDataLocation": "NAM",
+  "resourceProvisioningOptions": ["Team"]
+}

@@ -1,0 +1,139 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/active-directory/main/json-schema/users-user-schema.json",
+  "title": "User",
+  "description": "A Microsoft Entra ID user account managed via Microsoft Graph",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Unique identifier for the user (read-only)",
+      "readOnly": true
+    },
+    "displayName": {
+      "type": "string",
+      "description": "Name displayed in the address book for the user",
+      "maxLength": 256
+    },
+    "userPrincipalName": {
+      "type": "string",
+      "description": "Principal name in UPN format (alias@domain)",
+      "pattern": "^[^@]+@[^@]+$"
+    },
+    "mail": {
+      "type": ["string", "null"],
+      "format": "email",
+      "description": "Primary SMTP address for the user"
+    },
+    "givenName": {
+      "type": ["string", "null"],
+      "description": "Given name (first name) of the user",
+      "maxLength": 64
+    },
+    "surname": {
+      "type": ["string", "null"],
+      "description": "Surname (family name or last name) of the user",
+      "maxLength": 64
+    },
+    "jobTitle": {
+      "type": ["string", "null"],
+      "description": "The user's job title",
+      "maxLength": 128
+    },
+    "department": {
+      "type": ["string", "null"],
+      "description": "Department name in which the user works",
+      "maxLength": 64
+    },
+    "officeLocation": {
+      "type": ["string", "null"],
+      "description": "Office location in the user's place of business",
+      "maxLength": 128
+    },
+    "mobilePhone": {
+      "type": ["string", "null"],
+      "description": "Primary cellular telephone number for the user"
+    },
+    "businessPhones": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Telephone numbers for the user"
+    },
+    "accountEnabled": {
+      "type": ["boolean", "null"],
+      "description": "True if the account is enabled; otherwise false"
+    },
+    "usageLocation": {
+      "type": ["string", "null"],
+      "description": "Two-letter country code (ISO 3166) required for license assignment",
+      "minLength": 2,
+      "maxLength": 2
+    },
+    "preferredLanguage": {
+      "type": ["string", "null"],
+      "description": "Preferred language for the user (ISO 639-1 Code, e.g. en-US)"
+    },
+    "createdDateTime": {
+      "type": ["string", "null"],
+      "format": "date-time",
+      "description": "Date and time the user was created",
+      "readOnly": true
+    },
+    "lastPasswordChangeDateTime": {
+      "type": ["string", "null"],
+      "format": "date-time",
+      "description": "Timestamp of the last password change",
+      "readOnly": true
+    },
+    "passwordPolicies": {
+      "type": ["string", "null"],
+      "description": "Password policies enforced for the user",
+      "enum": ["DisablePasswordExpiration", "DisableStrongPassword", "DisablePasswordExpiration, DisableStrongPassword", null]
+    },
+    "userType": {
+      "type": ["string", "null"],
+      "description": "Whether the user is a member or guest in the tenant",
+      "enum": ["Member", "Guest", null]
+    },
+    "assignedLicenses": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "skuId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "disabledPlans": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        }
+      },
+      "description": "Licenses assigned to the user"
+    },
+    "onPremisesSyncEnabled": {
+      "type": ["boolean", "null"],
+      "description": "True if the user is synchronized from on-premises Active Directory",
+      "readOnly": true
+    },
+    "onPremisesDistinguishedName": {
+      "type": ["string", "null"],
+      "description": "Distinguished name from on-premises Active Directory",
+      "readOnly": true
+    },
+    "externalUserState": {
+      "type": ["string", "null"],
+      "description": "State of a guest/external user invited via Azure AD B2B",
+      "enum": ["PendingAcceptance", "Accepted", null],
+      "readOnly": true
+    }
+  },
+  "required": ["displayName", "userPrincipalName"]
+}

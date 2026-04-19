@@ -1,0 +1,127 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/active-directory/main/json-schema/applications-service-principal-schema.json",
+  "title": "ServicePrincipal",
+  "description": "A Microsoft Entra service principal — the local tenant instance of an application",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Unique identifier for the service principal object",
+      "readOnly": true
+    },
+    "appId": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Application (client) ID of the associated application registration"
+    },
+    "displayName": {
+      "type": "string",
+      "description": "Display name for the service principal"
+    },
+    "servicePrincipalType": {
+      "type": "string",
+      "description": "Type of service principal",
+      "enum": ["Application", "Legacy", "ManagedIdentity", "SocialIdp"]
+    },
+    "accountEnabled": {
+      "type": ["boolean", "null"],
+      "description": "True if the service principal account is enabled"
+    },
+    "appRoles": {
+      "type": "array",
+      "description": "Application roles exposed by the associated application",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "displayName": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "value": {
+            "type": "string"
+          },
+          "allowedMemberTypes": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": ["User", "Application"]
+            }
+          },
+          "isEnabled": {
+            "type": "boolean"
+          }
+        }
+      }
+    },
+    "oauth2PermissionScopes": {
+      "type": "array",
+      "description": "Delegated permission scopes exposed by the application",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "adminConsentDisplayName": {
+            "type": "string"
+          },
+          "adminConsentDescription": {
+            "type": "string"
+          },
+          "userConsentDisplayName": {
+            "type": "string"
+          },
+          "value": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string",
+            "enum": ["User", "Admin"]
+          },
+          "isEnabled": {
+            "type": "boolean"
+          }
+        }
+      }
+    },
+    "homepage": {
+      "type": ["string", "null"],
+      "format": "uri",
+      "description": "Home page or landing page of the application"
+    },
+    "loginUrl": {
+      "type": ["string", "null"],
+      "format": "uri",
+      "description": "URL to direct users for sign-in (for SP-initiated SAML SSO)"
+    },
+    "replyUrls": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "format": "uri"
+      },
+      "description": "URLs where tokens are sent after authentication"
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Strings that categorize the application"
+    },
+    "createdDateTime": {
+      "type": ["string", "null"],
+      "format": "date-time",
+      "readOnly": true
+    }
+  }
+}

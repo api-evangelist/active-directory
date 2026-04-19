@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-structure.org/meta/extended/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/active-directory/main/json-structure/users-user-structure.json",
+  "title": "User",
+  "description": "A Microsoft Entra ID user account managed via Microsoft Graph",
+  "type": "record",
+  "fields": [
+    { "name": "id", "type": "string", "description": "Unique identifier for the user (read-only UUID)" },
+    { "name": "displayName", "type": "string", "description": "Name displayed in the address book" },
+    { "name": "userPrincipalName", "type": "string", "description": "Principal name in UPN format (alias@domain)" },
+    { "name": "mail", "type": "string", "optional": true, "description": "Primary SMTP email address" },
+    { "name": "givenName", "type": "string", "optional": true, "description": "First name of the user" },
+    { "name": "surname", "type": "string", "optional": true, "description": "Last name of the user" },
+    { "name": "jobTitle", "type": "string", "optional": true, "description": "User's job title" },
+    { "name": "department", "type": "string", "optional": true, "description": "Department the user works in" },
+    { "name": "officeLocation", "type": "string", "optional": true, "description": "Office location" },
+    { "name": "mobilePhone", "type": "string", "optional": true, "description": "Primary mobile phone number" },
+    { "name": "businessPhones", "type": "array", "items": { "type": "string" }, "optional": true, "description": "Business phone numbers" },
+    { "name": "accountEnabled", "type": "boolean", "optional": true, "description": "Whether the account is enabled" },
+    { "name": "usageLocation", "type": "string", "optional": true, "description": "ISO 3166 two-letter country code (required for license assignment)" },
+    { "name": "preferredLanguage", "type": "string", "optional": true, "description": "ISO 639-1 language code (e.g. en-US)" },
+    { "name": "createdDateTime", "type": "timestamp", "optional": true, "description": "When the user was created" },
+    { "name": "lastPasswordChangeDateTime", "type": "timestamp", "optional": true, "description": "When the user last changed their password" },
+    { "name": "passwordPolicies", "type": "string", "optional": true, "description": "Password policies (e.g. DisablePasswordExpiration)" },
+    { "name": "userType", "type": "string", "optional": true, "description": "Member or Guest" },
+    { "name": "onPremisesSyncEnabled", "type": "boolean", "optional": true, "description": "Whether synced from on-premises Active Directory" },
+    { "name": "onPremisesDistinguishedName", "type": "string", "optional": true, "description": "Distinguished name from on-premises AD" },
+    { "name": "externalUserState", "type": "string", "optional": true, "description": "B2B guest invitation state (PendingAcceptance or Accepted)" }
+  ]
+}

@@ -1,0 +1,29 @@
+{
+  "id": "87d349ed-44d7-43e1-9a83-5f2406dee5bd",
+  "displayName": "Adele Vance",
+  "userPrincipalName": "AdeleV@contoso.com",
+  "mail": "AdeleV@contoso.com",
+  "givenName": "Adele",
+  "surname": "Vance",
+  "jobTitle": "Product Marketing Manager",
+  "department": "Marketing",
+  "officeLocation": "18/2111",
+  "mobilePhone": "+1 555 0100",
+  "businessPhones": ["+1 555 0200"],
+  "accountEnabled": true,
+  "usageLocation": "US",
+  "preferredLanguage": "en-US",
+  "userType": "Member",
+  "createdDateTime": "2024-01-15T08:30:00Z",
+  "lastPasswordChangeDateTime": "2025-12-01T14:22:00Z",
+  "passwordPolicies": "DisablePasswordExpiration",
+  "onPremisesSyncEnabled": false,
+  "onPremisesDistinguishedName": null,
+  "externalUserState": null,
+  "assignedLicenses": [
+    {
+      "skuId": "6fd2c87f-b296-42f0-b197-1e91e994b900",
+      "disabledPlans": []
+    }
+  ]
+}

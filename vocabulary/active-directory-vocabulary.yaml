@@ -1,0 +1,359 @@
+vocabulary: "1.0.0"
+
+info:
+  provider: Microsoft Active Directory
+  description: >-
+    Vocabulary covering Microsoft Active Directory and Microsoft Entra ID identity and
+    access management taxonomy, mapping operational dimensions (users, groups, applications,
+    service principals) and capability dimensions (workflows, personas) for identity lifecycle
+    management, zero trust, and governance.
+  created: "2026-04-19"
+  modified: "2026-04-19"
+
+operational:
+  apis:
+    - name: Microsoft Graph Users API
+      namespace: active-directory-users
+      version: "v1.0"
+      baseUrl: https://graph.microsoft.com/v1.0
+      status: active
+
+    - name: Microsoft Graph Groups API
+      namespace: active-directory-groups
+      version: "v1.0"
+      baseUrl: https://graph.microsoft.com/v1.0
+      status: active
+
+    - name: Microsoft Graph Applications and Service Principals API
+      namespace: active-directory-applications
+      version: "v1.0"
+      baseUrl: https://graph.microsoft.com/v1.0
+      status: active
+
+    - name: Microsoft Graph Devices API
+      namespace: active-directory-devices
+      version: "v1.0"
+      baseUrl: https://graph.microsoft.com/v1.0
+      status: active
+
+    - name: Microsoft Graph Conditional Access API
+      namespace: active-directory-conditional-access
+      version: "v1.0"
+      baseUrl: https://graph.microsoft.com/v1.0
+      status: active
+
+    - name: Microsoft Graph Identity Governance API
+      namespace: active-directory-governance
+      version: "v1.0"
+      baseUrl: https://graph.microsoft.com/v1.0
+      status: active
+
+    - name: Microsoft Graph Identity Protection API
+      namespace: active-directory-identity-protection
+      version: "v1.0"
+      baseUrl: https://graph.microsoft.com/v1.0
+      status: active
+
+  resources:
+    - name: users
+      apis: [active-directory-users]
+      actions: [list, get, create, update, delete]
+      description: Microsoft Entra ID user accounts representing employees, guests, and service accounts
+
+    - name: groups
+      apis: [active-directory-groups]
+      actions: [list, get, create, update, delete]
+      description: Security groups and Microsoft 365 groups for access control and collaboration
+
+    - name: members
+      apis: [active-directory-groups]
+      actions: [list, add, remove]
+      description: Direct members of a group (users, devices, service principals, or other groups)
+
+    - name: owners
+      apis: [active-directory-groups]
+      actions: [list, add, remove]
+      description: Non-admin users authorized to manage a specific group
+
+    - name: applications
+      apis: [active-directory-applications]
+      actions: [list, get, create, update, delete]
+      description: Application registrations in Microsoft Entra ID
+
+    - name: service-principals
+      apis: [active-directory-applications]
+      actions: [list, get, update, delete]
+      description: Local tenant instances of application registrations
+
+    - name: app-role-assignments
+      apis: [active-directory-applications]
+      actions: [list, create, delete]
+      description: App role grants assigned to users, groups, or service principals
+
+    - name: devices
+      apis: [active-directory-devices]
+      actions: [list, get, delete]
+      description: Devices registered or joined to Microsoft Entra ID
+
+    - name: conditional-access-policies
+      apis: [active-directory-conditional-access]
+      actions: [list, get, create, update, delete]
+      description: Conditional Access policies enforcing access controls based on user, device, and risk signals
+
+    - name: named-locations
+      apis: [active-directory-conditional-access]
+      actions: [list, get, create, update, delete]
+      description: IP ranges or countries used as conditions in Conditional Access policies
+
+    - name: access-reviews
+      apis: [active-directory-governance]
+      actions: [list, get, create]
+      description: Periodic reviews of user access to resources for compliance
+
+    - name: risky-users
+      apis: [active-directory-identity-protection]
+      actions: [list, get, confirm, dismiss]
+      description: Users flagged with identity risk detections by Microsoft Entra ID Protection
+
+  actions:
+    - name: list
+      httpMethod: GET
+      pattern: read
+      description: Retrieve collections with OData filtering and pagination
+
+    - name: get
+      httpMethod: GET
+      pattern: read
+      description: Retrieve a single resource by ID or UPN
+
+    - name: create
+      httpMethod: POST
+      pattern: write
+      description: Create a new resource
+
+    - name: update
+      httpMethod: PATCH
+      pattern: write
+      description: Update an existing resource (partial update)
+
+    - name: delete
+      httpMethod: DELETE
+      pattern: destructive
+      description: Delete a resource (soft-delete with 30-day recycle bin for most resources)
+
+    - name: add
+      httpMethod: POST
+      pattern: write
+      description: Add a member or owner to a collection
+
+    - name: remove
+      httpMethod: DELETE
+      pattern: destructive
+      description: Remove a member or owner from a collection
+
+    - name: confirm
+      httpMethod: POST
+      pattern: write
+      description: Confirm a risk detection or risky user
+
+    - name: dismiss
+      httpMethod: POST
+      pattern: write
+      description: Dismiss a risk detection or risky user
+
+  schemas:
+    core:
+      - name: User
+        description: Microsoft Entra ID user account
+        keyProperties: [id, displayName, userPrincipalName, mail, accountEnabled, userType, createdDateTime]
+
+      - name: Group
+        description: Microsoft Entra security group or Microsoft 365 group
+        keyProperties: [id, displayName, mailEnabled, securityEnabled, groupTypes, visibility, createdDateTime]
+
+      - name: Application
+        description: Microsoft Entra application registration
+        keyProperties: [id, appId, displayName, signInAudience, createdDateTime]
+
+      - name: ServicePrincipal
+        description: Local tenant instance of an application
+        keyProperties: [id, appId, displayName, servicePrincipalType, accountEnabled]
+
+    auxiliary:
+      - name: PasswordProfile
+        description: Password configuration for a new or reset user account
+        keyProperties: [password, forceChangePasswordNextSignIn]
+
+      - name: AppRoleAssignment
+        description: Assignment of an app role to a user, group, or service principal
+        keyProperties: [id, appRoleId, principalId, principalType, resourceId, createdDateTime]
+
+  parameters:
+    identifiers:
+      - name: userId
+        description: User object ID (UUID) or userPrincipalName
+      - name: groupId
+        description: Group object ID (UUID)
+      - name: applicationId
+        description: Application object ID (UUID) — distinct from appId/client ID
+      - name: servicePrincipalId
+        description: Service principal object ID (UUID)
+
+    filters:
+      - name: $filter
+        description: OData filter expression for scoping results
+      - name: $select
+        description: OData property selection — limits returned properties
+      - name: $search
+        description: OData search across supported properties
+
+    pagination:
+      - name: $top
+        description: Maximum results per page (max 999 for most resources)
+      - name: $skiptoken
+        description: Pagination cursor embedded in @odata.nextLink
+
+  enums:
+    userType:
+      - Member
+      - Guest
+
+    groupType:
+      - Unified
+      - DynamicMembership
+
+    groupVisibility:
+      - Public
+      - Private
+      - HiddenMembership
+
+    signInAudience:
+      - AzureADMyOrg
+      - AzureADMultipleOrgs
+      - AzureADandPersonalMicrosoftAccount
+      - PersonalMicrosoftAccount
+
+    servicePrincipalType:
+      - Application
+      - Legacy
+      - ManagedIdentity
+      - SocialIdp
+
+    membershipRuleProcessingState:
+      - On
+      - Paused
+
+  authentication:
+    schemes:
+      - name: oauth2-delegated
+        type: OAuth2
+        flow: authorizationCode
+        description: Delegated permissions — acts on behalf of the signed-in user
+        tokenEndpoint: https://login.microsoftonline.com/{tenant}/oauth2/v2.0/token
+      - name: oauth2-app
+        type: OAuth2
+        flow: clientCredentials
+        description: Application permissions — acts as the application without a signed-in user
+        tokenEndpoint: https://login.microsoftonline.com/{tenant}/oauth2/v2.0/token
+
+capability:
+  workflows:
+    - name: Identity Management Operations
+      file: capabilities/identity-management-operations.yaml
+      description: Unified user, group, and application management for Microsoft Entra ID
+      apisCombined: [active-directory-users, active-directory-groups, active-directory-applications]
+      toolCount: 10
+      personas: [IT Administrator, Identity Engineer, Security Analyst]
+
+  personas:
+    - id: it-administrator
+      name: IT Administrator
+      description: Enterprise IT admin managing user accounts, groups, device policies, and access management
+      workflows: [Identity Management Operations]
+
+    - id: identity-engineer
+      name: Identity Engineer
+      description: Identity platform engineer managing application registrations, service principals, and OAuth2 permission grants
+      workflows: [Identity Management Operations]
+
+    - id: security-analyst
+      name: Security Analyst
+      description: Security professional monitoring identity risks, conditional access policies, and audit logs
+      workflows: [Identity Management Operations]
+
+  domains:
+    - name: User Lifecycle Management
+      resources: [users]
+      description: Create, update, and deactivate user accounts throughout the employee/guest lifecycle
+
+    - name: Access Control
+      resources: [groups, members, owners, app-role-assignments]
+      description: Group-based access control and app role assignment for resource permissions
+
+    - name: Application Governance
+      resources: [applications, service-principals]
+      description: Application registration and service principal lifecycle for zero-trust app governance
+
+    - name: Device Management
+      resources: [devices]
+      description: Registered and joined device management for compliant device access policies
+
+    - name: Policy Enforcement
+      resources: [conditional-access-policies, named-locations]
+      description: Conditional Access policy automation for zero-trust enforcement
+
+    - name: Identity Governance
+      resources: [access-reviews, risky-users]
+      description: Periodic access reviews and identity risk remediation
+
+  namespaces:
+    - name: active-directory-users
+      type: consumed
+      description: Microsoft Graph Users API
+
+    - name: active-directory-groups
+      type: consumed
+      description: Microsoft Graph Groups API
+
+    - name: active-directory-applications
+      type: consumed
+      description: Microsoft Graph Applications API
+
+    - name: active-directory-identity-api
+      type: rest-exposed
+      port: 8080
+
+    - name: active-directory-identity-mcp
+      type: mcp-exposed
+      port: 9090
+
+  binds:
+    - name: AD_ACCESS_TOKEN
+      description: OAuth2 bearer token for Microsoft Graph API authentication
+      workflows: [Identity Management Operations]
+
+crossReference:
+  - resource: users
+    operations: [list-users, get-user, create-user]
+    workflows: [Identity Management Operations]
+    personas: [IT Administrator]
+
+  - resource: groups
+    operations: [list-groups, get-group]
+    workflows: [Identity Management Operations]
+    personas: [IT Administrator, Security Analyst]
+
+  - resource: members
+    operations: [list-group-members]
+    workflows: [Identity Management Operations]
+    personas: [IT Administrator]
+
+  - resource: applications
+    operations: [list-applications, get-application]
+    workflows: [Identity Management Operations]
+    personas: [Identity Engineer]
+
+  - resource: service-principals
+    operations: [list-service-principals]
+    workflows: [Identity Management Operations]
+    personas: [Identity Engineer, Security Analyst]

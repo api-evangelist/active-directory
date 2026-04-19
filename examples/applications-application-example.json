@@ -1,0 +1,48 @@
+{
+  "id": "aaa11b33-c40f-4880-b66e-7f4a91a47b85",
+  "appId": "f4d5e3c2-b1a0-4321-abcd-ef0123456789",
+  "displayName": "Contoso HR Portal",
+  "description": "Internal HR portal application for employee self-service",
+  "signInAudience": "AzureADMyOrg",
+  "identifierUris": [
+    "api://f4d5e3c2-b1a0-4321-abcd-ef0123456789"
+  ],
+  "web": {
+    "redirectUris": [
+      "https://hrportal.contoso.com/auth/callback",
+      "https://hrportal.contoso.com/auth/signin-oidc"
+    ],
+    "logoutUrl": "https://hrportal.contoso.com/auth/logout",
+    "implicitGrantSettings": {
+      "enableAccessTokenIssuance": false,
+      "enableIdTokenIssuance": false
+    }
+  },
+  "requiredResourceAccess": [
+    {
+      "resourceAppId": "00000003-0000-0000-c000-000000000000",
+      "resourceAccess": [
+        {
+          "id": "e1fe6dd8-ba31-4d61-89e7-88639da4683d",
+          "type": "Scope"
+        },
+        {
+          "id": "df021288-bdef-4463-88db-98f22de89214",
+          "type": "Role"
+        }
+      ]
+    }
+  ],
+  "keyCredentials": [],
+  "passwordCredentials": [
+    {
+      "keyId": "bbb22c44-d50e-5990-c77f-8e5b02b58b96",
+      "displayName": "Client Secret for Production",
+      "startDateTime": "2025-01-01T00:00:00Z",
+      "endDateTime": "2026-01-01T00:00:00Z",
+      "hint": "xWw"
+    }
+  ],
+  "createdDateTime": "2024-06-01T10:30:00Z",
+  "deletedDateTime": null
+}

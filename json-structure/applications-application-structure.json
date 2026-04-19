@@ -1,0 +1,49 @@
+{
+  "$schema": "https://json-structure.org/meta/extended/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/active-directory/main/json-structure/applications-application-structure.json",
+  "title": "Application",
+  "description": "A Microsoft Entra application registration managed via Microsoft Graph",
+  "type": "record",
+  "fields": [
+    { "name": "id", "type": "string", "description": "Unique identifier for the application object (UUID, read-only)" },
+    { "name": "appId", "type": "string", "description": "Application (client) ID used in OAuth2 flows (UUID, read-only)" },
+    { "name": "displayName", "type": "string", "description": "Display name of the application" },
+    { "name": "description", "type": "string", "optional": true, "description": "Free text description" },
+    { "name": "signInAudience", "type": "string", "description": "Supported Microsoft account types: AzureADMyOrg, AzureADMultipleOrgs, AzureADandPersonalMicrosoftAccount, PersonalMicrosoftAccount" },
+    { "name": "identifierUris", "type": "array", "items": { "type": "string" }, "optional": true, "description": "URIs identifying the application in the tenant" },
+    { "name": "web", "type": "record", "optional": true, "description": "Web platform configuration", "fields": [
+      { "name": "redirectUris", "type": "array", "items": { "type": "string" }, "optional": true },
+      { "name": "logoutUrl", "type": "string", "optional": true },
+      { "name": "implicitGrantSettings", "type": "record", "optional": true, "fields": [
+        { "name": "enableAccessTokenIssuance", "type": "boolean", "optional": true },
+        { "name": "enableIdTokenIssuance", "type": "boolean", "optional": true }
+      ]}
+    ]},
+    { "name": "requiredResourceAccess", "type": "array", "optional": true, "description": "API permissions required by the application", "items": {
+      "type": "record",
+      "fields": [
+        { "name": "resourceAppId", "type": "string" },
+        { "name": "resourceAccess", "type": "array", "items": {
+          "type": "record",
+          "fields": [
+            { "name": "id", "type": "string" },
+            { "name": "type", "type": "string", "description": "Role or Scope" }
+          ]
+        }}
+      ]
+    }},
+    { "name": "keyCredentials", "type": "array", "optional": true, "description": "Certificate credentials", "items": {
+      "type": "record",
+      "fields": [
+        { "name": "keyId", "type": "string" },
+        { "name": "type", "type": "string" },
+        { "name": "usage", "type": "string" },
+        { "name": "displayName", "type": "string", "optional": true },
+        { "name": "startDateTime", "type": "timestamp", "optional": true },
+        { "name": "endDateTime", "type": "timestamp", "optional": true }
+      ]
+    }},
+    { "name": "createdDateTime", "type": "timestamp", "optional": true, "description": "When the application was registered" },
+    { "name": "deletedDateTime", "type": "timestamp", "optional": true, "description": "When the application was soft-deleted" }
+  ]
+}

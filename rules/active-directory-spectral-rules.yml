@@ -1,0 +1,355 @@
+extends: spectral:oas
+
+rules:
+
+  # ── Microsoft Graph Server Validation ────────────────────────────────────────
+
+  ad-graph-server-url:
+    description: Microsoft Graph APIs must use graph.microsoft.com as the server URL
+    message: "Server URL must be graph.microsoft.com/v1.0 or graph.microsoft.com/beta"
+    severity: error
+    given: "$.servers[*].url"
+    then:
+      function: pattern
+      functionOptions:
+        match: "^https://graph\\.microsoft\\.com/(v1\\.0|beta)$"
+
+  ad-https-only:
+    description: All Microsoft Graph servers must use HTTPS
+    message: "Server URL must use HTTPS"
+    severity: error
+    given: "$.servers[*].url"
+    then:
+      function: pattern
+      functionOptions:
+        match: "^https://"
+
+  # ── Operation Summary and Description ────────────────────────────────────────
+
+  ad-operation-summary-required:
+    description: Every operation must have a non-empty summary
+    message: "Operation '{{path}}' must have a summary"
+    severity: error
+    given: "$.paths[*][get,post,patch,put,delete]"
+    then:
+      field: summary
+      function: truthy
+
+  ad-operation-summary-title-case:
+    description: Operation summaries must use Title Case (each word capitalized)
+    message: "Operation summary '{{value}}' must use Title Case"
+    severity: warn
+    given: "$.paths[*][get,post,patch,put,delete].summary"
+    then:
+      function: pattern
+      functionOptions:
+        match: "^[A-Z][a-zA-Z0-9]*([ ][A-Z][a-zA-Z0-9]*)*$"
+
+  ad-operation-summary-prefix:
+    description: Operation summaries must be prefixed with 'Active Directory'
+    message: "Operation summary must start with 'Active Directory'"
+    severity: warn
+    given: "$.paths[*][get,post,patch,put,delete].summary"
+    then:
+      function: pattern
+      functionOptions:
+        match: "^Active Directory "
+
+  ad-operation-description-required:
+    description: Every operation should have a detailed description
+    message: "Operation '{{path}}' should have a description"
+    severity: warn
+    given: "$.paths[*][get,post,patch,put,delete]"
+    then:
+      field: description
+      function: truthy
+
+  ad-operation-id-required:
+    description: Every operation must have an operationId
+    message: "Operation '{{path}}' must have an operationId"
+    severity: error
+    given: "$.paths[*][get,post,patch,put,delete]"
+    then:
+      field: operationId
+      function: truthy
+
+  ad-operation-id-kebab-case:
+    description: Operation IDs must use kebab-case
+    message: "operationId '{{value}}' must use kebab-case"
+    severity: warn
+    given: "$.paths[*][get,post,patch,put,delete].operationId"
+    then:
+      function: pattern
+      functionOptions:
+        match: "^[a-z][a-z0-9]*(-[a-z0-9]+)*$"
+
+  # ── Tags ─────────────────────────────────────────────────────────────────────
+
+  ad-operation-tags-required:
+    description: Every operation must have at least one tag
+    message: "Operation '{{path}}' must define at least one tag"
+    severity: warn
+    given: "$.paths[*][get,post,patch,put,delete]"
+    then:
+      field: tags
+      function: truthy
+
+  ad-tags-defined:
+    description: All tags used in operations must be declared in the global tags list
+    message: "Tag '{{value}}' must be declared in the global tags array"
+    severity: warn
+    given: "$.paths[*][get,post,patch,put,delete].tags[*]"
+    then:
+      function: enumeration
+      functionOptions:
+        values:
+          - Users
+          - Groups
+          - Members
+          - Owners
+          - Applications
+          - Service Principals
+          - App Role Assignments
+          - Devices
+          - Directory Roles
+          - Conditional Access
+          - Identity Governance
+          - Identity Protection
+          - Authentication Methods
+          - Reports
+
+  # ── Authentication ────────────────────────────────────────────────────────────
+
+  ad-oauth2-security-scheme:
+    description: APIs must declare an OAuth2 security scheme
+    message: "Security schemes must include an OAuth2 definition"
+    severity: error
+    given: "$.components.securitySchemes"
+    then:
+      function: schema
+      functionOptions:
+        schema:
+          type: object
+          required: [oauth2]
+
+  ad-security-required:
+    description: Every operation must declare security requirements
+    message: "Operation '{{path}}' must declare OAuth2 security requirements"
+    severity: error
+    given: "$.paths[*][get,post,patch,put,delete]"
+    then:
+      field: security
+      function: truthy
+
+  # ── Responses ────────────────────────────────────────────────────────────────
+
+  ad-get-200-response:
+    description: GET operations must return a 200 response
+    message: "GET operation '{{path}}' must define a 200 response"
+    severity: error
+    given: "$.paths[*].get"
+    then:
+      field: responses.200
+      function: truthy
+
+  ad-post-201-response:
+    description: POST operations creating resources should return 201
+    message: "POST operation '{{path}}' should define a 201 response"
+    severity: warn
+    given: "$.paths[*].post"
+    then:
+      field: responses.201
+      function: truthy
+
+  ad-delete-204-response:
+    description: DELETE operations must return 204 No Content
+    message: "DELETE operation '{{path}}' must return 204"
+    severity: error
+    given: "$.paths[*].delete"
+    then:
+      field: responses.204
+      function: truthy
+
+  ad-patch-204-response:
+    description: PATCH operations must return 204 No Content
+    message: "PATCH operation '{{path}}' must return 204"
+    severity: warn
+    given: "$.paths[*].patch"
+    then:
+      field: responses.204
+      function: truthy
+
+  ad-401-response:
+    description: All operations must define a 401 Unauthorized response
+    message: "Operation '{{path}}' must define a 401 response"
+    severity: warn
+    given: "$.paths[*][get,post,patch,put,delete]"
+    then:
+      field: responses.401
+      function: truthy
+
+  # ── OData Parameters ─────────────────────────────────────────────────────────
+
+  ad-list-filter-param:
+    description: List operations should support $filter OData parameter
+    message: "GET collection operation '{{path}}' should have a $filter query parameter"
+    severity: warn
+    given: "$.paths[?(!@property.match(/{[^}]+}$/))].get"
+    then:
+      function: schema
+      functionOptions:
+        schema:
+          type: object
+          required: [parameters]
+
+  ad-list-top-param:
+    description: List operations should support $top pagination parameter
+    message: "GET collection operation should support $top pagination"
+    severity: info
+    given: "$.paths[*].get.parameters[*]"
+    then:
+      field: name
+      function: pattern
+      functionOptions:
+        match: "^\\$top$|^\\$filter$|^\\$select$|^userId$|^groupId$|^applicationId$|^servicePrincipalId$|^memberId$"
+
+  # ── Request Body ─────────────────────────────────────────────────────────────
+
+  ad-post-request-body:
+    description: POST operations must define a request body
+    message: "POST operation '{{path}}' must define a request body"
+    severity: error
+    given: "$.paths[*].post"
+    then:
+      field: requestBody
+      function: truthy
+
+  ad-patch-request-body:
+    description: PATCH operations must define a request body
+    message: "PATCH operation '{{path}}' must define a request body"
+    severity: error
+    given: "$.paths[*].patch"
+    then:
+      field: requestBody
+      function: truthy
+
+  ad-request-body-json:
+    description: Request bodies must use application/json content type
+    message: "Request body must use application/json media type"
+    severity: error
+    given: "$.paths[*][post,patch,put].requestBody.content"
+    then:
+      field: "application/json"
+      function: truthy
+
+  # ── Schema Design ─────────────────────────────────────────────────────────────
+
+  ad-schema-id-uuid:
+    description: ID properties should be documented as UUID format
+    message: "Property 'id' should have format: uuid"
+    severity: warn
+    given: "$.components.schemas[*].properties.id"
+    then:
+      field: format
+      function: truthy
+
+  ad-schemas-have-descriptions:
+    description: All schemas must have descriptions
+    message: "Schema '{{path}}' must have a description"
+    severity: warn
+    given: "$.components.schemas[*]"
+    then:
+      field: description
+      function: truthy
+
+  ad-properties-have-descriptions:
+    description: Schema properties should have descriptions
+    message: "Property '{{path}}' should have a description"
+    severity: info
+    given: "$.components.schemas[*].properties[*]"
+    then:
+      field: description
+      function: truthy
+
+  # ── Path Conventions ──────────────────────────────────────────────────────────
+
+  ad-path-lowercase:
+    description: API paths must use lowercase letters
+    message: "Path '{{path}}' must use lowercase letters"
+    severity: error
+    given: "$.paths[*]~"
+    then:
+      function: pattern
+      functionOptions:
+        match: "^(/[a-z][a-zA-Z0-9${}/_-]*)+$"
+
+  ad-path-no-trailing-slash:
+    description: API paths must not end with a trailing slash
+    message: "Path '{{path}}' must not end with a trailing slash"
+    severity: error
+    given: "$.paths[*]~"
+    then:
+      function: pattern
+      functionOptions:
+        notMatch: "/$"
+
+  ad-path-id-parameter:
+    description: Path parameters for resource IDs should use descriptive names ending in 'Id'
+    message: "Path parameter '{{value}}' should end in 'Id' (e.g. userId, groupId)"
+    severity: warn
+    given: "$.paths[*][get,patch,delete].parameters[?(@.in=='path')].name"
+    then:
+      function: pattern
+      functionOptions:
+        match: "(Id|id)$"
+
+  # ── Info ──────────────────────────────────────────────────────────────────────
+
+  ad-info-contact:
+    description: API info must include a contact object
+    message: "API info must include a contact object"
+    severity: warn
+    given: "$.info"
+    then:
+      field: contact
+      function: truthy
+
+  ad-info-license:
+    description: API info must include license information
+    message: "API info must include a license object"
+    severity: warn
+    given: "$.info"
+    then:
+      field: license
+      function: truthy
+
+  ad-info-terms-of-service:
+    description: API info should include terms of service URL
+    message: "API info should include a termsOfService URL"
+    severity: info
+    given: "$.info"
+    then:
+      field: termsOfService
+      function: truthy
+
+  # ── Content Type ──────────────────────────────────────────────────────────────
+
+  ad-response-json-content:
+    description: Successful responses must include application/json content type
+    message: "Response '{{path}}' must include application/json content"
+    severity: error
+    given: "$.paths[*][get,post].responses[200,201].content"
+    then:
+      field: "application/json"
+      function: truthy
+
+  # ── Microcks Examples ─────────────────────────────────────────────────────────
+
+  ad-microcks-operation:
+    description: Operations should include x-microcks-operation for mock generation
+    message: "Operation '{{path}}' should include x-microcks-operation extension"
+    severity: info
+    given: "$.paths[*][get,post,patch,put,delete]"
+    then:
+      field: x-microcks-operation
+      function: truthy

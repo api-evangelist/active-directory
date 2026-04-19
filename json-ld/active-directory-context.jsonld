@@ -1,0 +1,115 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "ad": "https://learn.microsoft.com/en-us/graph/api/resources/",
+    "schema": "https://schema.org/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+
+    "User": {
+      "@id": "ad:user",
+      "@type": "@id"
+    },
+    "Group": {
+      "@id": "ad:group",
+      "@type": "@id"
+    },
+    "Application": {
+      "@id": "ad:application",
+      "@type": "@id"
+    },
+    "ServicePrincipal": {
+      "@id": "ad:serviceprincipal",
+      "@type": "@id"
+    },
+    "Device": {
+      "@id": "ad:device",
+      "@type": "@id"
+    },
+    "DirectoryRole": {
+      "@id": "ad:directoryrole",
+      "@type": "@id"
+    },
+    "AdministrativeUnit": {
+      "@id": "ad:administrativeunit",
+      "@type": "@id"
+    },
+    "ConditionalAccessPolicy": {
+      "@id": "ad:conditionalaccesspolicy",
+      "@type": "@id"
+    },
+    "AppRoleAssignment": {
+      "@id": "ad:approleassignment",
+      "@type": "@id"
+    },
+    "PasswordProfile": {
+      "@id": "ad:passwordprofile",
+      "@type": "@id"
+    },
+
+    "id": "@id",
+    "appId": { "@id": "ad:appId", "@type": "xsd:string" },
+    "displayName": { "@id": "schema:name", "@type": "xsd:string" },
+    "description": { "@id": "schema:description", "@type": "xsd:string" },
+    "userPrincipalName": { "@id": "ad:userPrincipalName", "@type": "xsd:string" },
+    "mail": { "@id": "schema:email", "@type": "xsd:string" },
+    "givenName": { "@id": "schema:givenName", "@type": "xsd:string" },
+    "surname": { "@id": "schema:familyName", "@type": "xsd:string" },
+    "jobTitle": { "@id": "schema:jobTitle", "@type": "xsd:string" },
+    "department": { "@id": "schema:department", "@type": "xsd:string" },
+    "officeLocation": { "@id": "schema:workLocation", "@type": "xsd:string" },
+    "mobilePhone": { "@id": "schema:telephone", "@type": "xsd:string" },
+    "businessPhones": { "@id": "schema:telephone", "@container": "@set" },
+    "accountEnabled": { "@id": "ad:accountEnabled", "@type": "xsd:boolean" },
+    "usageLocation": { "@id": "schema:addressCountry", "@type": "xsd:string" },
+    "preferredLanguage": { "@id": "schema:inLanguage", "@type": "xsd:string" },
+    "createdDateTime": { "@id": "schema:dateCreated", "@type": "xsd:dateTime" },
+    "lastPasswordChangeDateTime": { "@id": "ad:lastPasswordChangeDateTime", "@type": "xsd:dateTime" },
+    "passwordPolicies": { "@id": "ad:passwordPolicies", "@type": "xsd:string" },
+    "userType": { "@id": "ad:userType", "@type": "xsd:string" },
+    "onPremisesSyncEnabled": { "@id": "ad:onPremisesSyncEnabled", "@type": "xsd:boolean" },
+    "onPremisesDistinguishedName": { "@id": "ad:onPremisesDistinguishedName", "@type": "xsd:string" },
+    "externalUserState": { "@id": "ad:externalUserState", "@type": "xsd:string" },
+    "assignedLicenses": { "@id": "ad:assignedLicenses", "@container": "@set" },
+
+    "mailNickname": { "@id": "ad:mailNickname", "@type": "xsd:string" },
+    "mailEnabled": { "@id": "ad:mailEnabled", "@type": "xsd:boolean" },
+    "securityEnabled": { "@id": "ad:securityEnabled", "@type": "xsd:boolean" },
+    "groupTypes": { "@id": "ad:groupTypes", "@container": "@set" },
+    "visibility": { "@id": "ad:visibility", "@type": "xsd:string" },
+    "membershipRule": { "@id": "ad:membershipRule", "@type": "xsd:string" },
+    "membershipRuleProcessingState": { "@id": "ad:membershipRuleProcessingState", "@type": "xsd:string" },
+    "renewedDateTime": { "@id": "ad:renewedDateTime", "@type": "xsd:dateTime" },
+    "expirationDateTime": { "@id": "ad:expirationDateTime", "@type": "xsd:dateTime" },
+    "preferredDataLocation": { "@id": "ad:preferredDataLocation", "@type": "xsd:string" },
+    "resourceProvisioningOptions": { "@id": "ad:resourceProvisioningOptions", "@container": "@set" },
+
+    "signInAudience": { "@id": "ad:signInAudience", "@type": "xsd:string" },
+    "identifierUris": { "@id": "ad:identifierUris", "@container": "@set" },
+    "web": { "@id": "ad:web" },
+    "redirectUris": { "@id": "ad:redirectUris", "@container": "@set" },
+    "logoutUrl": { "@id": "ad:logoutUrl", "@type": "xsd:anyURI" },
+    "requiredResourceAccess": { "@id": "ad:requiredResourceAccess", "@container": "@set" },
+    "keyCredentials": { "@id": "ad:keyCredentials", "@container": "@set" },
+    "passwordCredentials": { "@id": "ad:passwordCredentials", "@container": "@set" },
+    "deletedDateTime": { "@id": "ad:deletedDateTime", "@type": "xsd:dateTime" },
+
+    "servicePrincipalType": { "@id": "ad:servicePrincipalType", "@type": "xsd:string" },
+    "appRoles": { "@id": "ad:appRoles", "@container": "@set" },
+    "oauth2PermissionScopes": { "@id": "ad:oauth2PermissionScopes", "@container": "@set" },
+    "homepage": { "@id": "schema:url", "@type": "xsd:anyURI" },
+    "loginUrl": { "@id": "ad:loginUrl", "@type": "xsd:anyURI" },
+    "replyUrls": { "@id": "ad:replyUrls", "@container": "@set" },
+    "tags": { "@id": "schema:keywords", "@container": "@set" },
+
+    "appRoleId": { "@id": "ad:appRoleId", "@type": "xsd:string" },
+    "principalId": { "@id": "ad:principalId", "@type": "xsd:string" },
+    "principalDisplayName": { "@id": "ad:principalDisplayName", "@type": "xsd:string" },
+    "principalType": { "@id": "ad:principalType", "@type": "xsd:string" },
+    "resourceId": { "@id": "ad:resourceId", "@type": "xsd:string" },
+    "resourceDisplayName": { "@id": "ad:resourceDisplayName", "@type": "xsd:string" },
+
+    "password": { "@id": "ad:password", "@type": "xsd:string" },
+    "forceChangePasswordNextSignIn": { "@id": "ad:forceChangePasswordNextSignIn", "@type": "xsd:boolean" },
+    "forceChangePasswordNextSignInWithMfa": { "@id": "ad:forceChangePasswordNextSignInWithMfa", "@type": "xsd:boolean" }
+  }
+}

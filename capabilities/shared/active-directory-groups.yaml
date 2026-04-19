@@ -1,0 +1,174 @@
+naftiko: "1.0.0-alpha1"
+
+info:
+  label: Microsoft Graph Groups API
+  description: Microsoft Graph Groups API for managing Microsoft Entra ID security groups and Microsoft 365 groups, including members and owners.
+  tags:
+    - Active Directory
+    - Groups
+    - Identity Management
+    - Microsoft Entra
+  created: "2026-04-19"
+  modified: "2026-04-19"
+
+binds:
+  - namespace: env
+    keys:
+      AD_ACCESS_TOKEN: AD_ACCESS_TOKEN
+
+capability:
+  consumes:
+    - type: http
+      namespace: active-directory-groups
+      baseUri: https://graph.microsoft.com/v1.0
+      description: Microsoft Graph Groups API v1.0
+      authentication:
+        type: bearer
+        token: "{{AD_ACCESS_TOKEN}}"
+      resources:
+        - name: groups
+          path: /groups
+          description: Microsoft Entra group registry
+          operations:
+            - name: list-groups
+              method: GET
+              description: List all groups with optional OData filtering
+              inputParameters:
+                - name: $filter
+                  in: query
+                  type: string
+                  required: false
+                  description: OData filter (e.g. groupTypes/any(c:c eq 'Unified'))
+                - name: $select
+                  in: query
+                  type: string
+                  required: false
+                  description: Properties to include
+                - name: $top
+                  in: query
+                  type: integer
+                  required: false
+                  description: Maximum results
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: create-group
+              method: POST
+              description: Create a new security group or Microsoft 365 group
+              inputParameters:
+                - name: displayName
+                  in: body
+                  type: string
+                  required: true
+                - name: mailEnabled
+                  in: body
+                  type: boolean
+                  required: true
+                - name: mailNickname
+                  in: body
+                  type: string
+                  required: true
+                - name: securityEnabled
+                  in: body
+                  type: boolean
+                  required: true
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+        - name: group
+          path: /groups/{groupId}
+          description: Individual group operations
+          operations:
+            - name: get-group
+              method: GET
+              description: Get a specific group by object ID
+              inputParameters:
+                - name: groupId
+                  in: path
+                  type: string
+                  required: true
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+        - name: group-members
+          path: /groups/{groupId}/members
+          description: Group member management
+          operations:
+            - name: list-group-members
+              method: GET
+              description: List direct members of a group
+              inputParameters:
+                - name: groupId
+                  in: path
+                  type: string
+                  required: true
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+  exposes:
+    - type: rest
+      port: 8101
+      namespace: active-directory-groups-api
+      resources:
+        - path: /v1/groups
+          name: groups
+          description: Group management
+          operations:
+            - method: GET
+              name: list-groups
+              description: List groups
+              call: "active-directory-groups.list-groups"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+    - type: mcp
+      port: 9101
+      namespace: active-directory-groups-mcp
+      transport: http
+      tools:
+        - name: list-groups
+          description: List Microsoft Entra ID groups with optional OData filtering
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "active-directory-groups.list-groups"
+          with:
+            $filter: "tools.$filter"
+            $select: "tools.$select"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-group
+          description: Get details about a specific Microsoft Entra group
+          hints:
+            readOnly: true
+            idempotent: true
+          call: "active-directory-groups.get-group"
+          with:
+            groupId: "tools.groupId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-group-members
+          description: List direct members of a Microsoft Entra group
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "active-directory-groups.list-group-members"
+          with:
+            groupId: "tools.groupId"
+          outputParameters:
+            - type: object
+              mapping: "$."

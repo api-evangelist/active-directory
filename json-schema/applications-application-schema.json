@@ -1,0 +1,175 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/active-directory/main/json-schema/applications-application-schema.json",
+  "title": "Application",
+  "description": "A Microsoft Entra application registration managed via Microsoft Graph",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Unique identifier for the application object (not the client ID)",
+      "readOnly": true
+    },
+    "appId": {
+      "type": "string",
+      "format": "uuid",
+      "description": "The application (client) ID used in OAuth2 flows",
+      "readOnly": true
+    },
+    "displayName": {
+      "type": "string",
+      "description": "Display name of the application",
+      "maxLength": 256
+    },
+    "description": {
+      "type": ["string", "null"],
+      "description": "Free text description for the application"
+    },
+    "signInAudience": {
+      "type": "string",
+      "description": "Microsoft account types supported by the application",
+      "enum": [
+        "AzureADMyOrg",
+        "AzureADMultipleOrgs",
+        "AzureADandPersonalMicrosoftAccount",
+        "PersonalMicrosoftAccount"
+      ]
+    },
+    "identifierUris": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "format": "uri"
+      },
+      "description": "URIs that identify the application within the tenant"
+    },
+    "web": {
+      "type": "object",
+      "description": "Web platform configuration for the application",
+      "properties": {
+        "redirectUris": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "uri"
+          }
+        },
+        "logoutUrl": {
+          "type": ["string", "null"],
+          "format": "uri"
+        },
+        "implicitGrantSettings": {
+          "type": "object",
+          "properties": {
+            "enableAccessTokenIssuance": {
+              "type": "boolean"
+            },
+            "enableIdTokenIssuance": {
+              "type": "boolean"
+            }
+          }
+        }
+      }
+    },
+    "requiredResourceAccess": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "resourceAppId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "resourceAccess": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "format": "uuid"
+                },
+                "type": {
+                  "type": "string",
+                  "enum": ["Role", "Scope"]
+                }
+              }
+            }
+          }
+        }
+      },
+      "description": "API permissions required by the application"
+    },
+    "keyCredentials": {
+      "type": "array",
+      "description": "Certificate credentials for the application",
+      "items": {
+        "type": "object",
+        "properties": {
+          "keyId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "type": {
+            "type": "string"
+          },
+          "usage": {
+            "type": "string",
+            "enum": ["Sign", "Verify"]
+          },
+          "displayName": {
+            "type": "string"
+          },
+          "startDateTime": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "endDateTime": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      }
+    },
+    "passwordCredentials": {
+      "type": "array",
+      "description": "Client secret credential metadata (secret value only returned at creation)",
+      "items": {
+        "type": "object",
+        "properties": {
+          "keyId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "displayName": {
+            "type": "string"
+          },
+          "startDateTime": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "endDateTime": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "hint": {
+            "type": "string",
+            "description": "First three characters of the application secret"
+          }
+        }
+      }
+    },
+    "createdDateTime": {
+      "type": ["string", "null"],
+      "format": "date-time",
+      "readOnly": true
+    },
+    "deletedDateTime": {
+      "type": ["string", "null"],
+      "format": "date-time",
+      "readOnly": true
+    }
+  },
+  "required": ["displayName"]
+}

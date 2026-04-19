@@ -1,0 +1,106 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/active-directory/main/json-schema/groups-group-schema.json",
+  "title": "Group",
+  "description": "A Microsoft Entra security group or Microsoft 365 group managed via Microsoft Graph",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Unique identifier for the group object (read-only)",
+      "readOnly": true
+    },
+    "displayName": {
+      "type": "string",
+      "description": "Display name for the group",
+      "maxLength": 256
+    },
+    "description": {
+      "type": ["string", "null"],
+      "description": "Optional description for the group",
+      "maxLength": 1024
+    },
+    "mail": {
+      "type": ["string", "null"],
+      "format": "email",
+      "description": "SMTP address for the group",
+      "readOnly": true
+    },
+    "mailNickname": {
+      "type": "string",
+      "description": "Mail alias for the group (without domain suffix)",
+      "maxLength": 64
+    },
+    "mailEnabled": {
+      "type": "boolean",
+      "description": "Specifies whether the group is mail-enabled"
+    },
+    "securityEnabled": {
+      "type": "boolean",
+      "description": "Specifies whether the group is a security group"
+    },
+    "groupTypes": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": ["Unified", "DynamicMembership"]
+      },
+      "description": "Collection specifying the group type and dynamic membership. Unified = Microsoft 365 group."
+    },
+    "visibility": {
+      "type": ["string", "null"],
+      "description": "Visibility of a Microsoft 365 group content and members list",
+      "enum": ["Public", "Private", "HiddenMembership", null]
+    },
+    "membershipRule": {
+      "type": ["string", "null"],
+      "description": "Rule defining dynamic group membership (requires DynamicMembership in groupTypes)"
+    },
+    "membershipRuleProcessingState": {
+      "type": ["string", "null"],
+      "description": "Indicates whether dynamic membership processing is on or paused",
+      "enum": ["On", "Paused", null]
+    },
+    "onPremisesSyncEnabled": {
+      "type": ["boolean", "null"],
+      "description": "True if the group is synced from on-premises Active Directory",
+      "readOnly": true
+    },
+    "onPremisesDistinguishedName": {
+      "type": ["string", "null"],
+      "description": "Distinguished name from on-premises AD",
+      "readOnly": true
+    },
+    "createdDateTime": {
+      "type": ["string", "null"],
+      "format": "date-time",
+      "description": "Timestamp when the group was created",
+      "readOnly": true
+    },
+    "renewedDateTime": {
+      "type": ["string", "null"],
+      "format": "date-time",
+      "description": "Timestamp when the Microsoft 365 group was last renewed",
+      "readOnly": true
+    },
+    "expirationDateTime": {
+      "type": ["string", "null"],
+      "format": "date-time",
+      "description": "Timestamp when the group expires (requires an expiration policy)",
+      "readOnly": true
+    },
+    "preferredDataLocation": {
+      "type": ["string", "null"],
+      "description": "Preferred data location for multi-geo tenant (e.g. CAN, EUR)"
+    },
+    "resourceProvisioningOptions": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Resources provisioned (e.g. Team for Microsoft Teams-enabled groups)"
+    }
+  },
+  "required": ["displayName", "mailEnabled", "mailNickname", "securityEnabled"]
+}

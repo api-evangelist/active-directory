@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-structure.org/meta/extended/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/active-directory/main/json-structure/groups-group-structure.json",
+  "title": "Group",
+  "description": "A Microsoft Entra security group or Microsoft 365 group managed via Microsoft Graph",
+  "type": "record",
+  "fields": [
+    { "name": "id", "type": "string", "description": "Unique identifier for the group object (UUID, read-only)" },
+    { "name": "displayName", "type": "string", "description": "Display name for the group" },
+    { "name": "description", "type": "string", "optional": true, "description": "Optional group description" },
+    { "name": "mail", "type": "string", "optional": true, "description": "SMTP address for the group (read-only)" },
+    { "name": "mailNickname", "type": "string", "description": "Mail alias without the domain suffix" },
+    { "name": "mailEnabled", "type": "boolean", "description": "Whether the group is mail-enabled" },
+    { "name": "securityEnabled", "type": "boolean", "description": "Whether the group is a security group" },
+    { "name": "groupTypes", "type": "array", "items": { "type": "string" }, "optional": true, "description": "Group type flags: Unified = Microsoft 365 group, DynamicMembership = dynamic group" },
+    { "name": "visibility", "type": "string", "optional": true, "description": "Visibility for Microsoft 365 groups: Public, Private, or HiddenMembership" },
+    { "name": "membershipRule", "type": "string", "optional": true, "description": "Dynamic membership rule expression" },
+    { "name": "membershipRuleProcessingState", "type": "string", "optional": true, "description": "On or Paused" },
+    { "name": "onPremisesSyncEnabled", "type": "boolean", "optional": true, "description": "Whether synced from on-premises Active Directory" },
+    { "name": "createdDateTime", "type": "timestamp", "optional": true, "description": "When the group was created" },
+    { "name": "renewedDateTime", "type": "timestamp", "optional": true, "description": "When the Microsoft 365 group was last renewed" },
+    { "name": "expirationDateTime", "type": "timestamp", "optional": true, "description": "When the group expires (if expiration policy is set)" },
+    { "name": "preferredDataLocation", "type": "string", "optional": true, "description": "Multi-geo preferred data location (e.g. CAN)" },
+    { "name": "resourceProvisioningOptions", "type": "array", "items": { "type": "string" }, "optional": true, "description": "Resources provisioned (e.g. Team)" }
+  ]
+}
