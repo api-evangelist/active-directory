@@ -1,0 +1,13 @@
+{
+  "repo": "active-directory",
+  "feeds": [
+    {
+      "source": "https://devblogs.microsoft.com/microsoft365dev/",
+      "feed_url": "https://devblogs.microsoft.com/microsoft365dev/feed/",
+      "saved": 10,
+      "title": "Microsoft 365 Developer Blog"
+    }
+  ],
+  "post_count": 10,
+  "fetched": "2026-05-03T23:20:32Z"
+}
