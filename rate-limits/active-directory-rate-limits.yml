@@ -4,7 +4,8 @@ schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main
 provider: Microsoft Active Directory
 providerId: active-directory
 created: '2026-05-04'
-modified: '2026-05-04'
+modified: '2026-05-05'
+reconciled: true
 tags:
   - Active Directory
   - Authentication
@@ -12,125 +13,77 @@ tags:
   - Directory Services
   - Identity Management
   - Microsoft Entra
-  - Zero Trust
   - Rate Limiting
-  - Quotas
-  - Throttling
-description: Machine-readable rate limit definitions for the Microsoft Active Directory API surface. Captures
-  per-tier quotas, burst behavior, response signaling, and recovery semantics. Defaults are scaffold values
-  to be replaced with published provider limits.
+description: Microsoft Entra ID (Azure AD) directory operations are accessed through Microsoft Graph,
+  which throttles using a token-bucket algorithm based on ResourceUnits. Limits are scoped per application,
+  per (application + tenant) pair, and per tenant for writes. Tenant size (S < 50 users, M 50–500, L >
+  500) affects the read budget. 429 responses include a Retry-After header. For bulk extraction Microsoft
+  recommends Microsoft Graph Data Connect rather than the REST APIs.
+sources:
+  - https://learn.microsoft.com/en-us/graph/throttling
+  - https://learn.microsoft.com/en-us/graph/throttling-limits
 headers:
-  limit: X-RateLimit-Limit
-  remaining: X-RateLimit-Remaining
-  reset: X-RateLimit-Reset
   retryAfter: Retry-After
-  policy: RateLimit-Policy
+  throttleLimitPercentage: x-ms-throttle-limit-percentage
+  requestId: request-id
 responseCodes:
   throttled: 429
-  quotaExceeded: 429
-  serviceUnavailable: 503
 limits:
-  - tier: free
-    name: Free Tier Default
-    scope: api-key
-    metric: requests_per_minute
-    limit: 10
-    burst: 20
-    timeFrame: minute
-    applies:
-      - Microsoft Graph Users API
-      - Microsoft Graph Groups API
-      - Microsoft Graph Applications and Service Principals API
-      - Microsoft Graph Devices API
-      - Microsoft Graph Directory Roles and Administrative Units API
-      - Microsoft Graph Conditional Access API
-      - Microsoft Graph Identity Governance API
-      - Microsoft Graph Identity Protection API
-      - Microsoft Graph Authentication Methods API
-      - Microsoft Graph Identity and Access Reports API
-  - tier: free
-    name: Free Tier Monthly Quota
-    scope: api-key
-    metric: requests_per_month
-    limit: 1000
-    timeFrame: month
-    applies:
-      - Microsoft Graph Users API
-      - Microsoft Graph Groups API
-      - Microsoft Graph Applications and Service Principals API
-      - Microsoft Graph Devices API
-      - Microsoft Graph Directory Roles and Administrative Units API
-      - Microsoft Graph Conditional Access API
-      - Microsoft Graph Identity Governance API
-      - Microsoft Graph Identity Protection API
-      - Microsoft Graph Authentication Methods API
-      - Microsoft Graph Identity and Access Reports API
-  - tier: professional
-    name: Professional Tier Default
-    scope: api-key
-    metric: requests_per_minute
-    limit: 100
-    burst: 200
-    timeFrame: minute
-    applies:
-      - Microsoft Graph Users API
-      - Microsoft Graph Groups API
-      - Microsoft Graph Applications and Service Principals API
-      - Microsoft Graph Devices API
-      - Microsoft Graph Directory Roles and Administrative Units API
-      - Microsoft Graph Conditional Access API
-      - Microsoft Graph Identity Governance API
-      - Microsoft Graph Identity Protection API
-      - Microsoft Graph Authentication Methods API
-      - Microsoft Graph Identity and Access Reports API
-  - tier: professional
-    name: Professional Tier Monthly Quota
-    scope: api-key
-    metric: requests_per_month
-    limit: 100000
-    timeFrame: month
-    applies:
-      - Microsoft Graph Users API
-      - Microsoft Graph Groups API
-      - Microsoft Graph Applications and Service Principals API
-      - Microsoft Graph Devices API
-      - Microsoft Graph Directory Roles and Administrative Units API
-      - Microsoft Graph Conditional Access API
-      - Microsoft Graph Identity Governance API
-      - Microsoft Graph Identity Protection API
-      - Microsoft Graph Authentication Methods API
-      - Microsoft Graph Identity and Access Reports API
-  - tier: enterprise
-    name: Enterprise Negotiated Limit
-    scope: contract
-    metric: requests_per_minute
-    limit: 1000
-    burst: 5000
-    timeFrame: minute
-    applies:
-      - Microsoft Graph Users API
-      - Microsoft Graph Groups API
-      - Microsoft Graph Applications and Service Principals API
-      - Microsoft Graph Devices API
-      - Microsoft Graph Directory Roles and Administrative Units API
-      - Microsoft Graph Conditional Access API
-      - Microsoft Graph Identity Governance API
-      - Microsoft Graph Identity Protection API
-      - Microsoft Graph Authentication Methods API
-      - Microsoft Graph Identity and Access Reports API
+  - name: Entra read budget — Application + Tenant pair (Small tenant <50 users)
+    scope: app+tenant
+    metric: resource-units
+    limit: 3500
+    timeFrame: 10s
+    notes: 10-second sliding window. Most GET requests cost 1 ResourceUnit; GET /applications costs 2;
+      $select reduces cost by 1; $expand increases cost by 1.
+  - name: Entra read budget — Application + Tenant pair (Medium tenant 50–500 users)
+    scope: app+tenant
+    metric: resource-units
+    limit: 5000
+    timeFrame: 10s
+  - name: Entra read budget — Application + Tenant pair (Large tenant >500 users)
+    scope: app+tenant
+    metric: resource-units
+    limit: 8000
+    timeFrame: 10s
+  - name: Entra read budget — Application (across all tenants)
+    scope: application
+    metric: resource-units
+    limit: 150000
+    timeFrame: 20s
+  - name: Entra write budget — Application + Tenant pair
+    scope: app+tenant
+    metric: requests
+    limit: 3000
+    timeFrame: 150s
+    notes: 2 minutes 30 seconds window for POST / PATCH / PUT / DELETE on directory objects.
+  - name: Entra write budget — Application
+    scope: application
+    metric: requests
+    limit: 35000
+    timeFrame: 300s
+  - name: Entra write budget — Tenant
+    scope: tenant
+    metric: requests
+    limit: 18000
+    timeFrame: 300s
 policies:
-  - name: Backoff Strategy
-    description: Clients should implement exponential backoff with jitter, honoring the Retry-After header
-      when present.
-  - name: Burst Handling
-    description: Short bursts above the steady-state limit are tolerated up to the documented burst ceiling
-      before throttling engages.
-  - name: Quota Reset
-    description: Monthly quotas reset at the start of each calendar month in UTC. Per-minute and per-second
-      windows reset on a sliding-window basis.
-  - name: Fair Use
-    description: Even on uncapped enterprise tiers, sustained usage that materially impacts shared infrastructure
-      may be subject to fair-use throttling.
+  - name: Retry-After
+    description: Wait the number of seconds returned in the Retry-After header before retrying. Microsoft
+      Graph SDKs implement this automatically.
+  - name: Exponential Backoff Fallback
+    description: If no Retry-After header is returned, fall back to exponential backoff with jitter.
+  - name: Avoid Polling
+    description: Use change tracking (delta queries) and change notifications (webhooks) instead of polling
+      directory collections.
+  - name: Batch Carefully
+    description: JSON batching evaluates each sub-request against limits independently; throttled sub-requests
+      must be retried using the Retry-After header from the inner response (not the outer 200 OK envelope).
+  - name: Bulk via Data Connect
+    description: For bulk extraction of users, groups, or activity data use Microsoft Graph Data Connect
+      rather than the REST APIs to avoid throttling.
+  - name: Header Watching
+    description: Monitor x-ms-throttle-limit-percentage; values approaching 1.0 indicate imminent throttling.
 maintainers:
-  - name: Kin Lane
-    email: kin@apievangelist.com
+  - FN: Kin Lane
+    email: info@apievangelist.com

@@ -1,5 +1,6 @@
 specification: FinOps Framework
 specificationVersion: '1.0'
+schema: https://www.finops.org/framework/
 alignedWith:
   framework: FinOps Foundation Framework
   frameworkUrl: https://www.finops.org/framework/
@@ -8,204 +9,97 @@ alignedWith:
   dataSpecUrl: https://focus.finops.org/focus-specification/v1-3/
 provider: Microsoft Active Directory
 providerId: active-directory
-publisherName: Microsoft Active Directory
-serviceCategory: API
+publisherName: Microsoft Corporation
+serviceCategory: Identity / Directory Services
 created: '2026-05-04'
-modified: '2026-05-04'
+modified: '2026-05-05'
+reconciled: true
 tags:
   - Active Directory
-  - Authentication
-  - Authorization
-  - Directory Services
   - Identity Management
   - Microsoft Entra
   - Zero Trust
   - FinOps
-  - Cost Management
   - FOCUS
-description: FinOps framework definition for the Microsoft Active Directory API surface. Provides a FOCUS-aligned
-  mapping for cost allocation, usage measurement, and unit-economics reporting across the provider's APIs.
-principles:
-  - name: Visibility
-    description: Make API consumption costs visible to engineering, product, and finance teams in near
-      real-time.
-  - name: Allocation
-    description: Tag every chargeable API call with the consuming team, environment, application, and
-      feature so cost can be allocated.
-  - name: Optimization
-    description: Continuously evaluate request patterns, caching, batching, and tier selection to reduce
-      cost per useful unit of work.
-  - name: Accountability
-    description: Establish budget owners and chargeback or showback flows for each consuming team.
-domains:
-  - name: Understand Usage and Cost
-    capabilities:
-      - Data Ingestion
-      - Allocation
-      - Reporting and Analytics
-      - Anomaly Management
-  - name: Quantify Business Value
-    capabilities:
-      - Planning and Estimating
-      - Forecasting
-      - Budgeting
-      - Benchmarking
-      - Unit Economics
-  - name: Optimize Usage and Cost
-    capabilities:
-      - Architecting for Cloud
-      - Rate Optimization
-      - Workload Optimization
-      - Cloud Sustainability
-      - Licensing and SaaS
-  - name: Manage the FinOps Practice
-    capabilities:
-      - FinOps Practice Operations
-      - FinOps Education and Enablement
-      - Invoicing and Chargeback
-      - Onboarding Workloads
-      - Intersecting Disciplines
+description: FOCUS-aligned FinOps for Microsoft Entra ID (the modern Active Directory). Billed per user
+  per month at a tier (Free / P1 / P2 / Suite) with optional standalone identity products (ID Governance,
+  Internet Access, Private Access, Verified ID) and per-workload-identity charges for Workload ID. Programmatic
+  access via Microsoft Graph is rate-limited rather than separately metered.
+sources:
+  - https://www.microsoft.com/en-us/security/business/microsoft-entra-pricing
+  - https://learn.microsoft.com/en-us/graph/throttling-limits
 billingModel:
-  pricingCategory: Usage-Based
+  pricingCategory: Subscription
   billingFrequency: Monthly
   billingCurrency: USD
   chargeCategories:
-    - Usage
     - Purchase
-    - Tax
-    - Credit
-    - Adjustment
-  chargeFrequency: Recurring
+    - Usage
 focusColumns:
-  ServiceName: Microsoft Active Directory
-  ServiceCategory: Developer Tools / API
-  ProviderName: Microsoft Active Directory
-  PublisherName: Microsoft Active Directory
-  InvoiceIssuerName: Microsoft Active Directory
-  PricingCategory: Usage-Based
-  PricingUnit: request
+  ServiceName: Microsoft Entra ID
+  ServiceCategory: Identity / Directory Services
+  ProviderName: Microsoft
+  PublisherName: Microsoft Corporation
+  InvoiceIssuerName: Microsoft Corporation
   BillingCurrency: USD
-  ChargeCategory: Usage
+  ChargeCategory: Purchase
 meters:
-  - name: api_requests
-    description: Count of billable API requests
-    unit: request
-    aggregation: sum
+  - name: entra_user_seat
+    description: Licensed Entra user seat (Free / P1 / P2 / Suite).
+    unit: seat
+    aggregation: max
     dimensions:
-      - api
-      - endpoint
       - tier
-      - region
-      - consumer
-  - name: data_egress
-    description: Bytes returned over the network in API responses
-    unit: GB
+      - tenant
+  - name: entra_id_governance_seat
+    description: Standalone Entra ID Governance seat.
+    unit: seat
+    aggregation: max
+    dimensions:
+      - tenant
+  - name: entra_internet_access_seat
+    description: Entra Internet Access seat.
+    unit: seat
+    aggregation: max
+    dimensions:
+      - tenant
+  - name: entra_private_access_seat
+    description: Entra Private Access seat.
+    unit: seat
+    aggregation: max
+    dimensions:
+      - tenant
+  - name: workload_identity
+    description: Entra Workload ID — service principal / managed identity protected by Workload ID.
+    unit: workload-identity
+    aggregation: max
+    dimensions:
+      - tenant
+  - name: graph_throttle_consumption
+    description: ResourceUnit consumption against Microsoft Graph; not directly billed but a leading
+      indicator of where automation pressure exists.
+    unit: resource-unit
     aggregation: sum
     dimensions:
-      - api
-      - region
-      - consumer
-  - name: compute_seconds
-    description: Server-side compute consumed by the request, where applicable
-    unit: second
-    aggregation: sum
-    dimensions:
-      - api
-      - endpoint
-      - tier
-apis:
-  - name: Microsoft Graph Users API
-    baseURL: https://graph.microsoft.com/v1.0
-    tags:
-      - Directory Services
-      - Identity Management
-      - Users
-    serviceName: Microsoft Graph Users API
-    serviceCategory: API
-  - name: Microsoft Graph Groups API
-    baseURL: https://graph.microsoft.com/v1.0
-    tags:
-      - Directory Services
-      - Groups
-      - Identity Management
-    serviceName: Microsoft Graph Groups API
-    serviceCategory: API
-  - name: Microsoft Graph Applications and Service Principals API
-    baseURL: https://graph.microsoft.com/v1.0
-    tags:
-      - Applications
-      - Identity Management
-      - OAuth2
-      - Service Principals
-    serviceName: Microsoft Graph Applications and Service Principals API
-    serviceCategory: API
-  - name: Microsoft Graph Devices API
-    baseURL: https://graph.microsoft.com/v1.0
-    tags:
-      - Devices
-      - Endpoint Management
-      - Identity Management
-    serviceName: Microsoft Graph Devices API
-    serviceCategory: API
-  - name: Microsoft Graph Directory Roles and Administrative Units API
-    baseURL: https://graph.microsoft.com/v1.0
-    tags:
-      - Authorization
-      - Directory Services
-      - Role Management
-    serviceName: Microsoft Graph Directory Roles and Administrative Units API
-    serviceCategory: API
-  - name: Microsoft Graph Conditional Access API
-    baseURL: https://graph.microsoft.com/v1.0
-    tags:
-      - Authorization
-      - Conditional Access
-      - Security
-      - Zero Trust
-    serviceName: Microsoft Graph Conditional Access API
-    serviceCategory: API
-  - name: Microsoft Graph Identity Governance API
-    baseURL: https://graph.microsoft.com/v1.0
-    tags:
-      - Governance
-      - Identity Management
-      - Lifecycle Management
-      - Privileged Identity Management
-    serviceName: Microsoft Graph Identity Governance API
-    serviceCategory: API
-  - name: Microsoft Graph Identity Protection API
-    baseURL: https://graph.microsoft.com/v1.0
-    tags:
-      - Identity Protection
-      - Risk Management
-      - Security
-    serviceName: Microsoft Graph Identity Protection API
-    serviceCategory: API
-  - name: Microsoft Graph Authentication Methods API
-    baseURL: https://graph.microsoft.com/v1.0
-    tags:
-      - Authentication
-      - MFA
-      - Passwordless
-      - Security
-    serviceName: Microsoft Graph Authentication Methods API
-    serviceCategory: API
-  - name: Microsoft Graph Identity and Access Reports API
-    baseURL: https://graph.microsoft.com/v1.0
-    tags:
-      - Audit Logs
-      - Compliance
-      - Monitoring
-      - Reports
-    serviceName: Microsoft Graph Identity and Access Reports API
-    serviceCategory: API
-unitEconomics:
-  - name: Cost per 1K Requests
-    metric: billed_cost / (api_requests / 1000)
-    target: TBD
-  - name: Cost per Active Consumer
-    metric: billed_cost / active_consumers
-    target: TBD
+      - application
+      - tenant
+      - operation
+principles:
+  - name: Visibility
+    description: Use Microsoft Cost Management on the EA / MCA enrollment for Entra licensing line items;
+      use the Entra admin center "Licenses" pane for assignment counts; use the Microsoft Graph activity
+      logs and the x-ms-throttle-limit-percentage header for automation pressure.
+  - name: Allocation
+    description: Allocate Entra seats by AD group → cost center mapping. For Workload ID, tag each managed
+      identity with its owning application and route cost to the consuming product team.
+  - name: Optimization
+    description: Right-tier users (don't put everyone on P2 if only privileged users need PIM); reclaim
+      seats from terminated employees through Lifecycle Workflows; consolidate point identity tools that
+      are duplicated by Entra ID Governance, Internet Access, or Private Access; prefer change-notifications
+      over polling to stay below throttle ceilings.
+  - name: Accountability
+    description: The IAM team owns tier mix and renewals; product owners own their Workload ID footprints
+      and the Graph applications calling on their behalf.
 maintainers:
-  - name: Kin Lane
-    email: kin@apievangelist.com
+  - FN: Kin Lane
+    email: info@apievangelist.com
