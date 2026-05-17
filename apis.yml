@@ -256,7 +256,7 @@ common:
     url: capabilities/identity-management-operations.yaml
   - type: Vocabulary
     url: vocabulary/active-directory-vocabulary.yaml
-  - type: JSON-LD
+  - type: JSONLD
     url: json-ld/active-directory-context.jsonld
   - type: Features
     data:
