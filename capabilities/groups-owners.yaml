@@ -1,0 +1,80 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Microsoft Graph Groups API — Owners
+  description: 'Microsoft Graph Groups API — Owners. 1 operations. Lead operation: Active Directory List Group Owners. Self-contained
+    Naftiko capability covering one Active Directory business surface.'
+  tags:
+  - Active Directory
+  - Owners
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    ACTIVE_DIRECTORY_API_KEY: ACTIVE_DIRECTORY_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: groups-owners
+    baseUri: https://graph.microsoft.com/v1.0
+    description: Microsoft Graph Groups API — Owners business capability. Self-contained, no shared references.
+    resources:
+    - name: groups-groupId-owners
+      path: /groups/{groupId}/owners
+      operations:
+      - name: listgroupowners
+        method: GET
+        description: Active Directory List Group Owners
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: groupId
+          in: path
+          type: string
+          description: Group object ID (UUID)
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.ACTIVE_DIRECTORY_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: groups-owners-rest
+    port: 8080
+    description: REST adapter for Microsoft Graph Groups API — Owners. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/groups/{groupid}/owners
+      name: groups-groupid-owners
+      description: REST surface for groups-groupId-owners.
+      operations:
+      - method: GET
+        name: listgroupowners
+        description: Active Directory List Group Owners
+        call: groups-owners.listgroupowners
+        with:
+          groupId: rest.groupId
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: groups-owners-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Microsoft Graph Groups API — Owners. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: active-directory-list-group-owners
+      description: Active Directory List Group Owners
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: groups-owners.listgroupowners
+      with:
+        groupId: tools.groupId
+      outputParameters:
+      - type: object
+        mapping: $.

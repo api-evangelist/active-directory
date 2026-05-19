@@ -1,0 +1,81 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Microsoft Graph Applications and Service Principals API — App Role Assignments
+  description: 'Microsoft Graph Applications and Service Principals API — App Role Assignments. 1 operations. Lead operation:
+    Active Directory List Service Principal App Role Assignments. Self-contained Naftiko capability covering one Active Directory
+    business surface.'
+  tags:
+  - Active Directory
+  - App Role Assignments
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    ACTIVE_DIRECTORY_API_KEY: ACTIVE_DIRECTORY_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: applications-app-role-assignments
+    baseUri: https://graph.microsoft.com/v1.0
+    description: Microsoft Graph Applications and Service Principals API — App Role Assignments business capability. Self-contained,
+      no shared references.
+    resources:
+    - name: servicePrincipals-servicePrincipalId-appRoleAssignments
+      path: /servicePrincipals/{servicePrincipalId}/appRoleAssignments
+      operations:
+      - name: listserviceprincipalapproleassignments
+        method: GET
+        description: Active Directory List Service Principal App Role Assignments
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: servicePrincipalId
+          in: path
+          type: string
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.ACTIVE_DIRECTORY_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: applications-app-role-assignments-rest
+    port: 8080
+    description: REST adapter for Microsoft Graph Applications and Service Principals API — App Role Assignments. One Spectral-compliant
+      resource per consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/serviceprincipals/{serviceprincipalid}/approleassignments
+      name: serviceprincipals-serviceprincipalid-approleassignments
+      description: REST surface for servicePrincipals-servicePrincipalId-appRoleAssignments.
+      operations:
+      - method: GET
+        name: listserviceprincipalapproleassignments
+        description: Active Directory List Service Principal App Role Assignments
+        call: applications-app-role-assignments.listserviceprincipalapproleassignments
+        with:
+          servicePrincipalId: rest.servicePrincipalId
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: applications-app-role-assignments-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Microsoft Graph Applications and Service Principals API — App Role Assignments. One tool
+      per consumed operation, routed inline through this capability's consumes block.
+    tools:
+    - name: active-directory-list-service-principal
+      description: Active Directory List Service Principal App Role Assignments
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: applications-app-role-assignments.listserviceprincipalapproleassignments
+      with:
+        servicePrincipalId: tools.servicePrincipalId
+      outputParameters:
+      - type: object
+        mapping: $.

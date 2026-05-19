@@ -1,0 +1,247 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Microsoft Graph Applications and Service Principals API — Applications
+  description: 'Microsoft Graph Applications and Service Principals API — Applications. 5 operations. Lead operation: Active
+    Directory List Applications. Self-contained Naftiko capability covering one Active Directory business surface.'
+  tags:
+  - Active Directory
+  - Applications
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    ACTIVE_DIRECTORY_API_KEY: ACTIVE_DIRECTORY_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: applications-applications
+    baseUri: https://graph.microsoft.com/v1.0
+    description: Microsoft Graph Applications and Service Principals API — Applications business capability. Self-contained,
+      no shared references.
+    resources:
+    - name: applications
+      path: /applications
+      operations:
+      - name: listapplications
+        method: GET
+        description: Active Directory List Applications
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: $filter
+          in: query
+          type: string
+          description: OData filter expression (e.g. displayName eq 'My App')
+        - name: $select
+          in: query
+          type: string
+        - name: $top
+          in: query
+          type: integer
+        - name: $search
+          in: query
+          type: string
+      - name: createapplication
+        method: POST
+        description: Active Directory Create Application
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: applications-applicationId
+      path: /applications/{applicationId}
+      operations:
+      - name: getapplication
+        method: GET
+        description: Active Directory Get Application
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: applicationId
+          in: path
+          type: string
+          description: Application object ID (not the appId/client ID)
+          required: true
+      - name: updateapplication
+        method: PATCH
+        description: Active Directory Update Application
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: applicationId
+          in: path
+          type: string
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: deleteapplication
+        method: DELETE
+        description: Active Directory Delete Application
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: applicationId
+          in: path
+          type: string
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.ACTIVE_DIRECTORY_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: applications-applications-rest
+    port: 8080
+    description: REST adapter for Microsoft Graph Applications and Service Principals API — Applications. One Spectral-compliant
+      resource per consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/applications
+      name: applications
+      description: REST surface for applications.
+      operations:
+      - method: GET
+        name: listapplications
+        description: Active Directory List Applications
+        call: applications-applications.listapplications
+        with:
+          $filter: rest.$filter
+          $select: rest.$select
+          $top: rest.$top
+          $search: rest.$search
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createapplication
+        description: Active Directory Create Application
+        call: applications-applications.createapplication
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/applications/{applicationid}
+      name: applications-applicationid
+      description: REST surface for applications-applicationId.
+      operations:
+      - method: GET
+        name: getapplication
+        description: Active Directory Get Application
+        call: applications-applications.getapplication
+        with:
+          applicationId: rest.applicationId
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PATCH
+        name: updateapplication
+        description: Active Directory Update Application
+        call: applications-applications.updateapplication
+        with:
+          applicationId: rest.applicationId
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deleteapplication
+        description: Active Directory Delete Application
+        call: applications-applications.deleteapplication
+        with:
+          applicationId: rest.applicationId
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: applications-applications-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Microsoft Graph Applications and Service Principals API — Applications. One tool per consumed
+      operation, routed inline through this capability's consumes block.
+    tools:
+    - name: active-directory-list-applications
+      description: Active Directory List Applications
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: applications-applications.listapplications
+      with:
+        $filter: tools.$filter
+        $select: tools.$select
+        $top: tools.$top
+        $search: tools.$search
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: active-directory-create-application
+      description: Active Directory Create Application
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: applications-applications.createapplication
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: active-directory-get-application
+      description: Active Directory Get Application
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: applications-applications.getapplication
+      with:
+        applicationId: tools.applicationId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: active-directory-update-application
+      description: Active Directory Update Application
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: applications-applications.updateapplication
+      with:
+        applicationId: tools.applicationId
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: active-directory-delete-application
+      description: Active Directory Delete Application
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: applications-applications.deleteapplication
+      with:
+        applicationId: tools.applicationId
+      outputParameters:
+      - type: object
+        mapping: $.

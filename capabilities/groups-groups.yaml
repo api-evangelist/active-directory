@@ -1,0 +1,460 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Microsoft Graph Groups API — Groups
+  description: 'Microsoft Graph Groups API — Groups. 9 operations. Lead operation: Active Directory List Groups. Self-contained
+    Naftiko capability covering one Active Directory business surface.'
+  tags:
+  - Active Directory
+  - Groups
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    ACTIVE_DIRECTORY_API_KEY: ACTIVE_DIRECTORY_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: groups-groups
+    baseUri: https://graph.microsoft.com/v1.0
+    description: Microsoft Graph Groups API — Groups business capability. Self-contained, no shared references.
+    resources:
+    - name: groups
+      path: /groups
+      operations:
+      - name: listgroups
+        method: GET
+        description: Active Directory List Groups
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: $filter
+          in: query
+          type: string
+          description: OData filter (e.g. groupTypes/any(c:c eq 'Unified') for M365 groups)
+        - name: $select
+          in: query
+          type: string
+          description: Comma-separated list of properties to include
+        - name: $top
+          in: query
+          type: integer
+          description: Maximum number of groups to return (max 999)
+        - name: $orderby
+          in: query
+          type: string
+          description: Property to sort by (e.g. displayName asc)
+        - name: $search
+          in: query
+          type: string
+          description: Search for groups by displayName or description
+        - name: $count
+          in: query
+          type: boolean
+          description: Include total count of matching groups
+      - name: creategroup
+        method: POST
+        description: Active Directory Create Group
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: groups-groupId
+      path: /groups/{groupId}
+      operations:
+      - name: getgroup
+        method: GET
+        description: Active Directory Get Group
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: groupId
+          in: path
+          type: string
+          description: Group object ID (UUID)
+          required: true
+        - name: $select
+          in: query
+          type: string
+          description: Comma-separated properties to include
+      - name: updategroup
+        method: PATCH
+        description: Active Directory Update Group
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: groupId
+          in: path
+          type: string
+          description: Group object ID (UUID)
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: deletegroup
+        method: DELETE
+        description: Active Directory Delete Group
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: groupId
+          in: path
+          type: string
+          description: Group object ID (UUID)
+          required: true
+    - name: groups-groupId-members
+      path: /groups/{groupId}/members
+      operations:
+      - name: listgroupmembers
+        method: GET
+        description: Active Directory List Group Members
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: groupId
+          in: path
+          type: string
+          description: Group object ID (UUID)
+          required: true
+        - name: $filter
+          in: query
+          type: string
+          description: Filter to scope to specific member types (e.g. microsoft.graph.user)
+        - name: $top
+          in: query
+          type: integer
+        - name: $select
+          in: query
+          type: string
+      - name: addgroupmember
+        method: POST
+        description: Active Directory Add Group Member
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: groupId
+          in: path
+          type: string
+          description: Group object ID (UUID)
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: groups-groupId-members-memberId-$ref
+      path: /groups/{groupId}/members/{memberId}/$ref
+      operations:
+      - name: removegroupmember
+        method: DELETE
+        description: Active Directory Remove Group Member
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: groupId
+          in: path
+          type: string
+          description: Group object ID (UUID)
+          required: true
+        - name: memberId
+          in: path
+          type: string
+          description: Member object ID to remove
+          required: true
+    - name: groups-groupId-owners
+      path: /groups/{groupId}/owners
+      operations:
+      - name: listgroupowners
+        method: GET
+        description: Active Directory List Group Owners
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: groupId
+          in: path
+          type: string
+          description: Group object ID (UUID)
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.ACTIVE_DIRECTORY_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: groups-groups-rest
+    port: 8080
+    description: REST adapter for Microsoft Graph Groups API — Groups. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/groups
+      name: groups
+      description: REST surface for groups.
+      operations:
+      - method: GET
+        name: listgroups
+        description: Active Directory List Groups
+        call: groups-groups.listgroups
+        with:
+          $filter: rest.$filter
+          $select: rest.$select
+          $top: rest.$top
+          $orderby: rest.$orderby
+          $search: rest.$search
+          $count: rest.$count
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: creategroup
+        description: Active Directory Create Group
+        call: groups-groups.creategroup
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/groups/{groupid}
+      name: groups-groupid
+      description: REST surface for groups-groupId.
+      operations:
+      - method: GET
+        name: getgroup
+        description: Active Directory Get Group
+        call: groups-groups.getgroup
+        with:
+          groupId: rest.groupId
+          $select: rest.$select
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PATCH
+        name: updategroup
+        description: Active Directory Update Group
+        call: groups-groups.updategroup
+        with:
+          groupId: rest.groupId
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deletegroup
+        description: Active Directory Delete Group
+        call: groups-groups.deletegroup
+        with:
+          groupId: rest.groupId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/groups/{groupid}/members
+      name: groups-groupid-members
+      description: REST surface for groups-groupId-members.
+      operations:
+      - method: GET
+        name: listgroupmembers
+        description: Active Directory List Group Members
+        call: groups-groups.listgroupmembers
+        with:
+          groupId: rest.groupId
+          $filter: rest.$filter
+          $top: rest.$top
+          $select: rest.$select
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: addgroupmember
+        description: Active Directory Add Group Member
+        call: groups-groups.addgroupmember
+        with:
+          groupId: rest.groupId
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/groups/{groupid}/members/{memberid}/ref
+      name: groups-groupid-members-memberid-ref
+      description: REST surface for groups-groupId-members-memberId-$ref.
+      operations:
+      - method: DELETE
+        name: removegroupmember
+        description: Active Directory Remove Group Member
+        call: groups-groups.removegroupmember
+        with:
+          groupId: rest.groupId
+          memberId: rest.memberId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/groups/{groupid}/owners
+      name: groups-groupid-owners
+      description: REST surface for groups-groupId-owners.
+      operations:
+      - method: GET
+        name: listgroupowners
+        description: Active Directory List Group Owners
+        call: groups-groups.listgroupowners
+        with:
+          groupId: rest.groupId
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: groups-groups-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Microsoft Graph Groups API — Groups. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: active-directory-list-groups
+      description: Active Directory List Groups
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: groups-groups.listgroups
+      with:
+        $filter: tools.$filter
+        $select: tools.$select
+        $top: tools.$top
+        $orderby: tools.$orderby
+        $search: tools.$search
+        $count: tools.$count
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: active-directory-create-group
+      description: Active Directory Create Group
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: groups-groups.creategroup
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: active-directory-get-group
+      description: Active Directory Get Group
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: groups-groups.getgroup
+      with:
+        groupId: tools.groupId
+        $select: tools.$select
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: active-directory-update-group
+      description: Active Directory Update Group
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: groups-groups.updategroup
+      with:
+        groupId: tools.groupId
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: active-directory-delete-group
+      description: Active Directory Delete Group
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: groups-groups.deletegroup
+      with:
+        groupId: tools.groupId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: active-directory-list-group-members
+      description: Active Directory List Group Members
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: groups-groups.listgroupmembers
+      with:
+        groupId: tools.groupId
+        $filter: tools.$filter
+        $top: tools.$top
+        $select: tools.$select
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: active-directory-add-group-member
+      description: Active Directory Add Group Member
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: groups-groups.addgroupmember
+      with:
+        groupId: tools.groupId
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: active-directory-remove-group-member
+      description: Active Directory Remove Group Member
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: groups-groups.removegroupmember
+      with:
+        groupId: tools.groupId
+        memberId: tools.memberId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: active-directory-list-group-owners
+      description: Active Directory List Group Owners
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: groups-groups.listgroupowners
+      with:
+        groupId: tools.groupId
+      outputParameters:
+      - type: object
+        mapping: $.
