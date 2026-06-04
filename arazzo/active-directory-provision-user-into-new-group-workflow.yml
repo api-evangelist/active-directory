@@ -1,0 +1,111 @@
+arazzo: 1.0.1
+info:
+  title: Active Directory Provision User Into New Group
+  summary: Create a user, create a security group, and add the user as a member of that group.
+  description: >-
+    A foundational onboarding pattern for Microsoft Entra ID. The workflow
+    creates a new user account, creates a fresh security group to govern that
+    user's access, and then binds the two together by adding the new user as a
+    member of the new group. Every step spells out its request inline so the
+    flow can be read and executed without opening the underlying OpenAPI
+    descriptions.
+  version: 1.0.0
+sourceDescriptions:
+- name: usersApi
+  url: ../openapi/active-directory-users-openapi.yaml
+  type: openapi
+- name: groupsApi
+  url: ../openapi/active-directory-groups-openapi.yaml
+  type: openapi
+workflows:
+- workflowId: provision-user-into-new-group
+  summary: Provision a new user and a new group, then make the user a member of the group.
+  description: >-
+    Creates a Microsoft Entra user, creates a security group, and references
+    the newly created user from the new group's members collection so that the
+    user immediately inherits the group's access.
+  inputs:
+    type: object
+    required:
+    - displayName
+    - mailNickname
+    - userPrincipalName
+    - password
+    - groupDisplayName
+    - groupMailNickname
+    properties:
+      displayName:
+        type: string
+        description: Display name for the new user (e.g. "Adele Vance").
+      mailNickname:
+        type: string
+        description: Mail alias for the new user (without the domain suffix).
+      userPrincipalName:
+        type: string
+        description: UPN for the new user in alias@domain format.
+      password:
+        type: string
+        description: Initial password meeting tenant complexity requirements.
+      groupDisplayName:
+        type: string
+        description: Display name for the new security group.
+      groupMailNickname:
+        type: string
+        description: Mail alias for the new security group.
+  steps:
+  - stepId: createUser
+    description: >-
+      Create the new, enabled Microsoft Entra user account with a password
+      profile that forces a password change at first sign-in.
+    operationId: create-user
+    requestBody:
+      contentType: application/json
+      payload:
+        accountEnabled: true
+        displayName: $inputs.displayName
+        mailNickname: $inputs.mailNickname
+        userPrincipalName: $inputs.userPrincipalName
+        passwordProfile:
+          password: $inputs.password
+          forceChangePasswordNextSignIn: true
+    successCriteria:
+    - condition: $statusCode == 201
+    outputs:
+      userId: $response.body#/id
+      userPrincipalName: $response.body#/userPrincipalName
+  - stepId: createGroup
+    description: >-
+      Create a security group (mail-disabled, security-enabled) that will
+      govern the new user's access.
+    operationId: create-group
+    requestBody:
+      contentType: application/json
+      payload:
+        displayName: $inputs.groupDisplayName
+        mailEnabled: false
+        mailNickname: $inputs.groupMailNickname
+        securityEnabled: true
+    successCriteria:
+    - condition: $statusCode == 201
+    outputs:
+      groupId: $response.body#/id
+  - stepId: addUserToGroup
+    description: >-
+      Add the newly created user to the newly created group by passing an
+      OData reference to the user object.
+    operationId: add-group-member
+    parameters:
+    - name: groupId
+      in: path
+      value: $steps.createGroup.outputs.groupId
+    requestBody:
+      contentType: application/json
+      payload:
+        '@odata.id': https://graph.microsoft.com/v1.0/users/$steps.createUser.outputs.userId
+    successCriteria:
+    - condition: $statusCode == 204
+    outputs:
+      addedUserId: $steps.createUser.outputs.userId
+  outputs:
+    userId: $steps.createUser.outputs.userId
+    groupId: $steps.createGroup.outputs.groupId

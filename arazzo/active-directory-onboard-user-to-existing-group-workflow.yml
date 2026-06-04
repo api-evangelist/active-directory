@@ -1,0 +1,117 @@
+arazzo: 1.0.1
+info:
+  title: Active Directory Onboard User To Existing Group
+  summary: Find an existing group by name, create a user, and add the user to that group.
+  description: >-
+    Onboards a new hire into an existing access group. The workflow resolves a
+    target group by display name, confirms a single match, creates the user
+    account, and then adds the new user to the resolved group so they inherit
+    its access on day one. Every step inlines its request inline so the flow is
+    self-describing without the OpenAPI sources.
+  version: 1.0.0
+sourceDescriptions:
+- name: usersApi
+  url: ../openapi/active-directory-users-openapi.yaml
+  type: openapi
+- name: groupsApi
+  url: ../openapi/active-directory-groups-openapi.yaml
+  type: openapi
+workflows:
+- workflowId: onboard-user-to-existing-group
+  summary: Create a user and add them to an already-existing group resolved by name.
+  description: >-
+    Searches the groups collection for a group whose displayName matches the
+    supplied value, creates a new user, and then adds that user as a member of
+    the resolved group.
+  inputs:
+    type: object
+    required:
+    - groupDisplayName
+    - displayName
+    - mailNickname
+    - userPrincipalName
+    - password
+    properties:
+      groupDisplayName:
+        type: string
+        description: Display name of the existing group to add the user to.
+      displayName:
+        type: string
+        description: Display name for the new user.
+      mailNickname:
+        type: string
+        description: Mail alias for the new user (without the domain suffix).
+      userPrincipalName:
+        type: string
+        description: UPN for the new user in alias@domain format.
+      password:
+        type: string
+        description: Initial password meeting tenant complexity requirements.
+  steps:
+  - stepId: findGroup
+    description: >-
+      Resolve the target group by filtering the groups collection on
+      displayName, returning at most one match.
+    operationId: list-groups
+    parameters:
+    - name: $filter
+      in: query
+      value: "displayName eq '$inputs.groupDisplayName'"
+    - name: $top
+      in: query
+      value: 1
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      groupId: $response.body#/value/0/id
+    onSuccess:
+    - name: groupFound
+      type: goto
+      stepId: createUser
+      criteria:
+      - context: $response.body
+        condition: $.value.length > 0
+        type: jsonpath
+    - name: groupMissing
+      type: end
+      criteria:
+      - context: $response.body
+        condition: $.value.length == 0
+        type: jsonpath
+  - stepId: createUser
+    description: Create the new, enabled user account for the incoming hire.
+    operationId: create-user
+    requestBody:
+      contentType: application/json
+      payload:
+        accountEnabled: true
+        displayName: $inputs.displayName
+        mailNickname: $inputs.mailNickname
+        userPrincipalName: $inputs.userPrincipalName
+        passwordProfile:
+          password: $inputs.password
+          forceChangePasswordNextSignIn: true
+    successCriteria:
+    - condition: $statusCode == 201
+    outputs:
+      userId: $response.body#/id
+  - stepId: addUserToGroup
+    description: >-
+      Add the new user to the resolved group via an OData reference to the user
+      object.
+    operationId: add-group-member
+    parameters:
+    - name: groupId
+      in: path
+      value: $steps.findGroup.outputs.groupId
+    requestBody:
+      contentType: application/json
+      payload:
+        '@odata.id': https://graph.microsoft.com/v1.0/users/$steps.createUser.outputs.userId
+    successCriteria:
+    - condition: $statusCode == 204
+    outputs:
+      addedUserId: $steps.createUser.outputs.userId
+  outputs:
+    userId: $steps.createUser.outputs.userId
+    groupId: $steps.findGroup.outputs.groupId

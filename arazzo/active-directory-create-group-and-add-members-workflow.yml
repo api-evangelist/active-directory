@@ -1,0 +1,88 @@
+arazzo: 1.0.1
+info:
+  title: Active Directory Create Group And Add Two Members
+  summary: Create a security group, then add two existing users to it by their object IDs.
+  description: >-
+    Stands up a new access group and populates it. The workflow creates a
+    security group and then adds two existing users to it as members using
+    OData references, returning the group id and the members it added. Each
+    step inlines its request so the flow can be read and executed without the
+    underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: groupsApi
+  url: ../openapi/active-directory-groups-openapi.yaml
+  type: openapi
+workflows:
+- workflowId: create-group-and-add-members
+  summary: Create a group and add two existing users to it.
+  description: >-
+    Creates a security group and then adds two users (referenced by their
+    object IDs) to that group's members collection.
+  inputs:
+    type: object
+    required:
+    - groupDisplayName
+    - groupMailNickname
+    - firstUserId
+    - secondUserId
+    properties:
+      groupDisplayName:
+        type: string
+        description: Display name for the new security group.
+      groupMailNickname:
+        type: string
+        description: Mail alias for the new security group.
+      firstUserId:
+        type: string
+        description: Object ID of the first existing user to add.
+      secondUserId:
+        type: string
+        description: Object ID of the second existing user to add.
+  steps:
+  - stepId: createGroup
+    description: Create a security group (mail-disabled, security-enabled).
+    operationId: create-group
+    requestBody:
+      contentType: application/json
+      payload:
+        displayName: $inputs.groupDisplayName
+        mailEnabled: false
+        mailNickname: $inputs.groupMailNickname
+        securityEnabled: true
+    successCriteria:
+    - condition: $statusCode == 201
+    outputs:
+      groupId: $response.body#/id
+  - stepId: addFirstMember
+    description: Add the first user to the new group via an OData reference.
+    operationId: add-group-member
+    parameters:
+    - name: groupId
+      in: path
+      value: $steps.createGroup.outputs.groupId
+    requestBody:
+      contentType: application/json
+      payload:
+        '@odata.id': https://graph.microsoft.com/v1.0/users/$inputs.firstUserId
+    successCriteria:
+    - condition: $statusCode == 204
+    outputs:
+      addedFirstUserId: $inputs.firstUserId
+  - stepId: addSecondMember
+    description: Add the second user to the new group via an OData reference.
+    operationId: add-group-member
+    parameters:
+    - name: groupId
+      in: path
+      value: $steps.createGroup.outputs.groupId
+    requestBody:
+      contentType: application/json
+      payload:
+        '@odata.id': https://graph.microsoft.com/v1.0/users/$inputs.secondUserId
+    successCriteria:
+    - condition: $statusCode == 204
+    outputs:
+      addedSecondUserId: $inputs.secondUserId
+  outputs:
+    groupId: $steps.createGroup.outputs.groupId

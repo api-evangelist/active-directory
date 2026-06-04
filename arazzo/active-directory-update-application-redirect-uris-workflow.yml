@@ -1,0 +1,98 @@
+arazzo: 1.0.1
+info:
+  title: Active Directory Update Application Redirect URIs
+  summary: Resolve an application by name, read it, then patch its web redirect URIs and description.
+  description: >-
+    An app configuration pattern. The workflow resolves an application
+    registration by display name, reads its current state, and patches the web
+    platform redirect URIs along with the application description — keeping
+    OAuth2 reply URLs current as deployment environments change. Each step
+    inlines its request so the flow runs without the OpenAPI source.
+  version: 1.0.0
+sourceDescriptions:
+- name: applicationsApi
+  url: ../openapi/active-directory-applications-openapi.yaml
+  type: openapi
+workflows:
+- workflowId: update-application-redirect-uris
+  summary: Find an application by name and update its web redirect URIs.
+  description: >-
+    Searches the applications collection by display name, reads the matched
+    application, and patches its web.redirectUris and description.
+  inputs:
+    type: object
+    required:
+    - displayName
+    - redirectUri
+    - description
+    properties:
+      displayName:
+        type: string
+        description: Display name of the application to update.
+      redirectUri:
+        type: string
+        description: The web redirect URI to set on the application.
+      description:
+        type: string
+        description: The new description to set on the application.
+  steps:
+  - stepId: findApplication
+    description: Resolve the application by display name, returning at most one match.
+    operationId: list-applications
+    parameters:
+    - name: $filter
+      in: query
+      value: "displayName eq '$inputs.displayName'"
+    - name: $top
+      in: query
+      value: 1
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      applicationId: $response.body#/value/0/id
+    onSuccess:
+    - name: applicationFound
+      type: goto
+      stepId: getApplication
+      criteria:
+      - context: $response.body
+        condition: $.value.length > 0
+        type: jsonpath
+    - name: applicationMissing
+      type: end
+      criteria:
+      - context: $response.body
+        condition: $.value.length == 0
+        type: jsonpath
+  - stepId: getApplication
+    description: Read the matched application to capture its current appId.
+    operationId: get-application
+    parameters:
+    - name: applicationId
+      in: path
+      value: $steps.findApplication.outputs.applicationId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      appId: $response.body#/appId
+  - stepId: updateApplication
+    description: Patch the application's web redirect URIs and description.
+    operationId: update-application
+    parameters:
+    - name: applicationId
+      in: path
+      value: $steps.findApplication.outputs.applicationId
+    requestBody:
+      contentType: application/json
+      payload:
+        description: $inputs.description
+        web:
+          redirectUris:
+          - $inputs.redirectUri
+    successCriteria:
+    - condition: $statusCode == 204
+    outputs:
+      updatedApplicationId: $steps.findApplication.outputs.applicationId
+  outputs:
+    applicationId: $steps.findApplication.outputs.applicationId
+    appId: $steps.getApplication.outputs.appId

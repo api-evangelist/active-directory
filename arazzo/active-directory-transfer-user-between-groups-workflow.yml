@@ -1,0 +1,117 @@
+arazzo: 1.0.1
+info:
+  title: Active Directory Transfer User Between Groups
+  summary: Resolve a user and two groups by name, remove the user from one group and add them to another.
+  description: >-
+    A team-transfer pattern. The workflow resolves a user by userPrincipalName,
+    resolves both the source and destination groups by display name, removes
+    the user's membership from the source group, and adds the user to the
+    destination group — moving an identity's access in a single, ordered flow.
+    Each step inlines its request so the flow is self-describing.
+  version: 1.0.0
+sourceDescriptions:
+- name: usersApi
+  url: ../openapi/active-directory-users-openapi.yaml
+  type: openapi
+- name: groupsApi
+  url: ../openapi/active-directory-groups-openapi.yaml
+  type: openapi
+workflows:
+- workflowId: transfer-user-between-groups
+  summary: Move a user from a source group to a destination group.
+  description: >-
+    Resolves a user by UPN and a source and destination group by display name,
+    removes the user from the source group, and adds the user to the
+    destination group.
+  inputs:
+    type: object
+    required:
+    - userPrincipalName
+    - sourceGroupDisplayName
+    - destinationGroupDisplayName
+    properties:
+      userPrincipalName:
+        type: string
+        description: UPN of the user to transfer.
+      sourceGroupDisplayName:
+        type: string
+        description: Display name of the group to remove the user from.
+      destinationGroupDisplayName:
+        type: string
+        description: Display name of the group to add the user to.
+  steps:
+  - stepId: findUser
+    description: Resolve the user by userPrincipalName, returning at most one match.
+    operationId: list-users
+    parameters:
+    - name: $filter
+      in: query
+      value: "userPrincipalName eq '$inputs.userPrincipalName'"
+    - name: $top
+      in: query
+      value: 1
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      userId: $response.body#/value/0/id
+  - stepId: findSourceGroup
+    description: Resolve the source group by display name.
+    operationId: list-groups
+    parameters:
+    - name: $filter
+      in: query
+      value: "displayName eq '$inputs.sourceGroupDisplayName'"
+    - name: $top
+      in: query
+      value: 1
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      sourceGroupId: $response.body#/value/0/id
+  - stepId: findDestinationGroup
+    description: Resolve the destination group by display name.
+    operationId: list-groups
+    parameters:
+    - name: $filter
+      in: query
+      value: "displayName eq '$inputs.destinationGroupDisplayName'"
+    - name: $top
+      in: query
+      value: 1
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      destinationGroupId: $response.body#/value/0/id
+  - stepId: removeFromSource
+    description: Remove the user's direct membership from the source group.
+    operationId: remove-group-member
+    parameters:
+    - name: groupId
+      in: path
+      value: $steps.findSourceGroup.outputs.sourceGroupId
+    - name: memberId
+      in: path
+      value: $steps.findUser.outputs.userId
+    successCriteria:
+    - condition: $statusCode == 204
+    outputs:
+      removedUserId: $steps.findUser.outputs.userId
+  - stepId: addToDestination
+    description: Add the user to the destination group via an OData reference.
+    operationId: add-group-member
+    parameters:
+    - name: groupId
+      in: path
+      value: $steps.findDestinationGroup.outputs.destinationGroupId
+    requestBody:
+      contentType: application/json
+      payload:
+        '@odata.id': https://graph.microsoft.com/v1.0/users/$steps.findUser.outputs.userId
+    successCriteria:
+    - condition: $statusCode == 204
+    outputs:
+      addedUserId: $steps.findUser.outputs.userId
+  outputs:
+    userId: $steps.findUser.outputs.userId
+    sourceGroupId: $steps.findSourceGroup.outputs.sourceGroupId
+    destinationGroupId: $steps.findDestinationGroup.outputs.destinationGroupId

@@ -1,0 +1,89 @@
+arazzo: 1.0.1
+info:
+  title: Active Directory Find User And Update Profile
+  summary: Look up a user by principal name, then patch their job title and department.
+  description: >-
+    A find-then-act pattern for keeping employee directory records current.
+    The workflow filters the users collection by userPrincipalName, branches on
+    whether a match was found, and when a user exists it patches the job title
+    and department on that user. Each step inlines its request so the flow can
+    be executed without consulting the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: usersApi
+  url: ../openapi/active-directory-users-openapi.yaml
+  type: openapi
+workflows:
+- workflowId: find-user-and-update-profile
+  summary: Resolve a user by UPN and update their organizational profile fields.
+  description: >-
+    Searches for a user by userPrincipalName, and if a match is found, patches
+    that user's jobTitle and department. If no user matches, the workflow ends
+    without making changes.
+  inputs:
+    type: object
+    required:
+    - userPrincipalName
+    - jobTitle
+    - department
+    properties:
+      userPrincipalName:
+        type: string
+        description: The userPrincipalName to search for (e.g. AdeleV@contoso.com).
+      jobTitle:
+        type: string
+        description: The new job title to set on the matched user.
+      department:
+        type: string
+        description: The new department to set on the matched user.
+  steps:
+  - stepId: findUser
+    description: >-
+      Filter the users collection on userPrincipalName, returning at most one
+      matching user.
+    operationId: list-users
+    parameters:
+    - name: $filter
+      in: query
+      value: "userPrincipalName eq '$inputs.userPrincipalName'"
+    - name: $top
+      in: query
+      value: 1
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      matchedUserId: $response.body#/value/0/id
+    onSuccess:
+    - name: userFound
+      type: goto
+      stepId: updateUser
+      criteria:
+      - context: $response.body
+        condition: $.value.length > 0
+        type: jsonpath
+    - name: userMissing
+      type: end
+      criteria:
+      - context: $response.body
+        condition: $.value.length == 0
+        type: jsonpath
+  - stepId: updateUser
+    description: >-
+      Patch the matched user with the new job title and department. Only the
+      supplied properties change; all others retain their current values.
+    operationId: update-user
+    parameters:
+    - name: userId
+      in: path
+      value: $steps.findUser.outputs.matchedUserId
+    requestBody:
+      contentType: application/json
+      payload:
+        jobTitle: $inputs.jobTitle
+        department: $inputs.department
+    successCriteria:
+    - condition: $statusCode == 204
+    outputs:
+      updatedUserId: $steps.findUser.outputs.matchedUserId
+  outputs:
+    updatedUserId: $steps.updateUser.outputs.updatedUserId

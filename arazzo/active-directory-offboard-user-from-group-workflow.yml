@@ -1,0 +1,98 @@
+arazzo: 1.0.1
+info:
+  title: Active Directory Offboard User From Group
+  summary: Resolve a user by UPN, remove them from a named group, then disable the account.
+  description: >-
+    An offboarding pattern that revokes access cleanly. The workflow resolves a
+    user by userPrincipalName and a group by display name, removes the direct
+    group membership, and finally disables the user account so they can no
+    longer sign in. Each step inlines its request so the flow reads and runs
+    without opening the OpenAPI sources.
+  version: 1.0.0
+sourceDescriptions:
+- name: usersApi
+  url: ../openapi/active-directory-users-openapi.yaml
+  type: openapi
+- name: groupsApi
+  url: ../openapi/active-directory-groups-openapi.yaml
+  type: openapi
+workflows:
+- workflowId: offboard-user-from-group
+  summary: Remove a user from a group and disable the user account.
+  description: >-
+    Looks up a user by UPN and a group by display name, removes the user's
+    direct membership from the group, and then disables the user account by
+    patching accountEnabled to false.
+  inputs:
+    type: object
+    required:
+    - userPrincipalName
+    - groupDisplayName
+    properties:
+      userPrincipalName:
+        type: string
+        description: UPN of the user to offboard.
+      groupDisplayName:
+        type: string
+        description: Display name of the group to remove the user from.
+  steps:
+  - stepId: findUser
+    description: Resolve the user by userPrincipalName, returning at most one match.
+    operationId: list-users
+    parameters:
+    - name: $filter
+      in: query
+      value: "userPrincipalName eq '$inputs.userPrincipalName'"
+    - name: $top
+      in: query
+      value: 1
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      userId: $response.body#/value/0/id
+  - stepId: findGroup
+    description: Resolve the group by displayName, returning at most one match.
+    operationId: list-groups
+    parameters:
+    - name: $filter
+      in: query
+      value: "displayName eq '$inputs.groupDisplayName'"
+    - name: $top
+      in: query
+      value: 1
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      groupId: $response.body#/value/0/id
+  - stepId: removeMembership
+    description: Remove the user's direct membership from the resolved group.
+    operationId: remove-group-member
+    parameters:
+    - name: groupId
+      in: path
+      value: $steps.findGroup.outputs.groupId
+    - name: memberId
+      in: path
+      value: $steps.findUser.outputs.userId
+    successCriteria:
+    - condition: $statusCode == 204
+    outputs:
+      removedUserId: $steps.findUser.outputs.userId
+  - stepId: disableUser
+    description: Disable the user account so the user can no longer sign in.
+    operationId: update-user
+    parameters:
+    - name: userId
+      in: path
+      value: $steps.findUser.outputs.userId
+    requestBody:
+      contentType: application/json
+      payload:
+        accountEnabled: false
+    successCriteria:
+    - condition: $statusCode == 204
+    outputs:
+      disabledUserId: $steps.findUser.outputs.userId
+  outputs:
+    userId: $steps.findUser.outputs.userId
+    groupId: $steps.findGroup.outputs.groupId

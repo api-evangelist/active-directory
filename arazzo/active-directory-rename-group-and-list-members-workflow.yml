@@ -1,0 +1,109 @@
+arazzo: 1.0.1
+info:
+  title: Active Directory Rename Group And List Members
+  summary: Resolve a group by name, update its display name and description, then list its members and owners.
+  description: >-
+    A group governance pattern. The workflow resolves a group by its current
+    display name, patches its display name and description, and then lists both
+    the members and the owners of the group so the change can be verified
+    against who is affected. Each step inlines its request so the flow runs
+    without opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: groupsApi
+  url: ../openapi/active-directory-groups-openapi.yaml
+  type: openapi
+workflows:
+- workflowId: rename-group-and-list-members
+  summary: Update a group's name and description, then enumerate its members and owners.
+  description: >-
+    Searches the groups collection by display name, patches the matched group's
+    displayName and description, lists the group's members, and lists the
+    group's owners.
+  inputs:
+    type: object
+    required:
+    - currentDisplayName
+    - newDisplayName
+    - newDescription
+    properties:
+      currentDisplayName:
+        type: string
+        description: The current display name used to resolve the group.
+      newDisplayName:
+        type: string
+        description: The new display name to set on the group.
+      newDescription:
+        type: string
+        description: The new description to set on the group.
+  steps:
+  - stepId: findGroup
+    description: Resolve the group by its current display name, returning at most one match.
+    operationId: list-groups
+    parameters:
+    - name: $filter
+      in: query
+      value: "displayName eq '$inputs.currentDisplayName'"
+    - name: $top
+      in: query
+      value: 1
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      groupId: $response.body#/value/0/id
+    onSuccess:
+    - name: groupFound
+      type: goto
+      stepId: updateGroup
+      criteria:
+      - context: $response.body
+        condition: $.value.length > 0
+        type: jsonpath
+    - name: groupMissing
+      type: end
+      criteria:
+      - context: $response.body
+        condition: $.value.length == 0
+        type: jsonpath
+  - stepId: updateGroup
+    description: Patch the matched group's display name and description.
+    operationId: update-group
+    parameters:
+    - name: groupId
+      in: path
+      value: $steps.findGroup.outputs.groupId
+    requestBody:
+      contentType: application/json
+      payload:
+        displayName: $inputs.newDisplayName
+        description: $inputs.newDescription
+    successCriteria:
+    - condition: $statusCode == 204
+    outputs:
+      updatedGroupId: $steps.findGroup.outputs.groupId
+  - stepId: listMembers
+    description: List the direct members of the updated group.
+    operationId: list-group-members
+    parameters:
+    - name: groupId
+      in: path
+      value: $steps.findGroup.outputs.groupId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      members: $response.body#/value
+  - stepId: listOwners
+    description: List the owners of the updated group.
+    operationId: list-group-owners
+    parameters:
+    - name: groupId
+      in: path
+      value: $steps.findGroup.outputs.groupId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      owners: $response.body#/value
+  outputs:
+    groupId: $steps.findGroup.outputs.groupId
+    members: $steps.listMembers.outputs.members
+    owners: $steps.listOwners.outputs.owners

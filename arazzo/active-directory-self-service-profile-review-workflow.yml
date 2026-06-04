@@ -1,0 +1,74 @@
+arazzo: 1.0.1
+info:
+  title: Active Directory Self-Service Profile Review
+  summary: Read the signed-in user's profile, then list their group memberships and look up their manager.
+  description: >-
+    A delegated self-service pattern using the signed-in user's token. The
+    workflow reads the caller's own profile via the /me endpoint, then uses the
+    returned object id to list the groups and directory roles the caller is a
+    direct member of and to read the caller's assigned manager — giving a user
+    a complete view of their own access and reporting line. Each step inlines
+    its request so the flow is self-describing.
+  version: 1.0.0
+sourceDescriptions:
+- name: usersApi
+  url: ../openapi/active-directory-users-openapi.yaml
+  type: openapi
+workflows:
+- workflowId: self-service-profile-review
+  summary: Show the signed-in user their own profile, memberships, and manager.
+  description: >-
+    Reads the signed-in user's profile via /me, lists the directory objects
+    they are a direct member of, and reads their manager.
+  inputs:
+    type: object
+    properties:
+      select:
+        type: string
+        description: Optional comma-separated list of profile properties to return.
+  steps:
+  - stepId: getMyProfile
+    description: Retrieve the signed-in user's profile via the /me endpoint.
+    operationId: get-me
+    parameters:
+    - name: $select
+      in: query
+      value: $inputs.select
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      myId: $response.body#/id
+      myDisplayName: $response.body#/displayName
+      myUserPrincipalName: $response.body#/userPrincipalName
+  - stepId: listMyMemberships
+    description: >-
+      List the groups and directory roles the signed-in user is a direct
+      member of, filtered to group objects.
+    operationId: list-user-member-of
+    parameters:
+    - name: userId
+      in: path
+      value: $steps.getMyProfile.outputs.myId
+    - name: $filter
+      in: query
+      value: "isof('microsoft.graph.group')"
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      memberships: $response.body#/value
+  - stepId: getMyManager
+    description: Read the signed-in user's assigned manager.
+    operationId: get-user-manager
+    parameters:
+    - name: userId
+      in: path
+      value: $steps.getMyProfile.outputs.myId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      managerId: $response.body#/id
+      managerDisplayName: $response.body#/displayName
+  outputs:
+    myId: $steps.getMyProfile.outputs.myId
+    memberships: $steps.listMyMemberships.outputs.memberships
+    managerId: $steps.getMyManager.outputs.managerId

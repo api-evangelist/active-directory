@@ -191,6 +191,48 @@ apis:
   - type: Documentation
     url: https://learn.microsoft.com/en-us/graph/api/resources/report-identity-access
 common:
+- type: ArazzoWorkflows
+  url: arazzo/
+  workflows:
+  - url: arazzo/active-directory-audit-user-group-memberships-workflow.yml
+    name: Active Directory Audit User Group Memberships
+    summary: Resolve a user by UPN, read their full profile, then list their group memberships and manager.
+  - url: arazzo/active-directory-create-group-and-add-members-workflow.yml
+    name: Active Directory Create Group And Add Two Members
+    summary: Create a security group, then add two existing users to it by their object IDs.
+  - url: arazzo/active-directory-create-m365-group-with-owner-workflow.yml
+    name: Active Directory Create Microsoft 365 Group With Owner
+    summary: Create a user, create a Microsoft 365 group owned by that user, and add the user as a member.
+  - url: arazzo/active-directory-decommission-application-workflow.yml
+    name: Active Directory Decommission Application
+    summary: Resolve an application by name, read its details, and soft-delete the registration.
+  - url: arazzo/active-directory-find-user-and-update-profile-workflow.yml
+    name: Active Directory Find User And Update Profile
+    summary: Look up a user by principal name, then patch their job title and department.
+  - url: arazzo/active-directory-offboard-user-from-group-workflow.yml
+    name: Active Directory Offboard User From Group
+    summary: Resolve a user by UPN, remove them from a named group, then disable the account.
+  - url: arazzo/active-directory-onboard-user-to-existing-group-workflow.yml
+    name: Active Directory Onboard User To Existing Group
+    summary: Find an existing group by name, create a user, and add the user to that group.
+  - url: arazzo/active-directory-provision-application-with-membership-workflow.yml
+    name: Active Directory Provision Application With Service Principal
+    summary: Register an application, then locate and read its service principal and app role assignments.
+  - url: arazzo/active-directory-provision-user-into-new-group-workflow.yml
+    name: Active Directory Provision User Into New Group
+    summary: Create a user, create a security group, and add the user as a member of that group.
+  - url: arazzo/active-directory-rename-group-and-list-members-workflow.yml
+    name: Active Directory Rename Group And List Members
+    summary: Resolve a group by name, update its display name and description, then list its members and owners.
+  - url: arazzo/active-directory-self-service-profile-review-workflow.yml
+    name: Active Directory Self-Service Profile Review
+    summary: Read the signed-in user's profile, then list their group memberships and look up their manager.
+  - url: arazzo/active-directory-transfer-user-between-groups-workflow.yml
+    name: Active Directory Transfer User Between Groups
+    summary: Resolve a user and two groups by name, remove the user from one group and add them to another.
+  - url: arazzo/active-directory-update-application-redirect-uris-workflow.yml
+    name: Active Directory Update Application Redirect URIs
+    summary: Resolve an application by name, read it, then patch its web redirect URIs and description.
 - type: Portal
   url: https://developer.microsoft.com/en-us/graph
 - type: GettingStarted

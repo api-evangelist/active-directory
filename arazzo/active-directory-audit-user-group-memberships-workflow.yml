@@ -1,0 +1,88 @@
+arazzo: 1.0.1
+info:
+  title: Active Directory Audit User Group Memberships
+  summary: Resolve a user by UPN, read their full profile, then list their group memberships and manager.
+  description: >-
+    An access review pattern for a single user. The workflow resolves a user by
+    userPrincipalName, retrieves their full user object, lists the groups and
+    directory roles they are a direct member of, and reads their assigned
+    manager — producing a consolidated picture of one identity's access and
+    reporting line. Each step inlines its request so the flow is self-describing.
+  version: 1.0.0
+sourceDescriptions:
+- name: usersApi
+  url: ../openapi/active-directory-users-openapi.yaml
+  type: openapi
+workflows:
+- workflowId: audit-user-group-memberships
+  summary: Compile a user's profile, direct memberships, and manager for an access review.
+  description: >-
+    Searches for a user by UPN, retrieves the user object, lists the directory
+    objects the user is a direct member of, and reads the user's manager.
+  inputs:
+    type: object
+    required:
+    - userPrincipalName
+    properties:
+      userPrincipalName:
+        type: string
+        description: UPN of the user to audit (e.g. AdeleV@contoso.com).
+  steps:
+  - stepId: findUser
+    description: Resolve the user by userPrincipalName, returning at most one match.
+    operationId: list-users
+    parameters:
+    - name: $filter
+      in: query
+      value: "userPrincipalName eq '$inputs.userPrincipalName'"
+    - name: $top
+      in: query
+      value: 1
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      userId: $response.body#/value/0/id
+  - stepId: getUser
+    description: Retrieve the full user object for the resolved id.
+    operationId: get-user
+    parameters:
+    - name: userId
+      in: path
+      value: $steps.findUser.outputs.userId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      displayName: $response.body#/displayName
+      accountEnabled: $response.body#/accountEnabled
+  - stepId: listMemberships
+    description: >-
+      List the groups and directory roles the user is a direct member of,
+      filtered to group objects.
+    operationId: list-user-member-of
+    parameters:
+    - name: userId
+      in: path
+      value: $steps.findUser.outputs.userId
+    - name: $filter
+      in: query
+      value: "isof('microsoft.graph.group')"
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      memberships: $response.body#/value
+  - stepId: getManager
+    description: Read the user's assigned manager.
+    operationId: get-user-manager
+    parameters:
+    - name: userId
+      in: path
+      value: $steps.findUser.outputs.userId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      managerId: $response.body#/id
+      managerDisplayName: $response.body#/displayName
+  outputs:
+    userId: $steps.findUser.outputs.userId
+    memberships: $steps.listMemberships.outputs.memberships
+    managerId: $steps.getManager.outputs.managerId

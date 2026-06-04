@@ -1,0 +1,92 @@
+arazzo: 1.0.1
+info:
+  title: Active Directory Provision Application With Service Principal
+  summary: Register an application, then locate and read its service principal and app role assignments.
+  description: >-
+    A zero-trust app governance pattern. The workflow registers a new
+    application, looks up the service principal that Microsoft Entra
+    automatically provisions for that application by filtering on its appId,
+    reads the full service principal object, and then lists the app role
+    assignments granted to it. Each step inlines its request so the flow runs
+    without opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: applicationsApi
+  url: ../openapi/active-directory-applications-openapi.yaml
+  type: openapi
+workflows:
+- workflowId: provision-application-with-service-principal
+  summary: Register an app and resolve its service principal and role assignments.
+  description: >-
+    Creates an application registration, resolves the matching service
+    principal by appId, retrieves the service principal object, and lists the
+    app role assignments granted to it.
+  inputs:
+    type: object
+    required:
+    - displayName
+    properties:
+      displayName:
+        type: string
+        description: Display name for the new application registration.
+      signInAudience:
+        type: string
+        description: Which Microsoft accounts are supported (e.g. AzureADMyOrg).
+  steps:
+  - stepId: createApplication
+    description: Register the new application in Microsoft Entra ID.
+    operationId: create-application
+    requestBody:
+      contentType: application/json
+      payload:
+        displayName: $inputs.displayName
+        signInAudience: $inputs.signInAudience
+    successCriteria:
+    - condition: $statusCode == 201
+    outputs:
+      applicationId: $response.body#/id
+      appId: $response.body#/appId
+  - stepId: findServicePrincipal
+    description: >-
+      Resolve the service principal automatically provisioned for the new
+      application by filtering service principals on the application's appId.
+    operationId: list-service-principals
+    parameters:
+    - name: $filter
+      in: query
+      value: "appId eq '$steps.createApplication.outputs.appId'"
+    - name: $top
+      in: query
+      value: 1
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      servicePrincipalId: $response.body#/value/0/id
+  - stepId: getServicePrincipal
+    description: Retrieve the full service principal object for the resolved id.
+    operationId: get-service-principal
+    parameters:
+    - name: servicePrincipalId
+      in: path
+      value: $steps.findServicePrincipal.outputs.servicePrincipalId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      servicePrincipalType: $response.body#/servicePrincipalType
+      accountEnabled: $response.body#/accountEnabled
+  - stepId: listAppRoleAssignments
+    description: List the app role assignments granted to the service principal.
+    operationId: list-service-principal-app-role-assignments
+    parameters:
+    - name: servicePrincipalId
+      in: path
+      value: $steps.findServicePrincipal.outputs.servicePrincipalId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      assignments: $response.body#/value
+  outputs:
+    applicationId: $steps.createApplication.outputs.applicationId
+    appId: $steps.createApplication.outputs.appId
+    servicePrincipalId: $steps.findServicePrincipal.outputs.servicePrincipalId
+    assignments: $steps.listAppRoleAssignments.outputs.assignments

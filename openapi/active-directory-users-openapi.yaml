@@ -361,7 +361,7 @@ components:
           example: Adele Vance
         userPrincipalName:
           type: string
-          description: Principal name of the user (in UPN format: alias@domain)
+          description: 'Principal name of the user (in UPN format: alias@domain)'
           example: AdeleV@contoso.com
         mail:
           type: string

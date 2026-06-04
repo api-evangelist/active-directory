@@ -1,0 +1,108 @@
+arazzo: 1.0.1
+info:
+  title: Active Directory Create Microsoft 365 Group With Owner
+  summary: Create a user, create a Microsoft 365 group owned by that user, and add the user as a member.
+  description: >-
+    Stands up a collaborative Microsoft 365 group with a designated owner. The
+    workflow creates a user to act as the group owner, creates a Unified
+    (Microsoft 365) group binding that user as an owner at creation time, and
+    then adds the same user as a member so they appear in the group's membership.
+    Each step inlines its request so the flow runs without the OpenAPI source.
+  version: 1.0.0
+sourceDescriptions:
+- name: usersApi
+  url: ../openapi/active-directory-users-openapi.yaml
+  type: openapi
+- name: groupsApi
+  url: ../openapi/active-directory-groups-openapi.yaml
+  type: openapi
+workflows:
+- workflowId: create-m365-group-with-owner
+  summary: Create an owner user and a Microsoft 365 group owned by that user.
+  description: >-
+    Creates a user, creates a Unified Microsoft 365 group with that user bound
+    as an owner via owners@odata.bind, and then adds the user as a member.
+  inputs:
+    type: object
+    required:
+    - ownerDisplayName
+    - ownerMailNickname
+    - ownerUserPrincipalName
+    - ownerPassword
+    - groupDisplayName
+    - groupMailNickname
+    properties:
+      ownerDisplayName:
+        type: string
+        description: Display name for the owner user.
+      ownerMailNickname:
+        type: string
+        description: Mail alias for the owner user.
+      ownerUserPrincipalName:
+        type: string
+        description: UPN for the owner user in alias@domain format.
+      ownerPassword:
+        type: string
+        description: Initial password meeting tenant complexity requirements.
+      groupDisplayName:
+        type: string
+        description: Display name for the new Microsoft 365 group.
+      groupMailNickname:
+        type: string
+        description: Mail alias for the new Microsoft 365 group.
+  steps:
+  - stepId: createOwner
+    description: Create the user who will own the Microsoft 365 group.
+    operationId: create-user
+    requestBody:
+      contentType: application/json
+      payload:
+        accountEnabled: true
+        displayName: $inputs.ownerDisplayName
+        mailNickname: $inputs.ownerMailNickname
+        userPrincipalName: $inputs.ownerUserPrincipalName
+        passwordProfile:
+          password: $inputs.ownerPassword
+          forceChangePasswordNextSignIn: true
+    successCriteria:
+    - condition: $statusCode == 201
+    outputs:
+      ownerId: $response.body#/id
+  - stepId: createGroup
+    description: >-
+      Create a Unified Microsoft 365 group binding the new user as an owner at
+      creation time.
+    operationId: create-group
+    requestBody:
+      contentType: application/json
+      payload:
+        displayName: $inputs.groupDisplayName
+        mailEnabled: true
+        mailNickname: $inputs.groupMailNickname
+        securityEnabled: false
+        groupTypes:
+        - Unified
+        'owners@odata.bind':
+        - https://graph.microsoft.com/v1.0/users/$steps.createOwner.outputs.ownerId
+    successCriteria:
+    - condition: $statusCode == 201
+    outputs:
+      groupId: $response.body#/id
+  - stepId: addOwnerAsMember
+    description: Add the owner user as a member of the group via an OData reference.
+    operationId: add-group-member
+    parameters:
+    - name: groupId
+      in: path
+      value: $steps.createGroup.outputs.groupId
+    requestBody:
+      contentType: application/json
+      payload:
+        '@odata.id': https://graph.microsoft.com/v1.0/users/$steps.createOwner.outputs.ownerId
+    successCriteria:
+    - condition: $statusCode == 204
+    outputs:
+      addedMemberId: $steps.createOwner.outputs.ownerId
+  outputs:
+    ownerId: $steps.createOwner.outputs.ownerId
+    groupId: $steps.createGroup.outputs.groupId
