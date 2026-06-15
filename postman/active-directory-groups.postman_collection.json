@@ -1,0 +1,1705 @@
+{
+  "info": {
+    "_postman_id": "0181e700-48b1-448d-b895-dcb2ec5c411f",
+    "name": "Microsoft Graph Groups API",
+    "description": "Create and manage Microsoft Entra security groups, Microsoft 365 groups, and distribution lists via Microsoft Graph. Manage group members, owners, and settings. Groups enable efficient entitlement management \u2014 granting users access to resources, licenses, and applications as a unit. Supports both v1.0 and beta Microsoft Graph endpoints.\n\nContact Support:\n Name: Microsoft Graph Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-06-05T14:58:53.000Z",
+    "updatedAt": "2026-06-05T14:58:53.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-0181e700-48b1-448d-b895-dcb2ec5c411f"
+  },
+  "item": [
+    {
+      "name": "groups",
+      "item": [
+        {
+          "name": "{groupId}",
+          "item": [
+            {
+              "name": "members",
+              "item": [
+                {
+                  "name": "{memberId}",
+                  "item": [
+                    {
+                      "name": "$ref",
+                      "item": [
+                        {
+                          "name": "Active Directory Remove Group Member",
+                          "id": "abaca6c8-dcef-474f-8426-ab115dc9f72b",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/groups/:groupId/members/:memberId/$ref",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "groups",
+                                ":groupId",
+                                "members",
+                                ":memberId",
+                                "$ref"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "ca7d08f7-d7a0-433d-8559-ed9b65b1d7a6",
+                                  "key": "groupId",
+                                  "value": "<uuid>",
+                                  "description": "(Required) Group object ID (UUID)"
+                                },
+                                {
+                                  "id": "6c254124-6d00-4d34-b314-094c2d27bb4c",
+                                  "key": "memberId",
+                                  "value": "<uuid>",
+                                  "description": "(Required) Member object ID to remove"
+                                }
+                              ]
+                            },
+                            "description": "Remove a member from a group. This removes the direct membership only."
+                          },
+                          "response": [
+                            {
+                              "id": "a040dfae-2bf8-42c9-bf16-fdb0ac5cee2c",
+                              "name": "Member removed successfully (no content)",
+                              "originalRequest": {
+                                "method": "DELETE",
+                                "header": [
+                                  {
+                                    "description": "Added as a part of security scheme: oauth2",
+                                    "key": "Authorization",
+                                    "value": "<token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/groups/:groupId/members/:memberId/$ref",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "groups",
+                                    ":groupId",
+                                    "members",
+                                    ":memberId",
+                                    "$ref"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "groupId"
+                                    },
+                                    {
+                                      "key": "memberId"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "No Content",
+                              "code": 204,
+                              "_postman_previewlanguage": "text",
+                              "header": [],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": null,
+                              "createdAt": "2026-06-05T14:58:54.000Z",
+                              "updatedAt": "2026-06-05T14:58:54.000Z",
+                              "uid": "35240-a040dfae-2bf8-42c9-bf16-fdb0ac5cee2c"
+                            },
+                            {
+                              "id": "fe564ec2-4030-4d37-a23a-3061f2679701",
+                              "name": "Group not found",
+                              "originalRequest": {
+                                "method": "DELETE",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: oauth2",
+                                    "key": "Authorization",
+                                    "value": "<token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/groups/:groupId/members/:memberId/$ref",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "groups",
+                                    ":groupId",
+                                    "members",
+                                    ":memberId",
+                                    "$ref"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "groupId"
+                                    },
+                                    {
+                                      "key": "memberId"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Not Found",
+                              "code": 404,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\",\n    \"innerError\": {}\n  }\n}",
+                              "createdAt": "2026-06-05T14:58:54.000Z",
+                              "updatedAt": "2026-06-05T14:58:54.000Z",
+                              "uid": "35240-fe564ec2-4030-4d37-a23a-3061f2679701"
+                            }
+                          ],
+                          "createdAt": "2026-06-05T14:58:54.000Z",
+                          "updatedAt": "2026-06-05T14:58:54.000Z",
+                          "uid": "35240-abaca6c8-dcef-474f-8426-ab115dc9f72b"
+                        }
+                      ],
+                      "id": "5690ad05-72a6-4770-ac94-db7120af6512",
+                      "createdAt": "2026-06-05T14:58:54.000Z",
+                      "updatedAt": "2026-06-05T14:58:54.000Z",
+                      "uid": "35240-5690ad05-72a6-4770-ac94-db7120af6512"
+                    }
+                  ],
+                  "id": "2b10b0f1-296b-4419-9f82-51de79bd009b",
+                  "createdAt": "2026-06-05T14:58:54.000Z",
+                  "updatedAt": "2026-06-05T14:58:54.000Z",
+                  "uid": "35240-2b10b0f1-296b-4419-9f82-51de79bd009b"
+                },
+                {
+                  "name": "Active Directory List Group Members",
+                  "id": "87be9a00-d423-4217-8748-c774019848a5",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/groups/:groupId/members?$filter=<string>&$top=<integer>&$select=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "groups",
+                        ":groupId",
+                        "members"
+                      ],
+                      "query": [
+                        {
+                          "description": "Filter to scope to specific member types (e.g. microsoft.graph.user)",
+                          "key": "$filter",
+                          "value": "<string>"
+                        },
+                        {
+                          "key": "$top",
+                          "value": "<integer>"
+                        },
+                        {
+                          "key": "$select",
+                          "value": "<string>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "id": "58dc5513-200f-4b1a-8b64-deefd004416e",
+                          "key": "groupId",
+                          "value": "<uuid>",
+                          "description": "(Required) Group object ID (UUID)"
+                        }
+                      ]
+                    },
+                    "description": "Get the list of direct members of a group. Members can be users, devices, service principals, organizational contacts, or other groups (nested). This does not return transitive members; use /transitiveMembers for that."
+                  },
+                  "response": [
+                    {
+                      "id": "2878def0-90b4-4db8-835e-ed137599c967",
+                      "name": "Collection of group members",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/groups/:groupId/members?$filter=<string>&$top=<integer>&$select=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "groups",
+                            ":groupId",
+                            "members"
+                          ],
+                          "query": [
+                            {
+                              "description": "Filter to scope to specific member types (e.g. microsoft.graph.user)",
+                              "key": "$filter",
+                              "value": "<string>"
+                            },
+                            {
+                              "key": "$top",
+                              "value": "<integer>"
+                            },
+                            {
+                              "key": "$select",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "groupId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"@odata.context\": \"<string>\",\n  \"value\": [\n    {\n      \"id\": \"<string>\",\n      \"displayName\": \"<string>\",\n      \"userPrincipalName\": \"<string>\",\n      \"@odata.type\": \"<string>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"displayName\": \"<string>\",\n      \"userPrincipalName\": \"<string>\",\n      \"@odata.type\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-06-05T14:58:54.000Z",
+                      "updatedAt": "2026-06-05T14:58:54.000Z",
+                      "uid": "35240-2878def0-90b4-4db8-835e-ed137599c967"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T14:58:54.000Z",
+                  "updatedAt": "2026-06-05T14:58:54.000Z",
+                  "uid": "35240-87be9a00-d423-4217-8748-c774019848a5"
+                },
+                {
+                  "name": "Active Directory Add Group Member",
+                  "id": "b584febc-f02c-416a-b8a5-b98ca4f81204",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"@odata.id\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/groups/:groupId/members",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "groups",
+                        ":groupId",
+                        "members"
+                      ],
+                      "variable": [
+                        {
+                          "id": "6248b88b-3a70-4fda-a419-6fcc9ae4270a",
+                          "key": "groupId",
+                          "value": "<uuid>",
+                          "description": "(Required) Group object ID (UUID)"
+                        }
+                      ]
+                    },
+                    "description": "Add a member to a group. The member can be a user, device, service principal, organizational contact, or another group (for security groups). Provide the OData id of the object to add."
+                  },
+                  "response": [
+                    {
+                      "id": "19e8bcad-33c3-478d-9ceb-29f404732114",
+                      "name": "Member added successfully (no content)",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"@odata.id\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/groups/:groupId/members",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "groups",
+                            ":groupId",
+                            "members"
+                          ],
+                          "variable": [
+                            {
+                              "key": "groupId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "No Content",
+                      "code": 204,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-06-05T14:58:54.000Z",
+                      "updatedAt": "2026-06-05T14:58:54.000Z",
+                      "uid": "35240-19e8bcad-33c3-478d-9ceb-29f404732114"
+                    },
+                    {
+                      "id": "31a74ca6-9b4f-4dea-8e86-4cf19aa37f91",
+                      "name": "Bad request \u2014 invalid parameters or request body",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"@odata.id\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/groups/:groupId/members",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "groups",
+                            ":groupId",
+                            "members"
+                          ],
+                          "variable": [
+                            {
+                              "key": "groupId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\",\n    \"innerError\": {}\n  }\n}",
+                      "createdAt": "2026-06-05T14:58:54.000Z",
+                      "updatedAt": "2026-06-05T14:58:54.000Z",
+                      "uid": "35240-31a74ca6-9b4f-4dea-8e86-4cf19aa37f91"
+                    },
+                    {
+                      "id": "dfbc70e4-66d2-408e-bae3-fe2fb4db0f30",
+                      "name": "Group not found",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"@odata.id\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/groups/:groupId/members",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "groups",
+                            ":groupId",
+                            "members"
+                          ],
+                          "variable": [
+                            {
+                              "key": "groupId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\",\n    \"innerError\": {}\n  }\n}",
+                      "createdAt": "2026-06-05T14:58:54.000Z",
+                      "updatedAt": "2026-06-05T14:58:54.000Z",
+                      "uid": "35240-dfbc70e4-66d2-408e-bae3-fe2fb4db0f30"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T14:58:54.000Z",
+                  "updatedAt": "2026-06-05T14:58:54.000Z",
+                  "uid": "35240-b584febc-f02c-416a-b8a5-b98ca4f81204"
+                }
+              ],
+              "id": "b202bca5-f858-46c7-afc2-619fef60aa1d",
+              "createdAt": "2026-06-05T14:58:54.000Z",
+              "updatedAt": "2026-06-05T14:58:54.000Z",
+              "uid": "35240-b202bca5-f858-46c7-afc2-619fef60aa1d"
+            },
+            {
+              "name": "owners",
+              "item": [
+                {
+                  "name": "Active Directory List Group Owners",
+                  "id": "7fa8268e-ec10-46ec-8573-bfc55b472821",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/groups/:groupId/owners",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "groups",
+                        ":groupId",
+                        "owners"
+                      ],
+                      "variable": [
+                        {
+                          "id": "211777dd-02a1-4ad9-9507-e97dde22fd59",
+                          "key": "groupId",
+                          "value": "<uuid>",
+                          "description": "(Required) Group object ID (UUID)"
+                        }
+                      ]
+                    },
+                    "description": "Get the owners of a group. Owners are non-admin users who can manage the group without being assigned a directory role. Microsoft 365 groups must have at least one owner."
+                  },
+                  "response": [
+                    {
+                      "id": "5992d31d-a748-4b6e-8d1f-627db7c534c9",
+                      "name": "Collection of group owners",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/groups/:groupId/owners",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "groups",
+                            ":groupId",
+                            "owners"
+                          ],
+                          "variable": [
+                            {
+                              "key": "groupId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"@odata.context\": \"<string>\",\n  \"value\": [\n    {\n      \"id\": \"<string>\",\n      \"displayName\": \"<string>\",\n      \"userPrincipalName\": \"<string>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"displayName\": \"<string>\",\n      \"userPrincipalName\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-06-05T14:58:54.000Z",
+                      "updatedAt": "2026-06-05T14:58:54.000Z",
+                      "uid": "35240-5992d31d-a748-4b6e-8d1f-627db7c534c9"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T14:58:54.000Z",
+                  "updatedAt": "2026-06-05T14:58:54.000Z",
+                  "uid": "35240-7fa8268e-ec10-46ec-8573-bfc55b472821"
+                }
+              ],
+              "id": "bdcef29a-0d92-407c-af00-8b12eb1ba36f",
+              "createdAt": "2026-06-05T14:58:54.000Z",
+              "updatedAt": "2026-06-05T14:58:54.000Z",
+              "uid": "35240-bdcef29a-0d92-407c-af00-8b12eb1ba36f"
+            },
+            {
+              "name": "Active Directory Get Group",
+              "id": "b3e5a603-d763-4e57-a35e-efea74e6fc40",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/groups/:groupId?$select=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "groups",
+                    ":groupId"
+                  ],
+                  "query": [
+                    {
+                      "description": "Comma-separated properties to include",
+                      "key": "$select",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "id": "22781d6b-2616-493e-b4b0-360bdaa4623b",
+                      "key": "groupId",
+                      "value": "<uuid>",
+                      "description": "(Required) Group object ID (UUID)"
+                    }
+                  ]
+                },
+                "description": "Retrieve the properties and relationships of a specific group in Microsoft Entra ID. Use $select to retrieve only the properties you need."
+              },
+              "response": [
+                {
+                  "id": "4833203d-c4bb-44af-a118-70a8bcc70f7b",
+                  "name": "Group object",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/groups/:groupId?$select=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "groups",
+                        ":groupId"
+                      ],
+                      "query": [
+                        {
+                          "description": "Comma-separated properties to include",
+                          "key": "$select",
+                          "value": "<string>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "groupId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"id\": \"<uuid>\",\n  \"displayName\": \"<string>\",\n  \"description\": \"<string>\",\n  \"mail\": \"<string>\",\n  \"mailNickname\": \"<string>\",\n  \"mailEnabled\": \"<boolean>\",\n  \"securityEnabled\": \"<boolean>\",\n  \"groupTypes\": [\n    \"Unified\",\n    \"Unified\"\n  ],\n  \"visibility\": \"HiddenMembership\",\n  \"membershipRule\": \"<string>\",\n  \"membershipRuleProcessingState\": \"Paused\",\n  \"onPremisesSyncEnabled\": \"<boolean>\",\n  \"onPremisesDistinguishedName\": \"<string>\",\n  \"createdDateTime\": \"<dateTime>\",\n  \"renewedDateTime\": \"<dateTime>\",\n  \"expirationDateTime\": \"<dateTime>\",\n  \"assignedLabels\": [\n    {\n      \"labelId\": \"<string>\",\n      \"displayName\": \"<string>\"\n    },\n    {\n      \"labelId\": \"<string>\",\n      \"displayName\": \"<string>\"\n    }\n  ],\n  \"preferredDataLocation\": \"<string>\",\n  \"resourceProvisioningOptions\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "createdAt": "2026-06-05T14:58:54.000Z",
+                  "updatedAt": "2026-06-05T14:58:54.000Z",
+                  "uid": "35240-4833203d-c4bb-44af-a118-70a8bcc70f7b"
+                },
+                {
+                  "id": "bc99b9d7-f1c6-4ac6-b659-e14aa6225d90",
+                  "name": "Group not found",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/groups/:groupId?$select=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "groups",
+                        ":groupId"
+                      ],
+                      "query": [
+                        {
+                          "description": "Comma-separated properties to include",
+                          "key": "$select",
+                          "value": "<string>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "groupId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\",\n    \"innerError\": {}\n  }\n}",
+                  "createdAt": "2026-06-05T14:58:54.000Z",
+                  "updatedAt": "2026-06-05T14:58:54.000Z",
+                  "uid": "35240-bc99b9d7-f1c6-4ac6-b659-e14aa6225d90"
+                }
+              ],
+              "createdAt": "2026-06-05T14:58:54.000Z",
+              "updatedAt": "2026-06-05T14:58:54.000Z",
+              "uid": "35240-b3e5a603-d763-4e57-a35e-efea74e6fc40"
+            },
+            {
+              "name": "Active Directory Update Group",
+              "id": "0110a82d-b9fa-49ab-a73f-bff01d8147e8",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "PATCH",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"displayName\": \"<string>\",\n  \"description\": \"<string>\",\n  \"mailNickname\": \"<string>\",\n  \"visibility\": \"<string>\",\n  \"membershipRule\": \"<string>\",\n  \"membershipRuleProcessingState\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/groups/:groupId",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "groups",
+                    ":groupId"
+                  ],
+                  "variable": [
+                    {
+                      "id": "e281360a-5770-44da-b38e-088636aa9a00",
+                      "key": "groupId",
+                      "value": "<uuid>",
+                      "description": "(Required) Group object ID (UUID)"
+                    }
+                  ]
+                },
+                "description": "Update the properties of a group. Only include properties you want to update; all other properties retain their current values."
+              },
+              "response": [
+                {
+                  "id": "b0438a44-82b4-4d61-826d-b0dd259ae4df",
+                  "name": "Group updated successfully (no content)",
+                  "originalRequest": {
+                    "method": "PATCH",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"displayName\": \"<string>\",\n  \"description\": \"<string>\",\n  \"mailNickname\": \"<string>\",\n  \"visibility\": \"<string>\",\n  \"membershipRule\": \"<string>\",\n  \"membershipRuleProcessingState\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/groups/:groupId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "groups",
+                        ":groupId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "groupId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "No Content",
+                  "code": 204,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-06-05T14:58:54.000Z",
+                  "updatedAt": "2026-06-05T14:58:54.000Z",
+                  "uid": "35240-b0438a44-82b4-4d61-826d-b0dd259ae4df"
+                },
+                {
+                  "id": "33fbf34e-0d92-4712-9e14-d631b3c1f1c5",
+                  "name": "Bad request \u2014 invalid parameters or request body",
+                  "originalRequest": {
+                    "method": "PATCH",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"displayName\": \"<string>\",\n  \"description\": \"<string>\",\n  \"mailNickname\": \"<string>\",\n  \"visibility\": \"<string>\",\n  \"membershipRule\": \"<string>\",\n  \"membershipRuleProcessingState\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/groups/:groupId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "groups",
+                        ":groupId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "groupId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\",\n    \"innerError\": {}\n  }\n}",
+                  "createdAt": "2026-06-05T14:58:54.000Z",
+                  "updatedAt": "2026-06-05T14:58:54.000Z",
+                  "uid": "35240-33fbf34e-0d92-4712-9e14-d631b3c1f1c5"
+                },
+                {
+                  "id": "7d7ae198-aa9e-46b2-89fb-4ee827bfb631",
+                  "name": "Group not found",
+                  "originalRequest": {
+                    "method": "PATCH",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"displayName\": \"<string>\",\n  \"description\": \"<string>\",\n  \"mailNickname\": \"<string>\",\n  \"visibility\": \"<string>\",\n  \"membershipRule\": \"<string>\",\n  \"membershipRuleProcessingState\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/groups/:groupId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "groups",
+                        ":groupId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "groupId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\",\n    \"innerError\": {}\n  }\n}",
+                  "createdAt": "2026-06-05T14:58:54.000Z",
+                  "updatedAt": "2026-06-05T14:58:54.000Z",
+                  "uid": "35240-7d7ae198-aa9e-46b2-89fb-4ee827bfb631"
+                }
+              ],
+              "createdAt": "2026-06-05T14:58:54.000Z",
+              "updatedAt": "2026-06-05T14:58:54.000Z",
+              "uid": "35240-0110a82d-b9fa-49ab-a73f-bff01d8147e8"
+            },
+            {
+              "name": "Active Directory Delete Group",
+              "id": "37bfd8f0-cac1-4f1a-8a1c-4b17081aed38",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/groups/:groupId",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "groups",
+                    ":groupId"
+                  ],
+                  "variable": [
+                    {
+                      "id": "94cf716b-2f0c-46fd-b788-49672aa435b2",
+                      "key": "groupId",
+                      "value": "<uuid>",
+                      "description": "(Required) Group object ID (UUID)"
+                    }
+                  ]
+                },
+                "description": "Delete a group from Microsoft Entra ID. Microsoft 365 groups are moved to the recycle bin for 30 days. Security groups are permanently deleted immediately."
+              },
+              "response": [
+                {
+                  "id": "6f659a80-d585-438a-9d31-846f7b393cd4",
+                  "name": "Group deleted successfully (no content)",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/groups/:groupId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "groups",
+                        ":groupId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "groupId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "No Content",
+                  "code": 204,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-06-05T14:58:54.000Z",
+                  "updatedAt": "2026-06-05T14:58:54.000Z",
+                  "uid": "35240-6f659a80-d585-438a-9d31-846f7b393cd4"
+                },
+                {
+                  "id": "88e142a2-db84-41dd-a768-c93118c96837",
+                  "name": "Group not found",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/groups/:groupId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "groups",
+                        ":groupId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "groupId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\",\n    \"innerError\": {}\n  }\n}",
+                  "createdAt": "2026-06-05T14:58:54.000Z",
+                  "updatedAt": "2026-06-05T14:58:54.000Z",
+                  "uid": "35240-88e142a2-db84-41dd-a768-c93118c96837"
+                }
+              ],
+              "createdAt": "2026-06-05T14:58:54.000Z",
+              "updatedAt": "2026-06-05T14:58:54.000Z",
+              "uid": "35240-37bfd8f0-cac1-4f1a-8a1c-4b17081aed38"
+            }
+          ],
+          "id": "2219d534-95d0-47fa-947a-2d5eb2e03a1d",
+          "createdAt": "2026-06-05T14:58:54.000Z",
+          "updatedAt": "2026-06-05T14:58:54.000Z",
+          "uid": "35240-2219d534-95d0-47fa-947a-2d5eb2e03a1d"
+        },
+        {
+          "name": "Active Directory List Groups",
+          "id": "2f8d4df8-c3f8-4cdf-8342-3aa6ab1f70d8",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/groups?$filter=<string>&$select=<string>&$top=<integer>&$orderby=<string>&$search=<string>&$count=<boolean>",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "groups"
+              ],
+              "query": [
+                {
+                  "description": "OData filter (e.g. groupTypes/any(c:c eq 'Unified') for M365 groups)",
+                  "key": "$filter",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Comma-separated list of properties to include",
+                  "key": "$select",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Maximum number of groups to return (max 999)",
+                  "key": "$top",
+                  "value": "<integer>"
+                },
+                {
+                  "description": "Property to sort by (e.g. displayName asc)",
+                  "key": "$orderby",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Search for groups by displayName or description",
+                  "key": "$search",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Include total count of matching groups",
+                  "key": "$count",
+                  "value": "<boolean>"
+                }
+              ]
+            },
+            "description": "Retrieve a list of group objects from Microsoft Entra ID. Returns security groups, Microsoft 365 groups, and distribution groups. Supports OData query parameters for filtering, selecting, ordering, and pagination."
+          },
+          "response": [
+            {
+              "id": "813496e9-1a5a-47c4-8484-c36d2b0188aa",
+              "name": "Collection of groups",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/groups?$filter=<string>&$select=<string>&$top=<integer>&$orderby=<string>&$search=<string>&$count=<boolean>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "groups"
+                  ],
+                  "query": [
+                    {
+                      "description": "OData filter (e.g. groupTypes/any(c:c eq 'Unified') for M365 groups)",
+                      "key": "$filter",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Comma-separated list of properties to include",
+                      "key": "$select",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Maximum number of groups to return (max 999)",
+                      "key": "$top",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "Property to sort by (e.g. displayName asc)",
+                      "key": "$orderby",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Search for groups by displayName or description",
+                      "key": "$search",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Include total count of matching groups",
+                      "key": "$count",
+                      "value": "<boolean>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"@odata.context\": \"<string>\",\n  \"@odata.nextLink\": \"<string>\",\n  \"value\": [\n    {\n      \"id\": \"<uuid>\",\n      \"displayName\": \"<string>\",\n      \"description\": \"<string>\",\n      \"mail\": \"<string>\",\n      \"mailNickname\": \"<string>\",\n      \"mailEnabled\": \"<boolean>\",\n      \"securityEnabled\": \"<boolean>\",\n      \"groupTypes\": [\n        \"DynamicMembership\",\n        \"Unified\"\n      ],\n      \"visibility\": \"HiddenMembership\",\n      \"membershipRule\": \"<string>\",\n      \"membershipRuleProcessingState\": \"On\",\n      \"onPremisesSyncEnabled\": \"<boolean>\",\n      \"onPremisesDistinguishedName\": \"<string>\",\n      \"createdDateTime\": \"<dateTime>\",\n      \"renewedDateTime\": \"<dateTime>\",\n      \"expirationDateTime\": \"<dateTime>\",\n      \"assignedLabels\": [\n        {\n          \"labelId\": \"<string>\",\n          \"displayName\": \"<string>\"\n        },\n        {\n          \"labelId\": \"<string>\",\n          \"displayName\": \"<string>\"\n        }\n      ],\n      \"preferredDataLocation\": \"<string>\",\n      \"resourceProvisioningOptions\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    {\n      \"id\": \"<uuid>\",\n      \"displayName\": \"<string>\",\n      \"description\": \"<string>\",\n      \"mail\": \"<string>\",\n      \"mailNickname\": \"<string>\",\n      \"mailEnabled\": \"<boolean>\",\n      \"securityEnabled\": \"<boolean>\",\n      \"groupTypes\": [\n        \"Unified\",\n        \"DynamicMembership\"\n      ],\n      \"visibility\": \"Private\",\n      \"membershipRule\": \"<string>\",\n      \"membershipRuleProcessingState\": \"On\",\n      \"onPremisesSyncEnabled\": \"<boolean>\",\n      \"onPremisesDistinguishedName\": \"<string>\",\n      \"createdDateTime\": \"<dateTime>\",\n      \"renewedDateTime\": \"<dateTime>\",\n      \"expirationDateTime\": \"<dateTime>\",\n      \"assignedLabels\": [\n        {\n          \"labelId\": \"<string>\",\n          \"displayName\": \"<string>\"\n        },\n        {\n          \"labelId\": \"<string>\",\n          \"displayName\": \"<string>\"\n        }\n      ],\n      \"preferredDataLocation\": \"<string>\",\n      \"resourceProvisioningOptions\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  ]\n}",
+              "createdAt": "2026-06-05T14:58:54.000Z",
+              "updatedAt": "2026-06-05T14:58:54.000Z",
+              "uid": "35240-813496e9-1a5a-47c4-8484-c36d2b0188aa"
+            },
+            {
+              "id": "1dc3c214-d5f9-4105-b6d0-d129b2cc64c7",
+              "name": "Bad request \u2014 invalid parameters or request body",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/groups?$filter=<string>&$select=<string>&$top=<integer>&$orderby=<string>&$search=<string>&$count=<boolean>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "groups"
+                  ],
+                  "query": [
+                    {
+                      "description": "OData filter (e.g. groupTypes/any(c:c eq 'Unified') for M365 groups)",
+                      "key": "$filter",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Comma-separated list of properties to include",
+                      "key": "$select",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Maximum number of groups to return (max 999)",
+                      "key": "$top",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "Property to sort by (e.g. displayName asc)",
+                      "key": "$orderby",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Search for groups by displayName or description",
+                      "key": "$search",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Include total count of matching groups",
+                      "key": "$count",
+                      "value": "<boolean>"
+                    }
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\",\n    \"innerError\": {}\n  }\n}",
+              "createdAt": "2026-06-05T14:58:54.000Z",
+              "updatedAt": "2026-06-05T14:58:54.000Z",
+              "uid": "35240-1dc3c214-d5f9-4105-b6d0-d129b2cc64c7"
+            },
+            {
+              "id": "ba078a66-facb-4231-9fbc-b8d085a01362",
+              "name": "Authentication required \u2014 missing or invalid access token",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/groups?$filter=<string>&$select=<string>&$top=<integer>&$orderby=<string>&$search=<string>&$count=<boolean>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "groups"
+                  ],
+                  "query": [
+                    {
+                      "description": "OData filter (e.g. groupTypes/any(c:c eq 'Unified') for M365 groups)",
+                      "key": "$filter",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Comma-separated list of properties to include",
+                      "key": "$select",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Maximum number of groups to return (max 999)",
+                      "key": "$top",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "Property to sort by (e.g. displayName asc)",
+                      "key": "$orderby",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Search for groups by displayName or description",
+                      "key": "$search",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Include total count of matching groups",
+                      "key": "$count",
+                      "value": "<boolean>"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\",\n    \"innerError\": {}\n  }\n}",
+              "createdAt": "2026-06-05T14:58:54.000Z",
+              "updatedAt": "2026-06-05T14:58:54.000Z",
+              "uid": "35240-ba078a66-facb-4231-9fbc-b8d085a01362"
+            }
+          ],
+          "createdAt": "2026-06-05T14:58:54.000Z",
+          "updatedAt": "2026-06-05T14:58:54.000Z",
+          "uid": "35240-2f8d4df8-c3f8-4cdf-8342-3aa6ab1f70d8"
+        },
+        {
+          "name": "Active Directory Create Group",
+          "id": "aeef3d2b-e3b2-477b-984e-86c59968d663",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"displayName\": \"<string>\",\n  \"mailEnabled\": \"<boolean>\",\n  \"mailNickname\": \"<string>\",\n  \"securityEnabled\": \"<boolean>\",\n  \"description\": \"<string>\",\n  \"groupTypes\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"visibility\": \"Public\",\n  \"members@odata.bind\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"owners@odata.bind\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "headerFamily": "json",
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/groups",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "groups"
+              ]
+            },
+            "description": "Create a new Microsoft Entra group. To create a Microsoft 365 group, include \"Unified\" in the groupTypes array. To create a security group, set securityEnabled to true and mailEnabled to false. The mailNickname and displayName are required."
+          },
+          "response": [
+            {
+              "id": "9c10a4cb-7824-4623-9904-29da1c50e78e",
+              "name": "Group created successfully",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"displayName\": \"<string>\",\n  \"mailEnabled\": \"<boolean>\",\n  \"mailNickname\": \"<string>\",\n  \"securityEnabled\": \"<boolean>\",\n  \"description\": \"<string>\",\n  \"groupTypes\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"visibility\": \"Public\",\n  \"members@odata.bind\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"owners@odata.bind\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/groups",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "groups"
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"id\": \"<uuid>\",\n  \"displayName\": \"<string>\",\n  \"description\": \"<string>\",\n  \"mail\": \"<string>\",\n  \"mailNickname\": \"<string>\",\n  \"mailEnabled\": \"<boolean>\",\n  \"securityEnabled\": \"<boolean>\",\n  \"groupTypes\": [\n    \"Unified\",\n    \"Unified\"\n  ],\n  \"visibility\": \"HiddenMembership\",\n  \"membershipRule\": \"<string>\",\n  \"membershipRuleProcessingState\": \"Paused\",\n  \"onPremisesSyncEnabled\": \"<boolean>\",\n  \"onPremisesDistinguishedName\": \"<string>\",\n  \"createdDateTime\": \"<dateTime>\",\n  \"renewedDateTime\": \"<dateTime>\",\n  \"expirationDateTime\": \"<dateTime>\",\n  \"assignedLabels\": [\n    {\n      \"labelId\": \"<string>\",\n      \"displayName\": \"<string>\"\n    },\n    {\n      \"labelId\": \"<string>\",\n      \"displayName\": \"<string>\"\n    }\n  ],\n  \"preferredDataLocation\": \"<string>\",\n  \"resourceProvisioningOptions\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+              "createdAt": "2026-06-05T14:58:54.000Z",
+              "updatedAt": "2026-06-05T14:58:54.000Z",
+              "uid": "35240-9c10a4cb-7824-4623-9904-29da1c50e78e"
+            },
+            {
+              "id": "87fe4b87-2ec4-4c91-a44b-4d8e8f8785bd",
+              "name": "Bad request \u2014 invalid parameters or request body",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"displayName\": \"<string>\",\n  \"mailEnabled\": \"<boolean>\",\n  \"mailNickname\": \"<string>\",\n  \"securityEnabled\": \"<boolean>\",\n  \"description\": \"<string>\",\n  \"groupTypes\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"visibility\": \"Public\",\n  \"members@odata.bind\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"owners@odata.bind\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/groups",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "groups"
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\",\n    \"innerError\": {}\n  }\n}",
+              "createdAt": "2026-06-05T14:58:54.000Z",
+              "updatedAt": "2026-06-05T14:58:54.000Z",
+              "uid": "35240-87fe4b87-2ec4-4c91-a44b-4d8e8f8785bd"
+            },
+            {
+              "id": "18ec5b0d-7ab5-40f3-9f02-bfc25395c2a9",
+              "name": "Insufficient permissions",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"displayName\": \"<string>\",\n  \"mailEnabled\": \"<boolean>\",\n  \"mailNickname\": \"<string>\",\n  \"securityEnabled\": \"<boolean>\",\n  \"description\": \"<string>\",\n  \"groupTypes\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"visibility\": \"Public\",\n  \"members@odata.bind\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"owners@odata.bind\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/groups",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "groups"
+                  ]
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\",\n    \"innerError\": {}\n  }\n}",
+              "createdAt": "2026-06-05T14:58:54.000Z",
+              "updatedAt": "2026-06-05T14:58:54.000Z",
+              "uid": "35240-18ec5b0d-7ab5-40f3-9f02-bfc25395c2a9"
+            }
+          ],
+          "createdAt": "2026-06-05T14:58:54.000Z",
+          "updatedAt": "2026-06-05T14:58:54.000Z",
+          "uid": "35240-aeef3d2b-e3b2-477b-984e-86c59968d663"
+        }
+      ],
+      "id": "4d8ccb8b-d7b0-4daf-a9ea-04db48eed58b",
+      "createdAt": "2026-06-05T14:58:54.000Z",
+      "updatedAt": "2026-06-05T14:58:54.000Z",
+      "uid": "35240-4d8ccb8b-d7b0-4daf-a9ea-04db48eed58b"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "scope",
+        "value": "Group.Read.All Group.ReadWrite.All Directory.Read.All Directory.ReadWrite.All",
+        "type": "string"
+      },
+      {
+        "key": "accessTokenUrl",
+        "value": "https://login.microsoftonline.com/{tenant}/oauth2/v2.0/token",
+        "type": "string"
+      },
+      {
+        "key": "authUrl",
+        "value": "https://login.microsoftonline.com/{tenant}/oauth2/v2.0/authorize",
+        "type": "string"
+      },
+      {
+        "key": "grant_type",
+        "value": "authorization_code",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://graph.microsoft.com/v1.0"
+    }
+  ]
+}

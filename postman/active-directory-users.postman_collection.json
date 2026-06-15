@@ -1,0 +1,1612 @@
+{
+  "info": {
+    "_postman_id": "ab95bef1-f577-47f1-a2c8-6f66f5f3ba39",
+    "name": "Microsoft Graph Users API",
+    "description": "Manage the entire lifecycle of users in Microsoft Entra ID (formerly Azure Active Directory) via Microsoft Graph. Create, read, update, and delete user accounts; manage licenses, group memberships, manager relationships, authentication methods, and profile photos. All endpoints require OAuth2 authentication with Microsoft identity platform.\n\nContact Support:\n Name: Microsoft Graph Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-06-05T14:58:52.000Z",
+    "updatedAt": "2026-06-05T14:58:52.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-ab95bef1-f577-47f1-a2c8-6f66f5f3ba39"
+  },
+  "item": [
+    {
+      "name": "users",
+      "item": [
+        {
+          "name": "{userId}",
+          "item": [
+            {
+              "name": "memberOf",
+              "item": [
+                {
+                  "name": "Active Directory List User Group Memberships",
+                  "id": "fd049c9b-358e-40ff-b104-43daccddfe72",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/users/:userId/memberOf?$filter=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "users",
+                        ":userId",
+                        "memberOf"
+                      ],
+                      "query": [
+                        {
+                          "description": "OData filter to scope to groups only (e.g. microsoft.graph.group)",
+                          "key": "$filter",
+                          "value": "<string>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "id": "4a671a90-350e-4508-b2ea-7a31b6a126c5",
+                          "key": "userId",
+                          "value": "<string>",
+                          "description": "(Required) User object ID or userPrincipalName"
+                        }
+                      ]
+                    },
+                    "description": "Get the groups, directory roles, and administrative units that the user is a direct member of. This operation does not return transitive group memberships. Use /users/{id}/transitiveMemberOf for transitive memberships."
+                  },
+                  "response": [
+                    {
+                      "id": "c6930896-8ddf-47e3-a886-dda62f61ebde",
+                      "name": "Collection of groups the user is a member of",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/users/:userId/memberOf?$filter=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "users",
+                            ":userId",
+                            "memberOf"
+                          ],
+                          "query": [
+                            {
+                              "description": "OData filter to scope to groups only (e.g. microsoft.graph.group)",
+                              "key": "$filter",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "userId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"@odata.context\": \"<string>\",\n  \"value\": [\n    {\n      \"id\": \"<string>\",\n      \"displayName\": \"<string>\",\n      \"groupTypes\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    {\n      \"id\": \"<string>\",\n      \"displayName\": \"<string>\",\n      \"groupTypes\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  ]\n}",
+                      "createdAt": "2026-06-05T14:58:53.000Z",
+                      "updatedAt": "2026-06-05T14:58:53.000Z",
+                      "uid": "35240-c6930896-8ddf-47e3-a886-dda62f61ebde"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T14:58:53.000Z",
+                  "updatedAt": "2026-06-05T14:58:53.000Z",
+                  "uid": "35240-fd049c9b-358e-40ff-b104-43daccddfe72"
+                }
+              ],
+              "id": "1fb28163-725c-44a4-99a6-8639a86ea994",
+              "createdAt": "2026-06-05T14:58:52.000Z",
+              "updatedAt": "2026-06-05T14:58:52.000Z",
+              "uid": "35240-1fb28163-725c-44a4-99a6-8639a86ea994"
+            },
+            {
+              "name": "manager",
+              "item": [
+                {
+                  "name": "Active Directory Get User Manager",
+                  "id": "467aea59-a711-43f0-b949-d83a62c706e9",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/users/:userId/manager",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "users",
+                        ":userId",
+                        "manager"
+                      ],
+                      "variable": [
+                        {
+                          "id": "72c2043c-8406-4741-a20e-6e78352ab1b3",
+                          "key": "userId",
+                          "value": "<string>",
+                          "description": "(Required) User object ID or userPrincipalName"
+                        }
+                      ]
+                    },
+                    "description": "Returns the user or organizational contact assigned as the user's manager in Microsoft Entra ID. The manager relationship represents the organizational hierarchy."
+                  },
+                  "response": [
+                    {
+                      "id": "cd2db051-6741-42c1-87b8-3290f668da25",
+                      "name": "Manager user object",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/users/:userId/manager",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "users",
+                            ":userId",
+                            "manager"
+                          ],
+                          "variable": [
+                            {
+                              "key": "userId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"id\": \"<uuid>\",\n  \"displayName\": \"<string>\",\n  \"userPrincipalName\": \"<string>\",\n  \"mail\": \"<email>\",\n  \"givenName\": \"<string>\",\n  \"surname\": \"<string>\",\n  \"jobTitle\": \"<string>\",\n  \"department\": \"<string>\",\n  \"officeLocation\": \"<string>\",\n  \"mobilePhone\": \"<string>\",\n  \"businessPhones\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"accountEnabled\": \"<boolean>\",\n  \"usageLocation\": \"<string>\",\n  \"preferredLanguage\": \"<string>\",\n  \"createdDateTime\": \"<dateTime>\",\n  \"lastPasswordChangeDateTime\": \"<dateTime>\",\n  \"passwordPolicies\": \"<string>\",\n  \"userType\": \"Guest\",\n  \"assignedLicenses\": [\n    {\n      \"skuId\": \"<uuid>\",\n      \"disabledPlans\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ]\n    },\n    {\n      \"skuId\": \"<uuid>\",\n      \"disabledPlans\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ]\n    }\n  ],\n  \"onPremisesSyncEnabled\": \"<boolean>\",\n  \"onPremisesDistinguishedName\": \"<string>\",\n  \"externalUserState\": \"<string>\"\n}",
+                      "createdAt": "2026-06-05T14:58:53.000Z",
+                      "updatedAt": "2026-06-05T14:58:53.000Z",
+                      "uid": "35240-cd2db051-6741-42c1-87b8-3290f668da25"
+                    },
+                    {
+                      "id": "5c2148ed-53a4-4a0f-bb3a-2b589066e4a4",
+                      "name": "Resource not found",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/users/:userId/manager",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "users",
+                            ":userId",
+                            "manager"
+                          ],
+                          "variable": [
+                            {
+                              "key": "userId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\",\n    \"innerError\": {\n      \"date\": \"<dateTime>\",\n      \"request-id\": \"<uuid>\",\n      \"client-request-id\": \"<uuid>\"\n    }\n  }\n}",
+                      "createdAt": "2026-06-05T14:58:53.000Z",
+                      "updatedAt": "2026-06-05T14:58:53.000Z",
+                      "uid": "35240-5c2148ed-53a4-4a0f-bb3a-2b589066e4a4"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T14:58:53.000Z",
+                  "updatedAt": "2026-06-05T14:58:53.000Z",
+                  "uid": "35240-467aea59-a711-43f0-b949-d83a62c706e9"
+                }
+              ],
+              "id": "54f01856-fd5b-404d-8c46-da78441c0527",
+              "createdAt": "2026-06-05T14:58:52.000Z",
+              "updatedAt": "2026-06-05T14:58:52.000Z",
+              "uid": "35240-54f01856-fd5b-404d-8c46-da78441c0527"
+            },
+            {
+              "name": "Active Directory Get User",
+              "id": "e5ee2f1e-4e25-4b1c-ad62-3435db7f220a",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/users/:userId?$select=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "users",
+                    ":userId"
+                  ],
+                  "query": [
+                    {
+                      "description": "Comma-separated properties to include",
+                      "key": "$select",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "id": "ab289b7a-68ca-435c-b16a-584455aa12af",
+                      "key": "userId",
+                      "value": "<string>",
+                      "description": "(Required) User object ID (UUID) or userPrincipalName"
+                    }
+                  ]
+                },
+                "description": "Retrieve the properties and relationships of a specific user in Microsoft Entra ID by their object ID or userPrincipalName. Use $select to retrieve specific properties."
+              },
+              "response": [
+                {
+                  "id": "869cca34-a346-4aad-a0da-f198f05efd91",
+                  "name": "User object",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/users/:userId?$select=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "users",
+                        ":userId"
+                      ],
+                      "query": [
+                        {
+                          "description": "Comma-separated properties to include",
+                          "key": "$select",
+                          "value": "<string>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "userId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"id\": \"<uuid>\",\n  \"displayName\": \"<string>\",\n  \"userPrincipalName\": \"<string>\",\n  \"mail\": \"<email>\",\n  \"givenName\": \"<string>\",\n  \"surname\": \"<string>\",\n  \"jobTitle\": \"<string>\",\n  \"department\": \"<string>\",\n  \"officeLocation\": \"<string>\",\n  \"mobilePhone\": \"<string>\",\n  \"businessPhones\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"accountEnabled\": \"<boolean>\",\n  \"usageLocation\": \"<string>\",\n  \"preferredLanguage\": \"<string>\",\n  \"createdDateTime\": \"<dateTime>\",\n  \"lastPasswordChangeDateTime\": \"<dateTime>\",\n  \"passwordPolicies\": \"<string>\",\n  \"userType\": \"Guest\",\n  \"assignedLicenses\": [\n    {\n      \"skuId\": \"<uuid>\",\n      \"disabledPlans\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ]\n    },\n    {\n      \"skuId\": \"<uuid>\",\n      \"disabledPlans\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ]\n    }\n  ],\n  \"onPremisesSyncEnabled\": \"<boolean>\",\n  \"onPremisesDistinguishedName\": \"<string>\",\n  \"externalUserState\": \"<string>\"\n}",
+                  "createdAt": "2026-06-05T14:58:53.000Z",
+                  "updatedAt": "2026-06-05T14:58:53.000Z",
+                  "uid": "35240-869cca34-a346-4aad-a0da-f198f05efd91"
+                },
+                {
+                  "id": "caf87217-0881-4e7c-89dd-2cb60a4cc818",
+                  "name": "Resource not found",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/users/:userId?$select=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "users",
+                        ":userId"
+                      ],
+                      "query": [
+                        {
+                          "description": "Comma-separated properties to include",
+                          "key": "$select",
+                          "value": "<string>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "userId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\",\n    \"innerError\": {\n      \"date\": \"<dateTime>\",\n      \"request-id\": \"<uuid>\",\n      \"client-request-id\": \"<uuid>\"\n    }\n  }\n}",
+                  "createdAt": "2026-06-05T14:58:53.000Z",
+                  "updatedAt": "2026-06-05T14:58:53.000Z",
+                  "uid": "35240-caf87217-0881-4e7c-89dd-2cb60a4cc818"
+                }
+              ],
+              "createdAt": "2026-06-05T14:58:53.000Z",
+              "updatedAt": "2026-06-05T14:58:53.000Z",
+              "uid": "35240-e5ee2f1e-4e25-4b1c-ad62-3435db7f220a"
+            },
+            {
+              "name": "Active Directory Update User",
+              "id": "b0b3e33a-1060-4413-9909-ff8d3e24399f",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "PATCH",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"displayName\": \"<string>\",\n  \"givenName\": \"<string>\",\n  \"surname\": \"<string>\",\n  \"jobTitle\": \"<string>\",\n  \"department\": \"<string>\",\n  \"officeLocation\": \"<string>\",\n  \"mobilePhone\": \"<string>\",\n  \"preferredLanguage\": \"<string>\",\n  \"usageLocation\": \"<string>\",\n  \"passwordProfile\": {\n    \"password\": \"<string>\",\n    \"forceChangePasswordNextSignIn\": true,\n    \"forceChangePasswordNextSignInWithMfa\": \"<boolean>\"\n  },\n  \"accountEnabled\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/users/:userId",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "users",
+                    ":userId"
+                  ],
+                  "variable": [
+                    {
+                      "id": "d156e8e2-5880-47ab-b327-097bed7f1ad1",
+                      "key": "userId",
+                      "value": "<string>",
+                      "description": "(Required) User object ID or userPrincipalName"
+                    }
+                  ]
+                },
+                "description": "Update the properties of a user in Microsoft Entra ID. Only include properties you want to update in the request body; all other properties retain their current values."
+              },
+              "response": [
+                {
+                  "id": "b98c8bc0-79cf-4923-baff-5449ae9d5af9",
+                  "name": "User updated successfully (no content)",
+                  "originalRequest": {
+                    "method": "PATCH",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"displayName\": \"<string>\",\n  \"givenName\": \"<string>\",\n  \"surname\": \"<string>\",\n  \"jobTitle\": \"<string>\",\n  \"department\": \"<string>\",\n  \"officeLocation\": \"<string>\",\n  \"mobilePhone\": \"<string>\",\n  \"preferredLanguage\": \"<string>\",\n  \"usageLocation\": \"<string>\",\n  \"passwordProfile\": {\n    \"password\": \"<string>\",\n    \"forceChangePasswordNextSignIn\": true,\n    \"forceChangePasswordNextSignInWithMfa\": \"<boolean>\"\n  },\n  \"accountEnabled\": \"<boolean>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/users/:userId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "users",
+                        ":userId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "userId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "No Content",
+                  "code": 204,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-06-05T14:58:53.000Z",
+                  "updatedAt": "2026-06-05T14:58:53.000Z",
+                  "uid": "35240-b98c8bc0-79cf-4923-baff-5449ae9d5af9"
+                },
+                {
+                  "id": "b0b19af5-c654-4617-9ec3-c951e05fd2f9",
+                  "name": "Bad request \u2014 invalid query parameters or request body",
+                  "originalRequest": {
+                    "method": "PATCH",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"displayName\": \"<string>\",\n  \"givenName\": \"<string>\",\n  \"surname\": \"<string>\",\n  \"jobTitle\": \"<string>\",\n  \"department\": \"<string>\",\n  \"officeLocation\": \"<string>\",\n  \"mobilePhone\": \"<string>\",\n  \"preferredLanguage\": \"<string>\",\n  \"usageLocation\": \"<string>\",\n  \"passwordProfile\": {\n    \"password\": \"<string>\",\n    \"forceChangePasswordNextSignIn\": true,\n    \"forceChangePasswordNextSignInWithMfa\": \"<boolean>\"\n  },\n  \"accountEnabled\": \"<boolean>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/users/:userId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "users",
+                        ":userId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "userId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\",\n    \"innerError\": {\n      \"date\": \"<dateTime>\",\n      \"request-id\": \"<uuid>\",\n      \"client-request-id\": \"<uuid>\"\n    }\n  }\n}",
+                  "createdAt": "2026-06-05T14:58:53.000Z",
+                  "updatedAt": "2026-06-05T14:58:53.000Z",
+                  "uid": "35240-b0b19af5-c654-4617-9ec3-c951e05fd2f9"
+                },
+                {
+                  "id": "5ad81bc4-01b0-4269-88ef-fdc3173ca2da",
+                  "name": "Resource not found",
+                  "originalRequest": {
+                    "method": "PATCH",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"displayName\": \"<string>\",\n  \"givenName\": \"<string>\",\n  \"surname\": \"<string>\",\n  \"jobTitle\": \"<string>\",\n  \"department\": \"<string>\",\n  \"officeLocation\": \"<string>\",\n  \"mobilePhone\": \"<string>\",\n  \"preferredLanguage\": \"<string>\",\n  \"usageLocation\": \"<string>\",\n  \"passwordProfile\": {\n    \"password\": \"<string>\",\n    \"forceChangePasswordNextSignIn\": true,\n    \"forceChangePasswordNextSignInWithMfa\": \"<boolean>\"\n  },\n  \"accountEnabled\": \"<boolean>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/users/:userId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "users",
+                        ":userId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "userId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\",\n    \"innerError\": {\n      \"date\": \"<dateTime>\",\n      \"request-id\": \"<uuid>\",\n      \"client-request-id\": \"<uuid>\"\n    }\n  }\n}",
+                  "createdAt": "2026-06-05T14:58:53.000Z",
+                  "updatedAt": "2026-06-05T14:58:53.000Z",
+                  "uid": "35240-5ad81bc4-01b0-4269-88ef-fdc3173ca2da"
+                }
+              ],
+              "createdAt": "2026-06-05T14:58:53.000Z",
+              "updatedAt": "2026-06-05T14:58:53.000Z",
+              "uid": "35240-b0b3e33a-1060-4413-9909-ff8d3e24399f"
+            },
+            {
+              "name": "Active Directory Delete User",
+              "id": "98de2e20-97b4-4086-b780-9d7b5b78e1c8",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/users/:userId",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "users",
+                    ":userId"
+                  ],
+                  "variable": [
+                    {
+                      "id": "eb5cf0a1-ef6b-4b58-91db-901545a95fcd",
+                      "key": "userId",
+                      "value": "<string>",
+                      "description": "(Required) User object ID or userPrincipalName"
+                    }
+                  ]
+                },
+                "description": "Delete a user from Microsoft Entra ID. The deleted user is moved to the recycle bin for 30 days before permanent deletion. During this period, the user can be restored."
+              },
+              "response": [
+                {
+                  "id": "c08c6221-7f7e-4fd9-9ad0-ed7427b93e4f",
+                  "name": "User deleted successfully (no content)",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/users/:userId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "users",
+                        ":userId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "userId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "No Content",
+                  "code": 204,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-06-05T14:58:53.000Z",
+                  "updatedAt": "2026-06-05T14:58:53.000Z",
+                  "uid": "35240-c08c6221-7f7e-4fd9-9ad0-ed7427b93e4f"
+                },
+                {
+                  "id": "897ceb54-1021-472b-989c-436f48108ab4",
+                  "name": "Resource not found",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/users/:userId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "users",
+                        ":userId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "userId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\",\n    \"innerError\": {\n      \"date\": \"<dateTime>\",\n      \"request-id\": \"<uuid>\",\n      \"client-request-id\": \"<uuid>\"\n    }\n  }\n}",
+                  "createdAt": "2026-06-05T14:58:53.000Z",
+                  "updatedAt": "2026-06-05T14:58:53.000Z",
+                  "uid": "35240-897ceb54-1021-472b-989c-436f48108ab4"
+                }
+              ],
+              "createdAt": "2026-06-05T14:58:53.000Z",
+              "updatedAt": "2026-06-05T14:58:53.000Z",
+              "uid": "35240-98de2e20-97b4-4086-b780-9d7b5b78e1c8"
+            }
+          ],
+          "id": "df792acc-b741-4932-8226-a1ce957ea4a6",
+          "createdAt": "2026-06-05T14:58:52.000Z",
+          "updatedAt": "2026-06-05T14:58:52.000Z",
+          "uid": "35240-df792acc-b741-4932-8226-a1ce957ea4a6"
+        },
+        {
+          "name": "Active Directory List Users",
+          "id": "a953203b-932c-45d6-9962-b20daf2d9830",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/users?$filter=<string>&$select=<string>&$top=<integer>&$orderby=<string>&$search=<string>&$count=<boolean>",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "users"
+              ],
+              "query": [
+                {
+                  "description": "OData filter expression (e.g. displayName eq 'John Doe')",
+                  "key": "$filter",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Comma-separated list of properties to include in response",
+                  "key": "$select",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Maximum number of users to return (max 999)",
+                  "key": "$top",
+                  "value": "<integer>"
+                },
+                {
+                  "description": "Property to sort by (e.g. displayName asc)",
+                  "key": "$orderby",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Search expression for user properties",
+                  "key": "$search",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Include total count of matching users",
+                  "key": "$count",
+                  "value": "<boolean>"
+                }
+              ]
+            },
+            "description": "Retrieve a list of user objects from Microsoft Entra ID. Supports OData query parameters for filtering, selecting specific properties, ordering, and pagination."
+          },
+          "response": [
+            {
+              "id": "42f41a1c-e5a4-4e72-8fc8-a479ba9a55bb",
+              "name": "List of users",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/users?$filter=<string>&$select=<string>&$top=<integer>&$orderby=<string>&$search=<string>&$count=<boolean>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "users"
+                  ],
+                  "query": [
+                    {
+                      "description": "OData filter expression (e.g. displayName eq 'John Doe')",
+                      "key": "$filter",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Comma-separated list of properties to include in response",
+                      "key": "$select",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Maximum number of users to return (max 999)",
+                      "key": "$top",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "Property to sort by (e.g. displayName asc)",
+                      "key": "$orderby",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Search expression for user properties",
+                      "key": "$search",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Include total count of matching users",
+                      "key": "$count",
+                      "value": "<boolean>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"@odata.context\": \"<string>\",\n  \"@odata.nextLink\": \"<string>\",\n  \"value\": [\n    {\n      \"id\": \"<uuid>\",\n      \"displayName\": \"<string>\",\n      \"userPrincipalName\": \"<string>\",\n      \"mail\": \"<email>\",\n      \"givenName\": \"<string>\",\n      \"surname\": \"<string>\",\n      \"jobTitle\": \"<string>\",\n      \"department\": \"<string>\",\n      \"officeLocation\": \"<string>\",\n      \"mobilePhone\": \"<string>\",\n      \"businessPhones\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"accountEnabled\": \"<boolean>\",\n      \"usageLocation\": \"<string>\",\n      \"preferredLanguage\": \"<string>\",\n      \"createdDateTime\": \"<dateTime>\",\n      \"lastPasswordChangeDateTime\": \"<dateTime>\",\n      \"passwordPolicies\": \"<string>\",\n      \"userType\": \"Guest\",\n      \"assignedLicenses\": [\n        {\n          \"skuId\": \"<uuid>\",\n          \"disabledPlans\": [\n            \"<uuid>\",\n            \"<uuid>\"\n          ]\n        },\n        {\n          \"skuId\": \"<uuid>\",\n          \"disabledPlans\": [\n            \"<uuid>\",\n            \"<uuid>\"\n          ]\n        }\n      ],\n      \"onPremisesSyncEnabled\": \"<boolean>\",\n      \"onPremisesDistinguishedName\": \"<string>\",\n      \"externalUserState\": \"<string>\"\n    },\n    {\n      \"id\": \"<uuid>\",\n      \"displayName\": \"<string>\",\n      \"userPrincipalName\": \"<string>\",\n      \"mail\": \"<email>\",\n      \"givenName\": \"<string>\",\n      \"surname\": \"<string>\",\n      \"jobTitle\": \"<string>\",\n      \"department\": \"<string>\",\n      \"officeLocation\": \"<string>\",\n      \"mobilePhone\": \"<string>\",\n      \"businessPhones\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"accountEnabled\": \"<boolean>\",\n      \"usageLocation\": \"<string>\",\n      \"preferredLanguage\": \"<string>\",\n      \"createdDateTime\": \"<dateTime>\",\n      \"lastPasswordChangeDateTime\": \"<dateTime>\",\n      \"passwordPolicies\": \"<string>\",\n      \"userType\": \"Member\",\n      \"assignedLicenses\": [\n        {\n          \"skuId\": \"<uuid>\",\n          \"disabledPlans\": [\n            \"<uuid>\",\n            \"<uuid>\"\n          ]\n        },\n        {\n          \"skuId\": \"<uuid>\",\n          \"disabledPlans\": [\n            \"<uuid>\",\n            \"<uuid>\"\n          ]\n        }\n      ],\n      \"onPremisesSyncEnabled\": \"<boolean>\",\n      \"onPremisesDistinguishedName\": \"<string>\",\n      \"externalUserState\": \"<string>\"\n    }\n  ]\n}",
+              "createdAt": "2026-06-05T14:58:53.000Z",
+              "updatedAt": "2026-06-05T14:58:53.000Z",
+              "uid": "35240-42f41a1c-e5a4-4e72-8fc8-a479ba9a55bb"
+            },
+            {
+              "id": "2cc08a54-22bc-42c3-b53b-c91e3df04e1e",
+              "name": "Bad request \u2014 invalid query parameters or request body",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/users?$filter=<string>&$select=<string>&$top=<integer>&$orderby=<string>&$search=<string>&$count=<boolean>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "users"
+                  ],
+                  "query": [
+                    {
+                      "description": "OData filter expression (e.g. displayName eq 'John Doe')",
+                      "key": "$filter",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Comma-separated list of properties to include in response",
+                      "key": "$select",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Maximum number of users to return (max 999)",
+                      "key": "$top",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "Property to sort by (e.g. displayName asc)",
+                      "key": "$orderby",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Search expression for user properties",
+                      "key": "$search",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Include total count of matching users",
+                      "key": "$count",
+                      "value": "<boolean>"
+                    }
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\",\n    \"innerError\": {\n      \"date\": \"<dateTime>\",\n      \"request-id\": \"<uuid>\",\n      \"client-request-id\": \"<uuid>\"\n    }\n  }\n}",
+              "createdAt": "2026-06-05T14:58:53.000Z",
+              "updatedAt": "2026-06-05T14:58:53.000Z",
+              "uid": "35240-2cc08a54-22bc-42c3-b53b-c91e3df04e1e"
+            },
+            {
+              "id": "ccbb0f34-60f4-492a-a117-165c9dd1abc0",
+              "name": "Authentication required \u2014 missing or invalid access token",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/users?$filter=<string>&$select=<string>&$top=<integer>&$orderby=<string>&$search=<string>&$count=<boolean>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "users"
+                  ],
+                  "query": [
+                    {
+                      "description": "OData filter expression (e.g. displayName eq 'John Doe')",
+                      "key": "$filter",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Comma-separated list of properties to include in response",
+                      "key": "$select",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Maximum number of users to return (max 999)",
+                      "key": "$top",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "Property to sort by (e.g. displayName asc)",
+                      "key": "$orderby",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Search expression for user properties",
+                      "key": "$search",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Include total count of matching users",
+                      "key": "$count",
+                      "value": "<boolean>"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\",\n    \"innerError\": {\n      \"date\": \"<dateTime>\",\n      \"request-id\": \"<uuid>\",\n      \"client-request-id\": \"<uuid>\"\n    }\n  }\n}",
+              "createdAt": "2026-06-05T14:58:53.000Z",
+              "updatedAt": "2026-06-05T14:58:53.000Z",
+              "uid": "35240-ccbb0f34-60f4-492a-a117-165c9dd1abc0"
+            },
+            {
+              "id": "58760da9-6142-4bdc-8f8c-0d429678dcde",
+              "name": "Insufficient permissions \u2014 required scopes not granted",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/users?$filter=<string>&$select=<string>&$top=<integer>&$orderby=<string>&$search=<string>&$count=<boolean>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "users"
+                  ],
+                  "query": [
+                    {
+                      "description": "OData filter expression (e.g. displayName eq 'John Doe')",
+                      "key": "$filter",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Comma-separated list of properties to include in response",
+                      "key": "$select",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Maximum number of users to return (max 999)",
+                      "key": "$top",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "Property to sort by (e.g. displayName asc)",
+                      "key": "$orderby",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Search expression for user properties",
+                      "key": "$search",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Include total count of matching users",
+                      "key": "$count",
+                      "value": "<boolean>"
+                    }
+                  ]
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\",\n    \"innerError\": {\n      \"date\": \"<dateTime>\",\n      \"request-id\": \"<uuid>\",\n      \"client-request-id\": \"<uuid>\"\n    }\n  }\n}",
+              "createdAt": "2026-06-05T14:58:53.000Z",
+              "updatedAt": "2026-06-05T14:58:53.000Z",
+              "uid": "35240-58760da9-6142-4bdc-8f8c-0d429678dcde"
+            }
+          ],
+          "createdAt": "2026-06-05T14:58:53.000Z",
+          "updatedAt": "2026-06-05T14:58:53.000Z",
+          "uid": "35240-a953203b-932c-45d6-9962-b20daf2d9830"
+        },
+        {
+          "name": "Active Directory Create User",
+          "id": "055e9d6a-ba39-4f0c-a361-88030e98c92b",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"accountEnabled\": \"<boolean>\",\n  \"displayName\": \"<string>\",\n  \"mailNickname\": \"<string>\",\n  \"passwordProfile\": {\n    \"password\": \"<string>\",\n    \"forceChangePasswordNextSignIn\": true,\n    \"forceChangePasswordNextSignInWithMfa\": \"<boolean>\"\n  },\n  \"userPrincipalName\": \"<string>\",\n  \"givenName\": \"<string>\",\n  \"surname\": \"<string>\",\n  \"jobTitle\": \"<string>\",\n  \"department\": \"<string>\",\n  \"usageLocation\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "headerFamily": "json",
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/users",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "users"
+              ]
+            },
+            "description": "Create a new user in Microsoft Entra ID. The user object must include the required properties: accountEnabled, displayName, mailNickname, passwordProfile, and userPrincipalName."
+          },
+          "response": [
+            {
+              "id": "f76fb6aa-a239-4200-90a9-389168230f7c",
+              "name": "User created successfully",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"accountEnabled\": \"<boolean>\",\n  \"displayName\": \"<string>\",\n  \"mailNickname\": \"<string>\",\n  \"passwordProfile\": {\n    \"password\": \"<string>\",\n    \"forceChangePasswordNextSignIn\": true,\n    \"forceChangePasswordNextSignInWithMfa\": \"<boolean>\"\n  },\n  \"userPrincipalName\": \"<string>\",\n  \"givenName\": \"<string>\",\n  \"surname\": \"<string>\",\n  \"jobTitle\": \"<string>\",\n  \"department\": \"<string>\",\n  \"usageLocation\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/users",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "users"
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"id\": \"<uuid>\",\n  \"displayName\": \"<string>\",\n  \"userPrincipalName\": \"<string>\",\n  \"mail\": \"<email>\",\n  \"givenName\": \"<string>\",\n  \"surname\": \"<string>\",\n  \"jobTitle\": \"<string>\",\n  \"department\": \"<string>\",\n  \"officeLocation\": \"<string>\",\n  \"mobilePhone\": \"<string>\",\n  \"businessPhones\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"accountEnabled\": \"<boolean>\",\n  \"usageLocation\": \"<string>\",\n  \"preferredLanguage\": \"<string>\",\n  \"createdDateTime\": \"<dateTime>\",\n  \"lastPasswordChangeDateTime\": \"<dateTime>\",\n  \"passwordPolicies\": \"<string>\",\n  \"userType\": \"Guest\",\n  \"assignedLicenses\": [\n    {\n      \"skuId\": \"<uuid>\",\n      \"disabledPlans\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ]\n    },\n    {\n      \"skuId\": \"<uuid>\",\n      \"disabledPlans\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ]\n    }\n  ],\n  \"onPremisesSyncEnabled\": \"<boolean>\",\n  \"onPremisesDistinguishedName\": \"<string>\",\n  \"externalUserState\": \"<string>\"\n}",
+              "createdAt": "2026-06-05T14:58:53.000Z",
+              "updatedAt": "2026-06-05T14:58:53.000Z",
+              "uid": "35240-f76fb6aa-a239-4200-90a9-389168230f7c"
+            },
+            {
+              "id": "5917ada4-44d3-491b-98d6-2e8f7df2ff24",
+              "name": "Bad request \u2014 invalid query parameters or request body",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"accountEnabled\": \"<boolean>\",\n  \"displayName\": \"<string>\",\n  \"mailNickname\": \"<string>\",\n  \"passwordProfile\": {\n    \"password\": \"<string>\",\n    \"forceChangePasswordNextSignIn\": true,\n    \"forceChangePasswordNextSignInWithMfa\": \"<boolean>\"\n  },\n  \"userPrincipalName\": \"<string>\",\n  \"givenName\": \"<string>\",\n  \"surname\": \"<string>\",\n  \"jobTitle\": \"<string>\",\n  \"department\": \"<string>\",\n  \"usageLocation\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/users",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "users"
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\",\n    \"innerError\": {\n      \"date\": \"<dateTime>\",\n      \"request-id\": \"<uuid>\",\n      \"client-request-id\": \"<uuid>\"\n    }\n  }\n}",
+              "createdAt": "2026-06-05T14:58:53.000Z",
+              "updatedAt": "2026-06-05T14:58:53.000Z",
+              "uid": "35240-5917ada4-44d3-491b-98d6-2e8f7df2ff24"
+            },
+            {
+              "id": "3badb688-6a41-4ecc-8b96-4618b88aec4a",
+              "name": "Authentication required \u2014 missing or invalid access token",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"accountEnabled\": \"<boolean>\",\n  \"displayName\": \"<string>\",\n  \"mailNickname\": \"<string>\",\n  \"passwordProfile\": {\n    \"password\": \"<string>\",\n    \"forceChangePasswordNextSignIn\": true,\n    \"forceChangePasswordNextSignInWithMfa\": \"<boolean>\"\n  },\n  \"userPrincipalName\": \"<string>\",\n  \"givenName\": \"<string>\",\n  \"surname\": \"<string>\",\n  \"jobTitle\": \"<string>\",\n  \"department\": \"<string>\",\n  \"usageLocation\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/users",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "users"
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\",\n    \"innerError\": {\n      \"date\": \"<dateTime>\",\n      \"request-id\": \"<uuid>\",\n      \"client-request-id\": \"<uuid>\"\n    }\n  }\n}",
+              "createdAt": "2026-06-05T14:58:53.000Z",
+              "updatedAt": "2026-06-05T14:58:53.000Z",
+              "uid": "35240-3badb688-6a41-4ecc-8b96-4618b88aec4a"
+            },
+            {
+              "id": "76ccc5b8-c247-4f4e-b662-80866e52370c",
+              "name": "Insufficient permissions \u2014 required scopes not granted",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"accountEnabled\": \"<boolean>\",\n  \"displayName\": \"<string>\",\n  \"mailNickname\": \"<string>\",\n  \"passwordProfile\": {\n    \"password\": \"<string>\",\n    \"forceChangePasswordNextSignIn\": true,\n    \"forceChangePasswordNextSignInWithMfa\": \"<boolean>\"\n  },\n  \"userPrincipalName\": \"<string>\",\n  \"givenName\": \"<string>\",\n  \"surname\": \"<string>\",\n  \"jobTitle\": \"<string>\",\n  \"department\": \"<string>\",\n  \"usageLocation\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/users",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "users"
+                  ]
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\",\n    \"innerError\": {\n      \"date\": \"<dateTime>\",\n      \"request-id\": \"<uuid>\",\n      \"client-request-id\": \"<uuid>\"\n    }\n  }\n}",
+              "createdAt": "2026-06-05T14:58:53.000Z",
+              "updatedAt": "2026-06-05T14:58:53.000Z",
+              "uid": "35240-76ccc5b8-c247-4f4e-b662-80866e52370c"
+            }
+          ],
+          "createdAt": "2026-06-05T14:58:53.000Z",
+          "updatedAt": "2026-06-05T14:58:53.000Z",
+          "uid": "35240-055e9d6a-ba39-4f0c-a361-88030e98c92b"
+        }
+      ],
+      "id": "ef508f9f-1965-4834-9aff-50fd8557bead",
+      "createdAt": "2026-06-05T14:58:52.000Z",
+      "updatedAt": "2026-06-05T14:58:52.000Z",
+      "uid": "35240-ef508f9f-1965-4834-9aff-50fd8557bead"
+    },
+    {
+      "name": "me",
+      "item": [
+        {
+          "name": "Active Directory Get My Profile",
+          "id": "d8b45e2f-5213-4984-9e6f-ac38dd13eeb0",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/me?$select=<string>",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "me"
+              ],
+              "query": [
+                {
+                  "description": "Comma-separated properties to include",
+                  "key": "$select",
+                  "value": "<string>"
+                }
+              ]
+            },
+            "description": "Retrieve the properties and relationships of the signed-in user. This endpoint only works with delegated permissions and requires an OAuth2 access token for the signed-in user."
+          },
+          "response": [
+            {
+              "id": "25f1b3bc-1f5c-4daa-91f7-3492a3507cea",
+              "name": "Signed-in user profile",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/me?$select=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "me"
+                  ],
+                  "query": [
+                    {
+                      "description": "Comma-separated properties to include",
+                      "key": "$select",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"id\": \"<uuid>\",\n  \"displayName\": \"<string>\",\n  \"userPrincipalName\": \"<string>\",\n  \"mail\": \"<email>\",\n  \"givenName\": \"<string>\",\n  \"surname\": \"<string>\",\n  \"jobTitle\": \"<string>\",\n  \"department\": \"<string>\",\n  \"officeLocation\": \"<string>\",\n  \"mobilePhone\": \"<string>\",\n  \"businessPhones\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"accountEnabled\": \"<boolean>\",\n  \"usageLocation\": \"<string>\",\n  \"preferredLanguage\": \"<string>\",\n  \"createdDateTime\": \"<dateTime>\",\n  \"lastPasswordChangeDateTime\": \"<dateTime>\",\n  \"passwordPolicies\": \"<string>\",\n  \"userType\": \"Guest\",\n  \"assignedLicenses\": [\n    {\n      \"skuId\": \"<uuid>\",\n      \"disabledPlans\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ]\n    },\n    {\n      \"skuId\": \"<uuid>\",\n      \"disabledPlans\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ]\n    }\n  ],\n  \"onPremisesSyncEnabled\": \"<boolean>\",\n  \"onPremisesDistinguishedName\": \"<string>\",\n  \"externalUserState\": \"<string>\"\n}",
+              "createdAt": "2026-06-05T14:58:53.000Z",
+              "updatedAt": "2026-06-05T14:58:53.000Z",
+              "uid": "35240-25f1b3bc-1f5c-4daa-91f7-3492a3507cea"
+            },
+            {
+              "id": "ab45bce3-aac3-42d7-be0a-fbf2e316026e",
+              "name": "Authentication required \u2014 missing or invalid access token",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/me?$select=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "me"
+                  ],
+                  "query": [
+                    {
+                      "description": "Comma-separated properties to include",
+                      "key": "$select",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\",\n    \"innerError\": {\n      \"date\": \"<dateTime>\",\n      \"request-id\": \"<uuid>\",\n      \"client-request-id\": \"<uuid>\"\n    }\n  }\n}",
+              "createdAt": "2026-06-05T14:58:53.000Z",
+              "updatedAt": "2026-06-05T14:58:53.000Z",
+              "uid": "35240-ab45bce3-aac3-42d7-be0a-fbf2e316026e"
+            }
+          ],
+          "createdAt": "2026-06-05T14:58:53.000Z",
+          "updatedAt": "2026-06-05T14:58:53.000Z",
+          "uid": "35240-d8b45e2f-5213-4984-9e6f-ac38dd13eeb0"
+        }
+      ],
+      "id": "fd432ed5-f140-460c-977c-c591799a77d3",
+      "createdAt": "2026-06-05T14:58:52.000Z",
+      "updatedAt": "2026-06-05T14:58:52.000Z",
+      "uid": "35240-fd432ed5-f140-460c-977c-c591799a77d3"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "scope",
+        "value": "User.Read User.ReadWrite User.ReadBasic.All User.Read.All User.ReadWrite.All Directory.Read.All Directory.ReadWrite.All",
+        "type": "string"
+      },
+      {
+        "key": "accessTokenUrl",
+        "value": "https://login.microsoftonline.com/{tenant}/oauth2/v2.0/token",
+        "type": "string"
+      },
+      {
+        "key": "authUrl",
+        "value": "https://login.microsoftonline.com/{tenant}/oauth2/v2.0/authorize",
+        "type": "string"
+      },
+      {
+        "key": "grant_type",
+        "value": "authorization_code",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://graph.microsoft.com/v1.0"
+    }
+  ]
+}
