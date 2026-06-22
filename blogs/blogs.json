@@ -4,8 +4,8 @@
     {
       "source": "https://devblogs.microsoft.com/microsoft365dev/feed/",
       "feed_url": "https://devblogs.microsoft.com/microsoft365dev/feed/",
-      "title": "",
-      "saved": 2,
+      "title": "Microsoft 365 Developer Blog",
+      "saved": 0,
       "method": "feed"
     },
     {
@@ -17,5 +17,5 @@
     }
   ],
   "post_count": 20,
-  "fetched": "2026-06-14T20:42:17Z"
+  "fetched": "2026-06-21T17:00:00Z"
 }
