@@ -38,7 +38,7 @@ apis:
     url: json-schema/users-password-profile-schema.json
   - type: JSONStructure
     url: json-structure/users-user-structure.json
-  - type: Example
+  - type: Examples
     url: examples/users-user-example.json
 - name: Microsoft Graph Groups API
   description: Create and manage Microsoft Entra security groups, Microsoft 365 groups, and distribution lists. Manage group
@@ -58,13 +58,13 @@ apis:
     url: json-schema/groups-group-schema.json
   - type: JSONStructure
     url: json-structure/groups-group-structure.json
-  - type: Example
+  - type: Examples
     url: examples/groups-group-example.json
-  - type: NaftikoCapability
+  - type: X-NaftikoCapability
     url: capabilities/groups-groups.yaml
-  - type: NaftikoCapability
+  - type: X-NaftikoCapability
     url: capabilities/groups-members.yaml
-  - type: NaftikoCapability
+  - type: X-NaftikoCapability
     url: capabilities/groups-owners.yaml
 - name: Microsoft Graph Applications and Service Principals API
   description: Register and manage Microsoft Entra applications and their associated service principals programmatically.
@@ -88,13 +88,13 @@ apis:
     url: json-schema/applications-service-principal-schema.json
   - type: JSONStructure
     url: json-structure/applications-application-structure.json
-  - type: Example
+  - type: Examples
     url: examples/applications-application-example.json
-  - type: NaftikoCapability
+  - type: X-NaftikoCapability
     url: capabilities/applications-app-role-assignments.yaml
-  - type: NaftikoCapability
+  - type: X-NaftikoCapability
     url: capabilities/applications-applications.yaml
-  - type: NaftikoCapability
+  - type: X-NaftikoCapability
     url: capabilities/applications-service-principals.yaml
 - name: Microsoft Graph Devices API
   description: Manage devices registered or joined to Microsoft Entra ID, including Entra joined, Entra registered, and hybrid
@@ -193,146 +193,143 @@ apis:
 common:
   - type: PostmanWorkspace
     url: https://www.postman.com/kinlaneapi/microsoft-active-directory/overview
-- type: ArazzoWorkflows
-  url: arazzo/
-  workflows:
-  - url: arazzo/active-directory-audit-user-group-memberships-workflow.yml
+  - type: Arazzo
+    url: arazzo/active-directory-audit-user-group-memberships-workflow.yml
     name: Active Directory Audit User Group Memberships
-    summary: Resolve a user by UPN, read their full profile, then list their group memberships and manager.
-  - url: arazzo/active-directory-create-group-and-add-members-workflow.yml
+  - type: Arazzo
+    url: arazzo/active-directory-create-group-and-add-members-workflow.yml
     name: Active Directory Create Group And Add Two Members
-    summary: Create a security group, then add two existing users to it by their object IDs.
-  - url: arazzo/active-directory-create-m365-group-with-owner-workflow.yml
+  - type: Arazzo
+    url: arazzo/active-directory-create-m365-group-with-owner-workflow.yml
     name: Active Directory Create Microsoft 365 Group With Owner
-    summary: Create a user, create a Microsoft 365 group owned by that user, and add the user as a member.
-  - url: arazzo/active-directory-decommission-application-workflow.yml
+  - type: Arazzo
+    url: arazzo/active-directory-decommission-application-workflow.yml
     name: Active Directory Decommission Application
-    summary: Resolve an application by name, read its details, and soft-delete the registration.
-  - url: arazzo/active-directory-find-user-and-update-profile-workflow.yml
+  - type: Arazzo
+    url: arazzo/active-directory-find-user-and-update-profile-workflow.yml
     name: Active Directory Find User And Update Profile
-    summary: Look up a user by principal name, then patch their job title and department.
-  - url: arazzo/active-directory-offboard-user-from-group-workflow.yml
+  - type: Arazzo
+    url: arazzo/active-directory-offboard-user-from-group-workflow.yml
     name: Active Directory Offboard User From Group
-    summary: Resolve a user by UPN, remove them from a named group, then disable the account.
-  - url: arazzo/active-directory-onboard-user-to-existing-group-workflow.yml
+  - type: Arazzo
+    url: arazzo/active-directory-onboard-user-to-existing-group-workflow.yml
     name: Active Directory Onboard User To Existing Group
-    summary: Find an existing group by name, create a user, and add the user to that group.
-  - url: arazzo/active-directory-provision-application-with-membership-workflow.yml
+  - type: Arazzo
+    url: arazzo/active-directory-provision-application-with-membership-workflow.yml
     name: Active Directory Provision Application With Service Principal
-    summary: Register an application, then locate and read its service principal and app role assignments.
-  - url: arazzo/active-directory-provision-user-into-new-group-workflow.yml
+  - type: Arazzo
+    url: arazzo/active-directory-provision-user-into-new-group-workflow.yml
     name: Active Directory Provision User Into New Group
-    summary: Create a user, create a security group, and add the user as a member of that group.
-  - url: arazzo/active-directory-rename-group-and-list-members-workflow.yml
+  - type: Arazzo
+    url: arazzo/active-directory-rename-group-and-list-members-workflow.yml
     name: Active Directory Rename Group And List Members
-    summary: Resolve a group by name, update its display name and description, then list its members and owners.
-  - url: arazzo/active-directory-self-service-profile-review-workflow.yml
+  - type: Arazzo
+    url: arazzo/active-directory-self-service-profile-review-workflow.yml
     name: Active Directory Self-Service Profile Review
-    summary: Read the signed-in user's profile, then list their group memberships and look up their manager.
-  - url: arazzo/active-directory-transfer-user-between-groups-workflow.yml
+  - type: Arazzo
+    url: arazzo/active-directory-transfer-user-between-groups-workflow.yml
     name: Active Directory Transfer User Between Groups
-    summary: Resolve a user and two groups by name, remove the user from one group and add them to another.
-  - url: arazzo/active-directory-update-application-redirect-uris-workflow.yml
+  - type: Arazzo
+    url: arazzo/active-directory-update-application-redirect-uris-workflow.yml
     name: Active Directory Update Application Redirect URIs
-    summary: Resolve an application by name, read it, then patch its web redirect URIs and description.
-- type: Portal
-  url: https://developer.microsoft.com/en-us/graph
-- type: GettingStarted
-  url: https://learn.microsoft.com/en-us/graph/get-started
-- type: Documentation
-  url: https://learn.microsoft.com/en-us/graph/overview
-- type: Authentication
-  url: https://learn.microsoft.com/en-us/graph/auth/auth-concepts
-- type: APIReference
-  url: https://learn.microsoft.com/en-us/graph/api/overview
-- type: RateLimits
-  url: https://learn.microsoft.com/en-us/graph/throttling
-- type: SDK
-  url: https://learn.microsoft.com/en-us/graph/sdks/sdks-overview
-- type: CLI
-  url: https://learn.microsoft.com/en-us/cli/azure/ad
-- type: Blog
-  url: https://devblogs.microsoft.com/microsoft365dev/
-- type: StatusPage
-  url: https://azure.status.microsoft.com/
-- type: Support
-  url: https://developer.microsoft.com/en-us/graph/support
-- type: TermsOfService
-  url: https://learn.microsoft.com/en-us/legal/microsoft-apis/terms-of-use
-- type: PrivacyPolicy
-  url: https://privacy.microsoft.com/privacystatement
-- type: Pricing
-  url: https://www.microsoft.com/en-us/security/business/microsoft-entra-pricing
-- type: ChangeLog
-  url: https://learn.microsoft.com/en-us/graph/changelog
-- type: GitHubOrganization
-  url: https://github.com/microsoftgraph
-- type: GitHubRepository
-  url: https://github.com/microsoftgraph/microsoft-graph-openapi
-- type: StackOverflow
-  url: https://stackoverflow.com/questions/tagged/microsoft-graph
-- type: Training
-  url: https://learn.microsoft.com/en-us/training/paths/m365-msgraph-associate/
-- type: SpectralRules
-  url: rules/active-directory-spectral-rules.yml
-- type: Vocabulary
-  url: vocabulary/active-directory-vocabulary.yaml
-- type: JSONLD
-  url: json-ld/active-directory-context.jsonld
-- type: Features
-  data:
-  - name: Unified Identity API
-    description: Single REST endpoint (graph.microsoft.com) for all Microsoft Entra identity and directory operations.
-  - name: User Lifecycle Management
-    description: Full CRUD operations for user accounts including bulk operations, license assignment, and guest management.
-  - name: Group Management
-    description: Create and manage security groups, Microsoft 365 groups, and dynamic membership groups.
-  - name: Application Registration
-    description: Programmatic app registration, permission configuration, and service principal management.
-  - name: Conditional Access Automation
-    description: Create, update, and evaluate Conditional Access policies via API for Zero Trust enforcement.
-  - name: Privileged Identity Management
-    description: Just-in-time role activation, time-bound access, and PIM policy management via API.
-  - name: Identity Protection
-    description: Access risk signals, risky users, and risk detections for automated threat response.
-  - name: Authentication Method Management
-    description: Manage MFA and passwordless authentication methods registered for users.
-  - name: Audit and Sign-in Logs
-    description: Programmatic access to audit logs, sign-in logs, and provisioning logs for SIEM integration.
-  - name: Identity Governance
-    description: Access reviews, entitlement management, and lifecycle workflows for automated IAM.
-- type: UseCases
-  data:
-  - name: User Provisioning Automation
-    description: Automate user account creation, attribute updates, and deprovisioning for HR-driven identity lifecycle.
-  - name: Zero Trust Policy Enforcement
-    description: Programmatically deploy and manage Conditional Access policies across the organization.
-  - name: SIEM Integration
-    description: Stream audit logs and sign-in events to security information and event management systems.
-  - name: Application Access Management
-    description: Automate app registration, permission grants, and app role assignments for developer self-service.
-  - name: Identity Risk Remediation
-    description: Detect and respond to risky sign-ins and compromised accounts via Identity Protection APIs.
-  - name: Compliance Reporting
-    description: Generate access reviews, entitlement reports, and audit logs for regulatory compliance.
-  - name: Privileged Access Governance
-    description: Enforce just-in-time privileged access and audit role assignments via PIM APIs.
-- type: Integrations
-  data:
-  - name: Azure Active Directory
-    description: Microsoft Entra ID (formerly Azure AD) is the cloud identity backbone accessed via Microsoft Graph.
-  - name: Microsoft 365
-    description: Microsoft Graph provides unified access to Microsoft 365 user data alongside identity operations.
-  - name: Azure Monitor
-    description: Stream Microsoft Entra sign-in and audit logs to Azure Monitor Log Analytics for analysis.
-  - name: Microsoft Sentinel
-    description: Feed identity risk signals and audit logs into Microsoft Sentinel SIEM for threat hunting.
-  - name: Intune
-    description: Microsoft Graph Intune APIs integrate device management with identity policies.
-  - name: SCIM Providers
-    description: Automate user provisioning to SaaS applications using Microsoft Entra SCIM provisioning.
-  - name: SAML and OIDC Applications
-    description: Register and manage federated applications using SAML 2.0 and OpenID Connect via Microsoft Graph.
+  - type: Portal
+    url: https://developer.microsoft.com/en-us/graph
+  - type: GettingStarted
+    url: https://learn.microsoft.com/en-us/graph/get-started
+  - type: Documentation
+    url: https://learn.microsoft.com/en-us/graph/overview
+  - type: Authentication
+    url: https://learn.microsoft.com/en-us/graph/auth/auth-concepts
+  - type: APIReference
+    url: https://learn.microsoft.com/en-us/graph/api/overview
+  - type: RateLimits
+    url: https://learn.microsoft.com/en-us/graph/throttling
+  - type: SDKs
+    url: https://learn.microsoft.com/en-us/graph/sdks/sdks-overview
+  - type: CLI
+    url: https://learn.microsoft.com/en-us/cli/azure/ad
+  - type: Blog
+    url: https://devblogs.microsoft.com/microsoft365dev/
+  - type: StatusPage
+    url: https://azure.status.microsoft.com/
+  - type: Support
+    url: https://developer.microsoft.com/en-us/graph/support
+  - type: TermsOfService
+    url: https://learn.microsoft.com/en-us/legal/microsoft-apis/terms-of-use
+  - type: PrivacyPolicy
+    url: https://privacy.microsoft.com/privacystatement
+  - type: Pricing
+    url: https://www.microsoft.com/en-us/security/business/microsoft-entra-pricing
+  - type: ChangeLog
+    url: https://learn.microsoft.com/en-us/graph/changelog
+  - type: GitHubOrganization
+    url: https://github.com/microsoftgraph
+  - type: GitHubRepository
+    url: https://github.com/microsoftgraph/microsoft-graph-openapi
+  - type: StackOverflow
+    url: https://stackoverflow.com/questions/tagged/microsoft-graph
+  - type: Training
+    url: https://learn.microsoft.com/en-us/training/paths/m365-msgraph-associate/
+  - type: SpectralRules
+    url: rules/active-directory-spectral-rules.yml
+  - type: Vocabulary
+    url: vocabulary/active-directory-vocabulary.yaml
+  - type: JSONLD
+    url: json-ld/active-directory-context.jsonld
+  - type: Features
+    data:
+    - name: Unified Identity API
+      description: Single REST endpoint (graph.microsoft.com) for all Microsoft Entra identity and directory operations.
+    - name: User Lifecycle Management
+      description: Full CRUD operations for user accounts including bulk operations, license assignment, and guest management.
+    - name: Group Management
+      description: Create and manage security groups, Microsoft 365 groups, and dynamic membership groups.
+    - name: Application Registration
+      description: Programmatic app registration, permission configuration, and service principal management.
+    - name: Conditional Access Automation
+      description: Create, update, and evaluate Conditional Access policies via API for Zero Trust enforcement.
+    - name: Privileged Identity Management
+      description: Just-in-time role activation, time-bound access, and PIM policy management via API.
+    - name: Identity Protection
+      description: Access risk signals, risky users, and risk detections for automated threat response.
+    - name: Authentication Method Management
+      description: Manage MFA and passwordless authentication methods registered for users.
+    - name: Audit and Sign-in Logs
+      description: Programmatic access to audit logs, sign-in logs, and provisioning logs for SIEM integration.
+    - name: Identity Governance
+      description: Access reviews, entitlement management, and lifecycle workflows for automated IAM.
+  - type: UseCases
+    data:
+    - name: User Provisioning Automation
+      description: Automate user account creation, attribute updates, and deprovisioning for HR-driven identity lifecycle.
+    - name: Zero Trust Policy Enforcement
+      description: Programmatically deploy and manage Conditional Access policies across the organization.
+    - name: SIEM Integration
+      description: Stream audit logs and sign-in events to security information and event management systems.
+    - name: Application Access Management
+      description: Automate app registration, permission grants, and app role assignments for developer self-service.
+    - name: Identity Risk Remediation
+      description: Detect and respond to risky sign-ins and compromised accounts via Identity Protection APIs.
+    - name: Compliance Reporting
+      description: Generate access reviews, entitlement reports, and audit logs for regulatory compliance.
+    - name: Privileged Access Governance
+      description: Enforce just-in-time privileged access and audit role assignments via PIM APIs.
+  - type: Integrations
+    data:
+    - name: Azure Active Directory
+      description: Microsoft Entra ID (formerly Azure AD) is the cloud identity backbone accessed via Microsoft Graph.
+    - name: Microsoft 365
+      description: Microsoft Graph provides unified access to Microsoft 365 user data alongside identity operations.
+    - name: Azure Monitor
+      description: Stream Microsoft Entra sign-in and audit logs to Azure Monitor Log Analytics for analysis.
+    - name: Microsoft Sentinel
+      description: Feed identity risk signals and audit logs into Microsoft Sentinel SIEM for threat hunting.
+    - name: Intune
+      description: Microsoft Graph Intune APIs integrate device management with identity policies.
+    - name: SCIM Providers
+      description: Automate user provisioning to SaaS applications using Microsoft Entra SCIM provisioning.
+    - name: SAML and OIDC Applications
+      description: Register and manage federated applications using SAML 2.0 and OpenID Connect via Microsoft Graph.
 maintainers:
 - name: Kin Lane
   email: kin@apievangelist.com
