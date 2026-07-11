@@ -191,6 +191,12 @@ apis:
   - type: Documentation
     url: https://learn.microsoft.com/en-us/graph/api/resources/report-identity-access
 common:
+  - type: VulnerabilityDisclosure
+    url: security/active-directory-vulnerability-disclosure.yml
+  - type: DomainSecurity
+    url: security/active-directory-domain-security.yml
+  - type: Authentication
+    url: authentication/active-directory-authentication.yml
   - type: OAuthScopes
     url: scopes/active-directory-scopes.yml
   - type: PostmanWorkspace
