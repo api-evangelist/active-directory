@@ -1,0 +1,109 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/active-directory-applications-openapi.yaml, openapi/active-directory-groups-openapi.yaml,
+  openapi/active-directory-users-openapi.yaml
+schemes:
+- name: oauth2
+  source: openapi/active-directory-applications-openapi.yaml
+  flows:
+  - flow: authorizationCode
+    authorizationUrl: https://login.microsoftonline.com/{tenant}/oauth2/v2.0/authorize
+    tokenUrl: https://login.microsoftonline.com/{tenant}/oauth2/v2.0/token
+  - flow: clientCredentials
+    tokenUrl: https://login.microsoftonline.com/{tenant}/oauth2/v2.0/token
+- name: oauth2
+  source: openapi/active-directory-groups-openapi.yaml
+  flows:
+  - flow: authorizationCode
+    authorizationUrl: https://login.microsoftonline.com/{tenant}/oauth2/v2.0/authorize
+    tokenUrl: https://login.microsoftonline.com/{tenant}/oauth2/v2.0/token
+  - flow: clientCredentials
+    tokenUrl: https://login.microsoftonline.com/{tenant}/oauth2/v2.0/token
+  description: OAuth2 with Microsoft identity platform (Azure AD)
+- name: oauth2
+  source: openapi/active-directory-users-openapi.yaml
+  flows:
+  - flow: authorizationCode
+    authorizationUrl: https://login.microsoftonline.com/{tenant}/oauth2/v2.0/authorize
+    tokenUrl: https://login.microsoftonline.com/{tenant}/oauth2/v2.0/token
+  - flow: clientCredentials
+    tokenUrl: https://login.microsoftonline.com/{tenant}/oauth2/v2.0/token
+  description: OAuth2 with Microsoft identity platform (Azure AD)
+scopes:
+- scope: Application.Read.All
+  description: Read all applications
+  flows:
+  - authorizationCode
+  - clientCredentials
+  sources:
+  - openapi/active-directory-applications-openapi.yaml
+- scope: Application.ReadWrite.All
+  description: Read and write all applications
+  flows:
+  - authorizationCode
+  - clientCredentials
+  sources:
+  - openapi/active-directory-applications-openapi.yaml
+- scope: Directory.Read.All
+  description: Read directory data
+  flows:
+  - authorizationCode
+  - clientCredentials
+  sources:
+  - openapi/active-directory-applications-openapi.yaml
+  - openapi/active-directory-groups-openapi.yaml
+  - openapi/active-directory-users-openapi.yaml
+- scope: Directory.ReadWrite.All
+  description: Read and write directory data
+  flows:
+  - authorizationCode
+  - clientCredentials
+  sources:
+  - openapi/active-directory-groups-openapi.yaml
+  - openapi/active-directory-users-openapi.yaml
+- scope: Group.Read.All
+  description: Read all groups
+  flows:
+  - authorizationCode
+  - clientCredentials
+  sources:
+  - openapi/active-directory-groups-openapi.yaml
+- scope: Group.ReadWrite.All
+  description: Read and write all groups
+  flows:
+  - authorizationCode
+  - clientCredentials
+  sources:
+  - openapi/active-directory-groups-openapi.yaml
+- scope: User.Read
+  description: Read signed-in user's profile
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/active-directory-users-openapi.yaml
+- scope: User.Read.All
+  description: Read all users' full profiles
+  flows:
+  - authorizationCode
+  - clientCredentials
+  sources:
+  - openapi/active-directory-users-openapi.yaml
+- scope: User.ReadBasic.All
+  description: Read all users' basic profiles
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/active-directory-users-openapi.yaml
+- scope: User.ReadWrite
+  description: Read and write signed-in user's profile
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/active-directory-users-openapi.yaml
+- scope: User.ReadWrite.All
+  description: Read and write all users' full profiles
+  flows:
+  - authorizationCode
+  - clientCredentials
+  sources:
+  - openapi/active-directory-users-openapi.yaml
