@@ -1,0 +1,25 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/active-directory-applications-openapi.yaml, openapi/active-directory-groups-openapi.yaml,
+  openapi/active-directory-users-openapi.yaml
+summary:
+  types:
+  - oauth2
+  oauth2_flows:
+  - authorizationCode
+  - clientCredentials
+schemes:
+- name: oauth2
+  type: oauth2
+  flows:
+  - flow: authorizationCode
+    authorizationUrl: https://login.microsoftonline.com/{tenant}/oauth2/v2.0/authorize
+    tokenUrl: https://login.microsoftonline.com/{tenant}/oauth2/v2.0/token
+    scopes: 3
+  - flow: clientCredentials
+    tokenUrl: https://login.microsoftonline.com/{tenant}/oauth2/v2.0/token
+    scopes: 2
+  sources:
+  - openapi/active-directory-applications-openapi.yaml
+  - openapi/active-directory-groups-openapi.yaml
+  - openapi/active-directory-users-openapi.yaml
