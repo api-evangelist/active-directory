@@ -191,6 +191,8 @@ apis:
   - type: Documentation
     url: https://learn.microsoft.com/en-us/graph/api/resources/report-identity-access
 common:
+  - type: AgenticAccess
+    url: agentic-access/active-directory-agentic-access.yml
   - type: VulnerabilityDisclosure
     url: security/active-directory-vulnerability-disclosure.yml
   - type: DomainSecurity

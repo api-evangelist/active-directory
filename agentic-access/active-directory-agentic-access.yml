@@ -1,0 +1,432 @@
+generated: '2026-07-15'
+method: generated
+source: openapi/active-directory-applications-openapi.yaml, openapi/active-directory-groups-openapi.yaml,
+  openapi/active-directory-users-openapi.yaml
+description: Recommended x-agentic-access execution contracts, classified heuristically from
+  the OpenAPI. A governance starting point for exposing this API to AI agents — review and bind
+  audience per deployment. See research/curity/agentic-governance/.
+summary:
+  operations: 25
+  by_action_class:
+    connected: 14
+    acting: 11
+  by_consequence:
+    read: 14
+    write: 11
+  human_in_the_loop_required: 0
+operations:
+- path: /applications
+  method: get
+  operationId: list-applications
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - Application.Read.All
+    - Application.ReadWrite.All
+- path: /applications
+  method: post
+  operationId: create-application
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+    scope:
+    - Application.Read.All
+    - Application.ReadWrite.All
+- path: /applications/{applicationId}
+  method: get
+  operationId: get-application
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - Application.Read.All
+    - Application.ReadWrite.All
+- path: /applications/{applicationId}
+  method: patch
+  operationId: update-application
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+    scope:
+    - Application.Read.All
+    - Application.ReadWrite.All
+- path: /applications/{applicationId}
+  method: delete
+  operationId: delete-application
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+    scope:
+    - Application.Read.All
+    - Application.ReadWrite.All
+- path: /servicePrincipals
+  method: get
+  operationId: list-service-principals
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - Application.Read.All
+    - Application.ReadWrite.All
+- path: /servicePrincipals/{servicePrincipalId}
+  method: get
+  operationId: get-service-principal
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - Application.Read.All
+    - Application.ReadWrite.All
+- path: /servicePrincipals/{servicePrincipalId}/appRoleAssignments
+  method: get
+  operationId: list-service-principal-app-role-assignments
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - Application.Read.All
+    - Application.ReadWrite.All
+- path: /groups
+  method: get
+  operationId: list-groups
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - Group.Read.All
+    - Group.ReadWrite.All
+- path: /groups
+  method: post
+  operationId: create-group
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+    scope:
+    - Group.Read.All
+    - Group.ReadWrite.All
+- path: /groups/{groupId}
+  method: get
+  operationId: get-group
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - Group.Read.All
+    - Group.ReadWrite.All
+- path: /groups/{groupId}
+  method: patch
+  operationId: update-group
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+    scope:
+    - Group.Read.All
+    - Group.ReadWrite.All
+- path: /groups/{groupId}
+  method: delete
+  operationId: delete-group
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+    scope:
+    - Group.Read.All
+    - Group.ReadWrite.All
+- path: /groups/{groupId}/members
+  method: get
+  operationId: list-group-members
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - Group.Read.All
+    - Group.ReadWrite.All
+- path: /groups/{groupId}/members
+  method: post
+  operationId: add-group-member
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+    scope:
+    - Group.Read.All
+    - Group.ReadWrite.All
+- path: /groups/{groupId}/members/{memberId}/$ref
+  method: delete
+  operationId: remove-group-member
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+    scope:
+    - Group.Read.All
+    - Group.ReadWrite.All
+- path: /groups/{groupId}/owners
+  method: get
+  operationId: list-group-owners
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - Group.Read.All
+    - Group.ReadWrite.All
+- path: /users
+  method: get
+  operationId: list-users
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - User.Read
+    - User.Read.All
+    - User.ReadBasic.All
+    - User.ReadWrite
+    - User.ReadWrite.All
+- path: /users
+  method: post
+  operationId: create-user
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+    scope:
+    - User.Read
+    - User.Read.All
+    - User.ReadBasic.All
+    - User.ReadWrite
+    - User.ReadWrite.All
+- path: /users/{userId}
+  method: get
+  operationId: get-user
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - User.Read
+    - User.Read.All
+    - User.ReadBasic.All
+    - User.ReadWrite
+    - User.ReadWrite.All
+- path: /users/{userId}
+  method: patch
+  operationId: update-user
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+    scope:
+    - User.Read
+    - User.Read.All
+    - User.ReadBasic.All
+    - User.ReadWrite
+    - User.ReadWrite.All
+- path: /users/{userId}
+  method: delete
+  operationId: delete-user
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+    scope:
+    - User.Read
+    - User.Read.All
+    - User.ReadBasic.All
+    - User.ReadWrite
+    - User.ReadWrite.All
+- path: /users/{userId}/memberOf
+  method: get
+  operationId: list-user-member-of
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - User.Read
+    - User.Read.All
+    - User.ReadBasic.All
+    - User.ReadWrite
+    - User.ReadWrite.All
+- path: /users/{userId}/manager
+  method: get
+  operationId: get-user-manager
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - User.Read
+    - User.Read.All
+    - User.ReadBasic.All
+    - User.ReadWrite
+    - User.ReadWrite.All
+- path: /me
+  method: get
+  operationId: get-me
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - User.Read
+    - User.Read.All
+    - User.ReadBasic.All
+    - User.ReadWrite
+    - User.ReadWrite.All
