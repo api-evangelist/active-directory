@@ -1,0 +1,186 @@
+openapi: 3.0.3
+info:
+  title: Microsoft Graph Applications and Service Principals App Role Assignments Members API
+  description: Register and manage Microsoft Entra applications and their associated service principals via Microsoft Graph. Configure app permissions (API permissions), OAuth2 permission grants (delegated consent), app role assignments, certificates, keys, federated identity credentials, and app consent policies. Use this API for application lifecycle management and zero-trust app governance.
+  version: v1.0
+  contact:
+    name: Microsoft Graph Support
+    url: https://developer.microsoft.com/en-us/graph/support
+  termsOfService: https://learn.microsoft.com/en-us/legal/microsoft-apis/terms-of-use
+  license:
+    name: Microsoft APIs Terms of Use
+    url: https://learn.microsoft.com/en-us/legal/microsoft-apis/terms-of-use
+servers:
+- url: https://graph.microsoft.com/v1.0
+  description: Microsoft Graph v1.0
+security:
+- oauth2:
+  - Application.Read.All
+  - Application.ReadWrite.All
+tags:
+- name: Members
+paths:
+  /groups/{groupId}/members:
+    get:
+      operationId: list-group-members
+      summary: Active Directory List Group Members
+      description: Get the list of direct members of a group. Members can be users, devices, service principals, organizational contacts, or other groups (nested). This does not return transitive members; use /transitiveMembers for that.
+      tags:
+      - Members
+      parameters:
+      - name: groupId
+        in: path
+        required: true
+        description: Group object ID (UUID)
+        schema:
+          type: string
+          format: uuid
+      - name: $filter
+        in: query
+        description: Filter to scope to specific member types (e.g. microsoft.graph.user)
+        schema:
+          type: string
+      - name: $top
+        in: query
+        schema:
+          type: integer
+      - name: $select
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Collection of group members
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  '@odata.context':
+                    type: string
+                  value:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                        displayName:
+                          type: string
+                        userPrincipalName:
+                          type: string
+                        '@odata.type':
+                          type: string
+      x-microcks-operation:
+        dispatcher: FALLBACK
+        dispatcherRules: Response || 200
+    post:
+      operationId: add-group-member
+      summary: Active Directory Add Group Member
+      description: Add a member to a group. The member can be a user, device, service principal, organizational contact, or another group (for security groups). Provide the OData id of the object to add.
+      tags:
+      - Members
+      parameters:
+      - name: groupId
+        in: path
+        required: true
+        description: Group object ID (UUID)
+        schema:
+          type: string
+          format: uuid
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - '@odata.id'
+              properties:
+                '@odata.id':
+                  type: string
+                  description: OData reference to the member to add
+                  example: https://graph.microsoft.com/v1.0/users/87d349ed-44d7-43e1-9a83-5f2406dee5bd
+      responses:
+        '204':
+          description: Member added successfully (no content)
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        dispatcher: FALLBACK
+        dispatcherRules: Response || 204
+  /groups/{groupId}/members/{memberId}/$ref:
+    delete:
+      operationId: remove-group-member
+      summary: Active Directory Remove Group Member
+      description: Remove a member from a group. This removes the direct membership only.
+      tags:
+      - Members
+      parameters:
+      - name: groupId
+        in: path
+        required: true
+        description: Group object ID (UUID)
+        schema:
+          type: string
+          format: uuid
+      - name: memberId
+        in: path
+        required: true
+        description: Member object ID to remove
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '204':
+          description: Member removed successfully (no content)
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        dispatcher: FALLBACK
+        dispatcherRules: Response || 204
+components:
+  responses:
+    BadRequest:
+      description: Bad request — invalid parameters or request body
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    NotFound:
+      description: Group not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+  schemas:
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            code:
+              type: string
+            message:
+              type: string
+            innerError:
+              type: object
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      flows:
+        authorizationCode:
+          authorizationUrl: https://login.microsoftonline.com/{tenant}/oauth2/v2.0/authorize
+          tokenUrl: https://login.microsoftonline.com/{tenant}/oauth2/v2.0/token
+          scopes:
+            Application.Read.All: Read all applications
+            Application.ReadWrite.All: Read and write all applications
+            Directory.Read.All: Read directory data
+        clientCredentials:
+          tokenUrl: https://login.microsoftonline.com/{tenant}/oauth2/v2.0/token
+          scopes:
+            Application.Read.All: Read all applications
+            Application.ReadWrite.All: Read and write all applications

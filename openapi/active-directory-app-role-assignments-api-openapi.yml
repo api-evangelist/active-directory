@@ -1,0 +1,100 @@
+openapi: 3.0.3
+info:
+  title: Microsoft Graph Applications and Service Principals App Role Assignments API
+  description: Register and manage Microsoft Entra applications and their associated service principals via Microsoft Graph. Configure app permissions (API permissions), OAuth2 permission grants (delegated consent), app role assignments, certificates, keys, federated identity credentials, and app consent policies. Use this API for application lifecycle management and zero-trust app governance.
+  version: v1.0
+  contact:
+    name: Microsoft Graph Support
+    url: https://developer.microsoft.com/en-us/graph/support
+  termsOfService: https://learn.microsoft.com/en-us/legal/microsoft-apis/terms-of-use
+  license:
+    name: Microsoft APIs Terms of Use
+    url: https://learn.microsoft.com/en-us/legal/microsoft-apis/terms-of-use
+servers:
+- url: https://graph.microsoft.com/v1.0
+  description: Microsoft Graph v1.0
+security:
+- oauth2:
+  - Application.Read.All
+  - Application.ReadWrite.All
+tags:
+- name: App Role Assignments
+paths:
+  /servicePrincipals/{servicePrincipalId}/appRoleAssignments:
+    get:
+      operationId: list-service-principal-app-role-assignments
+      summary: Active Directory List Service Principal App Role Assignments
+      description: Get the app roles that have been assigned to this service principal.
+      tags:
+      - App Role Assignments
+      parameters:
+      - name: servicePrincipalId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: Collection of app role assignments
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  value:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/AppRoleAssignment'
+      x-microcks-operation:
+        dispatcher: FALLBACK
+        dispatcherRules: Response || 200
+components:
+  schemas:
+    AppRoleAssignment:
+      type: object
+      description: An app role assignment granting a user, group, or SP access to an app role
+      properties:
+        id:
+          type: string
+        appRoleId:
+          type: string
+          format: uuid
+          description: ID of the app role being assigned
+        principalId:
+          type: string
+          format: uuid
+          description: ID of the user, group, or service principal receiving the role
+        principalDisplayName:
+          type: string
+        principalType:
+          type: string
+          enum:
+          - User
+          - Group
+          - ServicePrincipal
+        resourceId:
+          type: string
+          format: uuid
+          description: ID of the resource service principal (the API)
+        resourceDisplayName:
+          type: string
+        createdDateTime:
+          type: string
+          format: date-time
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      flows:
+        authorizationCode:
+          authorizationUrl: https://login.microsoftonline.com/{tenant}/oauth2/v2.0/authorize
+          tokenUrl: https://login.microsoftonline.com/{tenant}/oauth2/v2.0/token
+          scopes:
+            Application.Read.All: Read all applications
+            Application.ReadWrite.All: Read and write all applications
+            Directory.Read.All: Read directory data
+        clientCredentials:
+          tokenUrl: https://login.microsoftonline.com/{tenant}/oauth2/v2.0/token
+          scopes:
+            Application.Read.All: Read all applications
+            Application.ReadWrite.All: Read and write all applications

@@ -1,0 +1,78 @@
+openapi: 3.0.3
+info:
+  title: Microsoft Graph Applications and Service Principals App Role Assignments Owners API
+  description: Register and manage Microsoft Entra applications and their associated service principals via Microsoft Graph. Configure app permissions (API permissions), OAuth2 permission grants (delegated consent), app role assignments, certificates, keys, federated identity credentials, and app consent policies. Use this API for application lifecycle management and zero-trust app governance.
+  version: v1.0
+  contact:
+    name: Microsoft Graph Support
+    url: https://developer.microsoft.com/en-us/graph/support
+  termsOfService: https://learn.microsoft.com/en-us/legal/microsoft-apis/terms-of-use
+  license:
+    name: Microsoft APIs Terms of Use
+    url: https://learn.microsoft.com/en-us/legal/microsoft-apis/terms-of-use
+servers:
+- url: https://graph.microsoft.com/v1.0
+  description: Microsoft Graph v1.0
+security:
+- oauth2:
+  - Application.Read.All
+  - Application.ReadWrite.All
+tags:
+- name: Owners
+paths:
+  /groups/{groupId}/owners:
+    get:
+      operationId: list-group-owners
+      summary: Active Directory List Group Owners
+      description: Get the owners of a group. Owners are non-admin users who can manage the group without being assigned a directory role. Microsoft 365 groups must have at least one owner.
+      tags:
+      - Owners
+      parameters:
+      - name: groupId
+        in: path
+        required: true
+        description: Group object ID (UUID)
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: Collection of group owners
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  '@odata.context':
+                    type: string
+                  value:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                        displayName:
+                          type: string
+                        userPrincipalName:
+                          type: string
+      x-microcks-operation:
+        dispatcher: FALLBACK
+        dispatcherRules: Response || 200
+components:
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      flows:
+        authorizationCode:
+          authorizationUrl: https://login.microsoftonline.com/{tenant}/oauth2/v2.0/authorize
+          tokenUrl: https://login.microsoftonline.com/{tenant}/oauth2/v2.0/token
+          scopes:
+            Application.Read.All: Read all applications
+            Application.ReadWrite.All: Read and write all applications
+            Directory.Read.All: Read directory data
+        clientCredentials:
+          tokenUrl: https://login.microsoftonline.com/{tenant}/oauth2/v2.0/token
+          scopes:
+            Application.Read.All: Read all applications
+            Application.ReadWrite.All: Read and write all applications

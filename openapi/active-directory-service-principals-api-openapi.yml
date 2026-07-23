@@ -1,0 +1,274 @@
+openapi: 3.0.3
+info:
+  title: Microsoft Graph Applications and App Role Assignments Service Principals API
+  description: Register and manage Microsoft Entra applications and their associated service principals via Microsoft Graph. Configure app permissions (API permissions), OAuth2 permission grants (delegated consent), app role assignments, certificates, keys, federated identity credentials, and app consent policies. Use this API for application lifecycle management and zero-trust app governance.
+  version: v1.0
+  contact:
+    name: Microsoft Graph Support
+    url: https://developer.microsoft.com/en-us/graph/support
+  termsOfService: https://learn.microsoft.com/en-us/legal/microsoft-apis/terms-of-use
+  license:
+    name: Microsoft APIs Terms of Use
+    url: https://learn.microsoft.com/en-us/legal/microsoft-apis/terms-of-use
+servers:
+- url: https://graph.microsoft.com/v1.0
+  description: Microsoft Graph v1.0
+security:
+- oauth2:
+  - Application.Read.All
+  - Application.ReadWrite.All
+tags:
+- name: Service Principals
+paths:
+  /servicePrincipals:
+    get:
+      operationId: list-service-principals
+      summary: Active Directory List Service Principals
+      description: Retrieve the list of service principals in the Microsoft Entra tenant. Service principals represent the local instance of an application in the tenant.
+      tags:
+      - Service Principals
+      parameters:
+      - name: $filter
+        in: query
+        schema:
+          type: string
+      - name: $select
+        in: query
+        schema:
+          type: string
+      - name: $top
+        in: query
+        schema:
+          type: integer
+      - name: $search
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Collection of service principals
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServicePrincipalCollection'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        dispatcher: FALLBACK
+        dispatcherRules: Response || 200
+  /servicePrincipals/{servicePrincipalId}:
+    get:
+      operationId: get-service-principal
+      summary: Active Directory Get Service Principal
+      description: Retrieve the properties of a service principal by its object ID.
+      tags:
+      - Service Principals
+      parameters:
+      - name: servicePrincipalId
+        in: path
+        required: true
+        description: Service principal object ID
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: Service principal object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServicePrincipal'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        dispatcher: FALLBACK
+        dispatcherRules: Response || 200
+  /servicePrincipals/{servicePrincipalId}/appRoleAssignments:
+    get:
+      operationId: list-service-principal-app-role-assignments
+      summary: Active Directory List Service Principal App Role Assignments
+      description: Get the app roles that have been assigned to this service principal.
+      tags:
+      - Service Principals
+      parameters:
+      - name: servicePrincipalId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: Collection of app role assignments
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  value:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/AppRoleAssignment'
+      x-microcks-operation:
+        dispatcher: FALLBACK
+        dispatcherRules: Response || 200
+components:
+  schemas:
+    ServicePrincipal:
+      type: object
+      description: A service principal — the local instance of an application in the tenant
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Unique identifier for the service principal object
+        appId:
+          type: string
+          format: uuid
+          description: Application (client) ID of the associated application
+        displayName:
+          type: string
+          description: Display name of the service principal
+        servicePrincipalType:
+          type: string
+          enum:
+          - Application
+          - Legacy
+          - ManagedIdentity
+          - SocialIdp
+          description: Type of the service principal
+        accountEnabled:
+          type: boolean
+          description: True if the service principal account is enabled
+        appRoles:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+              displayName:
+                type: string
+              description:
+                type: string
+              value:
+                type: string
+              allowedMemberTypes:
+                type: array
+                items:
+                  type: string
+        oauth2PermissionScopes:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+              adminConsentDisplayName:
+                type: string
+              adminConsentDescription:
+                type: string
+              userConsentDisplayName:
+                type: string
+              value:
+                type: string
+              type:
+                type: string
+              isEnabled:
+                type: boolean
+        homepage:
+          type: string
+        loginUrl:
+          type: string
+        replyUrls:
+          type: array
+          items:
+            type: string
+        tags:
+          type: array
+          items:
+            type: string
+        createdDateTime:
+          type: string
+          format: date-time
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            code:
+              type: string
+            message:
+              type: string
+    AppRoleAssignment:
+      type: object
+      description: An app role assignment granting a user, group, or SP access to an app role
+      properties:
+        id:
+          type: string
+        appRoleId:
+          type: string
+          format: uuid
+          description: ID of the app role being assigned
+        principalId:
+          type: string
+          format: uuid
+          description: ID of the user, group, or service principal receiving the role
+        principalDisplayName:
+          type: string
+        principalType:
+          type: string
+          enum:
+          - User
+          - Group
+          - ServicePrincipal
+        resourceId:
+          type: string
+          format: uuid
+          description: ID of the resource service principal (the API)
+        resourceDisplayName:
+          type: string
+        createdDateTime:
+          type: string
+          format: date-time
+    ServicePrincipalCollection:
+      type: object
+      properties:
+        '@odata.context':
+          type: string
+        '@odata.nextLink':
+          type: string
+        value:
+          type: array
+          items:
+            $ref: '#/components/schemas/ServicePrincipal'
+  responses:
+    Unauthorized:
+      description: Authentication required
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      flows:
+        authorizationCode:
+          authorizationUrl: https://login.microsoftonline.com/{tenant}/oauth2/v2.0/authorize
+          tokenUrl: https://login.microsoftonline.com/{tenant}/oauth2/v2.0/token
+          scopes:
+            Application.Read.All: Read all applications
+            Application.ReadWrite.All: Read and write all applications
+            Directory.Read.All: Read directory data
+        clientCredentials:
+          tokenUrl: https://login.microsoftonline.com/{tenant}/oauth2/v2.0/token
+          scopes:
+            Application.Read.All: Read all applications
+            Application.ReadWrite.All: Read and write all applications
