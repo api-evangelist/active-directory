@@ -4,6 +4,19 @@ description: Microsoft Active Directory and Microsoft Entra ID provide identity 
   Active Directory), including users, groups, applications, devices, conditional access policies, identity governance, and
   directory administration. Legacy on-premises Active Directory is managed through LDAP, Kerberos, and PowerShell protocols;
   cloud identity is managed through Microsoft Graph.
+accessModel:
+  pricing: freemium
+  onboarding: self-serve
+  trial: false
+  try_now: true
+  public: false
+  label: Freemium · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
 image: https://learn.microsoft.com/en-us/entra/media/index/active-directory.svg
 created: '2024-01-01'
 modified: '2026-05-19'
@@ -17,21 +30,121 @@ tags:
 - Microsoft Entra
 - Zero Trust
 apis:
-- name: Microsoft Graph Users API
-  description: Manage the entire lifecycle of users in Microsoft Entra ID, including creating, reading, updating, and deleting
-    user accounts, managing licenses, group memberships, authentication methods, and profile photos. Supports both v1.0 and
-    beta endpoints.
+- name: Microsoft Graph Devices API
+  description: >-
+    Manage devices registered or joined to Microsoft Entra ID, including Entra joined, Entra registered,
+    and hybrid Azure AD joined devices. Retrieve BitLocker recovery keys and Local Admin Password Solution
+    (LAPS) credentials for managed devices.
+  humanURL: https://learn.microsoft.com/en-us/graph/api/resources/device
+  baseURL: https://graph.microsoft.com/v1.0
+  tags:
+  - Devices
+  - Endpoint Management
+  - Identity Management
+  properties:
+  - type: Documentation
+    url: https://learn.microsoft.com/en-us/graph/api/resources/device
+- name: Microsoft Graph Directory Roles and Administrative Units API
+  description: >-
+    Manage Microsoft Entra built-in and custom directory roles, role assignments, and role-scoped administrative
+    units. Assign administrator roles to users, groups, or service principals, and create scoped role
+    assignments via administrative units.
+  humanURL: https://learn.microsoft.com/en-us/graph/api/resources/directoryrole
+  baseURL: https://graph.microsoft.com/v1.0
+  tags:
+  - Authorization
+  - Directory Services
+  - Role Management
+  properties:
+  - type: Documentation
+    url: https://learn.microsoft.com/en-us/graph/api/resources/directoryrole
+- name: Microsoft Graph Conditional Access API
+  description: >-
+    Create and manage Microsoft Entra Conditional Access policies that enforce access controls based on
+    user, location, device, and risk signals. Configure named locations, authentication context class
+    references, and evaluate policy impact using what-if analysis.
+  humanURL: https://learn.microsoft.com/en-us/graph/api/resources/conditionalaccesspolicy
+  baseURL: https://graph.microsoft.com/v1.0
+  tags:
+  - Authorization
+  - Conditional Access
+  - Security
+  - Zero Trust
+  properties:
+  - type: Documentation
+    url: https://learn.microsoft.com/en-us/graph/api/resources/conditionalaccesspolicy
+- name: Microsoft Graph Identity Governance API
+  description: >-
+    Manage Microsoft Entra ID Governance features including access reviews, entitlement management (access
+    packages, catalogs, and policies), Privileged Identity Management (PIM) for just-in-time role activation,
+    and lifecycle workflows for joiner/mover/leaver employee identity lifecycle automation.
+  humanURL: https://learn.microsoft.com/en-us/graph/api/resources/identitygovernance-overview
+  baseURL: https://graph.microsoft.com/v1.0
+  tags:
+  - Governance
+  - Identity Management
+  - Lifecycle Management
+  - Privileged Identity Management
+  properties:
+  - type: Documentation
+    url: https://learn.microsoft.com/en-us/graph/api/resources/identitygovernance-overview
+- name: Microsoft Graph Identity Protection API
+  description: >-
+    Detect, investigate, and remediate identity-based risks using Microsoft Entra ID Protection. Access
+    risk detections, risky users, risky service principals, and risk events, and feed data into SIEM tools
+    for security correlation and incident response.
+  humanURL: https://learn.microsoft.com/en-us/graph/api/resources/identityprotection-overview
+  baseURL: https://graph.microsoft.com/v1.0
+  tags:
+  - Identity Protection
+  - Risk Management
+  - Security
+  properties:
+  - type: Documentation
+    url: https://learn.microsoft.com/en-us/graph/api/resources/identityprotection-overview
+- name: Microsoft Graph Authentication Methods API
+  description: >-
+    Manage authentication methods registered for users in Microsoft Entra ID, including FIDO2 security
+    keys, Microsoft Authenticator, phone (SMS/voice call), email OTP, Windows Hello for Business, and
+    temporary access passes. Configure authentication method policies and authentication strength requirements.
+  humanURL: https://learn.microsoft.com/en-us/graph/api/resources/authenticationmethods-overview
+  baseURL: https://graph.microsoft.com/v1.0
+  tags:
+  - Authentication
+  - MFA
+  - Passwordless
+  - Security
+  properties:
+  - type: Documentation
+    url: https://learn.microsoft.com/en-us/graph/api/resources/authenticationmethods-overview
+- name: Microsoft Graph Identity and Access Reports API
+  description: >-
+    Access audit logs, sign-in logs, provisioning logs, and identity-related reports for monitoring, compliance,
+    and troubleshooting. Stream logs to Azure Monitor and Log Analytics or to third-party SIEM tools for
+    security operations.
+  humanURL: https://learn.microsoft.com/en-us/graph/api/resources/report-identity-access
+  baseURL: https://graph.microsoft.com/v1.0
+  tags:
+  - Audit Logs
+  - Compliance
+  - Monitoring
+  - Reports
+  properties:
+  - type: Documentation
+    url: https://learn.microsoft.com/en-us/graph/api/resources/report-identity-access
+- aid: active-directory:active-directory-app-role-assignments-api
+  name: Microsoft Active Directory App Role Assignments API
+  description: >-
+    The App Role Assignments API from Microsoft Active Directory — 1 operation(s) for app role assignments.
   humanURL: https://learn.microsoft.com/en-us/graph/api/resources/users
   baseURL: https://graph.microsoft.com/v1.0
   tags:
-  - Directory Services
-  - Identity Management
-  - Users
+  - App Role Assignments
   properties:
+  - type: OpenAPI
+    url: openapi/active-directory-app-role-assignments-api-openapi.yml
   - type: Documentation
     url: https://learn.microsoft.com/en-us/graph/api/resources/users
-  - type: OpenAPI
-    url: openapi/active-directory-users-openapi.yaml
   - type: JSONSchema
     url: json-schema/users-user-schema.json
   - type: JSONSchema
@@ -40,20 +153,8 @@ apis:
     url: json-structure/users-user-structure.json
   - type: Examples
     url: examples/users-user-example.json
-- name: Microsoft Graph Groups API
-  description: Create and manage Microsoft Entra security groups, Microsoft 365 groups, and distribution lists. Manage group
-    memberships, owners, and settings. Groups enable efficient entitlement management for users, licensing, and resource access.
-  humanURL: https://learn.microsoft.com/en-us/graph/api/resources/groups-overview
-  baseURL: https://graph.microsoft.com/v1.0
-  tags:
-  - Directory Services
-  - Groups
-  - Identity Management
-  properties:
   - type: Documentation
     url: https://learn.microsoft.com/en-us/graph/api/resources/groups-overview
-  - type: OpenAPI
-    url: openapi/active-directory-groups-openapi.yaml
   - type: JSONSchema
     url: json-schema/groups-group-schema.json
   - type: JSONStructure
@@ -66,22 +167,8 @@ apis:
     url: capabilities/groups-members.yaml
   - type: X-NaftikoCapability
     url: capabilities/groups-owners.yaml
-- name: Microsoft Graph Applications and Service Principals API
-  description: Register and manage Microsoft Entra applications and their associated service principals programmatically.
-    Configure app permissions, OAuth2 permission grants, app role assignments, certificates, federated identity credentials,
-    and app consent policies.
-  humanURL: https://learn.microsoft.com/en-us/graph/api/resources/applications-api-overview
-  baseURL: https://graph.microsoft.com/v1.0
-  tags:
-  - Applications
-  - Identity Management
-  - OAuth2
-  - Service Principals
-  properties:
   - type: Documentation
     url: https://learn.microsoft.com/en-us/graph/api/resources/applications-api-overview
-  - type: OpenAPI
-    url: openapi/active-directory-applications-openapi.yaml
   - type: JSONSchema
     url: json-schema/applications-application-schema.json
   - type: JSONSchema
@@ -96,100 +183,307 @@ apis:
     url: capabilities/applications-applications.yaml
   - type: X-NaftikoCapability
     url: capabilities/applications-service-principals.yaml
-- name: Microsoft Graph Devices API
-  description: Manage devices registered or joined to Microsoft Entra ID, including Entra joined, Entra registered, and hybrid
-    Azure AD joined devices. Retrieve BitLocker recovery keys and Local Admin Password Solution (LAPS) credentials for managed
-    devices.
-  humanURL: https://learn.microsoft.com/en-us/graph/api/resources/device
+- aid: active-directory:active-directory-applications-api
+  name: Microsoft Active Directory Applications API
+  description: The Applications API from Microsoft Active Directory — 2 operation(s) for applications.
+  humanURL: https://learn.microsoft.com/en-us/graph/api/resources/users
   baseURL: https://graph.microsoft.com/v1.0
   tags:
-  - Devices
-  - Endpoint Management
-  - Identity Management
+  - Applications
   properties:
+  - type: OpenAPI
+    url: openapi/active-directory-applications-api-openapi.yml
   - type: Documentation
-    url: https://learn.microsoft.com/en-us/graph/api/resources/device
-- name: Microsoft Graph Directory Roles and Administrative Units API
-  description: Manage Microsoft Entra built-in and custom directory roles, role assignments, and role-scoped administrative
-    units. Assign administrator roles to users, groups, or service principals, and create scoped role assignments via administrative
-    units.
-  humanURL: https://learn.microsoft.com/en-us/graph/api/resources/directoryrole
+    url: https://learn.microsoft.com/en-us/graph/api/resources/users
+  - type: JSONSchema
+    url: json-schema/users-user-schema.json
+  - type: JSONSchema
+    url: json-schema/users-password-profile-schema.json
+  - type: JSONStructure
+    url: json-structure/users-user-structure.json
+  - type: Examples
+    url: examples/users-user-example.json
+  - type: Documentation
+    url: https://learn.microsoft.com/en-us/graph/api/resources/groups-overview
+  - type: JSONSchema
+    url: json-schema/groups-group-schema.json
+  - type: JSONStructure
+    url: json-structure/groups-group-structure.json
+  - type: Examples
+    url: examples/groups-group-example.json
+  - type: X-NaftikoCapability
+    url: capabilities/groups-groups.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/groups-members.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/groups-owners.yaml
+  - type: Documentation
+    url: https://learn.microsoft.com/en-us/graph/api/resources/applications-api-overview
+  - type: JSONSchema
+    url: json-schema/applications-application-schema.json
+  - type: JSONSchema
+    url: json-schema/applications-service-principal-schema.json
+  - type: JSONStructure
+    url: json-structure/applications-application-structure.json
+  - type: Examples
+    url: examples/applications-application-example.json
+  - type: X-NaftikoCapability
+    url: capabilities/applications-app-role-assignments.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/applications-applications.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/applications-service-principals.yaml
+- aid: active-directory:active-directory-groups-api
+  name: Microsoft Active Directory Groups API
+  description: The Groups API from Microsoft Active Directory — 6 operation(s) for groups.
+  humanURL: https://learn.microsoft.com/en-us/graph/api/resources/users
   baseURL: https://graph.microsoft.com/v1.0
   tags:
-  - Authorization
-  - Directory Services
-  - Role Management
+  - Groups
   properties:
+  - type: OpenAPI
+    url: openapi/active-directory-groups-api-openapi.yml
   - type: Documentation
-    url: https://learn.microsoft.com/en-us/graph/api/resources/directoryrole
-- name: Microsoft Graph Conditional Access API
-  description: Create and manage Microsoft Entra Conditional Access policies that enforce access controls based on user, location,
-    device, and risk signals. Configure named locations, authentication context class references, and evaluate policy impact
-    using what-if analysis.
-  humanURL: https://learn.microsoft.com/en-us/graph/api/resources/conditionalaccesspolicy
+    url: https://learn.microsoft.com/en-us/graph/api/resources/users
+  - type: JSONSchema
+    url: json-schema/users-user-schema.json
+  - type: JSONSchema
+    url: json-schema/users-password-profile-schema.json
+  - type: JSONStructure
+    url: json-structure/users-user-structure.json
+  - type: Examples
+    url: examples/users-user-example.json
+  - type: Documentation
+    url: https://learn.microsoft.com/en-us/graph/api/resources/groups-overview
+  - type: JSONSchema
+    url: json-schema/groups-group-schema.json
+  - type: JSONStructure
+    url: json-structure/groups-group-structure.json
+  - type: Examples
+    url: examples/groups-group-example.json
+  - type: X-NaftikoCapability
+    url: capabilities/groups-groups.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/groups-members.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/groups-owners.yaml
+  - type: Documentation
+    url: https://learn.microsoft.com/en-us/graph/api/resources/applications-api-overview
+  - type: JSONSchema
+    url: json-schema/applications-application-schema.json
+  - type: JSONSchema
+    url: json-schema/applications-service-principal-schema.json
+  - type: JSONStructure
+    url: json-structure/applications-application-structure.json
+  - type: Examples
+    url: examples/applications-application-example.json
+  - type: X-NaftikoCapability
+    url: capabilities/applications-app-role-assignments.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/applications-applications.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/applications-service-principals.yaml
+- aid: active-directory:active-directory-members-api
+  name: Microsoft Active Directory Members API
+  description: The Members API from Microsoft Active Directory — 2 operation(s) for members.
+  humanURL: https://learn.microsoft.com/en-us/graph/api/resources/users
   baseURL: https://graph.microsoft.com/v1.0
   tags:
-  - Authorization
-  - Conditional Access
-  - Security
-  - Zero Trust
+  - Members
   properties:
+  - type: OpenAPI
+    url: openapi/active-directory-members-api-openapi.yml
   - type: Documentation
-    url: https://learn.microsoft.com/en-us/graph/api/resources/conditionalaccesspolicy
-- name: Microsoft Graph Identity Governance API
-  description: Manage Microsoft Entra ID Governance features including access reviews, entitlement management (access packages,
-    catalogs, and policies), Privileged Identity Management (PIM) for just-in-time role activation, and lifecycle workflows
-    for joiner/mover/leaver employee identity lifecycle automation.
-  humanURL: https://learn.microsoft.com/en-us/graph/api/resources/identitygovernance-overview
+    url: https://learn.microsoft.com/en-us/graph/api/resources/users
+  - type: JSONSchema
+    url: json-schema/users-user-schema.json
+  - type: JSONSchema
+    url: json-schema/users-password-profile-schema.json
+  - type: JSONStructure
+    url: json-structure/users-user-structure.json
+  - type: Examples
+    url: examples/users-user-example.json
+  - type: Documentation
+    url: https://learn.microsoft.com/en-us/graph/api/resources/groups-overview
+  - type: JSONSchema
+    url: json-schema/groups-group-schema.json
+  - type: JSONStructure
+    url: json-structure/groups-group-structure.json
+  - type: Examples
+    url: examples/groups-group-example.json
+  - type: X-NaftikoCapability
+    url: capabilities/groups-groups.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/groups-members.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/groups-owners.yaml
+  - type: Documentation
+    url: https://learn.microsoft.com/en-us/graph/api/resources/applications-api-overview
+  - type: JSONSchema
+    url: json-schema/applications-application-schema.json
+  - type: JSONSchema
+    url: json-schema/applications-service-principal-schema.json
+  - type: JSONStructure
+    url: json-structure/applications-application-structure.json
+  - type: Examples
+    url: examples/applications-application-example.json
+  - type: X-NaftikoCapability
+    url: capabilities/applications-app-role-assignments.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/applications-applications.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/applications-service-principals.yaml
+- aid: active-directory:active-directory-owners-api
+  name: Microsoft Active Directory Owners API
+  description: The Owners API from Microsoft Active Directory — 1 operation(s) for owners.
+  humanURL: https://learn.microsoft.com/en-us/graph/api/resources/users
   baseURL: https://graph.microsoft.com/v1.0
   tags:
-  - Governance
-  - Identity Management
-  - Lifecycle Management
-  - Privileged Identity Management
+  - Owners
   properties:
+  - type: OpenAPI
+    url: openapi/active-directory-owners-api-openapi.yml
   - type: Documentation
-    url: https://learn.microsoft.com/en-us/graph/api/resources/identitygovernance-overview
-- name: Microsoft Graph Identity Protection API
-  description: Detect, investigate, and remediate identity-based risks using Microsoft Entra ID Protection. Access risk detections,
-    risky users, risky service principals, and risk events, and feed data into SIEM tools for security correlation and incident
-    response.
-  humanURL: https://learn.microsoft.com/en-us/graph/api/resources/identityprotection-overview
+    url: https://learn.microsoft.com/en-us/graph/api/resources/users
+  - type: JSONSchema
+    url: json-schema/users-user-schema.json
+  - type: JSONSchema
+    url: json-schema/users-password-profile-schema.json
+  - type: JSONStructure
+    url: json-structure/users-user-structure.json
+  - type: Examples
+    url: examples/users-user-example.json
+  - type: Documentation
+    url: https://learn.microsoft.com/en-us/graph/api/resources/groups-overview
+  - type: JSONSchema
+    url: json-schema/groups-group-schema.json
+  - type: JSONStructure
+    url: json-structure/groups-group-structure.json
+  - type: Examples
+    url: examples/groups-group-example.json
+  - type: X-NaftikoCapability
+    url: capabilities/groups-groups.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/groups-members.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/groups-owners.yaml
+  - type: Documentation
+    url: https://learn.microsoft.com/en-us/graph/api/resources/applications-api-overview
+  - type: JSONSchema
+    url: json-schema/applications-application-schema.json
+  - type: JSONSchema
+    url: json-schema/applications-service-principal-schema.json
+  - type: JSONStructure
+    url: json-structure/applications-application-structure.json
+  - type: Examples
+    url: examples/applications-application-example.json
+  - type: X-NaftikoCapability
+    url: capabilities/applications-app-role-assignments.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/applications-applications.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/applications-service-principals.yaml
+- aid: active-directory:active-directory-service-principals-api
+  name: Microsoft Active Directory Service Principals API
+  description: >-
+    The Service Principals API from Microsoft Active Directory — 3 operation(s) for service principals.
+  humanURL: https://learn.microsoft.com/en-us/graph/api/resources/users
   baseURL: https://graph.microsoft.com/v1.0
   tags:
-  - Identity Protection
-  - Risk Management
-  - Security
+  - Service Principals
   properties:
+  - type: OpenAPI
+    url: openapi/active-directory-service-principals-api-openapi.yml
   - type: Documentation
-    url: https://learn.microsoft.com/en-us/graph/api/resources/identityprotection-overview
-- name: Microsoft Graph Authentication Methods API
-  description: Manage authentication methods registered for users in Microsoft Entra ID, including FIDO2 security keys, Microsoft
-    Authenticator, phone (SMS/voice call), email OTP, Windows Hello for Business, and temporary access passes. Configure authentication
-    method policies and authentication strength requirements.
-  humanURL: https://learn.microsoft.com/en-us/graph/api/resources/authenticationmethods-overview
+    url: https://learn.microsoft.com/en-us/graph/api/resources/users
+  - type: JSONSchema
+    url: json-schema/users-user-schema.json
+  - type: JSONSchema
+    url: json-schema/users-password-profile-schema.json
+  - type: JSONStructure
+    url: json-structure/users-user-structure.json
+  - type: Examples
+    url: examples/users-user-example.json
+  - type: Documentation
+    url: https://learn.microsoft.com/en-us/graph/api/resources/groups-overview
+  - type: JSONSchema
+    url: json-schema/groups-group-schema.json
+  - type: JSONStructure
+    url: json-structure/groups-group-structure.json
+  - type: Examples
+    url: examples/groups-group-example.json
+  - type: X-NaftikoCapability
+    url: capabilities/groups-groups.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/groups-members.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/groups-owners.yaml
+  - type: Documentation
+    url: https://learn.microsoft.com/en-us/graph/api/resources/applications-api-overview
+  - type: JSONSchema
+    url: json-schema/applications-application-schema.json
+  - type: JSONSchema
+    url: json-schema/applications-service-principal-schema.json
+  - type: JSONStructure
+    url: json-structure/applications-application-structure.json
+  - type: Examples
+    url: examples/applications-application-example.json
+  - type: X-NaftikoCapability
+    url: capabilities/applications-app-role-assignments.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/applications-applications.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/applications-service-principals.yaml
+- aid: active-directory:active-directory-users-api
+  name: Microsoft Active Directory Users API
+  description: The Users API from Microsoft Active Directory — 5 operation(s) for users.
+  humanURL: https://learn.microsoft.com/en-us/graph/api/resources/users
   baseURL: https://graph.microsoft.com/v1.0
   tags:
-  - Authentication
-  - MFA
-  - Passwordless
-  - Security
+  - Users
   properties:
+  - type: OpenAPI
+    url: openapi/active-directory-users-api-openapi.yml
   - type: Documentation
-    url: https://learn.microsoft.com/en-us/graph/api/resources/authenticationmethods-overview
-- name: Microsoft Graph Identity and Access Reports API
-  description: Access audit logs, sign-in logs, provisioning logs, and identity-related reports for monitoring, compliance,
-    and troubleshooting. Stream logs to Azure Monitor and Log Analytics or to third-party SIEM tools for security operations.
-  humanURL: https://learn.microsoft.com/en-us/graph/api/resources/report-identity-access
-  baseURL: https://graph.microsoft.com/v1.0
-  tags:
-  - Audit Logs
-  - Compliance
-  - Monitoring
-  - Reports
-  properties:
+    url: https://learn.microsoft.com/en-us/graph/api/resources/users
+  - type: JSONSchema
+    url: json-schema/users-user-schema.json
+  - type: JSONSchema
+    url: json-schema/users-password-profile-schema.json
+  - type: JSONStructure
+    url: json-structure/users-user-structure.json
+  - type: Examples
+    url: examples/users-user-example.json
   - type: Documentation
-    url: https://learn.microsoft.com/en-us/graph/api/resources/report-identity-access
+    url: https://learn.microsoft.com/en-us/graph/api/resources/groups-overview
+  - type: JSONSchema
+    url: json-schema/groups-group-schema.json
+  - type: JSONStructure
+    url: json-structure/groups-group-structure.json
+  - type: Examples
+    url: examples/groups-group-example.json
+  - type: X-NaftikoCapability
+    url: capabilities/groups-groups.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/groups-members.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/groups-owners.yaml
+  - type: Documentation
+    url: https://learn.microsoft.com/en-us/graph/api/resources/applications-api-overview
+  - type: JSONSchema
+    url: json-schema/applications-application-schema.json
+  - type: JSONSchema
+    url: json-schema/applications-service-principal-schema.json
+  - type: JSONStructure
+    url: json-structure/applications-application-structure.json
+  - type: Examples
+    url: examples/applications-application-example.json
+  - type: X-NaftikoCapability
+    url: capabilities/applications-app-role-assignments.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/applications-applications.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/applications-service-principals.yaml
 common:
   - type: AgenticAccess
     url: agentic-access/active-directory-agentic-access.yml
