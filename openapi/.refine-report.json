@@ -1,0 +1,26 @@
+{
+  "provider": "active-directory",
+  "sources": [
+    "active-directory-app-role-assignments-api-openapi.yml",
+    "active-directory-applications-api-openapi.yml",
+    "active-directory-groups-api-openapi.yml",
+    "active-directory-members-api-openapi.yml",
+    "active-directory-owners-api-openapi.yml",
+    "active-directory-service-principals-api-openapi.yml",
+    "active-directory-users-api-openapi.yml"
+  ],
+  "outputs": [
+    "active-directory-app-role-assignments-api-openapi.yml",
+    "active-directory-applications-api-openapi.yml",
+    "active-directory-groups-api-openapi.yml",
+    "active-directory-members-api-openapi.yml",
+    "active-directory-owners-api-openapi.yml",
+    "active-directory-service-principals-api-openapi.yml",
+    "active-directory-users-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}

@@ -1,0 +1,624 @@
+openapi: 3.0.3
+info:
+  title: Microsoft Graph Groups API
+  description: >-
+    Create and manage Microsoft Entra security groups, Microsoft 365 groups, and distribution
+    lists via Microsoft Graph. Manage group members, owners, and settings. Groups enable
+    efficient entitlement management — granting users access to resources, licenses, and
+    applications as a unit. Supports both v1.0 and beta Microsoft Graph endpoints.
+  version: v1.0
+  contact:
+    name: Microsoft Graph Support
+    url: https://developer.microsoft.com/en-us/graph/support
+  termsOfService: https://learn.microsoft.com/en-us/legal/microsoft-apis/terms-of-use
+  license:
+    name: Microsoft APIs Terms of Use
+    url: https://learn.microsoft.com/en-us/legal/microsoft-apis/terms-of-use
+servers:
+  - url: https://graph.microsoft.com/v1.0
+    description: Microsoft Graph v1.0
+  - url: https://graph.microsoft.com/beta
+    description: Microsoft Graph beta (preview)
+security:
+  - oauth2:
+      - Group.Read.All
+      - Group.ReadWrite.All
+paths:
+  /groups:
+    get:
+      operationId: list-groups
+      summary: Active Directory List Groups
+      description: >-
+        Retrieve a list of group objects from Microsoft Entra ID. Returns security groups,
+        Microsoft 365 groups, and distribution groups. Supports OData query parameters
+        for filtering, selecting, ordering, and pagination.
+      tags:
+        - Groups
+      parameters:
+        - name: $filter
+          in: query
+          description: OData filter (e.g. groupTypes/any(c:c eq 'Unified') for M365 groups)
+          schema:
+            type: string
+        - name: $select
+          in: query
+          description: Comma-separated list of properties to include
+          schema:
+            type: string
+        - name: $top
+          in: query
+          description: Maximum number of groups to return (max 999)
+          schema:
+            type: integer
+            maximum: 999
+        - name: $orderby
+          in: query
+          description: Property to sort by (e.g. displayName asc)
+          schema:
+            type: string
+        - name: $search
+          in: query
+          description: Search for groups by displayName or description
+          schema:
+            type: string
+        - name: $count
+          in: query
+          description: Include total count of matching groups
+          schema:
+            type: boolean
+      responses:
+        '200':
+          description: Collection of groups
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GroupCollection'
+              example:
+                '@odata.context': https://graph.microsoft.com/v1.0/$metadata#groups
+                value:
+                  - id: 45b7d2e7-b882-4a80-ba97-10b7a63b8fa4
+                    displayName: All Company
+                    description: All company employees
+                    groupTypes: [Unified]
+                    mailEnabled: true
+                    securityEnabled: false
+                    mailNickname: allcompany
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        dispatcher: FALLBACK
+        dispatcherRules: Response || 200
+    post:
+      operationId: create-group
+      summary: Active Directory Create Group
+      description: >-
+        Create a new Microsoft Entra group. To create a Microsoft 365 group, include
+        "Unified" in the groupTypes array. To create a security group, set securityEnabled
+        to true and mailEnabled to false. The mailNickname and displayName are required.
+      tags:
+        - Groups
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GroupCreate'
+            example:
+              displayName: Sales and Marketing
+              mailEnabled: false
+              mailNickname: salesandmarketing
+              securityEnabled: true
+              description: Sales and Marketing department security group
+      responses:
+        '201':
+          description: Group created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Group'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+      x-microcks-operation:
+        dispatcher: FALLBACK
+        dispatcherRules: Response || 201
+
+  /groups/{groupId}:
+    get:
+      operationId: get-group
+      summary: Active Directory Get Group
+      description: >-
+        Retrieve the properties and relationships of a specific group in Microsoft Entra ID.
+        Use $select to retrieve only the properties you need.
+      tags:
+        - Groups
+      parameters:
+        - name: groupId
+          in: path
+          required: true
+          description: Group object ID (UUID)
+          schema:
+            type: string
+            format: uuid
+          example: 45b7d2e7-b882-4a80-ba97-10b7a63b8fa4
+        - name: $select
+          in: query
+          description: Comma-separated properties to include
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Group object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Group'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        dispatcher: FALLBACK
+        dispatcherRules: Response || 200
+    patch:
+      operationId: update-group
+      summary: Active Directory Update Group
+      description: >-
+        Update the properties of a group. Only include properties you want to update;
+        all other properties retain their current values.
+      tags:
+        - Groups
+      parameters:
+        - name: groupId
+          in: path
+          required: true
+          description: Group object ID (UUID)
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GroupUpdate'
+            example:
+              description: Updated group description
+              displayName: Sales, Marketing, and Partners
+      responses:
+        '204':
+          description: Group updated successfully (no content)
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        dispatcher: FALLBACK
+        dispatcherRules: Response || 204
+    delete:
+      operationId: delete-group
+      summary: Active Directory Delete Group
+      description: >-
+        Delete a group from Microsoft Entra ID. Microsoft 365 groups are moved to the
+        recycle bin for 30 days. Security groups are permanently deleted immediately.
+      tags:
+        - Groups
+      parameters:
+        - name: groupId
+          in: path
+          required: true
+          description: Group object ID (UUID)
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '204':
+          description: Group deleted successfully (no content)
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        dispatcher: FALLBACK
+        dispatcherRules: Response || 204
+
+  /groups/{groupId}/members:
+    get:
+      operationId: list-group-members
+      summary: Active Directory List Group Members
+      description: >-
+        Get the list of direct members of a group. Members can be users, devices,
+        service principals, organizational contacts, or other groups (nested). This
+        does not return transitive members; use /transitiveMembers for that.
+      tags:
+        - Groups
+        - Members
+      parameters:
+        - name: groupId
+          in: path
+          required: true
+          description: Group object ID (UUID)
+          schema:
+            type: string
+            format: uuid
+        - name: $filter
+          in: query
+          description: Filter to scope to specific member types (e.g. microsoft.graph.user)
+          schema:
+            type: string
+        - name: $top
+          in: query
+          schema:
+            type: integer
+        - name: $select
+          in: query
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Collection of group members
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  '@odata.context':
+                    type: string
+                  value:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                        displayName:
+                          type: string
+                        userPrincipalName:
+                          type: string
+                        '@odata.type':
+                          type: string
+      x-microcks-operation:
+        dispatcher: FALLBACK
+        dispatcherRules: Response || 200
+    post:
+      operationId: add-group-member
+      summary: Active Directory Add Group Member
+      description: >-
+        Add a member to a group. The member can be a user, device, service principal,
+        organizational contact, or another group (for security groups). Provide the
+        OData id of the object to add.
+      tags:
+        - Groups
+        - Members
+      parameters:
+        - name: groupId
+          in: path
+          required: true
+          description: Group object ID (UUID)
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - '@odata.id'
+              properties:
+                '@odata.id':
+                  type: string
+                  description: OData reference to the member to add
+                  example: https://graph.microsoft.com/v1.0/users/87d349ed-44d7-43e1-9a83-5f2406dee5bd
+      responses:
+        '204':
+          description: Member added successfully (no content)
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        dispatcher: FALLBACK
+        dispatcherRules: Response || 204
+
+  /groups/{groupId}/members/{memberId}/$ref:
+    delete:
+      operationId: remove-group-member
+      summary: Active Directory Remove Group Member
+      description: Remove a member from a group. This removes the direct membership only.
+      tags:
+        - Groups
+        - Members
+      parameters:
+        - name: groupId
+          in: path
+          required: true
+          description: Group object ID (UUID)
+          schema:
+            type: string
+            format: uuid
+        - name: memberId
+          in: path
+          required: true
+          description: Member object ID to remove
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '204':
+          description: Member removed successfully (no content)
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        dispatcher: FALLBACK
+        dispatcherRules: Response || 204
+
+  /groups/{groupId}/owners:
+    get:
+      operationId: list-group-owners
+      summary: Active Directory List Group Owners
+      description: >-
+        Get the owners of a group. Owners are non-admin users who can manage the group
+        without being assigned a directory role. Microsoft 365 groups must have at least
+        one owner.
+      tags:
+        - Groups
+        - Owners
+      parameters:
+        - name: groupId
+          in: path
+          required: true
+          description: Group object ID (UUID)
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: Collection of group owners
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  '@odata.context':
+                    type: string
+                  value:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                        displayName:
+                          type: string
+                        userPrincipalName:
+                          type: string
+      x-microcks-operation:
+        dispatcher: FALLBACK
+        dispatcherRules: Response || 200
+
+components:
+  schemas:
+    Group:
+      type: object
+      description: A Microsoft Entra group (security group or Microsoft 365 group)
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Unique identifier for the group (read-only)
+          example: 45b7d2e7-b882-4a80-ba97-10b7a63b8fa4
+        displayName:
+          type: string
+          description: The display name for the group
+          example: All Company
+        description:
+          type: string
+          description: An optional description for the group
+          example: All company employees
+        mail:
+          type: string
+          description: The SMTP address for the group
+          example: allcompany@contoso.com
+        mailNickname:
+          type: string
+          description: The mail alias for the group (without domain suffix)
+          example: allcompany
+        mailEnabled:
+          type: boolean
+          description: Specifies whether the group is mail-enabled
+          example: true
+        securityEnabled:
+          type: boolean
+          description: Specifies whether the group is a security group
+          example: false
+        groupTypes:
+          type: array
+          items:
+            type: string
+            enum: [Unified, DynamicMembership]
+          description: Specifies the group type and membership. Unified = Microsoft 365 group.
+          example: [Unified]
+        visibility:
+          type: string
+          enum: [Public, Private, HiddenMembership]
+          description: Visibility of a Microsoft 365 group
+          example: Public
+        membershipRule:
+          type: string
+          description: Rule defining dynamic group membership (requires DynamicMembership in groupTypes)
+        membershipRuleProcessingState:
+          type: string
+          enum: [On, Paused]
+          description: State of dynamic membership rule processing
+        onPremisesSyncEnabled:
+          type: boolean
+          description: True if the group is synced from on-premises Active Directory
+        onPremisesDistinguishedName:
+          type: string
+          description: Distinguished name from on-premises Active Directory
+        createdDateTime:
+          type: string
+          format: date-time
+          description: Timestamp when the group was created
+          example: '2024-01-15T08:30:00Z'
+        renewedDateTime:
+          type: string
+          format: date-time
+          description: Timestamp when the group was last renewed
+        expirationDateTime:
+          type: string
+          format: date-time
+          description: Timestamp when the group is set to expire (for groups with expiration policy)
+        assignedLabels:
+          type: array
+          items:
+            type: object
+            properties:
+              labelId:
+                type: string
+              displayName:
+                type: string
+          description: Sensitivity labels assigned to the group
+        preferredDataLocation:
+          type: string
+          description: Preferred data location for multi-geo tenant
+          example: CAN
+        resourceProvisioningOptions:
+          type: array
+          items:
+            type: string
+          description: Specifies the group resources provisioned (e.g. Team for Teams-enabled groups)
+
+    GroupCreate:
+      type: object
+      description: Properties required to create a Microsoft Entra group
+      required:
+        - displayName
+        - mailEnabled
+        - mailNickname
+        - securityEnabled
+      properties:
+        displayName:
+          type: string
+          description: The display name for the group
+        mailEnabled:
+          type: boolean
+          description: Must be true for mail-enabled groups, false for security-only
+        mailNickname:
+          type: string
+          description: The mail alias (required even if mailEnabled is false)
+        securityEnabled:
+          type: boolean
+          description: Set to true for security groups
+        description:
+          type: string
+          description: Optional description for the group
+        groupTypes:
+          type: array
+          items:
+            type: string
+          description: Include "Unified" for Microsoft 365 groups
+        visibility:
+          type: string
+          enum: [Public, Private, HiddenMembership]
+        'members@odata.bind':
+          type: array
+          items:
+            type: string
+          description: Array of OData references to members to add at creation time
+        'owners@odata.bind':
+          type: array
+          items:
+            type: string
+          description: Array of OData references to owners to add at creation time
+
+    GroupUpdate:
+      type: object
+      description: Properties that can be updated on a Microsoft Entra group
+      properties:
+        displayName:
+          type: string
+        description:
+          type: string
+        mailNickname:
+          type: string
+        visibility:
+          type: string
+        membershipRule:
+          type: string
+        membershipRuleProcessingState:
+          type: string
+
+    GroupCollection:
+      type: object
+      description: Collection of group objects with OData pagination metadata
+      properties:
+        '@odata.context':
+          type: string
+        '@odata.nextLink':
+          type: string
+          description: URL for the next page of results
+        value:
+          type: array
+          items:
+            $ref: '#/components/schemas/Group'
+
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            code:
+              type: string
+            message:
+              type: string
+            innerError:
+              type: object
+
+  responses:
+    BadRequest:
+      description: Bad request — invalid parameters or request body
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Unauthorized:
+      description: Authentication required — missing or invalid access token
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Forbidden:
+      description: Insufficient permissions
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    NotFound:
+      description: Group not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      description: OAuth2 with Microsoft identity platform (Azure AD)
+      flows:
+        authorizationCode:
+          authorizationUrl: https://login.microsoftonline.com/{tenant}/oauth2/v2.0/authorize
+          tokenUrl: https://login.microsoftonline.com/{tenant}/oauth2/v2.0/token
+          scopes:
+            Group.Read.All: Read all groups
+            Group.ReadWrite.All: Read and write all groups
+            Directory.Read.All: Read directory data
+            Directory.ReadWrite.All: Read and write directory data
+        clientCredentials:
+          tokenUrl: https://login.microsoftonline.com/{tenant}/oauth2/v2.0/token
+          scopes:
+            Group.Read.All: Read all groups
+            Group.ReadWrite.All: Read and write all groups
+            Directory.Read.All: Read directory data

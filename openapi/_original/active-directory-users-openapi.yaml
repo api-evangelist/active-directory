@@ -1,0 +1,624 @@
+openapi: 3.0.3
+info:
+  title: Microsoft Graph Users API
+  description: >-
+    Manage the entire lifecycle of users in Microsoft Entra ID (formerly Azure Active Directory)
+    via Microsoft Graph. Create, read, update, and delete user accounts; manage licenses,
+    group memberships, manager relationships, authentication methods, and profile photos.
+    All endpoints require OAuth2 authentication with Microsoft identity platform.
+  version: v1.0
+  contact:
+    name: Microsoft Graph Support
+    url: https://developer.microsoft.com/en-us/graph/support
+  termsOfService: https://learn.microsoft.com/en-us/legal/microsoft-apis/terms-of-use
+  license:
+    name: Microsoft APIs Terms of Use
+    url: https://learn.microsoft.com/en-us/legal/microsoft-apis/terms-of-use
+servers:
+  - url: https://graph.microsoft.com/v1.0
+    description: Microsoft Graph v1.0
+  - url: https://graph.microsoft.com/beta
+    description: Microsoft Graph beta (preview)
+security:
+  - oauth2:
+      - User.Read
+      - User.ReadWrite
+      - User.ReadBasic.All
+      - User.Read.All
+      - User.ReadWrite.All
+paths:
+  /users:
+    get:
+      operationId: list-users
+      summary: Active Directory List Users
+      description: >-
+        Retrieve a list of user objects from Microsoft Entra ID. Supports OData query
+        parameters for filtering, selecting specific properties, ordering, and pagination.
+      tags:
+        - Users
+      parameters:
+        - name: $filter
+          in: query
+          description: OData filter expression (e.g. displayName eq 'John Doe')
+          schema:
+            type: string
+        - name: $select
+          in: query
+          description: Comma-separated list of properties to include in response
+          schema:
+            type: string
+        - name: $top
+          in: query
+          description: Maximum number of users to return (max 999)
+          schema:
+            type: integer
+            maximum: 999
+        - name: $orderby
+          in: query
+          description: Property to sort by (e.g. displayName asc)
+          schema:
+            type: string
+        - name: $search
+          in: query
+          description: Search expression for user properties
+          schema:
+            type: string
+        - name: $count
+          in: query
+          description: Include total count of matching users
+          schema:
+            type: boolean
+      responses:
+        '200':
+          description: List of users
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserCollection'
+              example:
+                '@odata.context': https://graph.microsoft.com/v1.0/$metadata#users
+                value:
+                  - id: 87d349ed-44d7-43e1-9a83-5f2406dee5bd
+                    displayName: Adele Vance
+                    userPrincipalName: AdeleV@contoso.com
+                    mail: AdeleV@contoso.com
+                    jobTitle: Product Marketing Manager
+                    department: Marketing
+                    officeLocation: 18/2111
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+      x-microcks-operation:
+        dispatcher: FALLBACK
+        dispatcherRules: Response || 200
+    post:
+      operationId: create-user
+      summary: Active Directory Create User
+      description: >-
+        Create a new user in Microsoft Entra ID. The user object must include the required
+        properties: accountEnabled, displayName, mailNickname, passwordProfile, and
+        userPrincipalName.
+      tags:
+        - Users
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserCreate'
+            example:
+              accountEnabled: true
+              displayName: Adele Vance
+              mailNickname: AdeleV
+              userPrincipalName: AdeleV@contoso.com
+              passwordProfile:
+                forceChangePasswordNextSignIn: true
+                password: xWwvJ]6NMw+bWH-d
+      responses:
+        '201':
+          description: User created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+      x-microcks-operation:
+        dispatcher: FALLBACK
+        dispatcherRules: Response || 201
+
+  /users/{userId}:
+    get:
+      operationId: get-user
+      summary: Active Directory Get User
+      description: >-
+        Retrieve the properties and relationships of a specific user in Microsoft Entra ID
+        by their object ID or userPrincipalName. Use $select to retrieve specific properties.
+      tags:
+        - Users
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          description: User object ID (UUID) or userPrincipalName
+          schema:
+            type: string
+          example: 87d349ed-44d7-43e1-9a83-5f2406dee5bd
+        - name: $select
+          in: query
+          description: Comma-separated properties to include
+          schema:
+            type: string
+      responses:
+        '200':
+          description: User object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+              example:
+                id: 87d349ed-44d7-43e1-9a83-5f2406dee5bd
+                displayName: Adele Vance
+                userPrincipalName: AdeleV@contoso.com
+                mail: AdeleV@contoso.com
+                jobTitle: Product Marketing Manager
+                department: Marketing
+                officeLocation: 18/2111
+                accountEnabled: true
+                createdDateTime: '2024-01-15T08:30:00Z'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        dispatcher: FALLBACK
+        dispatcherRules: Response || 200
+    patch:
+      operationId: update-user
+      summary: Active Directory Update User
+      description: >-
+        Update the properties of a user in Microsoft Entra ID. Only include properties
+        you want to update in the request body; all other properties retain their current values.
+      tags:
+        - Users
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          description: User object ID or userPrincipalName
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserUpdate'
+            example:
+              jobTitle: Senior Product Marketing Manager
+              department: Product Marketing
+      responses:
+        '204':
+          description: User updated successfully (no content)
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        dispatcher: FALLBACK
+        dispatcherRules: Response || 204
+    delete:
+      operationId: delete-user
+      summary: Active Directory Delete User
+      description: >-
+        Delete a user from Microsoft Entra ID. The deleted user is moved to the recycle bin
+        for 30 days before permanent deletion. During this period, the user can be restored.
+      tags:
+        - Users
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          description: User object ID or userPrincipalName
+          schema:
+            type: string
+      responses:
+        '204':
+          description: User deleted successfully (no content)
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        dispatcher: FALLBACK
+        dispatcherRules: Response || 204
+
+  /users/{userId}/memberOf:
+    get:
+      operationId: list-user-member-of
+      summary: Active Directory List User Group Memberships
+      description: >-
+        Get the groups, directory roles, and administrative units that the user is a direct
+        member of. This operation does not return transitive group memberships. Use
+        /users/{id}/transitiveMemberOf for transitive memberships.
+      tags:
+        - Users
+        - Groups
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          description: User object ID or userPrincipalName
+          schema:
+            type: string
+        - name: $filter
+          in: query
+          description: OData filter to scope to groups only (e.g. microsoft.graph.group)
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Collection of groups the user is a member of
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  '@odata.context':
+                    type: string
+                  value:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                        displayName:
+                          type: string
+                        groupTypes:
+                          type: array
+                          items:
+                            type: string
+      x-microcks-operation:
+        dispatcher: FALLBACK
+        dispatcherRules: Response || 200
+
+  /users/{userId}/manager:
+    get:
+      operationId: get-user-manager
+      summary: Active Directory Get User Manager
+      description: >-
+        Returns the user or organizational contact assigned as the user's manager in
+        Microsoft Entra ID. The manager relationship represents the organizational hierarchy.
+      tags:
+        - Users
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          description: User object ID or userPrincipalName
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Manager user object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        dispatcher: FALLBACK
+        dispatcherRules: Response || 200
+
+  /me:
+    get:
+      operationId: get-me
+      summary: Active Directory Get My Profile
+      description: >-
+        Retrieve the properties and relationships of the signed-in user. This endpoint
+        only works with delegated permissions and requires an OAuth2 access token for
+        the signed-in user.
+      tags:
+        - Users
+      parameters:
+        - name: $select
+          in: query
+          description: Comma-separated properties to include
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Signed-in user profile
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        dispatcher: FALLBACK
+        dispatcherRules: Response || 200
+
+components:
+  schemas:
+    User:
+      type: object
+      description: A Microsoft Entra ID user account
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Unique identifier for the user (read-only)
+          example: 87d349ed-44d7-43e1-9a83-5f2406dee5bd
+        displayName:
+          type: string
+          description: Name displayed in the address book for the user
+          example: Adele Vance
+        userPrincipalName:
+          type: string
+          description: 'Principal name of the user (in UPN format: alias@domain)'
+          example: AdeleV@contoso.com
+        mail:
+          type: string
+          format: email
+          description: SMTP address for the user
+          example: AdeleV@contoso.com
+        givenName:
+          type: string
+          description: Given name (first name) of the user
+          example: Adele
+        surname:
+          type: string
+          description: Surname (family name or last name) of the user
+          example: Vance
+        jobTitle:
+          type: string
+          description: The user's job title
+          example: Product Marketing Manager
+        department:
+          type: string
+          description: The name for the department in which the user works
+          example: Marketing
+        officeLocation:
+          type: string
+          description: Office location in the user's place of business
+          example: 18/2111
+        mobilePhone:
+          type: string
+          description: The primary cellular telephone number for the user
+          example: +1 555 0100
+        businessPhones:
+          type: array
+          items:
+            type: string
+          description: Telephone numbers for the user
+        accountEnabled:
+          type: boolean
+          description: True if the account is enabled; otherwise, false
+          example: true
+        usageLocation:
+          type: string
+          description: Two-letter country code (ISO 3166) for license assignments
+          example: US
+        preferredLanguage:
+          type: string
+          description: The preferred language for the user (in ISO 639-1 Code)
+          example: en-US
+        createdDateTime:
+          type: string
+          format: date-time
+          description: The date and time the user was created
+          example: '2024-01-15T08:30:00Z'
+        lastPasswordChangeDateTime:
+          type: string
+          format: date-time
+          description: The time when this user last changed their password
+        passwordPolicies:
+          type: string
+          description: Password policies enforced for the user
+          example: DisablePasswordExpiration
+        userType:
+          type: string
+          enum: [Member, Guest]
+          description: Whether the user is a member or guest in the tenant
+          example: Member
+        assignedLicenses:
+          type: array
+          items:
+            type: object
+            properties:
+              skuId:
+                type: string
+                format: uuid
+              disabledPlans:
+                type: array
+                items:
+                  type: string
+                  format: uuid
+        onPremisesSyncEnabled:
+          type: boolean
+          description: True if the user is synced from on-premises Active Directory
+        onPremisesDistinguishedName:
+          type: string
+          description: Distinguished name from on-premises Active Directory
+        externalUserState:
+          type: string
+          description: State of a guest/external user invited via Azure AD B2B
+
+    UserCreate:
+      type: object
+      description: Properties required to create a new Microsoft Entra user
+      required:
+        - accountEnabled
+        - displayName
+        - mailNickname
+        - passwordProfile
+        - userPrincipalName
+      properties:
+        accountEnabled:
+          type: boolean
+          description: Must be true for the account to be active
+        displayName:
+          type: string
+          description: Name to display in the address book
+        mailNickname:
+          type: string
+          description: Mail alias for the user (without the domain suffix)
+        userPrincipalName:
+          type: string
+          description: UPN in the format alias@domain.onmicrosoft.com
+        passwordProfile:
+          $ref: '#/components/schemas/PasswordProfile'
+        givenName:
+          type: string
+        surname:
+          type: string
+        jobTitle:
+          type: string
+        department:
+          type: string
+        usageLocation:
+          type: string
+          description: Required for license assignment (ISO 3166 two-letter code)
+
+    UserUpdate:
+      type: object
+      description: Properties that can be updated on a Microsoft Entra user
+      properties:
+        displayName:
+          type: string
+        givenName:
+          type: string
+        surname:
+          type: string
+        jobTitle:
+          type: string
+        department:
+          type: string
+        officeLocation:
+          type: string
+        mobilePhone:
+          type: string
+        preferredLanguage:
+          type: string
+        usageLocation:
+          type: string
+        passwordProfile:
+          $ref: '#/components/schemas/PasswordProfile'
+        accountEnabled:
+          type: boolean
+
+    PasswordProfile:
+      type: object
+      description: Password profile for a user account
+      required:
+        - password
+      properties:
+        password:
+          type: string
+          description: The password for the user (must meet tenant complexity requirements)
+        forceChangePasswordNextSignIn:
+          type: boolean
+          description: If true, user must reset password at next sign-in
+          default: true
+        forceChangePasswordNextSignInWithMfa:
+          type: boolean
+          description: If true, user must perform MFA and reset password at next sign-in
+
+    UserCollection:
+      type: object
+      description: Collection of user objects with OData pagination metadata
+      properties:
+        '@odata.context':
+          type: string
+          description: OData metadata URL
+        '@odata.nextLink':
+          type: string
+          description: URL to fetch the next page of results
+        value:
+          type: array
+          items:
+            $ref: '#/components/schemas/User'
+
+    ErrorResponse:
+      type: object
+      description: Microsoft Graph API error response
+      properties:
+        error:
+          type: object
+          properties:
+            code:
+              type: string
+              description: Error code string
+              example: Request_BadRequest
+            message:
+              type: string
+              description: Human-readable error description
+              example: A property required for the request is missing.
+            innerError:
+              type: object
+              properties:
+                date:
+                  type: string
+                  format: date-time
+                request-id:
+                  type: string
+                  format: uuid
+                client-request-id:
+                  type: string
+                  format: uuid
+
+  responses:
+    BadRequest:
+      description: Bad request — invalid query parameters or request body
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Unauthorized:
+      description: Authentication required — missing or invalid access token
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Forbidden:
+      description: Insufficient permissions — required scopes not granted
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      description: OAuth2 with Microsoft identity platform (Azure AD)
+      flows:
+        authorizationCode:
+          authorizationUrl: https://login.microsoftonline.com/{tenant}/oauth2/v2.0/authorize
+          tokenUrl: https://login.microsoftonline.com/{tenant}/oauth2/v2.0/token
+          scopes:
+            User.Read: Read signed-in user's profile
+            User.ReadWrite: Read and write signed-in user's profile
+            User.ReadBasic.All: Read all users' basic profiles
+            User.Read.All: Read all users' full profiles
+            User.ReadWrite.All: Read and write all users' full profiles
+            Directory.Read.All: Read directory data
+            Directory.ReadWrite.All: Read and write directory data
+        clientCredentials:
+          tokenUrl: https://login.microsoftonline.com/{tenant}/oauth2/v2.0/token
+          scopes:
+            User.Read.All: Read all users' full profiles
+            User.ReadWrite.All: Read and write all users' full profiles
+            Directory.Read.All: Read directory data
+            Directory.ReadWrite.All: Read and write directory data
