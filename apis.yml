@@ -161,12 +161,6 @@ apis:
     url: json-structure/groups-group-structure.json
   - type: Examples
     url: examples/groups-group-example.json
-  - type: X-NaftikoCapability
-    url: capabilities/groups-groups.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/groups-members.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/groups-owners.yaml
   - type: Documentation
     url: https://learn.microsoft.com/en-us/graph/api/resources/applications-api-overview
   - type: JSONSchema
@@ -177,12 +171,6 @@ apis:
     url: json-structure/applications-application-structure.json
   - type: Examples
     url: examples/applications-application-example.json
-  - type: X-NaftikoCapability
-    url: capabilities/applications-app-role-assignments.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/applications-applications.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/applications-service-principals.yaml
 - aid: active-directory:active-directory-applications-api
   name: Microsoft Active Directory Applications API
   description: The Applications API from Microsoft Active Directory — 2 operation(s) for applications.
@@ -211,12 +199,6 @@ apis:
     url: json-structure/groups-group-structure.json
   - type: Examples
     url: examples/groups-group-example.json
-  - type: X-NaftikoCapability
-    url: capabilities/groups-groups.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/groups-members.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/groups-owners.yaml
   - type: Documentation
     url: https://learn.microsoft.com/en-us/graph/api/resources/applications-api-overview
   - type: JSONSchema
@@ -227,12 +209,6 @@ apis:
     url: json-structure/applications-application-structure.json
   - type: Examples
     url: examples/applications-application-example.json
-  - type: X-NaftikoCapability
-    url: capabilities/applications-app-role-assignments.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/applications-applications.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/applications-service-principals.yaml
 - aid: active-directory:active-directory-groups-api
   name: Microsoft Active Directory Groups API
   description: The Groups API from Microsoft Active Directory — 6 operation(s) for groups.
@@ -261,12 +237,6 @@ apis:
     url: json-structure/groups-group-structure.json
   - type: Examples
     url: examples/groups-group-example.json
-  - type: X-NaftikoCapability
-    url: capabilities/groups-groups.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/groups-members.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/groups-owners.yaml
   - type: Documentation
     url: https://learn.microsoft.com/en-us/graph/api/resources/applications-api-overview
   - type: JSONSchema
@@ -277,12 +247,6 @@ apis:
     url: json-structure/applications-application-structure.json
   - type: Examples
     url: examples/applications-application-example.json
-  - type: X-NaftikoCapability
-    url: capabilities/applications-app-role-assignments.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/applications-applications.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/applications-service-principals.yaml
 - aid: active-directory:active-directory-members-api
   name: Microsoft Active Directory Members API
   description: The Members API from Microsoft Active Directory — 2 operation(s) for members.
@@ -311,12 +275,6 @@ apis:
     url: json-structure/groups-group-structure.json
   - type: Examples
     url: examples/groups-group-example.json
-  - type: X-NaftikoCapability
-    url: capabilities/groups-groups.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/groups-members.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/groups-owners.yaml
   - type: Documentation
     url: https://learn.microsoft.com/en-us/graph/api/resources/applications-api-overview
   - type: JSONSchema
@@ -327,12 +285,6 @@ apis:
     url: json-structure/applications-application-structure.json
   - type: Examples
     url: examples/applications-application-example.json
-  - type: X-NaftikoCapability
-    url: capabilities/applications-app-role-assignments.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/applications-applications.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/applications-service-principals.yaml
 - aid: active-directory:active-directory-owners-api
   name: Microsoft Active Directory Owners API
   description: The Owners API from Microsoft Active Directory — 1 operation(s) for owners.
@@ -361,12 +313,6 @@ apis:
     url: json-structure/groups-group-structure.json
   - type: Examples
     url: examples/groups-group-example.json
-  - type: X-NaftikoCapability
-    url: capabilities/groups-groups.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/groups-members.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/groups-owners.yaml
   - type: Documentation
     url: https://learn.microsoft.com/en-us/graph/api/resources/applications-api-overview
   - type: JSONSchema
@@ -377,12 +323,6 @@ apis:
     url: json-structure/applications-application-structure.json
   - type: Examples
     url: examples/applications-application-example.json
-  - type: X-NaftikoCapability
-    url: capabilities/applications-app-role-assignments.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/applications-applications.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/applications-service-principals.yaml
 - aid: active-directory:active-directory-service-principals-api
   name: Microsoft Active Directory Service Principals API
   description: >-
@@ -412,12 +352,6 @@ apis:
     url: json-structure/groups-group-structure.json
   - type: Examples
     url: examples/groups-group-example.json
-  - type: X-NaftikoCapability
-    url: capabilities/groups-groups.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/groups-members.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/groups-owners.yaml
   - type: Documentation
     url: https://learn.microsoft.com/en-us/graph/api/resources/applications-api-overview
   - type: JSONSchema
@@ -428,12 +362,6 @@ apis:
     url: json-structure/applications-application-structure.json
   - type: Examples
     url: examples/applications-application-example.json
-  - type: X-NaftikoCapability
-    url: capabilities/applications-app-role-assignments.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/applications-applications.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/applications-service-principals.yaml
 - aid: active-directory:active-directory-users-api
   name: Microsoft Active Directory Users API
   description: The Users API from Microsoft Active Directory — 5 operation(s) for users.
@@ -462,12 +390,6 @@ apis:
     url: json-structure/groups-group-structure.json
   - type: Examples
     url: examples/groups-group-example.json
-  - type: X-NaftikoCapability
-    url: capabilities/groups-groups.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/groups-members.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/groups-owners.yaml
   - type: Documentation
     url: https://learn.microsoft.com/en-us/graph/api/resources/applications-api-overview
   - type: JSONSchema
@@ -478,12 +400,6 @@ apis:
     url: json-structure/applications-application-structure.json
   - type: Examples
     url: examples/applications-application-example.json
-  - type: X-NaftikoCapability
-    url: capabilities/applications-app-role-assignments.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/applications-applications.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/applications-service-principals.yaml
 common:
   - type: AgenticAccess
     url: agentic-access/active-directory-agentic-access.yml
