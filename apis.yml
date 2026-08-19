@@ -20,7 +20,7 @@ accessModel:
 image: https://learn.microsoft.com/en-us/entra/media/index/active-directory.svg
 created: '2024-01-01'
 modified: '2026-05-19'
-specificationVersion: '0.19'
+specificationVersion: '0.23'
 tags:
 - Active Directory
 - Authentication
