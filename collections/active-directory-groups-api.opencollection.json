@@ -1,0 +1,287 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Microsoft Graph Applications and Service Principals App Role Assignments Groups API",
+    "version": "v1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "client_credentials",
+      "accessTokenUrl": "https://login.microsoftonline.com/{tenant}/oauth2/v2.0/token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Groups",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Active Directory List Groups",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://graph.microsoft.com/v1.0/groups",
+            "params": [
+              {
+                "name": "$filter",
+                "value": "",
+                "type": "query",
+                "description": "OData filter (e.g. groupTypes/any(c:c eq 'Unified') for M365 groups)"
+              },
+              {
+                "name": "$select",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated list of properties to include"
+              },
+              {
+                "name": "$top",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of groups to return (max 999)"
+              },
+              {
+                "name": "$orderby",
+                "value": "",
+                "type": "query",
+                "description": "Property to sort by (e.g. displayName asc)"
+              },
+              {
+                "name": "$search",
+                "value": "",
+                "type": "query",
+                "description": "Search for groups by displayName or description"
+              },
+              {
+                "name": "$count",
+                "value": "",
+                "type": "query",
+                "description": "Include total count of matching groups"
+              }
+            ]
+          },
+          "docs": "Retrieve a list of group objects from Microsoft Entra ID. Returns security groups, Microsoft 365 groups, and distribution groups. Supports OData query parameters for filtering, selecting, ordering, and pagination."
+        },
+        {
+          "info": {
+            "name": "Active Directory Create Group",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://graph.microsoft.com/v1.0/groups",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new Microsoft Entra group. To create a Microsoft 365 group, include \"Unified\" in the groupTypes array. To create a security group, set securityEnabled to true and mailEnabled to false. The mailNickname and displayName are required."
+        },
+        {
+          "info": {
+            "name": "Active Directory Get Group",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://graph.microsoft.com/v1.0/groups/:groupId",
+            "params": [
+              {
+                "name": "groupId",
+                "value": "45b7d2e7-b882-4a80-ba97-10b7a63b8fa4",
+                "type": "path",
+                "description": "Group object ID (UUID)"
+              },
+              {
+                "name": "$select",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated properties to include"
+              }
+            ]
+          },
+          "docs": "Retrieve the properties and relationships of a specific group in Microsoft Entra ID. Use $select to retrieve only the properties you need."
+        },
+        {
+          "info": {
+            "name": "Active Directory Update Group",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://graph.microsoft.com/v1.0/groups/:groupId",
+            "params": [
+              {
+                "name": "groupId",
+                "value": "",
+                "type": "path",
+                "description": "Group object ID (UUID)"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update the properties of a group. Only include properties you want to update; all other properties retain their current values."
+        },
+        {
+          "info": {
+            "name": "Active Directory Delete Group",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://graph.microsoft.com/v1.0/groups/:groupId",
+            "params": [
+              {
+                "name": "groupId",
+                "value": "",
+                "type": "path",
+                "description": "Group object ID (UUID)"
+              }
+            ]
+          },
+          "docs": "Delete a group from Microsoft Entra ID. Microsoft 365 groups are moved to the recycle bin for 30 days. Security groups are permanently deleted immediately."
+        },
+        {
+          "info": {
+            "name": "Active Directory List Group Members",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://graph.microsoft.com/v1.0/groups/:groupId/members",
+            "params": [
+              {
+                "name": "groupId",
+                "value": "",
+                "type": "path",
+                "description": "Group object ID (UUID)"
+              },
+              {
+                "name": "$filter",
+                "value": "",
+                "type": "query",
+                "description": "Filter to scope to specific member types (e.g. microsoft.graph.user)"
+              },
+              {
+                "name": "$top",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "$select",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Get the list of direct members of a group. Members can be users, devices, service principals, organizational contacts, or other groups (nested). This does not return transitive members; use /transitiveMembers for that."
+        },
+        {
+          "info": {
+            "name": "Active Directory Add Group Member",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://graph.microsoft.com/v1.0/groups/:groupId/members",
+            "params": [
+              {
+                "name": "groupId",
+                "value": "",
+                "type": "path",
+                "description": "Group object ID (UUID)"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Add a member to a group. The member can be a user, device, service principal, organizational contact, or another group (for security groups). Provide the OData id of the object to add."
+        },
+        {
+          "info": {
+            "name": "Active Directory Remove Group Member",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://graph.microsoft.com/v1.0/groups/:groupId/members/:memberId/$ref",
+            "params": [
+              {
+                "name": "groupId",
+                "value": "",
+                "type": "path",
+                "description": "Group object ID (UUID)"
+              },
+              {
+                "name": "memberId",
+                "value": "",
+                "type": "path",
+                "description": "Member object ID to remove"
+              }
+            ]
+          },
+          "docs": "Remove a member from a group. This removes the direct membership only."
+        },
+        {
+          "info": {
+            "name": "Active Directory List Group Owners",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://graph.microsoft.com/v1.0/groups/:groupId/owners",
+            "params": [
+              {
+                "name": "groupId",
+                "value": "",
+                "type": "path",
+                "description": "Group object ID (UUID)"
+              }
+            ]
+          },
+          "docs": "Get the owners of a group. Owners are non-admin users who can manage the group without being assigned a directory role. Microsoft 365 groups must have at least one owner."
+        },
+        {
+          "info": {
+            "name": "Active Directory List User Group Memberships",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://graph.microsoft.com/v1.0/users/:userId/memberOf",
+            "params": [
+              {
+                "name": "userId",
+                "value": "",
+                "type": "path",
+                "description": "User object ID or userPrincipalName"
+              },
+              {
+                "name": "$filter",
+                "value": "",
+                "type": "query",
+                "description": "OData filter to scope to groups only (e.g. microsoft.graph.group)"
+              }
+            ]
+          },
+          "docs": "Get the groups, directory roles, and administrative units that the user is a direct member of. This operation does not return transitive group memberships. Use /users/{id}/transitiveMemberOf for transitive memberships."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

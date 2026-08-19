@@ -1,0 +1,223 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Microsoft Graph Applications and Service Principals App Role Assignments Users API",
+    "version": "v1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "client_credentials",
+      "accessTokenUrl": "https://login.microsoftonline.com/{tenant}/oauth2/v2.0/token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Users",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Active Directory List Users",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://graph.microsoft.com/v1.0/users",
+            "params": [
+              {
+                "name": "$filter",
+                "value": "",
+                "type": "query",
+                "description": "OData filter expression (e.g. displayName eq 'John Doe')"
+              },
+              {
+                "name": "$select",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated list of properties to include in response"
+              },
+              {
+                "name": "$top",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of users to return (max 999)"
+              },
+              {
+                "name": "$orderby",
+                "value": "",
+                "type": "query",
+                "description": "Property to sort by (e.g. displayName asc)"
+              },
+              {
+                "name": "$search",
+                "value": "",
+                "type": "query",
+                "description": "Search expression for user properties"
+              },
+              {
+                "name": "$count",
+                "value": "",
+                "type": "query",
+                "description": "Include total count of matching users"
+              }
+            ]
+          },
+          "docs": "Retrieve a list of user objects from Microsoft Entra ID. Supports OData query parameters for filtering, selecting specific properties, ordering, and pagination."
+        },
+        {
+          "info": {
+            "name": "Active Directory Create User",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://graph.microsoft.com/v1.0/users",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new user in Microsoft Entra ID. The user object must include the required properties: accountEnabled, displayName, mailNickname, passwordProfile, and userPrincipalName."
+        },
+        {
+          "info": {
+            "name": "Active Directory Get User",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://graph.microsoft.com/v1.0/users/:userId",
+            "params": [
+              {
+                "name": "userId",
+                "value": "87d349ed-44d7-43e1-9a83-5f2406dee5bd",
+                "type": "path",
+                "description": "User object ID (UUID) or userPrincipalName"
+              },
+              {
+                "name": "$select",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated properties to include"
+              }
+            ]
+          },
+          "docs": "Retrieve the properties and relationships of a specific user in Microsoft Entra ID by their object ID or userPrincipalName. Use $select to retrieve specific properties."
+        },
+        {
+          "info": {
+            "name": "Active Directory Update User",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://graph.microsoft.com/v1.0/users/:userId",
+            "params": [
+              {
+                "name": "userId",
+                "value": "",
+                "type": "path",
+                "description": "User object ID or userPrincipalName"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update the properties of a user in Microsoft Entra ID. Only include properties you want to update in the request body; all other properties retain their current values."
+        },
+        {
+          "info": {
+            "name": "Active Directory Delete User",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://graph.microsoft.com/v1.0/users/:userId",
+            "params": [
+              {
+                "name": "userId",
+                "value": "",
+                "type": "path",
+                "description": "User object ID or userPrincipalName"
+              }
+            ]
+          },
+          "docs": "Delete a user from Microsoft Entra ID. The deleted user is moved to the recycle bin for 30 days before permanent deletion. During this period, the user can be restored."
+        },
+        {
+          "info": {
+            "name": "Active Directory List User Group Memberships",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://graph.microsoft.com/v1.0/users/:userId/memberOf",
+            "params": [
+              {
+                "name": "userId",
+                "value": "",
+                "type": "path",
+                "description": "User object ID or userPrincipalName"
+              },
+              {
+                "name": "$filter",
+                "value": "",
+                "type": "query",
+                "description": "OData filter to scope to groups only (e.g. microsoft.graph.group)"
+              }
+            ]
+          },
+          "docs": "Get the groups, directory roles, and administrative units that the user is a direct member of. This operation does not return transitive group memberships. Use /users/{id}/transitiveMemberOf for transitive memberships."
+        },
+        {
+          "info": {
+            "name": "Active Directory Get User Manager",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://graph.microsoft.com/v1.0/users/:userId/manager",
+            "params": [
+              {
+                "name": "userId",
+                "value": "",
+                "type": "path",
+                "description": "User object ID or userPrincipalName"
+              }
+            ]
+          },
+          "docs": "Returns the user or organizational contact assigned as the user's manager in Microsoft Entra ID. The manager relationship represents the organizational hierarchy."
+        },
+        {
+          "info": {
+            "name": "Active Directory Get My Profile",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://graph.microsoft.com/v1.0/me",
+            "params": [
+              {
+                "name": "$select",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated properties to include"
+              }
+            ]
+          },
+          "docs": "Retrieve the properties and relationships of the signed-in user. This endpoint only works with delegated permissions and requires an OAuth2 access token for the signed-in user."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

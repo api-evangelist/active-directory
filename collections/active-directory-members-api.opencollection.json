@@ -1,0 +1,112 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Microsoft Graph Applications and Service Principals App Role Assignments Members API",
+    "version": "v1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "client_credentials",
+      "accessTokenUrl": "https://login.microsoftonline.com/{tenant}/oauth2/v2.0/token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Members",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Active Directory List Group Members",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://graph.microsoft.com/v1.0/groups/:groupId/members",
+            "params": [
+              {
+                "name": "groupId",
+                "value": "",
+                "type": "path",
+                "description": "Group object ID (UUID)"
+              },
+              {
+                "name": "$filter",
+                "value": "",
+                "type": "query",
+                "description": "Filter to scope to specific member types (e.g. microsoft.graph.user)"
+              },
+              {
+                "name": "$top",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "$select",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Get the list of direct members of a group. Members can be users, devices, service principals, organizational contacts, or other groups (nested). This does not return transitive members; use /transitiveMembers for that."
+        },
+        {
+          "info": {
+            "name": "Active Directory Add Group Member",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://graph.microsoft.com/v1.0/groups/:groupId/members",
+            "params": [
+              {
+                "name": "groupId",
+                "value": "",
+                "type": "path",
+                "description": "Group object ID (UUID)"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Add a member to a group. The member can be a user, device, service principal, organizational contact, or another group (for security groups). Provide the OData id of the object to add."
+        },
+        {
+          "info": {
+            "name": "Active Directory Remove Group Member",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://graph.microsoft.com/v1.0/groups/:groupId/members/:memberId/$ref",
+            "params": [
+              {
+                "name": "groupId",
+                "value": "",
+                "type": "path",
+                "description": "Group object ID (UUID)"
+              },
+              {
+                "name": "memberId",
+                "value": "",
+                "type": "path",
+                "description": "Member object ID to remove"
+              }
+            ]
+          },
+          "docs": "Remove a member from a group. This removes the direct membership only."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

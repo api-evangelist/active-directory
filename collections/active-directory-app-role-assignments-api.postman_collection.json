@@ -1,0 +1,151 @@
+{
+  "item": [
+    {
+      "id": "640fff98-7162-4dff-bb91-ca9ef036320b",
+      "name": "App Role Assignments",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "55e960ed-9971-46a4-a186-ad11029108f2",
+          "name": "Active Directory List Service Principal App Role Assignments",
+          "request": {
+            "name": "Active Directory List Service Principal App Role Assignments",
+            "description": {
+              "content": "Get the app roles that have been assigned to this service principal.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "servicePrincipals",
+                ":servicePrincipalId",
+                "appRoleAssignments"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "servicePrincipalId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e6cc4db8-bfc8-4595-bb60-cbaf278af767",
+              "name": "Collection of app role assignments",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "servicePrincipals",
+                    ":servicePrincipalId",
+                    "appRoleAssignments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "servicePrincipalId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"value\": [\n    {\n      \"id\": \"string\",\n      \"appRoleId\": \"8427e6c1-e043-143c-5414-e820f023808f\",\n      \"principalId\": \"e356899a-2383-08b9-2f21-44829a238943\",\n      \"principalDisplayName\": \"string\",\n      \"principalType\": \"ServicePrincipal\",\n      \"resourceId\": \"49920cf3-eb8c-0cc0-6e01-7001089789b0\",\n      \"resourceDisplayName\": \"string\",\n      \"createdDateTime\": \"1980-09-04T20:56:18.502Z\"\n    },\n    {\n      \"id\": \"string\",\n      \"appRoleId\": \"f9908651-0953-35f7-c923-849e7d39e9fe\",\n      \"principalId\": \"2c759e26-dea7-89b2-823d-847e5f6b41d4\",\n      \"principalDisplayName\": \"string\",\n      \"principalType\": \"User\",\n      \"resourceId\": \"d9c102d8-b252-c426-1f36-b2af7dfa06c8\",\n      \"resourceDisplayName\": \"string\",\n      \"createdDateTime\": \"1958-11-24T19:44:49.960Z\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://graph.microsoft.com/v1.0",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "scope",
+        "value": "Application.Read.All Application.ReadWrite.All Directory.Read.All"
+      },
+      {
+        "key": "accessTokenUrl",
+        "value": "https://login.microsoftonline.com/{tenant}/oauth2/v2.0/token"
+      },
+      {
+        "key": "authUrl",
+        "value": "https://login.microsoftonline.com/{tenant}/oauth2/v2.0/authorize"
+      },
+      {
+        "key": "grant_type",
+        "value": "authorization_code"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "67d73d4b-2a54-4df9-b769-11a4edffb2fe",
+    "name": "Microsoft Graph Applications and Service Principals App Role Assignments API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Register and manage Microsoft Entra applications and their associated service principals via Microsoft Graph. Configure app permissions (API permissions), OAuth2 permission grants (delegated consent), app role assignments, certificates, keys, federated identity credentials, and app consent policies. Use this API for application lifecycle management and zero-trust app governance.\n\nContact Support:\n Name: Microsoft Graph Support",
+      "type": "text/plain"
+    }
+  }
+}

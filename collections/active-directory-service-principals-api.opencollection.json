@@ -1,0 +1,99 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Microsoft Graph Applications and App Role Assignments Service Principals API",
+    "version": "v1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "client_credentials",
+      "accessTokenUrl": "https://login.microsoftonline.com/{tenant}/oauth2/v2.0/token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Service Principals",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Active Directory List Service Principals",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://graph.microsoft.com/v1.0/servicePrincipals",
+            "params": [
+              {
+                "name": "$filter",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "$select",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "$top",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "$search",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Retrieve the list of service principals in the Microsoft Entra tenant. Service principals represent the local instance of an application in the tenant."
+        },
+        {
+          "info": {
+            "name": "Active Directory Get Service Principal",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://graph.microsoft.com/v1.0/servicePrincipals/:servicePrincipalId",
+            "params": [
+              {
+                "name": "servicePrincipalId",
+                "value": "",
+                "type": "path",
+                "description": "Service principal object ID"
+              }
+            ]
+          },
+          "docs": "Retrieve the properties of a service principal by its object ID."
+        },
+        {
+          "info": {
+            "name": "Active Directory List Service Principal App Role Assignments",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://graph.microsoft.com/v1.0/servicePrincipals/:servicePrincipalId/appRoleAssignments",
+            "params": [
+              {
+                "name": "servicePrincipalId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get the app roles that have been assigned to this service principal."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

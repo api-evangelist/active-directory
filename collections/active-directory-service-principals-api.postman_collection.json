@@ -1,0 +1,475 @@
+{
+  "item": [
+    {
+      "id": "1be2474b-aafb-437d-b15b-cedef069ff45",
+      "name": "Service Principals",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "a8ab0ada-c9fe-45fe-8404-f77d332a27fe",
+          "name": "Active Directory List Service Principals",
+          "request": {
+            "name": "Active Directory List Service Principals",
+            "description": {
+              "content": "Retrieve the list of service principals in the Microsoft Entra tenant. Service principals represent the local instance of an application in the tenant.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "servicePrincipals"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "$filter",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "$select",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "$top",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "$search",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "1296484f-c93c-423f-a59f-482e123532a0",
+              "name": "Collection of service principals",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "servicePrincipals"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "$filter",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "$select",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "$top",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "$search",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"@odata.context\": \"string\",\n  \"@odata.nextLink\": \"string\",\n  \"value\": [\n    {\n      \"id\": \"11a4cf43-7eaf-7aa2-6f42-12dd713489d0\",\n      \"appId\": \"11ce4d42-f8ca-5a20-5767-02efdee6a10c\",\n      \"displayName\": \"string\",\n      \"servicePrincipalType\": \"ManagedIdentity\",\n      \"accountEnabled\": false,\n      \"appRoles\": [\n        {\n          \"id\": \"string\",\n          \"displayName\": \"string\",\n          \"description\": \"string\",\n          \"value\": \"string\",\n          \"allowedMemberTypes\": [\n            \"string\",\n            \"string\"\n          ]\n        },\n        {\n          \"id\": \"string\",\n          \"displayName\": \"string\",\n          \"description\": \"string\",\n          \"value\": \"string\",\n          \"allowedMemberTypes\": [\n            \"string\",\n            \"string\"\n          ]\n        }\n      ],\n      \"oauth2PermissionScopes\": [\n        {\n          \"id\": \"string\",\n          \"adminConsentDisplayName\": \"string\",\n          \"adminConsentDescription\": \"string\",\n          \"userConsentDisplayName\": \"string\",\n          \"value\": \"string\",\n          \"type\": \"string\",\n          \"isEnabled\": false\n        },\n        {\n          \"id\": \"string\",\n          \"adminConsentDisplayName\": \"string\",\n          \"adminConsentDescription\": \"string\",\n          \"userConsentDisplayName\": \"string\",\n          \"value\": \"string\",\n          \"type\": \"string\",\n          \"isEnabled\": true\n        }\n      ],\n      \"homepage\": \"string\",\n      \"loginUrl\": \"string\",\n      \"replyUrls\": [\n        \"string\",\n        \"string\"\n      ],\n      \"tags\": [\n        \"string\",\n        \"string\"\n      ],\n      \"createdDateTime\": \"1954-04-09T23:05:45.838Z\"\n    },\n    {\n      \"id\": \"739a0559-ea0c-f73d-1974-ed32282ffa81\",\n      \"appId\": \"65dde1fd-d29f-3904-7cab-cbc29446a21b\",\n      \"displayName\": \"string\",\n      \"servicePrincipalType\": \"ManagedIdentity\",\n      \"accountEnabled\": true,\n      \"appRoles\": [\n        {\n          \"id\": \"string\",\n          \"displayName\": \"string\",\n          \"description\": \"string\",\n          \"value\": \"string\",\n          \"allowedMemberTypes\": [\n            \"string\",\n            \"string\"\n          ]\n        },\n        {\n          \"id\": \"string\",\n          \"displayName\": \"string\",\n          \"description\": \"string\",\n          \"value\": \"string\",\n          \"allowedMemberTypes\": [\n            \"string\",\n            \"string\"\n          ]\n        }\n      ],\n      \"oauth2PermissionScopes\": [\n        {\n          \"id\": \"string\",\n          \"adminConsentDisplayName\": \"string\",\n          \"adminConsentDescription\": \"string\",\n          \"userConsentDisplayName\": \"string\",\n          \"value\": \"string\",\n          \"type\": \"string\",\n          \"isEnabled\": true\n        },\n        {\n          \"id\": \"string\",\n          \"adminConsentDisplayName\": \"string\",\n          \"adminConsentDescription\": \"string\",\n          \"userConsentDisplayName\": \"string\",\n          \"value\": \"string\",\n          \"type\": \"string\",\n          \"isEnabled\": true\n        }\n      ],\n      \"homepage\": \"string\",\n      \"loginUrl\": \"string\",\n      \"replyUrls\": [\n        \"string\",\n        \"string\"\n      ],\n      \"tags\": [\n        \"string\",\n        \"string\"\n      ],\n      \"createdDateTime\": \"1954-05-16T08:08:14.675Z\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f070c192-d1a3-4fe0-b9b2-4ea9493df66a",
+              "name": "Authentication required",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "servicePrincipals"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "$filter",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "$select",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "$top",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "$search",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4a68a8a5-1f7c-4b10-bf70-5eca5aa29007",
+          "name": "Active Directory Get Service Principal",
+          "request": {
+            "name": "Active Directory Get Service Principal",
+            "description": {
+              "content": "Retrieve the properties of a service principal by its object ID.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "servicePrincipals",
+                ":servicePrincipalId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "servicePrincipalId",
+                  "description": "(Required) Service principal object ID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "cc955c42-8f44-44f7-bafd-20473cf004ed",
+              "name": "Service principal object",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "servicePrincipals",
+                    ":servicePrincipalId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "servicePrincipalId",
+                      "description": "(Required) Service principal object ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"577adc5a-6dde-74fc-7e25-62248555dda3\",\n  \"appId\": \"f851bc47-99ca-1a87-633a-06c69b8f852e\",\n  \"displayName\": \"string\",\n  \"servicePrincipalType\": \"SocialIdp\",\n  \"accountEnabled\": false,\n  \"appRoles\": [\n    {\n      \"id\": \"string\",\n      \"displayName\": \"string\",\n      \"description\": \"string\",\n      \"value\": \"string\",\n      \"allowedMemberTypes\": [\n        \"string\",\n        \"string\"\n      ]\n    },\n    {\n      \"id\": \"string\",\n      \"displayName\": \"string\",\n      \"description\": \"string\",\n      \"value\": \"string\",\n      \"allowedMemberTypes\": [\n        \"string\",\n        \"string\"\n      ]\n    }\n  ],\n  \"oauth2PermissionScopes\": [\n    {\n      \"id\": \"string\",\n      \"adminConsentDisplayName\": \"string\",\n      \"adminConsentDescription\": \"string\",\n      \"userConsentDisplayName\": \"string\",\n      \"value\": \"string\",\n      \"type\": \"string\",\n      \"isEnabled\": false\n    },\n    {\n      \"id\": \"string\",\n      \"adminConsentDisplayName\": \"string\",\n      \"adminConsentDescription\": \"string\",\n      \"userConsentDisplayName\": \"string\",\n      \"value\": \"string\",\n      \"type\": \"string\",\n      \"isEnabled\": true\n    }\n  ],\n  \"homepage\": \"string\",\n  \"loginUrl\": \"string\",\n  \"replyUrls\": [\n    \"string\",\n    \"string\"\n  ],\n  \"tags\": [\n    \"string\",\n    \"string\"\n  ],\n  \"createdDateTime\": \"1987-10-05T06:49:24.686Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1b08b857-f450-4fdd-853f-3300505bb62f",
+              "name": "Resource not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "servicePrincipals",
+                    ":servicePrincipalId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "servicePrincipalId",
+                      "description": "(Required) Service principal object ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "58e3665a-42f5-4128-a40c-8392bbe928e1",
+          "name": "Active Directory List Service Principal App Role Assignments",
+          "request": {
+            "name": "Active Directory List Service Principal App Role Assignments",
+            "description": {
+              "content": "Get the app roles that have been assigned to this service principal.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "servicePrincipals",
+                ":servicePrincipalId",
+                "appRoleAssignments"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "servicePrincipalId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "2311c942-3535-4517-ab39-5b488538f031",
+              "name": "Collection of app role assignments",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "servicePrincipals",
+                    ":servicePrincipalId",
+                    "appRoleAssignments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "servicePrincipalId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"value\": [\n    {\n      \"id\": \"string\",\n      \"appRoleId\": \"eff9b6f1-f12e-25f8-b388-3886e3386962\",\n      \"principalId\": \"fdc365e0-1fa4-f38a-87e8-1a37ad25f0b6\",\n      \"principalDisplayName\": \"string\",\n      \"principalType\": \"User\",\n      \"resourceId\": \"d4664a8d-9a87-d5b2-0109-f1c7b3d99c76\",\n      \"resourceDisplayName\": \"string\",\n      \"createdDateTime\": \"1986-08-20T04:09:38.674Z\"\n    },\n    {\n      \"id\": \"string\",\n      \"appRoleId\": \"9bda7f26-2b97-fa62-8994-adaebe519ef3\",\n      \"principalId\": \"57c697ad-9f60-47ff-6483-a46a4a272710\",\n      \"principalDisplayName\": \"string\",\n      \"principalType\": \"Group\",\n      \"resourceId\": \"3670c1b6-a647-969f-8149-c24b9cc77826\",\n      \"resourceDisplayName\": \"string\",\n      \"createdDateTime\": \"1952-06-09T04:44:15.918Z\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://graph.microsoft.com/v1.0",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "scope",
+        "value": "Application.Read.All Application.ReadWrite.All Directory.Read.All"
+      },
+      {
+        "key": "accessTokenUrl",
+        "value": "https://login.microsoftonline.com/{tenant}/oauth2/v2.0/token"
+      },
+      {
+        "key": "authUrl",
+        "value": "https://login.microsoftonline.com/{tenant}/oauth2/v2.0/authorize"
+      },
+      {
+        "key": "grant_type",
+        "value": "authorization_code"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "df15c077-8a87-4976-b76a-10254d0f4b92",
+    "name": "Microsoft Graph Applications and App Role Assignments Service Principals API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Register and manage Microsoft Entra applications and their associated service principals via Microsoft Graph. Configure app permissions (API permissions), OAuth2 permission grants (delegated consent), app role assignments, certificates, keys, federated identity credentials, and app consent policies. Use this API for application lifecycle management and zero-trust app governance.\n\nContact Support:\n Name: Microsoft Graph Support",
+      "type": "text/plain"
+    }
+  }
+}

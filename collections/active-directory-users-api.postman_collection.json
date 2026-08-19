@@ -1,0 +1,1590 @@
+{
+  "item": [
+    {
+      "id": "eb1ed069-7ba3-487b-83d6-2f3d925f2341",
+      "name": "Users",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "c403d067-d12b-4f6e-82c4-1ebc3caef3f3",
+          "name": "Active Directory List Users",
+          "request": {
+            "name": "Active Directory List Users",
+            "description": {
+              "content": "Retrieve a list of user objects from Microsoft Entra ID. Supports OData query parameters for filtering, selecting specific properties, ordering, and pagination.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "users"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "$filter",
+                  "value": "<string>",
+                  "description": "OData filter expression (e.g. displayName eq 'John Doe')"
+                },
+                {
+                  "disabled": false,
+                  "key": "$select",
+                  "value": "<string>",
+                  "description": "Comma-separated list of properties to include in response"
+                },
+                {
+                  "disabled": false,
+                  "key": "$top",
+                  "value": "<integer>",
+                  "description": "Maximum number of users to return (max 999)"
+                },
+                {
+                  "disabled": false,
+                  "key": "$orderby",
+                  "value": "<string>",
+                  "description": "Property to sort by (e.g. displayName asc)"
+                },
+                {
+                  "disabled": false,
+                  "key": "$search",
+                  "value": "<string>",
+                  "description": "Search expression for user properties"
+                },
+                {
+                  "disabled": false,
+                  "key": "$count",
+                  "value": "<boolean>",
+                  "description": "Include total count of matching users"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "af4cceb9-2cbf-495f-932f-52b885c0e89a",
+              "name": "List of users",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "users"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "$filter",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "$select",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "$top",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "$orderby",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "$search",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "$count",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"@odata.context\": \"https://graph.microsoft.com/v1.0/$metadata#users\",\n  \"value\": [\n    {\n      \"id\": \"87d349ed-44d7-43e1-9a83-5f2406dee5bd\",\n      \"displayName\": \"Adele Vance\",\n      \"userPrincipalName\": \"AdeleV@contoso.com\",\n      \"mail\": \"AdeleV@contoso.com\",\n      \"jobTitle\": \"Product Marketing Manager\",\n      \"department\": \"Marketing\",\n      \"officeLocation\": \"18/2111\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b1b82eed-eea9-4908-b3a7-5223a36e1af2",
+              "name": "Bad request — invalid query parameters or request body",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "users"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "$filter",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "$select",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "$top",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "$orderby",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "$search",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "$count",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"Request_BadRequest\",\n    \"message\": \"A property required for the request is missing.\",\n    \"innerError\": {\n      \"date\": \"1997-09-20T01:52:54.351Z\",\n      \"request-id\": \"be27337f-6930-a67a-d63c-870be1eeba2e\",\n      \"client-request-id\": \"bb76f9ae-67d8-d5fb-88c1-f2a8f697fb78\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "60005848-019c-4a1b-a2a9-20ce5b02f365",
+              "name": "Authentication required — missing or invalid access token",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "users"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "$filter",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "$select",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "$top",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "$orderby",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "$search",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "$count",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"Request_BadRequest\",\n    \"message\": \"A property required for the request is missing.\",\n    \"innerError\": {\n      \"date\": \"1997-09-20T01:52:54.351Z\",\n      \"request-id\": \"be27337f-6930-a67a-d63c-870be1eeba2e\",\n      \"client-request-id\": \"bb76f9ae-67d8-d5fb-88c1-f2a8f697fb78\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6218cebf-cffd-4ab9-b52d-bd0671268923",
+              "name": "Insufficient permissions — required scopes not granted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "users"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "$filter",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "$select",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "$top",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "$orderby",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "$search",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "$count",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"Request_BadRequest\",\n    \"message\": \"A property required for the request is missing.\",\n    \"innerError\": {\n      \"date\": \"1997-09-20T01:52:54.351Z\",\n      \"request-id\": \"be27337f-6930-a67a-d63c-870be1eeba2e\",\n      \"client-request-id\": \"bb76f9ae-67d8-d5fb-88c1-f2a8f697fb78\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "66701c94-fe72-4cb9-b045-2d6444667d61",
+          "name": "Active Directory Create User",
+          "request": {
+            "name": "Active Directory Create User",
+            "description": {
+              "content": "Create a new user in Microsoft Entra ID. The user object must include the required properties: accountEnabled, displayName, mailNickname, passwordProfile, and userPrincipalName.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "users"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"accountEnabled\": \"<boolean>\",\n  \"displayName\": \"<string>\",\n  \"mailNickname\": \"<string>\",\n  \"passwordProfile\": {\n    \"password\": \"<string>\",\n    \"forceChangePasswordNextSignIn\": true,\n    \"forceChangePasswordNextSignInWithMfa\": \"<boolean>\"\n  },\n  \"userPrincipalName\": \"<string>\",\n  \"givenName\": \"<string>\",\n  \"surname\": \"<string>\",\n  \"jobTitle\": \"<string>\",\n  \"department\": \"<string>\",\n  \"usageLocation\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "9ee9d74a-9957-4887-8397-b2f7e833f57d",
+              "name": "User created successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "users"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"accountEnabled\": true,\n  \"displayName\": \"Adele Vance\",\n  \"mailNickname\": \"AdeleV\",\n  \"userPrincipalName\": \"AdeleV@contoso.com\",\n  \"passwordProfile\": {\n    \"forceChangePasswordNextSignIn\": true,\n    \"password\": \"xWwvJ]6NMw+bWH-d\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"87d349ed-44d7-43e1-9a83-5f2406dee5bd\",\n  \"displayName\": \"Adele Vance\",\n  \"userPrincipalName\": \"AdeleV@contoso.com\",\n  \"mail\": \"AdeleV@contoso.com\",\n  \"givenName\": \"Adele\",\n  \"surname\": \"Vance\",\n  \"jobTitle\": \"Product Marketing Manager\",\n  \"department\": \"Marketing\",\n  \"officeLocation\": \"18/2111\",\n  \"mobilePhone\": \"+1 555 0100\",\n  \"businessPhones\": [\n    \"string\",\n    \"string\"\n  ],\n  \"accountEnabled\": true,\n  \"usageLocation\": \"US\",\n  \"preferredLanguage\": \"en-US\",\n  \"createdDateTime\": \"2024-01-15T08:30:00Z\",\n  \"lastPasswordChangeDateTime\": \"1986-11-24T04:42:12.970Z\",\n  \"passwordPolicies\": \"DisablePasswordExpiration\",\n  \"userType\": \"Member\",\n  \"assignedLicenses\": [\n    {\n      \"skuId\": \"0a6a01fa-0aa4-d5bf-06d2-22bc64349f76\",\n      \"disabledPlans\": [\n        \"c4b6502f-343e-193c-4850-597d5d73562e\",\n        \"73d087e8-79a2-cea7-9feb-7e5a4fcc01e0\"\n      ]\n    },\n    {\n      \"skuId\": \"2191538d-5fb4-1809-ab4a-fe8c594798ae\",\n      \"disabledPlans\": [\n        \"30a7dbce-b58f-7968-9fbb-4a322c032539\",\n        \"703baaf0-9918-0b05-c32b-306bdda3a7ac\"\n      ]\n    }\n  ],\n  \"onPremisesSyncEnabled\": true,\n  \"onPremisesDistinguishedName\": \"string\",\n  \"externalUserState\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e42f2dd0-5420-46ee-a277-8e946fef0fe0",
+              "name": "Bad request — invalid query parameters or request body",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "users"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"accountEnabled\": true,\n  \"displayName\": \"Adele Vance\",\n  \"mailNickname\": \"AdeleV\",\n  \"userPrincipalName\": \"AdeleV@contoso.com\",\n  \"passwordProfile\": {\n    \"forceChangePasswordNextSignIn\": true,\n    \"password\": \"xWwvJ]6NMw+bWH-d\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"Request_BadRequest\",\n    \"message\": \"A property required for the request is missing.\",\n    \"innerError\": {\n      \"date\": \"1997-09-20T01:52:54.351Z\",\n      \"request-id\": \"be27337f-6930-a67a-d63c-870be1eeba2e\",\n      \"client-request-id\": \"bb76f9ae-67d8-d5fb-88c1-f2a8f697fb78\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0150238e-cba6-48ea-a1a2-17ee6163998b",
+              "name": "Authentication required — missing or invalid access token",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "users"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"accountEnabled\": true,\n  \"displayName\": \"Adele Vance\",\n  \"mailNickname\": \"AdeleV\",\n  \"userPrincipalName\": \"AdeleV@contoso.com\",\n  \"passwordProfile\": {\n    \"forceChangePasswordNextSignIn\": true,\n    \"password\": \"xWwvJ]6NMw+bWH-d\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"Request_BadRequest\",\n    \"message\": \"A property required for the request is missing.\",\n    \"innerError\": {\n      \"date\": \"1997-09-20T01:52:54.351Z\",\n      \"request-id\": \"be27337f-6930-a67a-d63c-870be1eeba2e\",\n      \"client-request-id\": \"bb76f9ae-67d8-d5fb-88c1-f2a8f697fb78\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fc32570c-f197-4d68-b767-fabc76948bb0",
+              "name": "Insufficient permissions — required scopes not granted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "users"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"accountEnabled\": true,\n  \"displayName\": \"Adele Vance\",\n  \"mailNickname\": \"AdeleV\",\n  \"userPrincipalName\": \"AdeleV@contoso.com\",\n  \"passwordProfile\": {\n    \"forceChangePasswordNextSignIn\": true,\n    \"password\": \"xWwvJ]6NMw+bWH-d\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"Request_BadRequest\",\n    \"message\": \"A property required for the request is missing.\",\n    \"innerError\": {\n      \"date\": \"1997-09-20T01:52:54.351Z\",\n      \"request-id\": \"be27337f-6930-a67a-d63c-870be1eeba2e\",\n      \"client-request-id\": \"bb76f9ae-67d8-d5fb-88c1-f2a8f697fb78\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8f0f4a0d-459b-426d-9362-b81398589242",
+          "name": "Active Directory Get User",
+          "request": {
+            "name": "Active Directory Get User",
+            "description": {
+              "content": "Retrieve the properties and relationships of a specific user in Microsoft Entra ID by their object ID or userPrincipalName. Use $select to retrieve specific properties.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "users",
+                ":userId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "$select",
+                  "value": "<string>",
+                  "description": "Comma-separated properties to include"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "userId",
+                  "description": "(Required) User object ID (UUID) or userPrincipalName"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "1bdff1f5-4b63-483c-b161-3fd4249d2c04",
+              "name": "User object",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "users",
+                    ":userId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "$select",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "userId",
+                      "description": "(Required) User object ID (UUID) or userPrincipalName"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"87d349ed-44d7-43e1-9a83-5f2406dee5bd\",\n  \"displayName\": \"Adele Vance\",\n  \"userPrincipalName\": \"AdeleV@contoso.com\",\n  \"mail\": \"AdeleV@contoso.com\",\n  \"jobTitle\": \"Product Marketing Manager\",\n  \"department\": \"Marketing\",\n  \"officeLocation\": \"18/2111\",\n  \"accountEnabled\": true,\n  \"createdDateTime\": \"2024-01-15T08:30:00Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "163c09ce-5521-43bc-9f1e-f89b5d7fb4e9",
+              "name": "Resource not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "users",
+                    ":userId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "$select",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "userId",
+                      "description": "(Required) User object ID (UUID) or userPrincipalName"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"Request_BadRequest\",\n    \"message\": \"A property required for the request is missing.\",\n    \"innerError\": {\n      \"date\": \"1997-09-20T01:52:54.351Z\",\n      \"request-id\": \"be27337f-6930-a67a-d63c-870be1eeba2e\",\n      \"client-request-id\": \"bb76f9ae-67d8-d5fb-88c1-f2a8f697fb78\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "137b4840-e788-45f6-9229-3fabc8db5f35",
+          "name": "Active Directory Update User",
+          "request": {
+            "name": "Active Directory Update User",
+            "description": {
+              "content": "Update the properties of a user in Microsoft Entra ID. Only include properties you want to update in the request body; all other properties retain their current values.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "users",
+                ":userId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "userId",
+                  "description": "(Required) User object ID or userPrincipalName"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"displayName\": \"<string>\",\n  \"givenName\": \"<string>\",\n  \"surname\": \"<string>\",\n  \"jobTitle\": \"<string>\",\n  \"department\": \"<string>\",\n  \"officeLocation\": \"<string>\",\n  \"mobilePhone\": \"<string>\",\n  \"preferredLanguage\": \"<string>\",\n  \"usageLocation\": \"<string>\",\n  \"passwordProfile\": {\n    \"password\": \"<string>\",\n    \"forceChangePasswordNextSignIn\": true,\n    \"forceChangePasswordNextSignInWithMfa\": \"<boolean>\"\n  },\n  \"accountEnabled\": \"<boolean>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "71b09a4b-8301-4c83-8ed4-ea805a92c2f0",
+              "name": "User updated successfully (no content)",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "users",
+                    ":userId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "userId",
+                      "description": "(Required) User object ID or userPrincipalName"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"jobTitle\": \"Senior Product Marketing Manager\",\n  \"department\": \"Product Marketing\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "f10f31f3-a965-4312-8791-38862b54016e",
+              "name": "Bad request — invalid query parameters or request body",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "users",
+                    ":userId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "userId",
+                      "description": "(Required) User object ID or userPrincipalName"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"jobTitle\": \"Senior Product Marketing Manager\",\n  \"department\": \"Product Marketing\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"Request_BadRequest\",\n    \"message\": \"A property required for the request is missing.\",\n    \"innerError\": {\n      \"date\": \"1997-09-20T01:52:54.351Z\",\n      \"request-id\": \"be27337f-6930-a67a-d63c-870be1eeba2e\",\n      \"client-request-id\": \"bb76f9ae-67d8-d5fb-88c1-f2a8f697fb78\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1f842966-2644-4ebd-bc26-8531744f8cd9",
+              "name": "Resource not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "users",
+                    ":userId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "userId",
+                      "description": "(Required) User object ID or userPrincipalName"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"jobTitle\": \"Senior Product Marketing Manager\",\n  \"department\": \"Product Marketing\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"Request_BadRequest\",\n    \"message\": \"A property required for the request is missing.\",\n    \"innerError\": {\n      \"date\": \"1997-09-20T01:52:54.351Z\",\n      \"request-id\": \"be27337f-6930-a67a-d63c-870be1eeba2e\",\n      \"client-request-id\": \"bb76f9ae-67d8-d5fb-88c1-f2a8f697fb78\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "08bee628-1dc5-475c-8a73-01d7065adc83",
+          "name": "Active Directory Delete User",
+          "request": {
+            "name": "Active Directory Delete User",
+            "description": {
+              "content": "Delete a user from Microsoft Entra ID. The deleted user is moved to the recycle bin for 30 days before permanent deletion. During this period, the user can be restored.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "users",
+                ":userId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "userId",
+                  "description": "(Required) User object ID or userPrincipalName"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "6c50405a-10ce-4379-981e-ad2f723b533e",
+              "name": "User deleted successfully (no content)",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "users",
+                    ":userId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "userId",
+                      "description": "(Required) User object ID or userPrincipalName"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "4080d835-995a-402b-a0af-d05b10d84642",
+              "name": "Resource not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "users",
+                    ":userId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "userId",
+                      "description": "(Required) User object ID or userPrincipalName"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"Request_BadRequest\",\n    \"message\": \"A property required for the request is missing.\",\n    \"innerError\": {\n      \"date\": \"1997-09-20T01:52:54.351Z\",\n      \"request-id\": \"be27337f-6930-a67a-d63c-870be1eeba2e\",\n      \"client-request-id\": \"bb76f9ae-67d8-d5fb-88c1-f2a8f697fb78\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1358e9ae-b7fa-4082-a1c4-45269dced89d",
+          "name": "Active Directory List User Group Memberships",
+          "request": {
+            "name": "Active Directory List User Group Memberships",
+            "description": {
+              "content": "Get the groups, directory roles, and administrative units that the user is a direct member of. This operation does not return transitive group memberships. Use /users/{id}/transitiveMemberOf for transitive memberships.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "users",
+                ":userId",
+                "memberOf"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "$filter",
+                  "value": "<string>",
+                  "description": "OData filter to scope to groups only (e.g. microsoft.graph.group)"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "userId",
+                  "description": "(Required) User object ID or userPrincipalName"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e2b98c9c-5712-407f-9e5e-d5d2c65f4d1f",
+              "name": "Collection of groups the user is a member of",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "users",
+                    ":userId",
+                    "memberOf"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "$filter",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "userId",
+                      "description": "(Required) User object ID or userPrincipalName"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"@odata.context\": \"string\",\n  \"value\": [\n    {\n      \"id\": \"string\",\n      \"displayName\": \"string\",\n      \"groupTypes\": [\n        \"string\",\n        \"string\"\n      ]\n    },\n    {\n      \"id\": \"string\",\n      \"displayName\": \"string\",\n      \"groupTypes\": [\n        \"string\",\n        \"string\"\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e87e43a3-c7a0-4f02-8fc1-1eef7cb95bdb",
+          "name": "Active Directory Get User Manager",
+          "request": {
+            "name": "Active Directory Get User Manager",
+            "description": {
+              "content": "Returns the user or organizational contact assigned as the user's manager in Microsoft Entra ID. The manager relationship represents the organizational hierarchy.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "users",
+                ":userId",
+                "manager"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "userId",
+                  "description": "(Required) User object ID or userPrincipalName"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "971c10f7-9a05-4f15-a2a5-5720d23649f5",
+              "name": "Manager user object",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "users",
+                    ":userId",
+                    "manager"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "userId",
+                      "description": "(Required) User object ID or userPrincipalName"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"87d349ed-44d7-43e1-9a83-5f2406dee5bd\",\n  \"displayName\": \"Adele Vance\",\n  \"userPrincipalName\": \"AdeleV@contoso.com\",\n  \"mail\": \"AdeleV@contoso.com\",\n  \"givenName\": \"Adele\",\n  \"surname\": \"Vance\",\n  \"jobTitle\": \"Product Marketing Manager\",\n  \"department\": \"Marketing\",\n  \"officeLocation\": \"18/2111\",\n  \"mobilePhone\": \"+1 555 0100\",\n  \"businessPhones\": [\n    \"string\",\n    \"string\"\n  ],\n  \"accountEnabled\": true,\n  \"usageLocation\": \"US\",\n  \"preferredLanguage\": \"en-US\",\n  \"createdDateTime\": \"2024-01-15T08:30:00Z\",\n  \"lastPasswordChangeDateTime\": \"2006-11-09T20:46:15.148Z\",\n  \"passwordPolicies\": \"DisablePasswordExpiration\",\n  \"userType\": \"Member\",\n  \"assignedLicenses\": [\n    {\n      \"skuId\": \"e3181ab9-c0f1-05bb-5c59-bf4eb2decf6a\",\n      \"disabledPlans\": [\n        \"266ca94f-0686-66e1-6b9c-7213bf5f18c9\",\n        \"ec721e8d-63e5-b687-c46a-e421797ea5aa\"\n      ]\n    },\n    {\n      \"skuId\": \"b26a7ba6-7d29-ca62-88ae-a2c3f7cee6ce\",\n      \"disabledPlans\": [\n        \"8ded5bce-1d2c-aa64-b9e3-e9e2da8dd7cf\",\n        \"d36667c7-73bf-2a55-fff0-5a406c2814d0\"\n      ]\n    }\n  ],\n  \"onPremisesSyncEnabled\": false,\n  \"onPremisesDistinguishedName\": \"string\",\n  \"externalUserState\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2dc24bbd-2506-42f6-8603-2a92ceb56661",
+              "name": "Resource not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "users",
+                    ":userId",
+                    "manager"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "userId",
+                      "description": "(Required) User object ID or userPrincipalName"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"Request_BadRequest\",\n    \"message\": \"A property required for the request is missing.\",\n    \"innerError\": {\n      \"date\": \"1997-09-20T01:52:54.351Z\",\n      \"request-id\": \"be27337f-6930-a67a-d63c-870be1eeba2e\",\n      \"client-request-id\": \"bb76f9ae-67d8-d5fb-88c1-f2a8f697fb78\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3f530dd2-4da9-487e-8c51-fdf031ce49b7",
+          "name": "Active Directory Get My Profile",
+          "request": {
+            "name": "Active Directory Get My Profile",
+            "description": {
+              "content": "Retrieve the properties and relationships of the signed-in user. This endpoint only works with delegated permissions and requires an OAuth2 access token for the signed-in user.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "me"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "$select",
+                  "value": "<string>",
+                  "description": "Comma-separated properties to include"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a9f641a4-de04-4d04-bcc0-24be71657194",
+              "name": "Signed-in user profile",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "me"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "$select",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"87d349ed-44d7-43e1-9a83-5f2406dee5bd\",\n  \"displayName\": \"Adele Vance\",\n  \"userPrincipalName\": \"AdeleV@contoso.com\",\n  \"mail\": \"AdeleV@contoso.com\",\n  \"givenName\": \"Adele\",\n  \"surname\": \"Vance\",\n  \"jobTitle\": \"Product Marketing Manager\",\n  \"department\": \"Marketing\",\n  \"officeLocation\": \"18/2111\",\n  \"mobilePhone\": \"+1 555 0100\",\n  \"businessPhones\": [\n    \"string\",\n    \"string\"\n  ],\n  \"accountEnabled\": true,\n  \"usageLocation\": \"US\",\n  \"preferredLanguage\": \"en-US\",\n  \"createdDateTime\": \"2024-01-15T08:30:00Z\",\n  \"lastPasswordChangeDateTime\": \"2006-11-09T20:46:15.148Z\",\n  \"passwordPolicies\": \"DisablePasswordExpiration\",\n  \"userType\": \"Member\",\n  \"assignedLicenses\": [\n    {\n      \"skuId\": \"e3181ab9-c0f1-05bb-5c59-bf4eb2decf6a\",\n      \"disabledPlans\": [\n        \"266ca94f-0686-66e1-6b9c-7213bf5f18c9\",\n        \"ec721e8d-63e5-b687-c46a-e421797ea5aa\"\n      ]\n    },\n    {\n      \"skuId\": \"b26a7ba6-7d29-ca62-88ae-a2c3f7cee6ce\",\n      \"disabledPlans\": [\n        \"8ded5bce-1d2c-aa64-b9e3-e9e2da8dd7cf\",\n        \"d36667c7-73bf-2a55-fff0-5a406c2814d0\"\n      ]\n    }\n  ],\n  \"onPremisesSyncEnabled\": false,\n  \"onPremisesDistinguishedName\": \"string\",\n  \"externalUserState\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8ea03e30-415c-4942-8721-c5717776bc9f",
+              "name": "Authentication required — missing or invalid access token",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "me"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "$select",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"Request_BadRequest\",\n    \"message\": \"A property required for the request is missing.\",\n    \"innerError\": {\n      \"date\": \"1997-09-20T01:52:54.351Z\",\n      \"request-id\": \"be27337f-6930-a67a-d63c-870be1eeba2e\",\n      \"client-request-id\": \"bb76f9ae-67d8-d5fb-88c1-f2a8f697fb78\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://graph.microsoft.com/v1.0",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "scope",
+        "value": "Application.Read.All Application.ReadWrite.All Directory.Read.All"
+      },
+      {
+        "key": "accessTokenUrl",
+        "value": "https://login.microsoftonline.com/{tenant}/oauth2/v2.0/token"
+      },
+      {
+        "key": "authUrl",
+        "value": "https://login.microsoftonline.com/{tenant}/oauth2/v2.0/authorize"
+      },
+      {
+        "key": "grant_type",
+        "value": "authorization_code"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "8f9aa90f-77e4-4be3-abfe-e98ff5fa9c0f",
+    "name": "Microsoft Graph Applications and Service Principals App Role Assignments Users API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Register and manage Microsoft Entra applications and their associated service principals via Microsoft Graph. Configure app permissions (API permissions), OAuth2 permission grants (delegated consent), app role assignments, certificates, keys, federated identity credentials, and app consent policies. Use this API for application lifecycle management and zero-trust app governance.\n\nContact Support:\n Name: Microsoft Graph Support",
+      "type": "text/plain"
+    }
+  }
+}
