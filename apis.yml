@@ -177,6 +177,8 @@ apis:
   humanURL: https://learn.microsoft.com/en-us/graph/api/resources/users
   baseURL: https://graph.microsoft.com/v1.0
   tags:
+  - Application
+  tags_raw:
   - Applications
   properties:
   - type: OpenAPI
@@ -215,6 +217,8 @@ apis:
   humanURL: https://learn.microsoft.com/en-us/graph/api/resources/users
   baseURL: https://graph.microsoft.com/v1.0
   tags:
+  - Group
+  tags_raw:
   - Groups
   properties:
   - type: OpenAPI
@@ -368,6 +372,8 @@ apis:
   humanURL: https://learn.microsoft.com/en-us/graph/api/resources/users
   baseURL: https://graph.microsoft.com/v1.0
   tags:
+  - User
+  tags_raw:
   - Users
   properties:
   - type: OpenAPI
