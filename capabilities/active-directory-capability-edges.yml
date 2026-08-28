@@ -1,0 +1,77 @@
+slug: active-directory
+provider: Microsoft Active Directory
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Banking & Capital Markets
+- Software & Technology
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 7
+edges:
+- tag: Groups
+  spec_file: active-directory-groups-api-openapi.yml
+  capability_id: BC-620.20
+  capability_id_l1: BC-620
+  capability_name: Identity & Access Management
+  confidence: 0.9
+  evidence: POST /groups/{groupId}/members  add-group-member  Active Directory Add Group Member
+  reason: Directory group and membership management is core identity and access administration.
+- tag: Members
+  spec_file: active-directory-members-api-openapi.yml
+  capability_id: BC-620.20
+  capability_id_l1: BC-620
+  capability_name: Identity & Access Management
+  confidence: 0.88
+  evidence: GET /groups/{groupId}/members  list-group-members
+  reason: Group membership add/remove operations are access provisioning in the directory.
+- tag: Users
+  spec_file: active-directory-users-api-openapi.yml
+  capability_id: BC-620.20
+  capability_id_l1: BC-620
+  capability_name: Identity & Access Management
+  confidence: 0.88
+  evidence: 'POST /users  create-user  Active Directory Create User; schemas: PasswordProfile'
+  reason: Directory user account lifecycle (create/update/delete, password profile, group memberships)
+    is IAM joiners-movers-leavers, not HR records.
+- tag: App Role Assignments
+  spec_file: active-directory-app-role-assignments-api-openapi.yml
+  capability_id: BC-620.20
+  capability_id_l1: BC-620
+  capability_name: Identity & Access Management
+  confidence: 0.85
+  evidence: GET /servicePrincipals/{servicePrincipalId}/appRoleAssignments  list-service-principal-app-role-assignments
+  reason: App role assignments to service principals are access-rights grants in an identity directory
+    — Identity & Access Management.
+- tag: Service Principals
+  spec_file: active-directory-service-principals-api-openapi.yml
+  capability_id: BC-620.20
+  capability_id_l1: BC-620
+  capability_name: Identity & Access Management
+  confidence: 0.85
+  evidence: GET /servicePrincipals  list-service-principals
+  reason: Service principals are machine identities with app role assignments — identity and access management.
+- tag: Applications
+  spec_file: active-directory-applications-api-openapi.yml
+  capability_id: BC-620.20
+  capability_id_l1: BC-620
+  capability_name: Identity & Access Management
+  confidence: 0.75
+  evidence: Register and manage Microsoft Entra applications and their associated service principals ...
+    Configure app permissions (API permissions), OAuth2 permission grants (delegated consent)
+  reason: Application registration in Entra ID is the basis for app identity and permission grants; sits
+    within IAM rather than application portfolio management.
+- tag: Owners
+  spec_file: active-directory-owners-api-openapi.yml
+  capability_id: BC-620.20
+  capability_id_l1: BC-620
+  capability_name: Identity & Access Management
+  confidence: 0.7
+  evidence: GET /groups/{groupId}/owners  list-group-owners
+  reason: Listing group owners is directory access administration; thin surface but unambiguous within
+    IAM.
