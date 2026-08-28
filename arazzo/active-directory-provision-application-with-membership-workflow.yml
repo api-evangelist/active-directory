@@ -11,8 +11,14 @@ info:
     without opening the underlying OpenAPI description.
   version: 1.0.0
 sourceDescriptions:
+- name: appRoleAssignmentsApi
+  url: ../openapi/active-directory-app-role-assignments-api-openapi.yml
+  type: openapi
 - name: applicationsApi
-  url: ../openapi/active-directory-applications-openapi.yaml
+  url: ../openapi/active-directory-applications-api-openapi.yml
+  type: openapi
+- name: servicePrincipalsApi
+  url: ../openapi/active-directory-service-principals-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: provision-application-with-service-principal

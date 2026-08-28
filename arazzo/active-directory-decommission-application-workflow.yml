@@ -11,7 +11,7 @@ info:
   version: 1.0.0
 sourceDescriptions:
 - name: applicationsApi
-  url: ../openapi/active-directory-applications-openapi.yaml
+  url: ../openapi/active-directory-applications-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: decommission-application

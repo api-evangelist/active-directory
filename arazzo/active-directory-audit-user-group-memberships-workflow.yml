@@ -10,8 +10,11 @@ info:
     reporting line. Each step inlines its request so the flow is self-describing.
   version: 1.0.0
 sourceDescriptions:
+- name: groupsApi
+  url: ../openapi/active-directory-groups-api-openapi.yml
+  type: openapi
 - name: usersApi
-  url: ../openapi/active-directory-users-openapi.yaml
+  url: ../openapi/active-directory-users-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: audit-user-group-memberships

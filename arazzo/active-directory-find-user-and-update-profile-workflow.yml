@@ -11,7 +11,7 @@ info:
   version: 1.0.0
 sourceDescriptions:
 - name: usersApi
-  url: ../openapi/active-directory-users-openapi.yaml
+  url: ../openapi/active-directory-users-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: find-user-and-update-profile

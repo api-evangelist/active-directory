@@ -11,7 +11,7 @@ info:
   version: 1.0.0
 sourceDescriptions:
 - name: groupsApi
-  url: ../openapi/active-directory-groups-openapi.yaml
+  url: ../openapi/active-directory-groups-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: create-group-and-add-members

@@ -11,11 +11,11 @@ info:
     descriptions.
   version: 1.0.0
 sourceDescriptions:
-- name: usersApi
-  url: ../openapi/active-directory-users-openapi.yaml
-  type: openapi
 - name: groupsApi
-  url: ../openapi/active-directory-groups-openapi.yaml
+  url: ../openapi/active-directory-groups-api-openapi.yml
+  type: openapi
+- name: usersApi
+  url: ../openapi/active-directory-users-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: provision-user-into-new-group
