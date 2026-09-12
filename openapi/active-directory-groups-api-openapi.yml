@@ -1,4 +1,4 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   title: Microsoft Graph Applications and Service Principals App Role Assignments Groups API
   description: Register and manage Microsoft Entra applications and their associated service principals via Microsoft Graph. Configure app permissions (API permissions), OAuth2 permission grants (delegated consent), app role assignments, certificates, keys, federated identity credentials, and app consent policies. Use this API for application lifecycle management and zero-trust app governance.
@@ -410,23 +410,32 @@ paths:
         dispatcher: FALLBACK
         dispatcherRules: Response || 200
 components:
+  responses:
+    NotFound:
+      description: Group not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    BadRequest:
+      description: Bad request — invalid parameters or request body
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Unauthorized:
+      description: Authentication required — missing or invalid access token
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Forbidden:
+      description: Insufficient permissions
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
   schemas:
-    GroupUpdate:
-      type: object
-      description: Properties that can be updated on a Microsoft Entra group
-      properties:
-        displayName:
-          type: string
-        description:
-          type: string
-        mailNickname:
-          type: string
-        visibility:
-          type: string
-        membershipRule:
-          type: string
-        membershipRuleProcessingState:
-          type: string
     ErrorResponse:
       type: object
       properties:
@@ -452,6 +461,22 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Group'
+    GroupUpdate:
+      type: object
+      description: Properties that can be updated on a Microsoft Entra group
+      properties:
+        displayName:
+          type: string
+        description:
+          type: string
+        mailNickname:
+          type: string
+        visibility:
+          type: string
+        membershipRule:
+          type: string
+        membershipRuleProcessingState:
+          type: string
     Group:
       type: object
       description: A Microsoft Entra group (security group or Microsoft 365 group)
@@ -595,31 +620,6 @@ components:
           items:
             type: string
           description: Array of OData references to owners to add at creation time
-  responses:
-    Unauthorized:
-      description: Authentication required — missing or invalid access token
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    BadRequest:
-      description: Bad request — invalid parameters or request body
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    NotFound:
-      description: Group not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    Forbidden:
-      description: Insufficient permissions
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
   securitySchemes:
     oauth2:
       type: oauth2

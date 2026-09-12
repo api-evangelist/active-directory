@@ -1,4 +1,4 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   title: Microsoft Graph Applications and Service Principals App Role Assignments Users API
   description: Register and manage Microsoft Entra applications and their associated service principals via Microsoft Graph. Configure app permissions (API permissions), OAuth2 permission grants (delegated consent), app role assignments, certificates, keys, federated identity credentials, and app consent policies. Use this API for application lifecycle management and zero-trust app governance.
@@ -313,23 +313,32 @@ paths:
         dispatcher: FALLBACK
         dispatcherRules: Response || 200
 components:
+  responses:
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    BadRequest:
+      description: Bad request — invalid query parameters or request body
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Unauthorized:
+      description: Authentication required — missing or invalid access token
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Forbidden:
+      description: Insufficient permissions — required scopes not granted
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
   schemas:
-    PasswordProfile:
-      type: object
-      description: Password profile for a user account
-      required:
-      - password
-      properties:
-        password:
-          type: string
-          description: The password for the user (must meet tenant complexity requirements)
-        forceChangePasswordNextSignIn:
-          type: boolean
-          description: If true, user must reset password at next sign-in
-          default: true
-        forceChangePasswordNextSignInWithMfa:
-          type: boolean
-          description: If true, user must perform MFA and reset password at next sign-in
     UserCreate:
       type: object
       description: Properties required to create a new Microsoft Entra user
@@ -497,6 +506,36 @@ components:
         externalUserState:
           type: string
           description: State of a guest/external user invited via Azure AD B2B
+    PasswordProfile:
+      type: object
+      description: Password profile for a user account
+      required:
+      - password
+      properties:
+        password:
+          type: string
+          description: The password for the user (must meet tenant complexity requirements)
+        forceChangePasswordNextSignIn:
+          type: boolean
+          description: If true, user must reset password at next sign-in
+          default: true
+        forceChangePasswordNextSignInWithMfa:
+          type: boolean
+          description: If true, user must perform MFA and reset password at next sign-in
+    UserCollection:
+      type: object
+      description: Collection of user objects with OData pagination metadata
+      properties:
+        '@odata.context':
+          type: string
+          description: OData metadata URL
+        '@odata.nextLink':
+          type: string
+          description: URL to fetch the next page of results
+        value:
+          type: array
+          items:
+            $ref: '#/components/schemas/User'
     UserUpdate:
       type: object
       description: Properties that can be updated on a Microsoft Entra user
@@ -523,45 +562,6 @@ components:
           $ref: '#/components/schemas/PasswordProfile'
         accountEnabled:
           type: boolean
-    UserCollection:
-      type: object
-      description: Collection of user objects with OData pagination metadata
-      properties:
-        '@odata.context':
-          type: string
-          description: OData metadata URL
-        '@odata.nextLink':
-          type: string
-          description: URL to fetch the next page of results
-        value:
-          type: array
-          items:
-            $ref: '#/components/schemas/User'
-  responses:
-    Unauthorized:
-      description: Authentication required — missing or invalid access token
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    BadRequest:
-      description: Bad request — invalid query parameters or request body
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    Forbidden:
-      description: Insufficient permissions — required scopes not granted
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    NotFound:
-      description: Resource not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
   securitySchemes:
     oauth2:
       type: oauth2

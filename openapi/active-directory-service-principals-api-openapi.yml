@@ -1,4 +1,4 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   title: Microsoft Graph Applications and App Role Assignments Service Principals API
   description: Register and manage Microsoft Entra applications and their associated service principals via Microsoft Graph. Configure app permissions (API permissions), OAuth2 permission grants (delegated consent), app role assignments, certificates, keys, federated identity credentials, and app consent policies. Use this API for application lifecycle management and zero-trust app governance.
@@ -113,7 +113,30 @@ paths:
         dispatcher: FALLBACK
         dispatcherRules: Response || 200
 components:
+  responses:
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Unauthorized:
+      description: Authentication required
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
   schemas:
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            code:
+              type: string
+            message:
+              type: string
     ServicePrincipal:
       type: object
       description: A service principal — the local instance of an application in the tenant
@@ -191,16 +214,17 @@ components:
         createdDateTime:
           type: string
           format: date-time
-    ErrorResponse:
+    ServicePrincipalCollection:
       type: object
       properties:
-        error:
-          type: object
-          properties:
-            code:
-              type: string
-            message:
-              type: string
+        '@odata.context':
+          type: string
+        '@odata.nextLink':
+          type: string
+        value:
+          type: array
+          items:
+            $ref: '#/components/schemas/ServicePrincipal'
     AppRoleAssignment:
       type: object
       description: An app role assignment granting a user, group, or SP access to an app role
@@ -232,30 +256,6 @@ components:
         createdDateTime:
           type: string
           format: date-time
-    ServicePrincipalCollection:
-      type: object
-      properties:
-        '@odata.context':
-          type: string
-        '@odata.nextLink':
-          type: string
-        value:
-          type: array
-          items:
-            $ref: '#/components/schemas/ServicePrincipal'
-  responses:
-    Unauthorized:
-      description: Authentication required
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    NotFound:
-      description: Resource not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
   securitySchemes:
     oauth2:
       type: oauth2
