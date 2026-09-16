@@ -479,7 +479,7 @@ apis:
   - type: Deprecation Notice
     url: https://docs.microsoft.com/en-us/graph/migrate-azure-ad-graph-overview
 - aid: microsoft-active-directory:microsoft-active-directory-directory-roles-api
-  name: Microsoft Active Directory Directory Roles API
+  name: Microsoft Active Directory Roles API
   description: The Directory Roles API from Microsoft Active Directory — 2 operation(s) for directory
     roles.
   humanURL: https://docs.microsoft.com/en-us/graph/overview
