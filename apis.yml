@@ -1,7 +1,12 @@
 name: Microsoft Active Directory
 url: https://developer.microsoft.com/en-us/graph
 x-parent: microsoft-entra
-description: Microsoft Active Directory and Microsoft Entra ID provide identity and access management for organizations of all sizes. Microsoft Graph API is the unified REST API gateway for accessing and managing Microsoft Entra ID (formerly Azure Active Directory), including users, groups, applications, devices, conditional access policies, identity governance, and directory administration. Legacy on-premises Active Directory is managed through LDAP, Kerberos, and PowerShell protocols; cloud identity is managed through Microsoft Graph.
+description: Microsoft Active Directory and Microsoft Entra ID provide identity and access management
+  for organizations of all sizes. Microsoft Graph API is the unified REST API gateway for accessing and
+  managing Microsoft Entra ID (formerly Azure Active Directory), including users, groups, applications,
+  devices, conditional access policies, identity governance, and directory administration. Legacy on-premises
+  Active Directory is managed through LDAP, Kerberos, and PowerShell protocols; cloud identity is managed
+  through Microsoft Graph.
 deliveryModel:
   model: unknown
   open_source: unknown
@@ -30,7 +35,7 @@ accessModel:
   method: derived
 image: https://learn.microsoft.com/en-us/entra/media/index/active-directory.svg
 created: '2024-01-01'
-modified: '2026-05-19'
+modified: '2026-09-16'
 specificationVersion: '0.23'
 tags:
 - Active Directory
@@ -42,7 +47,9 @@ tags:
 - Zero Trust
 apis:
 - name: Microsoft Graph Devices API
-  description: Manage devices registered or joined to Microsoft Entra ID, including Entra joined, Entra registered, and hybrid Azure AD joined devices. Retrieve BitLocker recovery keys and Local Admin Password Solution (LAPS) credentials for managed devices.
+  description: Manage devices registered or joined to Microsoft Entra ID, including Entra joined, Entra
+    registered, and hybrid Azure AD joined devices. Retrieve BitLocker recovery keys and Local Admin Password
+    Solution (LAPS) credentials for managed devices.
   humanURL: https://learn.microsoft.com/en-us/graph/api/resources/device
   baseURL: https://graph.microsoft.com/v1.0
   tags:
@@ -53,7 +60,9 @@ apis:
   - type: Documentation
     url: https://learn.microsoft.com/en-us/graph/api/resources/device
 - name: Microsoft Graph Directory Roles and Administrative Units API
-  description: Manage Microsoft Entra built-in and custom directory roles, role assignments, and role-scoped administrative units. Assign administrator roles to users, groups, or service principals, and create scoped role assignments via administrative units.
+  description: Manage Microsoft Entra built-in and custom directory roles, role assignments, and role-scoped
+    administrative units. Assign administrator roles to users, groups, or service principals, and create
+    scoped role assignments via administrative units.
   humanURL: https://learn.microsoft.com/en-us/graph/api/resources/directoryrole
   baseURL: https://graph.microsoft.com/v1.0
   tags:
@@ -64,7 +73,9 @@ apis:
   - type: Documentation
     url: https://learn.microsoft.com/en-us/graph/api/resources/directoryrole
 - name: Microsoft Graph Conditional Access API
-  description: Create and manage Microsoft Entra Conditional Access policies that enforce access controls based on user, location, device, and risk signals. Configure named locations, authentication context class references, and evaluate policy impact using what-if analysis.
+  description: Create and manage Microsoft Entra Conditional Access policies that enforce access controls
+    based on user, location, device, and risk signals. Configure named locations, authentication context
+    class references, and evaluate policy impact using what-if analysis.
   humanURL: https://learn.microsoft.com/en-us/graph/api/resources/conditionalaccesspolicy
   baseURL: https://graph.microsoft.com/v1.0
   tags:
@@ -76,7 +87,9 @@ apis:
   - type: Documentation
     url: https://learn.microsoft.com/en-us/graph/api/resources/conditionalaccesspolicy
 - name: Microsoft Graph Identity Governance API
-  description: Manage Microsoft Entra ID Governance features including access reviews, entitlement management (access packages, catalogs, and policies), Privileged Identity Management (PIM) for just-in-time role activation, and lifecycle workflows for joiner/mover/leaver employee identity lifecycle automation.
+  description: Manage Microsoft Entra ID Governance features including access reviews, entitlement management
+    (access packages, catalogs, and policies), Privileged Identity Management (PIM) for just-in-time role
+    activation, and lifecycle workflows for joiner/mover/leaver employee identity lifecycle automation.
   humanURL: https://learn.microsoft.com/en-us/graph/api/resources/identitygovernance-overview
   baseURL: https://graph.microsoft.com/v1.0
   tags:
@@ -88,7 +101,9 @@ apis:
   - type: Documentation
     url: https://learn.microsoft.com/en-us/graph/api/resources/identitygovernance-overview
 - name: Microsoft Graph Identity Protection API
-  description: Detect, investigate, and remediate identity-based risks using Microsoft Entra ID Protection. Access risk detections, risky users, risky service principals, and risk events, and feed data into SIEM tools for security correlation and incident response.
+  description: Detect, investigate, and remediate identity-based risks using Microsoft Entra ID Protection.
+    Access risk detections, risky users, risky service principals, and risk events, and feed data into
+    SIEM tools for security correlation and incident response.
   humanURL: https://learn.microsoft.com/en-us/graph/api/resources/identityprotection-overview
   baseURL: https://graph.microsoft.com/v1.0
   tags:
@@ -99,7 +114,10 @@ apis:
   - type: Documentation
     url: https://learn.microsoft.com/en-us/graph/api/resources/identityprotection-overview
 - name: Microsoft Graph Authentication Methods API
-  description: Manage authentication methods registered for users in Microsoft Entra ID, including FIDO2 security keys, Microsoft Authenticator, phone (SMS/voice call), email OTP, Windows Hello for Business, and temporary access passes. Configure authentication method policies and authentication strength requirements.
+  description: Manage authentication methods registered for users in Microsoft Entra ID, including FIDO2
+    security keys, Microsoft Authenticator, phone (SMS/voice call), email OTP, Windows Hello for Business,
+    and temporary access passes. Configure authentication method policies and authentication strength
+    requirements.
   humanURL: https://learn.microsoft.com/en-us/graph/api/resources/authenticationmethods-overview
   baseURL: https://graph.microsoft.com/v1.0
   tags:
@@ -111,7 +129,9 @@ apis:
   - type: Documentation
     url: https://learn.microsoft.com/en-us/graph/api/resources/authenticationmethods-overview
 - name: Microsoft Graph Identity and Access Reports API
-  description: Access audit logs, sign-in logs, provisioning logs, and identity-related reports for monitoring, compliance, and troubleshooting. Stream logs to Azure Monitor and Log Analytics or to third-party SIEM tools for security operations.
+  description: Access audit logs, sign-in logs, provisioning logs, and identity-related reports for monitoring,
+    compliance, and troubleshooting. Stream logs to Azure Monitor and Log Analytics or to third-party
+    SIEM tools for security operations.
   humanURL: https://learn.microsoft.com/en-us/graph/api/resources/report-identity-access
   baseURL: https://graph.microsoft.com/v1.0
   tags:
@@ -124,7 +144,8 @@ apis:
     url: https://learn.microsoft.com/en-us/graph/api/resources/report-identity-access
 - aid: active-directory:active-directory-app-role-assignments-api
   name: Microsoft Active Directory App Role Assignments API
-  description: The App Role Assignments API from Microsoft Active Directory — 1 operation(s) for app role assignments.
+  description: The App Role Assignments API from Microsoft Active Directory — 1 operation(s) for app role
+    assignments.
   humanURL: https://learn.microsoft.com/en-us/graph/api/resources/users
   baseURL: https://graph.microsoft.com/v1.0
   tags:
@@ -318,7 +339,8 @@ apis:
     url: examples/applications-application-example.json
 - aid: active-directory:active-directory-service-principals-api
   name: Microsoft Active Directory Service Principals API
-  description: The Service Principals API from Microsoft Active Directory — 3 operation(s) for service principals.
+  description: The Service Principals API from Microsoft Active Directory — 3 operation(s) for service
+    principals.
   humanURL: https://learn.microsoft.com/en-us/graph/api/resources/users
   baseURL: https://graph.microsoft.com/v1.0
   tags:
@@ -458,7 +480,8 @@ apis:
     url: https://docs.microsoft.com/en-us/graph/migrate-azure-ad-graph-overview
 - aid: microsoft-active-directory:microsoft-active-directory-directory-roles-api
   name: Microsoft Active Directory Directory Roles API
-  description: The Directory Roles API from Microsoft Active Directory — 2 operation(s) for directory roles.
+  description: The Directory Roles API from Microsoft Active Directory — 2 operation(s) for directory
+    roles.
   humanURL: https://docs.microsoft.com/en-us/graph/overview
   baseURL: https://graph.microsoft.com
   tags:
@@ -474,6 +497,175 @@ apis:
     url: https://docs.microsoft.com/en-us/graph/sdks/sdks-overview
   - type: Pricing
     url: https://azure.microsoft.com/en-us/pricing/details/active-directory/
+- name: Azure AD Authentication Library (ADAL)
+  description: Authentication library for Azure AD (being replaced by MSAL).
+  humanURL: https://docs.microsoft.com/en-us/azure/active-directory/develop/active-directory-authentication-libraries
+  tags:
+  - Authentication
+  - Legacy
+  - Library
+  properties:
+  - type: Documentation
+    url: https://docs.microsoft.com/en-us/azure/active-directory/develop/active-directory-authentication-libraries
+  - type: GitHubRepository
+    url: https://github.com/AzureAD/azure-activedirectory-library-for-dotnet
+- name: Microsoft Authentication Library (MSAL)
+  description: Modern authentication library for Microsoft identity platform.
+  humanURL: https://docs.microsoft.com/en-us/azure/active-directory/develop/msal-overview
+  tags:
+  - Authentication
+  - Library
+  - OpenID Connect
+  tags_raw:
+  - Authentication
+  - Library
+  - OAuth
+  - OpenID Connect
+  properties:
+  - type: Documentation
+    url: https://docs.microsoft.com/en-us/azure/active-directory/develop/msal-overview
+  - type: GitHubRepository
+    url: https://github.com/AzureAD/microsoft-authentication-library-for-js
+    title: JavaScript SDK
+  - type: CodeExamples
+    url: https://docs.microsoft.com/en-us/azure/active-directory/develop/sample-v2-code
+  - type: GitHubRepository
+    url: https://github.com/AzureAD/microsoft-authentication-library-for-dotnet
+    title: .NET SDK
+  - type: GitHubRepository
+    url: https://github.com/AzureAD/microsoft-authentication-library-for-python
+    title: Python SDK
+  - type: GitHubRepository
+    url: https://github.com/AzureAD/microsoft-authentication-library-for-java
+    title: Java SDK
+  - type: GitHubRepository
+    url: https://github.com/AzureAD/microsoft-authentication-library-for-objc
+    title: iOS SDK
+  - type: Documentation
+    url: https://learn.microsoft.com/en-us/entra/msal/
+    title: MSAL Documentation
+- name: Microsoft Identity Platform
+  description: The Microsoft identity platform provides authentication and authorization services using
+    standards-compliant implementations of OAuth 2.0 and OpenID Connect, enabling developers to build
+    applications that sign in users and access secured APIs.
+  humanURL: https://learn.microsoft.com/en-us/entra/identity-platform/
+  baseURL: https://login.microsoftonline.com
+  tags:
+  - App Registration
+  - Authentication
+  - Authorization
+  - OpenID Connect
+  tags_raw:
+  - App Registration
+  - Authentication
+  - Authorization
+  - OAuth
+  - OpenID Connect
+  properties:
+  - type: Documentation
+    url: https://learn.microsoft.com/en-us/entra/identity-platform/
+  - type: Documentation
+    url: https://learn.microsoft.com/en-us/entra/identity-platform/v2-protocols
+    title: OAuth Documentation
+  - type: Documentation
+    url: https://learn.microsoft.com/en-us/entra/identity-platform/v2-protocols-oidc
+    title: OpenID Connect Documentation
+  - type: Documentation
+    url: https://learn.microsoft.com/en-us/entra/identity-platform/v2-oauth2-auth-code-flow
+    title: Authorization Code Flow
+  - type: GettingStarted
+    url: https://learn.microsoft.com/en-us/entra/identity-platform/quickstart-register-app
+    title: App Registration Guide
+  - type: Documentation
+    url: https://learn.microsoft.com/en-us/entra/identity-platform/scopes-oidc
+    title: Scopes and Permissions
+  - type: CodeExamples
+    url: https://learn.microsoft.com/en-us/entra/identity-platform/quickstart-web-app-sign-in
+- name: Microsoft Entra Verified ID API
+  description: Microsoft Entra Verified ID is a managed verifiable credentials service that enables organizations
+    to issue, manage, and verify decentralized identity credentials based on W3C standards.
+  humanURL: https://learn.microsoft.com/en-us/entra/verified-id/
+  baseURL: https://verifiedid.did.msidentity.com
+  tags:
+  - Decentralized Identity
+  - Identity Verification
+  - Verifiable Credentials
+  - W3C
+  properties:
+  - type: Documentation
+    url: https://learn.microsoft.com/en-us/entra/verified-id/
+  - type: APIReference
+    url: https://learn.microsoft.com/en-us/entra/verified-id/admin-api
+    title: Admin API
+  - type: APIReference
+    url: https://learn.microsoft.com/en-us/entra/verified-id/vc-network-api
+    title: Network API
+  - type: Documentation
+    url: https://learn.microsoft.com/en-us/entra/verified-id/decentralized-identifier-overview
+    title: Overview
+  - type: GettingStarted
+    url: https://learn.microsoft.com/en-us/entra/verified-id/verifiable-credentials-configure-tenant
+- name: Microsoft Entra ID Governance API
+  description: Microsoft Entra ID Governance APIs in Microsoft Graph enable automated access reviews,
+    entitlement management, lifecycle workflows, and privileged identity management for identity governance
+    scenarios.
+  humanURL: https://learn.microsoft.com/en-us/entra/id-governance/identity-governance-overview
+  baseURL: https://graph.microsoft.com
+  tags:
+  - Access Reviews
+  - Entitlement Management
+  - Governance
+  - Lifecycle Workflows
+  - Privileged Identity Management
+  properties:
+  - type: Documentation
+    url: https://learn.microsoft.com/en-us/entra/id-governance/identity-governance-overview
+  - type: APIReference
+    url: https://learn.microsoft.com/en-us/graph/api/resources/identitygovernance-overview?view=graph-rest-1.0
+  - type: Documentation
+    url: https://learn.microsoft.com/en-us/entra/id-governance/deploy-access-reviews
+    title: Access Reviews
+  - type: Documentation
+    url: https://learn.microsoft.com/en-us/entra/id-governance/lifecycle-workflows-deployment
+    title: Lifecycle Workflows
+  - type: Pricing
+    url: https://learn.microsoft.com/en-us/entra/id-governance/licensing-fundamentals
+- name: Microsoft Entra SCIM Provisioning API
+  description: Microsoft Entra ID supports SCIM 2.0 protocol for automatic user and group provisioning
+    to cloud applications, enabling automated identity lifecycle management through standardized REST
+    APIs.
+  humanURL: https://learn.microsoft.com/en-us/entra/identity/app-provisioning/use-scim-to-provision-users-and-groups
+  tags:
+  - Automation
+  - Group Management
+  - Provisioning
+  - SCIM
+  - User Management
+  properties:
+  - type: Documentation
+    url: https://learn.microsoft.com/en-us/entra/identity/app-provisioning/use-scim-to-provision-users-and-groups
+  - type: Documentation
+    url: https://learn.microsoft.com/en-us/entra/architecture/sync-scim
+    title: Architecture Guide
+  - type: GitHubRepository
+    url: https://github.com/azure-ad-b2c/rest-api
+- name: Microsoft Entra PowerShell
+  description: The Microsoft Entra PowerShell module provides cmdlets for managing Microsoft Entra resources
+    programmatically, built on the Microsoft Graph PowerShell SDK.
+  humanURL: https://learn.microsoft.com/en-us/powershell/entra-powershell/overview?view=entra-powershell
+  tags:
+  - Automation
+  - CLI
+  - PowerShell
+  - Scripting
+  properties:
+  - type: Documentation
+    url: https://learn.microsoft.com/en-us/powershell/entra-powershell/?view=entra-powershell
+  - type: GettingStarted
+    url: https://learn.microsoft.com/en-us/powershell/entra-powershell/installation?view=entra-powershell
+    title: Installation
+  - type: GitHubRepository
+    url: https://github.com/microsoftgraph/entra-powershell
 common:
 - type: Service Status
   url: https://status.azure.com/
@@ -580,9 +772,11 @@ common:
 - type: Features
   data:
   - name: Unified Identity API
-    description: Single REST endpoint (graph.microsoft.com) for all Microsoft Entra identity and directory operations.
+    description: Single REST endpoint (graph.microsoft.com) for all Microsoft Entra identity and directory
+      operations.
   - name: User Lifecycle Management
-    description: Full CRUD operations for user accounts including bulk operations, license assignment, and guest management.
+    description: Full CRUD operations for user accounts including bulk operations, license assignment,
+      and guest management.
   - name: Group Management
     description: Create and manage security groups, Microsoft 365 groups, and dynamic membership groups.
   - name: Application Registration
@@ -602,15 +796,18 @@ common:
 - type: UseCases
   data:
   - name: User Provisioning Automation
-    description: Automate user account creation, attribute updates, and deprovisioning for HR-driven identity lifecycle.
+    description: Automate user account creation, attribute updates, and deprovisioning for HR-driven identity
+      lifecycle.
   - name: Zero Trust Policy Enforcement
     description: Programmatically deploy and manage Conditional Access policies across the organization.
   - name: SIEM Integration
     description: Stream audit logs and sign-in events to security information and event management systems.
   - name: Application Access Management
-    description: Automate app registration, permission grants, and app role assignments for developer self-service.
+    description: Automate app registration, permission grants, and app role assignments for developer
+      self-service.
   - name: Identity Risk Remediation
-    description: Detect and respond to risky sign-ins and compromised accounts via Identity Protection APIs.
+    description: Detect and respond to risky sign-ins and compromised accounts via Identity Protection
+      APIs.
   - name: Compliance Reporting
     description: Generate access reviews, entitlement reports, and audit logs for regulatory compliance.
   - name: Privileged Access Governance
@@ -618,9 +815,11 @@ common:
 - type: Integrations
   data:
   - name: Azure Active Directory
-    description: Microsoft Entra ID (formerly Azure AD) is the cloud identity backbone accessed via Microsoft Graph.
+    description: Microsoft Entra ID (formerly Azure AD) is the cloud identity backbone accessed via Microsoft
+      Graph.
   - name: Microsoft 365
-    description: Microsoft Graph provides unified access to Microsoft 365 user data alongside identity operations.
+    description: Microsoft Graph provides unified access to Microsoft 365 user data alongside identity
+      operations.
   - name: Azure Monitor
     description: Stream Microsoft Entra sign-in and audit logs to Azure Monitor Log Analytics for analysis.
   - name: Microsoft Sentinel
@@ -630,7 +829,10 @@ common:
   - name: SCIM Providers
     description: Automate user provisioning to SaaS applications using Microsoft Entra SCIM provisioning.
   - name: SAML and OIDC Applications
-    description: Register and manage federated applications using SAML 2.0 and OpenID Connect via Microsoft Graph.
+    description: Register and manage federated applications using SAML 2.0 and OpenID Connect via Microsoft
+      Graph.
 maintainers:
 - name: Kin Lane
   email: kin@apievangelist.com
+x-aliases:
+- Microsoft Azure Active Directory
