@@ -1,92 +1,18 @@
-specification: API Commons Rate Limits
-specificationVersion: '0.1'
-schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/RateLimits
-provider: Microsoft Active Directory
-providerId: active-directory
-created: '2026-05-04'
-# Provenance stamped 2026-08-11: this artifact was written by the API Evangelist
-# bulk sweep dated 2026-05-04, not harvested from the provider. See roadmap#35.
-method: generated
-modified: '2026-05-05'
-reconciled: true
-tags:
-  - Active Directory
-  - Authentication
-  - Authorization
-  - Directory Services
-  - Identity Management
-  - Microsoft Entra
-  - Rate Limiting
-description: Microsoft Entra ID (Azure AD) directory operations are accessed through Microsoft Graph,
-  which throttles using a token-bucket algorithm based on ResourceUnits. Limits are scoped per application,
-  per (application + tenant) pair, and per tenant for writes. Tenant size (S < 50 users, M 50–500, L >
-  500) affects the read budget. 429 responses include a Retry-After header. For bulk extraction Microsoft
-  recommends Microsoft Graph Data Connect rather than the REST APIs.
+# Rate limits transcribed from the provider's own documentation — see provenance. Quoted, not derived.
+generated: '2026-09-20'
+method: searched
+source: https://learn.microsoft.com/en-us/graph/throttling
 sources:
-  - https://learn.microsoft.com/en-us/graph/throttling
-  - https://learn.microsoft.com/en-us/graph/throttling-limits
+- https://learn.microsoft.com/en-us/graph/throttling
+provenance:
+  tool: planning/api-economics/harvest_ratelimits.py
+  run: 20260920T133210
+  grounding: every limit_text was found verbatim in the fetched page text
+published: false
+note: General throttling guidance page; describes 429 responses and Retry-After header but states no numeric
+  rate limits (service-specific limits are linked elsewhere).
+limit_count: 0
+limits: []
 headers:
-  retryAfter: Retry-After
-  throttleLimitPercentage: x-ms-throttle-limit-percentage
-  requestId: request-id
-responseCodes:
-  throttled: 429
-limits:
-  - name: Entra read budget — Application + Tenant pair (Small tenant <50 users)
-    scope: app+tenant
-    metric: resource-units
-    limit: 3500
-    timeFrame: 10s
-    notes: 10-second sliding window. Most GET requests cost 1 ResourceUnit; GET /applications costs 2;
-      $select reduces cost by 1; $expand increases cost by 1.
-  - name: Entra read budget — Application + Tenant pair (Medium tenant 50–500 users)
-    scope: app+tenant
-    metric: resource-units
-    limit: 5000
-    timeFrame: 10s
-  - name: Entra read budget — Application + Tenant pair (Large tenant >500 users)
-    scope: app+tenant
-    metric: resource-units
-    limit: 8000
-    timeFrame: 10s
-  - name: Entra read budget — Application (across all tenants)
-    scope: application
-    metric: resource-units
-    limit: 150000
-    timeFrame: 20s
-  - name: Entra write budget — Application + Tenant pair
-    scope: app+tenant
-    metric: requests
-    limit: 3000
-    timeFrame: 150s
-    notes: 2 minutes 30 seconds window for POST / PATCH / PUT / DELETE on directory objects.
-  - name: Entra write budget — Application
-    scope: application
-    metric: requests
-    limit: 35000
-    timeFrame: 300s
-  - name: Entra write budget — Tenant
-    scope: tenant
-    metric: requests
-    limit: 18000
-    timeFrame: 300s
-policies:
-  - name: Retry-After
-    description: Wait the number of seconds returned in the Retry-After header before retrying. Microsoft
-      Graph SDKs implement this automatically.
-  - name: Exponential Backoff Fallback
-    description: If no Retry-After header is returned, fall back to exponential backoff with jitter.
-  - name: Avoid Polling
-    description: Use change tracking (delta queries) and change notifications (webhooks) instead of polling
-      directory collections.
-  - name: Batch Carefully
-    description: JSON batching evaluates each sub-request against limits independently; throttled sub-requests
-      must be retried using the Retry-After header from the inner response (not the outer 200 OK envelope).
-  - name: Bulk via Data Connect
-    description: For bulk extraction of users, groups, or activity data use Microsoft Graph Data Connect
-      rather than the REST APIs to avoid throttling.
-  - name: Header Watching
-    description: Monitor x-ms-throttle-limit-percentage; values approaching 1.0 indicate imminent throttling.
-maintainers:
-  - FN: Kin Lane
-    email: info@apievangelist.com
+- Retry-After
+exceeded_status: 429
