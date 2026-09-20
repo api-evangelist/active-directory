@@ -667,6 +667,8 @@ apis:
   - type: GitHubRepository
     url: https://github.com/microsoftgraph/entra-powershell
 common:
+- type: Plans
+  url: plans/active-directory-plans-pricing.yml
 - type: Service Status
   url: https://status.azure.com/
 - type: Website

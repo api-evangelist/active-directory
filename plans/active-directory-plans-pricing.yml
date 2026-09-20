@@ -1,191 +1,87 @@
-specification: API Commons Plans
-specificationVersion: '0.1'
-schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/Plans
-provider: Microsoft Active Directory
-providerId: active-directory
-created: '2026-05-04'
-# Provenance stamped 2026-08-11: this artifact was written by the API Evangelist
-# bulk sweep dated 2026-05-04, not harvested from the provider. See roadmap#35.
-method: generated
-modified: '2026-05-05'
-reconciled: true
-tags:
-  - Active Directory
-  - Authentication
-  - Authorization
-  - Directory Services
-  - Identity Management
-  - Microsoft Entra
-  - Zero Trust
-description: Microsoft Entra ID (the cloud successor to Azure AD / on-prem Active Directory) is sold
-  per user per month, with a Free edition bundled into Microsoft cloud subscriptions plus paid P1, P2,
-  and Suite tiers and several standalone identity products. Programmatic access via Microsoft Graph is
-  metered through directory throttling rather than additional per-call billing — pricing is the per-user
-  Entra licence.
+# Pricing transcribed from the provider's own page — see provenance. Numbers are quoted, not derived.
+generated: '2026-09-20'
+method: searched
+source: https://www.microsoft.com/en-us/security/business/microsoft-entra-pricing
 sources:
-  - https://www.microsoft.com/en-us/security/business/microsoft-entra-pricing
-  - https://learn.microsoft.com/en-us/entra/
+- https://www.microsoft.com/en-us/security/business/microsoft-entra-pricing
+- https://azure.microsoft.com/en-us/pricing/details/active-directory/
+provenance:
+  tool: planning/api-economics/harvest_pricing.py
+  run: 20260920T120546
+  grounding: every price_text was found verbatim in the fetched page text
+audience: business-product
+pricing_basis: per-seat
+published: true
+note: Per-user/month license pricing for Entra plans, standalones, and add-ons; External ID and Domain
+  Services pricing not shown on this page.
+plan_count: 11
+currency: USD
 plans:
-  - id: active-directory-entra-id-free
-    name: Microsoft Entra ID Free
-    type: freemium
-    description: Included with Azure, Microsoft 365, Dynamics 365, Intune, and Power Platform subscriptions.
-    entries:
-      - label: Per user per month
-        name: entra_free
-        type: subscription
-        metric: seat
-        limit: -1
-        timeFrame: month
-        geo: global
-        unit: 1
-        price: '0.00'
-        userMultiplied: true
-    elements:
-      - name: Cloud user and group management
-      - name: Unlimited SSO across SaaS apps
-      - name: Multifactor authentication
-      - name: Self-service password change for cloud users
-      - name: Directory sync from on-prem AD (Entra Connect)
-      - name: Basic reporting
-  - id: active-directory-entra-id-p1
-    name: Microsoft Entra ID P1
-    type: subscription
-    description: Premium identity tier with conditional access, advanced group management, and identity
-      governance basics.
-    entries:
-      - label: Per user per month (annual)
-        name: entra_p1
-        type: subscription
-        metric: seat
-        limit: -1
-        timeFrame: month
-        geo: global
-        unit: 1
-        price: '6.00'
-        userMultiplied: true
-    elements:
-      - name: Conditional access
-      - name: Self-service password reset / writeback
-      - name: Advanced group management
-      - name: Application proxy
-      - name: Microsoft Identity Manager
-  - id: active-directory-entra-id-p2
-    name: Microsoft Entra ID P2
-    type: subscription
-    description: Adds risk-based conditional access and identity protection.
-    entries:
-      - label: Per user per month (annual)
-        name: entra_p2
-        type: subscription
-        metric: seat
-        limit: -1
-        timeFrame: month
-        geo: global
-        unit: 1
-        price: '9.00'
-        userMultiplied: true
-    elements:
-      - name: All P1 features
-      - name: Identity Protection (risk-based conditional access)
-      - name: Privileged Identity Management
-      - name: Access reviews
-  - id: active-directory-entra-suite
-    name: Microsoft Entra Suite
-    type: subscription
-    description: Combines Entra ID P1, ID Governance, Internet Access, Private Access, and Verified ID.
-      Requires P1 (or a bundle that includes P1).
-    entries:
-      - label: Per user per month (annual)
-        name: entra_suite
-        type: subscription
-        metric: seat
-        limit: -1
-        timeFrame: month
-        geo: global
-        unit: 1
-        price: '12.00'
-        userMultiplied: true
-    elements:
-      - name: Entra ID Governance
-      - name: Entra Internet Access
-      - name: Entra Private Access
-      - name: Entra Verified ID
-  - id: active-directory-entra-id-governance
-    name: Microsoft Entra ID Governance (Standalone)
-    type: subscription
-    description: Identity governance, lifecycle workflows, entitlement management, and access reviews.
-    entries:
-      - label: Per user per month
-        name: entra_id_governance
-        type: subscription
-        metric: seat
-        limit: -1
-        timeFrame: month
-        geo: global
-        unit: 1
-        price: '7.00'
-        userMultiplied: true
-    elements:
-      - name: Lifecycle workflows
-      - name: Entitlement management
-      - name: Access reviews
-  - id: active-directory-entra-internet-access
-    name: Microsoft Entra Internet Access
-    type: subscription
-    description: SSE / SWG component of Microsoft's Security Service Edge.
-    entries:
-      - label: Per user per month
-        name: entra_internet_access
-        type: subscription
-        metric: seat
-        limit: -1
-        timeFrame: month
-        geo: global
-        unit: 1
-        price: '5.00'
-        userMultiplied: true
-    elements:
-      - name: Internet access security
-      - name: Web filtering
-  - id: active-directory-entra-private-access
-    name: Microsoft Entra Private Access
-    type: subscription
-    description: ZTNA replacement for legacy VPN / Application Proxy.
-    entries:
-      - label: Per user per month
-        name: entra_private_access
-        type: subscription
-        metric: seat
-        limit: -1
-        timeFrame: month
-        geo: global
-        unit: 1
-        price: '5.00'
-        userMultiplied: true
-    elements:
-      - name: ZTNA private access to internal apps
-      - name: Per-app conditional access
-  - id: active-directory-entra-workload-id
-    name: Microsoft Entra Workload ID
-    type: usage-based
-    description: Per workload identity (service principal / managed identity) with conditional access
-      and lifecycle management.
-    entries:
-      - label: Per workload identity per month
-        name: entra_workload_id
-        type: subscription
-        metric: workload-identity
-        limit: -1
-        timeFrame: month
-        geo: global
-        unit: 1
-        price: '3.00'
-        userMultiplied: false
-    elements:
-      - name: Conditional access for workload identities
-      - name: Identity Protection signals for workload identities
-      - name: Access reviews for service principals
-maintainers:
-  - FN: Kin Lane
-    email: info@apievangelist.com
+- name: Microsoft Entra ID P1
+  price_text: $7.00 user/month, paid yearly (annual commitment)
+  price: 7.0
+  currency: USD
+  period: month
+  unit: user
+  included_quota: Available as a standalone or included with Microsoft 365 E3 for enterprise customers
+    and Microsoft 365 Business Premium for small to medium businesses.
+- name: Microsoft Entra ID P2
+  price_text: $10.00 user/month, paid yearly (annual commitment)
+  price: 10.0
+  currency: USD
+  period: month
+  unit: user
+  included_quota: Available as a standalone or included with Microsoft 365 E5 for enterprise customers.
+- name: Microsoft Entra Suite
+  price_text: $12.00 user/month, paid yearly (annual commitment)
+  price: 12.0
+  currency: USD
+  period: month
+  unit: user
+  included_quota: A subscription to Microsoft Entra ID P1 or a package that includes Microsoft Entra ID
+    P1 is required.
+- name: Microsoft Entra ID Free
+  price_text: Microsoft Entra ID Free is included with Microsoft cloud subscriptions, such as Microsoft
+    Azure and Microsoft 365.
+  period: none
+  unit: user
+  included_quota: Multifactor authentication, unlimited SSO across any SaaS app, basic reports, self-service
+    password change for cloud users
+- name: Microsoft Entra Internet Access
+  price_text: $5.00 user/month, paid yearly (annual commitment)
+  price: 5.0
+  currency: USD
+  period: month
+  unit: user
+- name: Microsoft Entra Private Access
+  price_text: $5.00 user/month, paid yearly (annual commitment)
+  price: 5.0
+  currency: USD
+  period: month
+  unit: user
+- name: Microsoft Entra ID Governance
+  price_text: $7.00 user/month, paid yearly (annual commitment)
+  price: 7.0
+  currency: USD
+  period: month
+  unit: user
+  included_quota: Available for Microsoft Entra ID P1 and P2 customers.
+- name: Microsoft Entra Verified ID
+  price_text: Verified ID is included with any Microsoft Entra ID subscription.
+  period: none
+  included_quota: Face Check is a premium feature included in the Microsoft Entra Suite or purchasable
+    separately.
+- name: Microsoft Entra External ID
+  price_text: See pricing
+  period: none
+  unit: monthly active user
+  included_quota: The External ID core features are free for your first 50,000 monthly active users.
+- name: Microsoft Entra Workload ID
+  price_text: $3.00 workload identity/month, paid yearly (annual commitment)
+  price: 3.0
+  currency: USD
+  period: month
+  unit: workload identity
+- name: Microsoft Entra Domain Services
+  price_text: Contact Sales
+  period: none
