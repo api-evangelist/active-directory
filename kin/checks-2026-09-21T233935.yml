@@ -2,21 +2,19 @@
 kin_checks:
   slug: active-directory
   schema_version: 0.22.0
-  scored_at: '2026-09-19'
-  run_ts: 2026-09-19T193153
+  scored_at: '2026-09-21'
+  run_ts: 2026-09-21T233935
   note: Actionable checks (missed + partial) in `checks`, plus the ids that did not
     apply in `na`. Everything else in rubric/scoring-0.22.0.yml was earned; counts
     below let you verify that.
   counts:
     total: 136
-    earned: 49
-    partial: 19
-    missed: 42
+    earned: 54
+    partial: 15
+    missed: 41
     na: 26
   checks:
   - id: maintainer_present
-    status: missed
-  - id: human_url_per_api
     status: missed
   - id: base_url_per_api
     status: missed
@@ -35,10 +33,6 @@ kin_checks:
     detail: 0 of 8 openapi documents pass
   - id: asyncapi_present
     status: missed
-  - id: json_schema_present
-    status: missed
-  - id: json_schema_per_resource
-    status: missed
   - id: json_ld_class_depth
     status: missed
   - id: conformance_declared
@@ -48,6 +42,10 @@ kin_checks:
   - id: change_log_present
     status: missed
     detail: pointer liveness 0.0
+  - id: rate_limits_documented
+    status: missed
+  - id: rate_limits_rich
+    status: missed
   - id: security_disclosure
     status: missed
   - id: webhooks_advertised
@@ -130,12 +128,6 @@ kin_checks:
     status: partial
     earned: 3.0
     detail: pointer liveness 0.5
-  - id: rate_limits_documented
-    status: partial
-    earned: 2.0
-  - id: rate_limits_rich
-    status: partial
-    earned: 1.0
   - id: github_org_present
     status: partial
     earned: 1.0
@@ -143,12 +135,6 @@ kin_checks:
   - id: postman_present
     status: partial
     earned: 0.5
-  - id: plans_present
-    status: partial
-    earned: 2.0
-  - id: plans_multiple
-    status: partial
-    earned: 1.0
   - id: agentic_access
     status: partial
     earned: 2.5
