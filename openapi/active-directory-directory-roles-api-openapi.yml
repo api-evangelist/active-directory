@@ -1,6 +1,6 @@
 openapi: 3.2.0
 info:
-  title: Microsoft Active Directory (via Microsoft Graph) Applications Directory Roles API
+  title: Microsoft Active Directory (via Microsoft Graph)… Directory…
   description: 'Microsoft Active Directory / Microsoft Entra ID identity resources are
 
     accessed through the Microsoft Graph REST API at
@@ -11,9 +11,7 @@ info:
 
     roles, and group membership. Authentication is via Microsoft Entra ID
 
-    OAuth 2.0 bearer tokens.
-
-    '
+    OAuth 2.0 bearer tokens.'
   version: '1.0'
   contact:
     name: Microsoft Graph (Entra ID)
@@ -34,6 +32,8 @@ paths:
       responses:
         '200':
           description: Directory roles
+      operationId: getDirectoryRoles
+      x-operation-id-source: derived
   /directoryRoles/{id}/members:
     parameters:
     - in: path
@@ -48,6 +48,8 @@ paths:
       responses:
         '200':
           description: Members
+      operationId: getDirectoryRolesByIdMembers
+      x-operation-id-source: derived
 components:
   securitySchemes:
     oauth2:

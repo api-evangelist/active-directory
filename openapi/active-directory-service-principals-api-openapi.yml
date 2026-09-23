@@ -1,6 +1,6 @@
 openapi: 3.2.0
 info:
-  title: Microsoft Graph Applications and App Role Assignments Service Principals API
+  title: Microsoft Graph Applications Service Principals API
   description: Register and manage Microsoft Entra applications and their associated service principals via Microsoft Graph. Configure app permissions (API permissions), OAuth2 permission grants (delegated consent), app role assignments, certificates, keys, federated identity credentials, and app consent policies. Use this API for application lifecycle management and zero-trust app governance.
   version: v1.0
   contact:
@@ -114,29 +114,61 @@ paths:
         dispatcherRules: Response || 200
 components:
   responses:
-    NotFound:
-      description: Resource not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
     Unauthorized:
       description: Authentication required
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
   schemas:
-    ErrorResponse:
+    ServicePrincipalCollection:
       type: object
       properties:
-        error:
-          type: object
-          properties:
-            code:
-              type: string
-            message:
-              type: string
+        '@odata.context':
+          type: string
+        '@odata.nextLink':
+          type: string
+        value:
+          type: array
+          items:
+            $ref: '#/components/schemas/ServicePrincipal'
+    AppRoleAssignment:
+      type: object
+      description: An app role assignment granting a user, group, or SP access to an app role
+      properties:
+        id:
+          type: string
+        appRoleId:
+          type: string
+          format: uuid
+          description: ID of the app role being assigned
+        principalId:
+          type: string
+          format: uuid
+          description: ID of the user, group, or service principal receiving the role
+        principalDisplayName:
+          type: string
+        principalType:
+          type: string
+          enum:
+          - User
+          - Group
+          - ServicePrincipal
+        resourceId:
+          type: string
+          format: uuid
+          description: ID of the resource service principal (the API)
+        resourceDisplayName:
+          type: string
+        createdDateTime:
+          type: string
+          format: date-time
     ServicePrincipal:
       type: object
       description: A service principal — the local instance of an application in the tenant
@@ -214,48 +246,16 @@ components:
         createdDateTime:
           type: string
           format: date-time
-    ServicePrincipalCollection:
+    ErrorResponse:
       type: object
       properties:
-        '@odata.context':
-          type: string
-        '@odata.nextLink':
-          type: string
-        value:
-          type: array
-          items:
-            $ref: '#/components/schemas/ServicePrincipal'
-    AppRoleAssignment:
-      type: object
-      description: An app role assignment granting a user, group, or SP access to an app role
-      properties:
-        id:
-          type: string
-        appRoleId:
-          type: string
-          format: uuid
-          description: ID of the app role being assigned
-        principalId:
-          type: string
-          format: uuid
-          description: ID of the user, group, or service principal receiving the role
-        principalDisplayName:
-          type: string
-        principalType:
-          type: string
-          enum:
-          - User
-          - Group
-          - ServicePrincipal
-        resourceId:
-          type: string
-          format: uuid
-          description: ID of the resource service principal (the API)
-        resourceDisplayName:
-          type: string
-        createdDateTime:
-          type: string
-          format: date-time
+        error:
+          type: object
+          properties:
+            code:
+              type: string
+            message:
+              type: string
   securitySchemes:
     oauth2:
       type: oauth2

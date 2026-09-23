@@ -1,7 +1,7 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Microsoft Graph Applications and Service Principals App Role Assignments Owners API
-  description: Register and manage Microsoft Entra applications and their associated service principals via Microsoft Graph. Configure app permissions (API permissions), OAuth2 permission grants (delegated consent), app role assignments, certificates, keys, federated identity credentials, and app consent policies. Use this API for application lifecycle management and zero-trust app governance.
+  title: Microsoft Graph Groups Owners API
+  description: Create and manage Microsoft Entra security groups, Microsoft 365 groups, and distribution lists via Microsoft Graph. Manage group members, owners, and settings. Groups enable efficient entitlement management — granting users access to resources, licenses, and applications as a unit. Supports both v1.0 and beta Microsoft Graph endpoints.
   version: v1.0
   contact:
     name: Microsoft Graph Support
@@ -13,10 +13,12 @@ info:
 servers:
 - url: https://graph.microsoft.com/v1.0
   description: Microsoft Graph v1.0
+- url: https://graph.microsoft.com/beta
+  description: Microsoft Graph beta (preview)
 security:
 - oauth2:
-  - Application.Read.All
-  - Application.ReadWrite.All
+  - Group.Read.All
+  - Group.ReadWrite.All
 tags:
 - name: Owners
 paths:
@@ -63,16 +65,19 @@ components:
   securitySchemes:
     oauth2:
       type: oauth2
+      description: OAuth2 with Microsoft identity platform (Azure AD)
       flows:
         authorizationCode:
           authorizationUrl: https://login.microsoftonline.com/{tenant}/oauth2/v2.0/authorize
           tokenUrl: https://login.microsoftonline.com/{tenant}/oauth2/v2.0/token
           scopes:
-            Application.Read.All: Read all applications
-            Application.ReadWrite.All: Read and write all applications
+            Group.Read.All: Read all groups
+            Group.ReadWrite.All: Read and write all groups
             Directory.Read.All: Read directory data
+            Directory.ReadWrite.All: Read and write directory data
         clientCredentials:
           tokenUrl: https://login.microsoftonline.com/{tenant}/oauth2/v2.0/token
           scopes:
-            Application.Read.All: Read all applications
-            Application.ReadWrite.All: Read and write all applications
+            Group.Read.All: Read all groups
+            Group.ReadWrite.All: Read and write all groups
+            Directory.Read.All: Read directory data

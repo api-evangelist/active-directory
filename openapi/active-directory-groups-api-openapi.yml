@@ -1,22 +1,20 @@
 openapi: 3.2.0
 info:
-  title: Microsoft Graph Applications and Service Principals App Role Assignments Groups API
-  description: Register and manage Microsoft Entra applications and their associated service principals via Microsoft Graph. Configure app permissions (API permissions), OAuth2 permission grants (delegated consent), app role assignments, certificates, keys, federated identity credentials, and app consent policies. Use this API for application lifecycle management and zero-trust app governance.
+  title: Active Directory Groups API
   version: v1.0
   contact:
     name: Microsoft Graph Support
     url: https://developer.microsoft.com/en-us/graph/support
-  termsOfService: https://learn.microsoft.com/en-us/legal/microsoft-apis/terms-of-use
   license:
     name: Microsoft APIs Terms of Use
     url: https://learn.microsoft.com/en-us/legal/microsoft-apis/terms-of-use
+  termsOfService: https://learn.microsoft.com/en-us/legal/microsoft-apis/terms-of-use
+  description: 'Operations tagged Groups across 2 of this provider''s published API definitions: active-directory-groups-openapi.yaml, active-directory-users-openapi.yaml. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://graph.microsoft.com/v1.0
   description: Microsoft Graph v1.0
-security:
-- oauth2:
-  - Application.Read.All
-  - Application.ReadWrite.All
+- url: https://graph.microsoft.com/beta
+  description: Microsoft Graph beta (preview)
 tags:
 - name: Groups
 paths:
@@ -84,6 +82,10 @@ paths:
       x-microcks-operation:
         dispatcher: FALLBACK
         dispatcherRules: Response || 200
+      security:
+      - oauth2:
+        - Group.Read.All
+        - Group.ReadWrite.All
     post:
       operationId: create-group
       summary: Active Directory Create Group
@@ -116,6 +118,15 @@ paths:
       x-microcks-operation:
         dispatcher: FALLBACK
         dispatcherRules: Response || 201
+      security:
+      - oauth2:
+        - Group.Read.All
+        - Group.ReadWrite.All
+    servers:
+    - url: https://graph.microsoft.com/v1.0
+      description: Microsoft Graph v1.0
+    - url: https://graph.microsoft.com/beta
+      description: Microsoft Graph beta (preview)
   /groups/{groupId}:
     get:
       operationId: get-group
@@ -149,6 +160,10 @@ paths:
       x-microcks-operation:
         dispatcher: FALLBACK
         dispatcherRules: Response || 200
+      security:
+      - oauth2:
+        - Group.Read.All
+        - Group.ReadWrite.All
     patch:
       operationId: update-group
       summary: Active Directory Update Group
@@ -182,6 +197,10 @@ paths:
       x-microcks-operation:
         dispatcher: FALLBACK
         dispatcherRules: Response || 204
+      security:
+      - oauth2:
+        - Group.Read.All
+        - Group.ReadWrite.All
     delete:
       operationId: delete-group
       summary: Active Directory Delete Group
@@ -204,6 +223,15 @@ paths:
       x-microcks-operation:
         dispatcher: FALLBACK
         dispatcherRules: Response || 204
+      security:
+      - oauth2:
+        - Group.Read.All
+        - Group.ReadWrite.All
+    servers:
+    - url: https://graph.microsoft.com/v1.0
+      description: Microsoft Graph v1.0
+    - url: https://graph.microsoft.com/beta
+      description: Microsoft Graph beta (preview)
   /groups/{groupId}/members:
     get:
       operationId: list-group-members
@@ -258,6 +286,10 @@ paths:
       x-microcks-operation:
         dispatcher: FALLBACK
         dispatcherRules: Response || 200
+      security:
+      - oauth2:
+        - Group.Read.All
+        - Group.ReadWrite.All
     post:
       operationId: add-group-member
       summary: Active Directory Add Group Member
@@ -295,6 +327,15 @@ paths:
       x-microcks-operation:
         dispatcher: FALLBACK
         dispatcherRules: Response || 204
+      security:
+      - oauth2:
+        - Group.Read.All
+        - Group.ReadWrite.All
+    servers:
+    - url: https://graph.microsoft.com/v1.0
+      description: Microsoft Graph v1.0
+    - url: https://graph.microsoft.com/beta
+      description: Microsoft Graph beta (preview)
   /groups/{groupId}/members/{memberId}/$ref:
     delete:
       operationId: remove-group-member
@@ -325,6 +366,15 @@ paths:
       x-microcks-operation:
         dispatcher: FALLBACK
         dispatcherRules: Response || 204
+      security:
+      - oauth2:
+        - Group.Read.All
+        - Group.ReadWrite.All
+    servers:
+    - url: https://graph.microsoft.com/v1.0
+      description: Microsoft Graph v1.0
+    - url: https://graph.microsoft.com/beta
+      description: Microsoft Graph beta (preview)
   /groups/{groupId}/owners:
     get:
       operationId: list-group-owners
@@ -364,6 +414,15 @@ paths:
       x-microcks-operation:
         dispatcher: FALLBACK
         dispatcherRules: Response || 200
+      security:
+      - oauth2:
+        - Group.Read.All
+        - Group.ReadWrite.All
+    servers:
+    - url: https://graph.microsoft.com/v1.0
+      description: Microsoft Graph v1.0
+    - url: https://graph.microsoft.com/beta
+      description: Microsoft Graph beta (preview)
   /users/{userId}/memberOf:
     get:
       operationId: list-user-member-of
@@ -409,10 +468,22 @@ paths:
       x-microcks-operation:
         dispatcher: FALLBACK
         dispatcherRules: Response || 200
+      security:
+      - oauth2:
+        - User.Read
+        - User.ReadWrite
+        - User.ReadBasic.All
+        - User.Read.All
+        - User.ReadWrite.All
+    servers:
+    - url: https://graph.microsoft.com/v1.0
+      description: Microsoft Graph v1.0
+    - url: https://graph.microsoft.com/beta
+      description: Microsoft Graph beta (preview)
 components:
   responses:
-    NotFound:
-      description: Group not found
+    Unauthorized:
+      description: Authentication required — missing or invalid access token
       content:
         application/json:
           schema:
@@ -423,8 +494,8 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
-    Unauthorized:
-      description: Authentication required — missing or invalid access token
+    NotFound:
+      description: Group not found
       content:
         application/json:
           schema:
@@ -436,18 +507,6 @@ components:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
   schemas:
-    ErrorResponse:
-      type: object
-      properties:
-        error:
-          type: object
-          properties:
-            code:
-              type: string
-            message:
-              type: string
-            innerError:
-              type: object
     GroupCollection:
       type: object
       description: Collection of group objects with OData pagination metadata
@@ -461,22 +520,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Group'
-    GroupUpdate:
-      type: object
-      description: Properties that can be updated on a Microsoft Entra group
-      properties:
-        displayName:
-          type: string
-        description:
-          type: string
-        mailNickname:
-          type: string
-        visibility:
-          type: string
-        membershipRule:
-          type: string
-        membershipRuleProcessingState:
-          type: string
     Group:
       type: object
       description: A Microsoft Entra group (security group or Microsoft 365 group)
@@ -575,6 +618,18 @@ components:
           items:
             type: string
           description: Specifies the group resources provisioned (e.g. Team for Teams-enabled groups)
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            code:
+              type: string
+            message:
+              type: string
+            innerError:
+              type: object
     GroupCreate:
       type: object
       description: Properties required to create a Microsoft Entra group
@@ -620,19 +675,41 @@ components:
           items:
             type: string
           description: Array of OData references to owners to add at creation time
+    GroupUpdate:
+      type: object
+      description: Properties that can be updated on a Microsoft Entra group
+      properties:
+        displayName:
+          type: string
+        description:
+          type: string
+        mailNickname:
+          type: string
+        visibility:
+          type: string
+        membershipRule:
+          type: string
+        membershipRuleProcessingState:
+          type: string
   securitySchemes:
     oauth2:
       type: oauth2
+      description: OAuth2 with Microsoft identity platform (Azure AD)
       flows:
         authorizationCode:
           authorizationUrl: https://login.microsoftonline.com/{tenant}/oauth2/v2.0/authorize
           tokenUrl: https://login.microsoftonline.com/{tenant}/oauth2/v2.0/token
           scopes:
-            Application.Read.All: Read all applications
-            Application.ReadWrite.All: Read and write all applications
+            Group.Read.All: Read all groups
+            Group.ReadWrite.All: Read and write all groups
             Directory.Read.All: Read directory data
+            Directory.ReadWrite.All: Read and write directory data
         clientCredentials:
           tokenUrl: https://login.microsoftonline.com/{tenant}/oauth2/v2.0/token
           scopes:
-            Application.Read.All: Read all applications
-            Application.ReadWrite.All: Read and write all applications
+            Group.Read.All: Read all groups
+            Group.ReadWrite.All: Read and write all groups
+            Directory.Read.All: Read directory data
+x-refined-from:
+- active-directory-groups-openapi.yaml
+- active-directory-users-openapi.yaml

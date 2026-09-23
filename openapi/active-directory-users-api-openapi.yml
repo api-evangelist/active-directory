@@ -1,7 +1,7 @@
 openapi: 3.2.0
 info:
-  title: Microsoft Graph Applications and Service Principals App Role Assignments Users API
-  description: Register and manage Microsoft Entra applications and their associated service principals via Microsoft Graph. Configure app permissions (API permissions), OAuth2 permission grants (delegated consent), app role assignments, certificates, keys, federated identity credentials, and app consent policies. Use this API for application lifecycle management and zero-trust app governance.
+  title: Microsoft Graph Users API
+  description: Manage the entire lifecycle of users in Microsoft Entra ID (formerly Azure Active Directory) via Microsoft Graph. Create, read, update, and delete user accounts; manage licenses, group memberships, manager relationships, authentication methods, and profile photos. All endpoints require OAuth2 authentication with Microsoft identity platform.
   version: v1.0
   contact:
     name: Microsoft Graph Support
@@ -13,10 +13,15 @@ info:
 servers:
 - url: https://graph.microsoft.com/v1.0
   description: Microsoft Graph v1.0
+- url: https://graph.microsoft.com/beta
+  description: Microsoft Graph beta (preview)
 security:
 - oauth2:
-  - Application.Read.All
-  - Application.ReadWrite.All
+  - User.Read
+  - User.ReadWrite
+  - User.ReadBasic.All
+  - User.Read.All
+  - User.ReadWrite.All
 tags:
 - name: Users
 paths:
@@ -313,32 +318,76 @@ paths:
         dispatcher: FALLBACK
         dispatcherRules: Response || 200
 components:
-  responses:
-    NotFound:
-      description: Resource not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    BadRequest:
-      description: Bad request — invalid query parameters or request body
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    Unauthorized:
-      description: Authentication required — missing or invalid access token
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    Forbidden:
-      description: Insufficient permissions — required scopes not granted
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
   schemas:
+    UserUpdate:
+      type: object
+      description: Properties that can be updated on a Microsoft Entra user
+      properties:
+        displayName:
+          type: string
+        givenName:
+          type: string
+        surname:
+          type: string
+        jobTitle:
+          type: string
+        department:
+          type: string
+        officeLocation:
+          type: string
+        mobilePhone:
+          type: string
+        preferredLanguage:
+          type: string
+        usageLocation:
+          type: string
+        passwordProfile:
+          $ref: '#/components/schemas/PasswordProfile'
+        accountEnabled:
+          type: boolean
+    PasswordProfile:
+      type: object
+      description: Password profile for a user account
+      required:
+      - password
+      properties:
+        password:
+          type: string
+          description: The password for the user (must meet tenant complexity requirements)
+        forceChangePasswordNextSignIn:
+          type: boolean
+          description: If true, user must reset password at next sign-in
+          default: true
+        forceChangePasswordNextSignInWithMfa:
+          type: boolean
+          description: If true, user must perform MFA and reset password at next sign-in
+    ErrorResponse:
+      type: object
+      description: Microsoft Graph API error response
+      properties:
+        error:
+          type: object
+          properties:
+            code:
+              type: string
+              description: Error code string
+              example: Request_BadRequest
+            message:
+              type: string
+              description: Human-readable error description
+              example: A property required for the request is missing.
+            innerError:
+              type: object
+              properties:
+                date:
+                  type: string
+                  format: date-time
+                request-id:
+                  type: string
+                  format: uuid
+                client-request-id:
+                  type: string
+                  format: uuid
     UserCreate:
       type: object
       description: Properties required to create a new Microsoft Entra user
@@ -374,33 +423,20 @@ components:
         usageLocation:
           type: string
           description: Required for license assignment (ISO 3166 two-letter code)
-    ErrorResponse:
+    UserCollection:
       type: object
-      description: Microsoft Graph API error response
+      description: Collection of user objects with OData pagination metadata
       properties:
-        error:
-          type: object
-          properties:
-            code:
-              type: string
-              description: Error code string
-              example: Request_BadRequest
-            message:
-              type: string
-              description: Human-readable error description
-              example: A property required for the request is missing.
-            innerError:
-              type: object
-              properties:
-                date:
-                  type: string
-                  format: date-time
-                request-id:
-                  type: string
-                  format: uuid
-                client-request-id:
-                  type: string
-                  format: uuid
+        '@odata.context':
+          type: string
+          description: OData metadata URL
+        '@odata.nextLink':
+          type: string
+          description: URL to fetch the next page of results
+        value:
+          type: array
+          items:
+            $ref: '#/components/schemas/User'
     User:
       type: object
       description: A Microsoft Entra ID user account
@@ -506,75 +542,51 @@ components:
         externalUserState:
           type: string
           description: State of a guest/external user invited via Azure AD B2B
-    PasswordProfile:
-      type: object
-      description: Password profile for a user account
-      required:
-      - password
-      properties:
-        password:
-          type: string
-          description: The password for the user (must meet tenant complexity requirements)
-        forceChangePasswordNextSignIn:
-          type: boolean
-          description: If true, user must reset password at next sign-in
-          default: true
-        forceChangePasswordNextSignInWithMfa:
-          type: boolean
-          description: If true, user must perform MFA and reset password at next sign-in
-    UserCollection:
-      type: object
-      description: Collection of user objects with OData pagination metadata
-      properties:
-        '@odata.context':
-          type: string
-          description: OData metadata URL
-        '@odata.nextLink':
-          type: string
-          description: URL to fetch the next page of results
-        value:
-          type: array
-          items:
-            $ref: '#/components/schemas/User'
-    UserUpdate:
-      type: object
-      description: Properties that can be updated on a Microsoft Entra user
-      properties:
-        displayName:
-          type: string
-        givenName:
-          type: string
-        surname:
-          type: string
-        jobTitle:
-          type: string
-        department:
-          type: string
-        officeLocation:
-          type: string
-        mobilePhone:
-          type: string
-        preferredLanguage:
-          type: string
-        usageLocation:
-          type: string
-        passwordProfile:
-          $ref: '#/components/schemas/PasswordProfile'
-        accountEnabled:
-          type: boolean
+  responses:
+    Unauthorized:
+      description: Authentication required — missing or invalid access token
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    BadRequest:
+      description: Bad request — invalid query parameters or request body
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Forbidden:
+      description: Insufficient permissions — required scopes not granted
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
   securitySchemes:
     oauth2:
       type: oauth2
+      description: OAuth2 with Microsoft identity platform (Azure AD)
       flows:
         authorizationCode:
           authorizationUrl: https://login.microsoftonline.com/{tenant}/oauth2/v2.0/authorize
           tokenUrl: https://login.microsoftonline.com/{tenant}/oauth2/v2.0/token
           scopes:
-            Application.Read.All: Read all applications
-            Application.ReadWrite.All: Read and write all applications
+            User.Read: Read signed-in user's profile
+            User.ReadWrite: Read and write signed-in user's profile
+            User.ReadBasic.All: Read all users' basic profiles
+            User.Read.All: Read all users' full profiles
+            User.ReadWrite.All: Read and write all users' full profiles
             Directory.Read.All: Read directory data
+            Directory.ReadWrite.All: Read and write directory data
         clientCredentials:
           tokenUrl: https://login.microsoftonline.com/{tenant}/oauth2/v2.0/token
           scopes:
-            Application.Read.All: Read all applications
-            Application.ReadWrite.All: Read and write all applications
+            User.Read.All: Read all users' full profiles
+            User.ReadWrite.All: Read and write all users' full profiles
+            Directory.Read.All: Read directory data
+            Directory.ReadWrite.All: Read and write directory data

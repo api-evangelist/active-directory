@@ -1,6 +1,6 @@
 openapi: 3.2.0
 info:
-  title: Microsoft Graph and Service Principals App Role Assignments Applications API
+  title: Microsoft Graph and Service Principals Applications API
   description: Register and manage Microsoft Entra applications and their associated service principals via Microsoft Graph. Configure app permissions (API permissions), OAuth2 permission grants (delegated consent), app role assignments, certificates, keys, federated identity credentials, and app consent policies. Use this API for application lifecycle management and zero-trust app governance.
   version: v1.0
   contact:
@@ -168,8 +168,8 @@ paths:
         dispatcherRules: Response || 204
 components:
   responses:
-    NotFound:
-      description: Resource not found
+    Unauthorized:
+      description: Authentication required
       content:
         application/json:
           schema:
@@ -180,13 +180,59 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
-    Unauthorized:
-      description: Authentication required
+    NotFound:
+      description: Resource not found
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
   schemas:
+    ApplicationCollection:
+      type: object
+      properties:
+        '@odata.context':
+          type: string
+        '@odata.nextLink':
+          type: string
+        value:
+          type: array
+          items:
+            $ref: '#/components/schemas/Application'
+    ApplicationUpdate:
+      type: object
+      properties:
+        displayName:
+          type: string
+        description:
+          type: string
+        signInAudience:
+          type: string
+        web:
+          type: object
+          properties:
+            redirectUris:
+              type: array
+              items:
+                type: string
+    ApplicationCreate:
+      type: object
+      required:
+      - displayName
+      properties:
+        displayName:
+          type: string
+        signInAudience:
+          type: string
+          default: AzureADMyOrg
+        description:
+          type: string
+        web:
+          type: object
+          properties:
+            redirectUris:
+              type: array
+              items:
+                type: string
     ErrorResponse:
       type: object
       properties:
@@ -314,52 +360,6 @@ components:
           - string
           - 'null'
           format: date-time
-    ApplicationUpdate:
-      type: object
-      properties:
-        displayName:
-          type: string
-        description:
-          type: string
-        signInAudience:
-          type: string
-        web:
-          type: object
-          properties:
-            redirectUris:
-              type: array
-              items:
-                type: string
-    ApplicationCollection:
-      type: object
-      properties:
-        '@odata.context':
-          type: string
-        '@odata.nextLink':
-          type: string
-        value:
-          type: array
-          items:
-            $ref: '#/components/schemas/Application'
-    ApplicationCreate:
-      type: object
-      required:
-      - displayName
-      properties:
-        displayName:
-          type: string
-        signInAudience:
-          type: string
-          default: AzureADMyOrg
-        description:
-          type: string
-        web:
-          type: object
-          properties:
-            redirectUris:
-              type: array
-              items:
-                type: string
   securitySchemes:
     oauth2:
       type: oauth2

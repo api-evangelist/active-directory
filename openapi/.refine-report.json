@@ -1,26 +1,49 @@
 {
   "provider": "active-directory",
   "sources": [
-    "active-directory-app-role-assignments-api-openapi.yml",
-    "active-directory-applications-api-openapi.yml",
-    "active-directory-groups-api-openapi.yml",
-    "active-directory-members-api-openapi.yml",
-    "active-directory-owners-api-openapi.yml",
-    "active-directory-service-principals-api-openapi.yml",
-    "active-directory-users-api-openapi.yml"
+    "_original/active-directory-applications-openapi.yaml",
+    "_original/active-directory-groups-openapi.yaml",
+    "_original/active-directory-users-openapi.yaml",
+    "active-directory-directory-roles-api-openapi.yml"
   ],
   "outputs": [
     "active-directory-app-role-assignments-api-openapi.yml",
     "active-directory-applications-api-openapi.yml",
+    "active-directory-service-principals-api-openapi.yml",
     "active-directory-groups-api-openapi.yml",
     "active-directory-members-api-openapi.yml",
     "active-directory-owners-api-openapi.yml",
-    "active-directory-service-principals-api-openapi.yml",
-    "active-directory-users-api-openapi.yml"
+    "active-directory-users-api-openapi.yml",
+    "active-directory-directory-roles-api-openapi.yml"
   ],
   "archived": [],
   "errors": [],
-  "warnings": [],
-  "notes": [],
-  "skipped": []
+  "warnings": [
+    "active-directory-directory-roles-api-openapi.yml: previously refined output kept for 2 operation(s) no archived document covers (e.g. /directoryRoles get, /directoryRoles/{id}/members get); its other 0 operation(s) came from the archive and were dropped from it. The archive is incomplete for this provider \u2014 re-harvest to restore _original/ as the full source of truth."
+  ],
+  "notes": [
+    "sourced from openapi/_original/ (3 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "active-directory-applications-openapi.yaml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "active-directory-applications-openapi.yaml: declared missing tag: App Role Assignments",
+    "active-directory-applications-openapi.yaml: declared missing tag: Applications",
+    "active-directory-applications-openapi.yaml: declared missing tag: Service Principals",
+    "active-directory-groups-openapi.yaml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "active-directory-groups-openapi.yaml: declared missing tag: Groups",
+    "active-directory-groups-openapi.yaml: declared missing tag: Members",
+    "active-directory-groups-openapi.yaml: declared missing tag: Owners",
+    "active-directory-users-openapi.yaml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "active-directory-users-openapi.yaml: declared missing tag: Groups",
+    "active-directory-users-openapi.yaml: declared missing tag: Users",
+    "tag 'Groups' spans 2 source specs (active-directory-groups-openapi.yaml, active-directory-users-openapi.yaml): per-path servers applied",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "active-directory-app-role-assignments-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "active-directory-applications-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "active-directory-groups-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "active-directory-members-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "active-directory-owners-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "active-directory-service-principals-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "active-directory-users-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }
