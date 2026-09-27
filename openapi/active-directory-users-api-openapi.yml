@@ -319,32 +319,6 @@ paths:
         dispatcherRules: Response || 200
 components:
   schemas:
-    UserUpdate:
-      type: object
-      description: Properties that can be updated on a Microsoft Entra user
-      properties:
-        displayName:
-          type: string
-        givenName:
-          type: string
-        surname:
-          type: string
-        jobTitle:
-          type: string
-        department:
-          type: string
-        officeLocation:
-          type: string
-        mobilePhone:
-          type: string
-        preferredLanguage:
-          type: string
-        usageLocation:
-          type: string
-        passwordProfile:
-          $ref: '#/components/schemas/PasswordProfile'
-        accountEnabled:
-          type: boolean
     PasswordProfile:
       type: object
       description: Password profile for a user account
@@ -361,82 +335,6 @@ components:
         forceChangePasswordNextSignInWithMfa:
           type: boolean
           description: If true, user must perform MFA and reset password at next sign-in
-    ErrorResponse:
-      type: object
-      description: Microsoft Graph API error response
-      properties:
-        error:
-          type: object
-          properties:
-            code:
-              type: string
-              description: Error code string
-              example: Request_BadRequest
-            message:
-              type: string
-              description: Human-readable error description
-              example: A property required for the request is missing.
-            innerError:
-              type: object
-              properties:
-                date:
-                  type: string
-                  format: date-time
-                request-id:
-                  type: string
-                  format: uuid
-                client-request-id:
-                  type: string
-                  format: uuid
-    UserCreate:
-      type: object
-      description: Properties required to create a new Microsoft Entra user
-      required:
-      - accountEnabled
-      - displayName
-      - mailNickname
-      - passwordProfile
-      - userPrincipalName
-      properties:
-        accountEnabled:
-          type: boolean
-          description: Must be true for the account to be active
-        displayName:
-          type: string
-          description: Name to display in the address book
-        mailNickname:
-          type: string
-          description: Mail alias for the user (without the domain suffix)
-        userPrincipalName:
-          type: string
-          description: UPN in the format alias@domain.onmicrosoft.com
-        passwordProfile:
-          $ref: '#/components/schemas/PasswordProfile'
-        givenName:
-          type: string
-        surname:
-          type: string
-        jobTitle:
-          type: string
-        department:
-          type: string
-        usageLocation:
-          type: string
-          description: Required for license assignment (ISO 3166 two-letter code)
-    UserCollection:
-      type: object
-      description: Collection of user objects with OData pagination metadata
-      properties:
-        '@odata.context':
-          type: string
-          description: OData metadata URL
-        '@odata.nextLink':
-          type: string
-          description: URL to fetch the next page of results
-        value:
-          type: array
-          items:
-            $ref: '#/components/schemas/User'
     User:
       type: object
       description: A Microsoft Entra ID user account
@@ -542,7 +440,115 @@ components:
         externalUserState:
           type: string
           description: State of a guest/external user invited via Azure AD B2B
+    UserUpdate:
+      type: object
+      description: Properties that can be updated on a Microsoft Entra user
+      properties:
+        displayName:
+          type: string
+        givenName:
+          type: string
+        surname:
+          type: string
+        jobTitle:
+          type: string
+        department:
+          type: string
+        officeLocation:
+          type: string
+        mobilePhone:
+          type: string
+        preferredLanguage:
+          type: string
+        usageLocation:
+          type: string
+        passwordProfile:
+          $ref: '#/components/schemas/PasswordProfile'
+        accountEnabled:
+          type: boolean
+    ErrorResponse:
+      type: object
+      description: Microsoft Graph API error response
+      properties:
+        error:
+          type: object
+          properties:
+            code:
+              type: string
+              description: Error code string
+              example: Request_BadRequest
+            message:
+              type: string
+              description: Human-readable error description
+              example: A property required for the request is missing.
+            innerError:
+              type: object
+              properties:
+                date:
+                  type: string
+                  format: date-time
+                request-id:
+                  type: string
+                  format: uuid
+                client-request-id:
+                  type: string
+                  format: uuid
+    UserCreate:
+      type: object
+      description: Properties required to create a new Microsoft Entra user
+      required:
+      - accountEnabled
+      - displayName
+      - mailNickname
+      - passwordProfile
+      - userPrincipalName
+      properties:
+        accountEnabled:
+          type: boolean
+          description: Must be true for the account to be active
+        displayName:
+          type: string
+          description: Name to display in the address book
+        mailNickname:
+          type: string
+          description: Mail alias for the user (without the domain suffix)
+        userPrincipalName:
+          type: string
+          description: UPN in the format alias@domain.onmicrosoft.com
+        passwordProfile:
+          $ref: '#/components/schemas/PasswordProfile'
+        givenName:
+          type: string
+        surname:
+          type: string
+        jobTitle:
+          type: string
+        department:
+          type: string
+        usageLocation:
+          type: string
+          description: Required for license assignment (ISO 3166 two-letter code)
+    UserCollection:
+      type: object
+      description: Collection of user objects with OData pagination metadata
+      properties:
+        '@odata.context':
+          type: string
+          description: OData metadata URL
+        '@odata.nextLink':
+          type: string
+          description: URL to fetch the next page of results
+        value:
+          type: array
+          items:
+            $ref: '#/components/schemas/User'
   responses:
+    Forbidden:
+      description: Insufficient permissions — required scopes not granted
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
     Unauthorized:
       description: Authentication required — missing or invalid access token
       content:
@@ -557,12 +563,6 @@ components:
             $ref: '#/components/schemas/ErrorResponse'
     NotFound:
       description: Resource not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    Forbidden:
-      description: Insufficient permissions — required scopes not granted
       content:
         application/json:
           schema:

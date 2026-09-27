@@ -8,17 +8,24 @@ description: Microsoft Active Directory and Microsoft Entra ID provide identity 
   Active Directory is managed through LDAP, Kerberos, and PowerShell protocols; cloud identity is managed
   through Microsoft Graph.
 deliveryModel:
-  model: unknown
+  model: saas
+  license_evidence:
+    not_product:
+    - azure-ad-b2c/rest-api
+    - azuread/azure-activedirectory-library-for-dotnet
+    - azuread/microsoft-authentication-library-for-dotnet
+    - azuread/microsoft-authentication-library-for-java
+    - azuread/microsoft-authentication-library-for-js
   open_source: unknown
   commercial: true
   callable_host: true
-  label: Delivery model not determined — needs a product licence on record
+  label: Hosted service · you call their endpoint
   confidence: low
   source:
   - openapi
   - pricing
-  - repository-unlicensed
-  generated: '2026-08-28'
+  - repository-not-product
+  generated: '2026-09-25'
   method: derived
 accessModel:
   pricing: freemium

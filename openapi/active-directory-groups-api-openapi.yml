@@ -482,6 +482,12 @@ paths:
       description: Microsoft Graph beta (preview)
 components:
   responses:
+    Forbidden:
+      description: Insufficient permissions
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
     Unauthorized:
       description: Authentication required — missing or invalid access token
       content:
@@ -500,26 +506,80 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
-    Forbidden:
-      description: Insufficient permissions
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
   schemas:
-    GroupCollection:
+    GroupUpdate:
       type: object
-      description: Collection of group objects with OData pagination metadata
+      description: Properties that can be updated on a Microsoft Entra group
       properties:
-        '@odata.context':
+        displayName:
           type: string
-        '@odata.nextLink':
+        description:
           type: string
-          description: URL for the next page of results
-        value:
+        mailNickname:
+          type: string
+        visibility:
+          type: string
+        membershipRule:
+          type: string
+        membershipRuleProcessingState:
+          type: string
+    GroupCreate:
+      type: object
+      description: Properties required to create a Microsoft Entra group
+      required:
+      - displayName
+      - mailEnabled
+      - mailNickname
+      - securityEnabled
+      properties:
+        displayName:
+          type: string
+          description: The display name for the group
+        mailEnabled:
+          type: boolean
+          description: Must be true for mail-enabled groups, false for security-only
+        mailNickname:
+          type: string
+          description: The mail alias (required even if mailEnabled is false)
+        securityEnabled:
+          type: boolean
+          description: Set to true for security groups
+        description:
+          type: string
+          description: Optional description for the group
+        groupTypes:
           type: array
           items:
-            $ref: '#/components/schemas/Group'
+            type: string
+          description: Include "Unified" for Microsoft 365 groups
+        visibility:
+          type: string
+          enum:
+          - Public
+          - Private
+          - HiddenMembership
+        members@odata.bind:
+          type: array
+          items:
+            type: string
+          description: Array of OData references to members to add at creation time
+        owners@odata.bind:
+          type: array
+          items:
+            type: string
+          description: Array of OData references to owners to add at creation time
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            code:
+              type: string
+            message:
+              type: string
+            innerError:
+              type: object
     Group:
       type: object
       description: A Microsoft Entra group (security group or Microsoft 365 group)
@@ -618,79 +678,19 @@ components:
           items:
             type: string
           description: Specifies the group resources provisioned (e.g. Team for Teams-enabled groups)
-    ErrorResponse:
+    GroupCollection:
       type: object
+      description: Collection of group objects with OData pagination metadata
       properties:
-        error:
-          type: object
-          properties:
-            code:
-              type: string
-            message:
-              type: string
-            innerError:
-              type: object
-    GroupCreate:
-      type: object
-      description: Properties required to create a Microsoft Entra group
-      required:
-      - displayName
-      - mailEnabled
-      - mailNickname
-      - securityEnabled
-      properties:
-        displayName:
+        '@odata.context':
           type: string
-          description: The display name for the group
-        mailEnabled:
-          type: boolean
-          description: Must be true for mail-enabled groups, false for security-only
-        mailNickname:
+        '@odata.nextLink':
           type: string
-          description: The mail alias (required even if mailEnabled is false)
-        securityEnabled:
-          type: boolean
-          description: Set to true for security groups
-        description:
-          type: string
-          description: Optional description for the group
-        groupTypes:
+          description: URL for the next page of results
+        value:
           type: array
           items:
-            type: string
-          description: Include "Unified" for Microsoft 365 groups
-        visibility:
-          type: string
-          enum:
-          - Public
-          - Private
-          - HiddenMembership
-        members@odata.bind:
-          type: array
-          items:
-            type: string
-          description: Array of OData references to members to add at creation time
-        owners@odata.bind:
-          type: array
-          items:
-            type: string
-          description: Array of OData references to owners to add at creation time
-    GroupUpdate:
-      type: object
-      description: Properties that can be updated on a Microsoft Entra group
-      properties:
-        displayName:
-          type: string
-        description:
-          type: string
-        mailNickname:
-          type: string
-        visibility:
-          type: string
-        membershipRule:
-          type: string
-        membershipRuleProcessingState:
-          type: string
+            $ref: '#/components/schemas/Group'
   securitySchemes:
     oauth2:
       type: oauth2
