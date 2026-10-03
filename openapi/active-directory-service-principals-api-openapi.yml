@@ -114,17 +114,6 @@ paths:
         dispatcherRules: Response || 200
 components:
   schemas:
-    ServicePrincipalCollection:
-      type: object
-      properties:
-        '@odata.context':
-          type: string
-        '@odata.nextLink':
-          type: string
-        value:
-          type: array
-          items:
-            $ref: '#/components/schemas/ServicePrincipal'
     ServicePrincipal:
       type: object
       description: A service principal — the local instance of an application in the tenant
@@ -212,6 +201,17 @@ components:
               type: string
             message:
               type: string
+    ServicePrincipalCollection:
+      type: object
+      properties:
+        '@odata.context':
+          type: string
+        '@odata.nextLink':
+          type: string
+        value:
+          type: array
+          items:
+            $ref: '#/components/schemas/ServicePrincipal'
     AppRoleAssignment:
       type: object
       description: An app role assignment granting a user, group, or SP access to an app role

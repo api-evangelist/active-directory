@@ -167,7 +167,37 @@ paths:
         dispatcher: FALLBACK
         dispatcherRules: Response || 204
 components:
+  responses:
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Unauthorized:
+      description: Authentication required
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    BadRequest:
+      description: Bad request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
   schemas:
+    ApplicationCollection:
+      type: object
+      properties:
+        '@odata.context':
+          type: string
+        '@odata.nextLink':
+          type: string
+        value:
+          type: array
+          items:
+            $ref: '#/components/schemas/Application'
     ApplicationUpdate:
       type: object
       properties:
@@ -203,17 +233,6 @@ components:
               type: array
               items:
                 type: string
-    ApplicationCollection:
-      type: object
-      properties:
-        '@odata.context':
-          type: string
-        '@odata.nextLink':
-          type: string
-        value:
-          type: array
-          items:
-            $ref: '#/components/schemas/Application'
     ErrorResponse:
       type: object
       properties:
@@ -341,25 +360,6 @@ components:
           - string
           - 'null'
           format: date-time
-  responses:
-    NotFound:
-      description: Resource not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    Unauthorized:
-      description: Authentication required
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    BadRequest:
-      description: Bad request
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
   securitySchemes:
     oauth2:
       type: oauth2

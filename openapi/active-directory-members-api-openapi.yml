@@ -145,14 +145,14 @@ paths:
         dispatcherRules: Response || 204
 components:
   responses:
-    NotFound:
-      description: Group not found
+    BadRequest:
+      description: Bad request — invalid parameters or request body
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
-    BadRequest:
-      description: Bad request — invalid parameters or request body
+    NotFound:
+      description: Group not found
       content:
         application/json:
           schema:
