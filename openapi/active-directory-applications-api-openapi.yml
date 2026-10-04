@@ -168,12 +168,6 @@ paths:
         dispatcherRules: Response || 204
 components:
   responses:
-    NotFound:
-      description: Resource not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
     Unauthorized:
       description: Authentication required
       content:
@@ -186,34 +180,23 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
   schemas:
-    ApplicationCollection:
+    ErrorResponse:
       type: object
       properties:
-        '@odata.context':
-          type: string
-        '@odata.nextLink':
-          type: string
-        value:
-          type: array
-          items:
-            $ref: '#/components/schemas/Application'
-    ApplicationUpdate:
-      type: object
-      properties:
-        displayName:
-          type: string
-        description:
-          type: string
-        signInAudience:
-          type: string
-        web:
+        error:
           type: object
           properties:
-            redirectUris:
-              type: array
-              items:
-                type: string
+            code:
+              type: string
+            message:
+              type: string
     ApplicationCreate:
       type: object
       required:
@@ -233,16 +216,17 @@ components:
               type: array
               items:
                 type: string
-    ErrorResponse:
+    ApplicationCollection:
       type: object
       properties:
-        error:
-          type: object
-          properties:
-            code:
-              type: string
-            message:
-              type: string
+        '@odata.context':
+          type: string
+        '@odata.nextLink':
+          type: string
+        value:
+          type: array
+          items:
+            $ref: '#/components/schemas/Application'
     Application:
       type: object
       description: A Microsoft Entra application registration
@@ -360,6 +344,22 @@ components:
           - string
           - 'null'
           format: date-time
+    ApplicationUpdate:
+      type: object
+      properties:
+        displayName:
+          type: string
+        description:
+          type: string
+        signInAudience:
+          type: string
+        web:
+          type: object
+          properties:
+            redirectUris:
+              type: array
+              items:
+                type: string
   securitySchemes:
     oauth2:
       type: oauth2

@@ -1,6 +1,6 @@
 openapi: 3.2.0
 info:
-  title: Microsoft Active Directory (via Microsoft Graph)………
+  title: Microsoft Active Directory (via Microsoft Graph)…………
   description: 'Microsoft Active Directory / Microsoft Entra ID identity resources are
 
     accessed through the Microsoft Graph REST API at
