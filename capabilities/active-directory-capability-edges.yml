@@ -12,8 +12,17 @@ capability_model:
   attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
     CC BY 4.0
   notice: NOTICE
-edge_count: 7
+edge_count: 8
 edges:
+- tag: Directory Roles
+  spec_file: active-directory-directory-roles-api-openapi.yml
+  capability_id: BC-620.20
+  capability_id_l1: BC-620
+  capability_name: Identity & Access Management
+  confidence: 0.9
+  evidence: '''List activated directory roles in the tenant'', ''List members of a directory role'''
+  reason: Entra ID directory role and role-membership enumeration is directly identity and access management
+    (role-based access administration).
 - tag: Groups
   spec_file: active-directory-groups-api-openapi.yml
   capability_id: BC-620.20
