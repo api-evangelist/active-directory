@@ -674,6 +674,8 @@ apis:
   - type: GitHubRepository
     url: https://github.com/microsoftgraph/entra-powershell
 common:
+- type: FinOps
+  url: finops/active-directory-finops.yml
 - type: RateLimits
   url: rate-limits/active-directory-rate-limits.yml
 - type: Plans
