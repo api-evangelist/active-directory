@@ -113,19 +113,6 @@ paths:
         dispatcher: FALLBACK
         dispatcherRules: Response || 200
 components:
-  responses:
-    Unauthorized:
-      description: Authentication required
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    NotFound:
-      description: Resource not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
   schemas:
     ServicePrincipalCollection:
       type: object
@@ -138,6 +125,37 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/ServicePrincipal'
+    AppRoleAssignment:
+      type: object
+      description: An app role assignment granting a user, group, or SP access to an app role
+      properties:
+        id:
+          type: string
+        appRoleId:
+          type: string
+          format: uuid
+          description: ID of the app role being assigned
+        principalId:
+          type: string
+          format: uuid
+          description: ID of the user, group, or service principal receiving the role
+        principalDisplayName:
+          type: string
+        principalType:
+          type: string
+          enum:
+          - User
+          - Group
+          - ServicePrincipal
+        resourceId:
+          type: string
+          format: uuid
+          description: ID of the resource service principal (the API)
+        resourceDisplayName:
+          type: string
+        createdDateTime:
+          type: string
+          format: date-time
     ErrorResponse:
       type: object
       properties:
@@ -225,37 +243,19 @@ components:
         createdDateTime:
           type: string
           format: date-time
-    AppRoleAssignment:
-      type: object
-      description: An app role assignment granting a user, group, or SP access to an app role
-      properties:
-        id:
-          type: string
-        appRoleId:
-          type: string
-          format: uuid
-          description: ID of the app role being assigned
-        principalId:
-          type: string
-          format: uuid
-          description: ID of the user, group, or service principal receiving the role
-        principalDisplayName:
-          type: string
-        principalType:
-          type: string
-          enum:
-          - User
-          - Group
-          - ServicePrincipal
-        resourceId:
-          type: string
-          format: uuid
-          description: ID of the resource service principal (the API)
-        resourceDisplayName:
-          type: string
-        createdDateTime:
-          type: string
-          format: date-time
+  responses:
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Unauthorized:
+      description: Authentication required
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
   securitySchemes:
     oauth2:
       type: oauth2

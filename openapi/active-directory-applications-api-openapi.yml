@@ -167,66 +167,7 @@ paths:
         dispatcher: FALLBACK
         dispatcherRules: Response || 204
 components:
-  responses:
-    Unauthorized:
-      description: Authentication required
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    BadRequest:
-      description: Bad request
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    NotFound:
-      description: Resource not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
   schemas:
-    ErrorResponse:
-      type: object
-      properties:
-        error:
-          type: object
-          properties:
-            code:
-              type: string
-            message:
-              type: string
-    ApplicationCreate:
-      type: object
-      required:
-      - displayName
-      properties:
-        displayName:
-          type: string
-        signInAudience:
-          type: string
-          default: AzureADMyOrg
-        description:
-          type: string
-        web:
-          type: object
-          properties:
-            redirectUris:
-              type: array
-              items:
-                type: string
-    ApplicationCollection:
-      type: object
-      properties:
-        '@odata.context':
-          type: string
-        '@odata.nextLink':
-          type: string
-        value:
-          type: array
-          items:
-            $ref: '#/components/schemas/Application'
     Application:
       type: object
       description: A Microsoft Entra application registration
@@ -360,6 +301,65 @@ components:
               type: array
               items:
                 type: string
+    ApplicationCollection:
+      type: object
+      properties:
+        '@odata.context':
+          type: string
+        '@odata.nextLink':
+          type: string
+        value:
+          type: array
+          items:
+            $ref: '#/components/schemas/Application'
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            code:
+              type: string
+            message:
+              type: string
+    ApplicationCreate:
+      type: object
+      required:
+      - displayName
+      properties:
+        displayName:
+          type: string
+        signInAudience:
+          type: string
+          default: AzureADMyOrg
+        description:
+          type: string
+        web:
+          type: object
+          properties:
+            redirectUris:
+              type: array
+              items:
+                type: string
+  responses:
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Unauthorized:
+      description: Authentication required
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    BadRequest:
+      description: Bad request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
   securitySchemes:
     oauth2:
       type: oauth2

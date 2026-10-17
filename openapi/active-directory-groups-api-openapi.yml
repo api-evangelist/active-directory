@@ -482,47 +482,6 @@ paths:
       description: Microsoft Graph beta (preview)
 components:
   schemas:
-    GroupUpdate:
-      type: object
-      description: Properties that can be updated on a Microsoft Entra group
-      properties:
-        displayName:
-          type: string
-        description:
-          type: string
-        mailNickname:
-          type: string
-        visibility:
-          type: string
-        membershipRule:
-          type: string
-        membershipRuleProcessingState:
-          type: string
-    GroupCollection:
-      type: object
-      description: Collection of group objects with OData pagination metadata
-      properties:
-        '@odata.context':
-          type: string
-        '@odata.nextLink':
-          type: string
-          description: URL for the next page of results
-        value:
-          type: array
-          items:
-            $ref: '#/components/schemas/Group'
-    ErrorResponse:
-      type: object
-      properties:
-        error:
-          type: object
-          properties:
-            code:
-              type: string
-            message:
-              type: string
-            innerError:
-              type: object
     Group:
       type: object
       description: A Microsoft Entra group (security group or Microsoft 365 group)
@@ -621,6 +580,35 @@ components:
           items:
             type: string
           description: Specifies the group resources provisioned (e.g. Team for Teams-enabled groups)
+    GroupUpdate:
+      type: object
+      description: Properties that can be updated on a Microsoft Entra group
+      properties:
+        displayName:
+          type: string
+        description:
+          type: string
+        mailNickname:
+          type: string
+        visibility:
+          type: string
+        membershipRule:
+          type: string
+        membershipRuleProcessingState:
+          type: string
+    GroupCollection:
+      type: object
+      description: Collection of group objects with OData pagination metadata
+      properties:
+        '@odata.context':
+          type: string
+        '@odata.nextLink':
+          type: string
+          description: URL for the next page of results
+        value:
+          type: array
+          items:
+            $ref: '#/components/schemas/Group'
     GroupCreate:
       type: object
       description: Properties required to create a Microsoft Entra group
@@ -666,7 +654,25 @@ components:
           items:
             type: string
           description: Array of OData references to owners to add at creation time
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            code:
+              type: string
+            message:
+              type: string
+            innerError:
+              type: object
   responses:
+    NotFound:
+      description: Group not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
     Unauthorized:
       description: Authentication required — missing or invalid access token
       content:
@@ -675,12 +681,6 @@ components:
             $ref: '#/components/schemas/ErrorResponse'
     BadRequest:
       description: Bad request — invalid parameters or request body
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    NotFound:
-      description: Group not found
       content:
         application/json:
           schema:

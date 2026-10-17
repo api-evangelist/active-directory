@@ -319,6 +319,12 @@ paths:
         dispatcherRules: Response || 200
 components:
   responses:
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
     Unauthorized:
       description: Authentication required — missing or invalid access token
       content:
@@ -331,12 +337,6 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
-    NotFound:
-      description: Resource not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
     Forbidden:
       description: Insufficient permissions — required scopes not granted
       content:
@@ -344,6 +344,57 @@ components:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
   schemas:
+    UserCreate:
+      type: object
+      description: Properties required to create a new Microsoft Entra user
+      required:
+      - accountEnabled
+      - displayName
+      - mailNickname
+      - passwordProfile
+      - userPrincipalName
+      properties:
+        accountEnabled:
+          type: boolean
+          description: Must be true for the account to be active
+        displayName:
+          type: string
+          description: Name to display in the address book
+        mailNickname:
+          type: string
+          description: Mail alias for the user (without the domain suffix)
+        userPrincipalName:
+          type: string
+          description: UPN in the format alias@domain.onmicrosoft.com
+        passwordProfile:
+          $ref: '#/components/schemas/PasswordProfile'
+        givenName:
+          type: string
+        surname:
+          type: string
+        jobTitle:
+          type: string
+        department:
+          type: string
+        usageLocation:
+          type: string
+          description: Required for license assignment (ISO 3166 two-letter code)
+    PasswordProfile:
+      type: object
+      description: Password profile for a user account
+      required:
+      - password
+      properties:
+        password:
+          type: string
+          description: The password for the user (must meet tenant complexity requirements)
+        forceChangePasswordNextSignIn:
+          type: boolean
+          description: If true, user must reset password at next sign-in
+          default: true
+        forceChangePasswordNextSignInWithMfa:
+          type: boolean
+          description: If true, user must perform MFA and reset password at next sign-in
     UserUpdate:
       type: object
       description: Properties that can be updated on a Microsoft Entra user
@@ -384,84 +435,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/User'
-    PasswordProfile:
-      type: object
-      description: Password profile for a user account
-      required:
-      - password
-      properties:
-        password:
-          type: string
-          description: The password for the user (must meet tenant complexity requirements)
-        forceChangePasswordNextSignIn:
-          type: boolean
-          description: If true, user must reset password at next sign-in
-          default: true
-        forceChangePasswordNextSignInWithMfa:
-          type: boolean
-          description: If true, user must perform MFA and reset password at next sign-in
-    UserCreate:
-      type: object
-      description: Properties required to create a new Microsoft Entra user
-      required:
-      - accountEnabled
-      - displayName
-      - mailNickname
-      - passwordProfile
-      - userPrincipalName
-      properties:
-        accountEnabled:
-          type: boolean
-          description: Must be true for the account to be active
-        displayName:
-          type: string
-          description: Name to display in the address book
-        mailNickname:
-          type: string
-          description: Mail alias for the user (without the domain suffix)
-        userPrincipalName:
-          type: string
-          description: UPN in the format alias@domain.onmicrosoft.com
-        passwordProfile:
-          $ref: '#/components/schemas/PasswordProfile'
-        givenName:
-          type: string
-        surname:
-          type: string
-        jobTitle:
-          type: string
-        department:
-          type: string
-        usageLocation:
-          type: string
-          description: Required for license assignment (ISO 3166 two-letter code)
-    ErrorResponse:
-      type: object
-      description: Microsoft Graph API error response
-      properties:
-        error:
-          type: object
-          properties:
-            code:
-              type: string
-              description: Error code string
-              example: Request_BadRequest
-            message:
-              type: string
-              description: Human-readable error description
-              example: A property required for the request is missing.
-            innerError:
-              type: object
-              properties:
-                date:
-                  type: string
-                  format: date-time
-                request-id:
-                  type: string
-                  format: uuid
-                client-request-id:
-                  type: string
-                  format: uuid
     User:
       type: object
       description: A Microsoft Entra ID user account
@@ -567,6 +540,33 @@ components:
         externalUserState:
           type: string
           description: State of a guest/external user invited via Azure AD B2B
+    ErrorResponse:
+      type: object
+      description: Microsoft Graph API error response
+      properties:
+        error:
+          type: object
+          properties:
+            code:
+              type: string
+              description: Error code string
+              example: Request_BadRequest
+            message:
+              type: string
+              description: Human-readable error description
+              example: A property required for the request is missing.
+            innerError:
+              type: object
+              properties:
+                date:
+                  type: string
+                  format: date-time
+                request-id:
+                  type: string
+                  format: uuid
+                client-request-id:
+                  type: string
+                  format: uuid
   securitySchemes:
     oauth2:
       type: oauth2
