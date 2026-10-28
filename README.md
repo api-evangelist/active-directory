@@ -1,4 +1,4 @@
-# Microsoft Active Directory (active-directory)
+# Microsoft Active Directory
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -64,313 +64,231 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-Microsoft Active Directory and Microsoft Entra ID provide identity and access management for organizations of all sizes. Microsoft Graph API is the unified REST API gateway for accessing and managing Microsoft Entra ID (formerly Azure Active Directory), including users, groups, applications, devices, conditional access policies, identity governance, and directory administration. The Microsoft Graph API enables IT administrators, identity engineers, and security teams to automate user lifecycle management, enforce zero trust policies, and integrate identity data into security operations.
+Microsoft Active Directory and Microsoft Entra ID provide identity and access management for organizations of all sizes. Microsoft Graph API is the unified REST API gateway for accessing and managing Microsoft Entra ID (formerly Azure Active Directory), including users, groups, applications, devices, conditional access policies, identity governance, and directory administration. Legacy on-premises Active Directory is managed through LDAP, Kerberos, and PowerShell protocols; cloud identity is managed through Microsoft Graph.
 
-**URL:** [Visit APIs.json](https://raw.githubusercontent.com/api-evangelist/active-directory/refs/heads/main/apis.yml)
+**Areas:** Active Directory · Authentication · Authorization · Directory Services · Identity and Access Management · Microsoft Entra · Zero Trust
 
-**Run:** [Capabilities Using Naftiko](https://github.com/naftiko/fleet?utm_source=api-evangelist&utm_medium=readme&utm_campaign=company-api-evangelist&utm_content=repo)
+## Microsoft Active Directory on APIs.io
 
-## Tags:
+Everything profiled for Microsoft Active Directory is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/active-directory/](https://apis.io/providers/active-directory/)** — or go straight to one of the APIs or properties below.
 
- - Active Directory, Authentication, Authorization, Directory Services, Identity Management, Microsoft Entra, Zero Trust
+### APIs (25)
 
-## Timestamps
+- [Microsoft Graph Devices API](https://apis.io/apis/active-directory/microsoft-graph-devices-api/) — Manage devices registered or joined to Microsoft Entra ID, including Entra joined, Entra registered, and hybrid Azure AD joined devices. Retrieve BitLocker…
+- [Microsoft Graph Directory Roles and Administrative Units API](https://apis.io/apis/active-directory/microsoft-graph-directory-roles-and-administrative-units-api/) — Manage Microsoft Entra built-in and custom directory roles, role assignments, and role-scoped administrative units. Assign administrator roles to users,…
+- [Microsoft Graph Conditional Access API](https://apis.io/apis/active-directory/microsoft-graph-conditional-access-api/) — Create and manage Microsoft Entra Conditional Access policies that enforce access controls based on user, location, device, and risk signals. Configure…
+- [Microsoft Graph Identity Governance API](https://apis.io/apis/active-directory/microsoft-graph-identity-governance-api/) — Manage Microsoft Entra ID Governance features including access reviews, entitlement management (access packages, catalogs, and policies), Privileged…
+- [Microsoft Graph Identity Protection API](https://apis.io/apis/active-directory/microsoft-graph-identity-protection-api/) — Detect, investigate, and remediate identity-based risks using Microsoft Entra ID Protection. Access risk detections, risky users, risky service principals,…
+- [Microsoft Graph Authentication Methods API](https://apis.io/apis/active-directory/microsoft-graph-authentication-methods-api/) — Manage authentication methods registered for users in Microsoft Entra ID, including FIDO2 security keys, Microsoft Authenticator, phone (SMS/voice call),…
+- [Microsoft Graph Identity and Access Reports API](https://apis.io/apis/active-directory/microsoft-graph-identity-and-access-reports-api/) — Access audit logs, sign-in logs, provisioning logs, and identity-related reports for monitoring, compliance, and troubleshooting. Stream logs to Azure…
+- [Microsoft Active Directory App Role Assignments API](https://apis.io/apis/active-directory/active-directory-app-role-assignments-api/) — The App Role Assignments API from Microsoft Active Directory — 1 operation(s) for app role assignments.
+- [Microsoft Active Directory Applications API](https://apis.io/apis/active-directory/active-directory-applications-api/) — The Applications API from Microsoft Active Directory — 2 operation(s) for applications.
+- [Microsoft Active Directory Groups API](https://apis.io/apis/active-directory/active-directory-groups-api/) — The Groups API from Microsoft Active Directory — 6 operation(s) for groups.
+- [Microsoft Active Directory Members API](https://apis.io/apis/active-directory/active-directory-members-api/) — The Members API from Microsoft Active Directory — 2 operation(s) for members.
+- [Microsoft Active Directory Owners API](https://apis.io/apis/active-directory/active-directory-owners-api/) — The Owners API from Microsoft Active Directory — 1 operation(s) for owners.
+- [Microsoft Active Directory Service Principals API](https://apis.io/apis/active-directory/active-directory-service-principals-api/) — The Service Principals API from Microsoft Active Directory — 3 operation(s) for service principals.
+- [Microsoft Active Directory Users API](https://apis.io/apis/active-directory/active-directory-users-api/) — The Users API from Microsoft Active Directory — 5 operation(s) for users.
+- [LDAP Protocol Interface](https://apis.io/apis/active-directory/ldap-protocol-interface/) — Lightweight Directory Access Protocol interface for querying and modifying Active Directory.
+- [PowerShell Active Directory Module](https://apis.io/apis/active-directory/powershell-active-directory-module/) — PowerShell cmdlets for managing Active Directory Domain Services.
+- [Azure AD Graph API (Deprecated)](https://apis.io/apis/active-directory/azure-ad-graph-api-deprecated/) — Legacy REST API for Azure Active Directory (being replaced by Microsoft Graph).
+- [Microsoft Active Directory Roles API](https://apis.io/apis/active-directory/microsoft-active-directory-directory-roles-api/) — The Directory Roles API from Microsoft Active Directory — 2 operation(s) for directory roles.
+- [Azure AD Authentication Library (ADAL)](https://apis.io/apis/active-directory/azure-ad-authentication-library-adal/) — Authentication library for Azure AD (being replaced by MSAL).
+- [Microsoft Authentication Library (MSAL)](https://apis.io/apis/active-directory/microsoft-authentication-library-msal/) — Modern authentication library for Microsoft identity platform.
+- [Microsoft Identity Platform](https://apis.io/apis/active-directory/microsoft-identity-platform/) — The Microsoft identity platform provides authentication and authorization services using standards-compliant implementations of OAuth 2.0 and OpenID…
+- [Microsoft Entra Verified ID API](https://apis.io/apis/active-directory/microsoft-entra-verified-id-api/) — Microsoft Entra Verified ID is a managed verifiable credentials service that enables organizations to issue, manage, and verify decentralized identity…
+- [Microsoft Entra ID Governance API](https://apis.io/apis/active-directory/microsoft-entra-id-governance-api/) — Microsoft Entra ID Governance APIs in Microsoft Graph enable automated access reviews, entitlement management, lifecycle workflows, and privileged identity…
+- [Microsoft Entra SCIM Provisioning API](https://apis.io/apis/active-directory/microsoft-entra-scim-provisioning-api/) — Microsoft Entra ID supports SCIM 2.0 protocol for automatic user and group provisioning to cloud applications, enabling automated identity lifecycle…
+- [Microsoft Entra PowerShell](https://apis.io/apis/active-directory/microsoft-entra-powershell/) — The Microsoft Entra PowerShell module provides cmdlets for managing Microsoft Entra resources programmatically, built on the Microsoft Graph PowerShell SDK.
 
-- **Created:** 2024-01-01
-- **Modified:** 2026-04-19
+### Published properties
 
-## APIs
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-### Microsoft Graph Users API
-Manage the entire lifecycle of users in Microsoft Entra ID, including creating, reading, updating, and deleting user accounts, managing licenses, group memberships, authentication methods, and profile photos. Supports both v1.0 and beta endpoints.
+#### Arazzo workflows (13)
 
-**Human URL:** [https://learn.microsoft.com/en-us/graph/api/resources/users](https://learn.microsoft.com/en-us/graph/api/resources/users)
+Multi-step workflows that chain operations into a business task.
 
-#### Tags:
+- [Active Directory Audit User Group Memberships](https://apis.io/arazzos/active-directory/active-directory-audit-user-group-memberships-workflow/)
+- [Active Directory Create Group And Add Two Members](https://apis.io/arazzos/active-directory/active-directory-create-group-and-add-members-workflow/)
+- [Active Directory Create Microsoft 365 Group With Owner](https://apis.io/arazzos/active-directory/active-directory-create-m365-group-with-owner-workflow/)
+- [Active Directory Decommission Application](https://apis.io/arazzos/active-directory/active-directory-decommission-application-workflow/)
+- [Active Directory Find User And Update Profile](https://apis.io/arazzos/active-directory/active-directory-find-user-and-update-profile-workflow/)
+- [Active Directory Offboard User From Group](https://apis.io/arazzos/active-directory/active-directory-offboard-user-from-group-workflow/)
+- [Active Directory Onboard User To Existing Group](https://apis.io/arazzos/active-directory/active-directory-onboard-user-to-existing-group-workflow/)
+- [Active Directory Provision Application With Service Principal](https://apis.io/arazzos/active-directory/active-directory-provision-application-with-membership-workflow/)
+- [Active Directory Provision User Into New Group](https://apis.io/arazzos/active-directory/active-directory-provision-user-into-new-group-workflow/)
+- [Active Directory Rename Group And List Members](https://apis.io/arazzos/active-directory/active-directory-rename-group-and-list-members-workflow/)
+- [Active Directory Self-Service Profile Review](https://apis.io/arazzos/active-directory/active-directory-self-service-profile-review-workflow/)
+- [Active Directory Transfer User Between Groups](https://apis.io/arazzos/active-directory/active-directory-transfer-user-between-groups-workflow/)
+- [Active Directory Update Application Redirect URIs](https://apis.io/arazzos/active-directory/active-directory-update-application-redirect-uris-workflow/)
 
- - Directory Services, Identity Management, Users
+#### Agentic access (1)
 
-#### Properties
+Which operations an agent can call, which act, and which need a human in the loop.
 
-- [Documentation](https://learn.microsoft.com/en-us/graph/api/resources/users)
-- [OpenAPI](openapi/active-directory-users-openapi.yaml)
-- [JSONSchema](json-schema/users-user-schema.json)
-- [JSONSchema](json-schema/users-password-profile-schema.json)
-- [JSONStructure](json-structure/users-user-structure.json)
-- [Example](examples/users-user-example.json)
-- [NaftikoCapability](capabilities/shared/active-directory-users.yaml)
+- [Active Directory Agentic Access](https://apis.io/agentic-access/active-directory/active-directory-agentic-access/)
 
----
+#### JSON Schema (5)
 
-### Microsoft Graph Groups API
-Create and manage Microsoft Entra security groups, Microsoft 365 groups, and distribution lists. Manage group memberships, owners, and settings. Groups enable efficient entitlement management for users, licensing, and resource access.
+The data models the API reads and writes.
 
-**Human URL:** [https://learn.microsoft.com/en-us/graph/api/resources/groups-overview](https://learn.microsoft.com/en-us/graph/api/resources/groups-overview)
+- [Application](https://apis.io/schemas/active-directory/applications-application/)
+- [ServicePrincipal](https://apis.io/schemas/active-directory/applications-service-principal/)
+- [Group](https://apis.io/schemas/active-directory/groups-group/)
+- [PasswordProfile](https://apis.io/schemas/active-directory/users-password-profile/)
+- [User](https://apis.io/schemas/active-directory/users-user/)
 
-#### Tags:
+#### JSON Structure (3)
 
- - Directory Services, Groups, Identity Management
+Data models expressed in JSON Structure.
 
-#### Properties
+- [Applications Application Structure](https://apis.io/json-structure/active-directory/applications-application-structure/)
+- [Groups Group Structure](https://apis.io/json-structure/active-directory/groups-group-structure/)
+- [Users User Structure](https://apis.io/json-structure/active-directory/users-user-structure/)
 
-- [Documentation](https://learn.microsoft.com/en-us/graph/api/resources/groups-overview)
-- [OpenAPI](openapi/active-directory-groups-openapi.yaml)
-- [JSONSchema](json-schema/groups-group-schema.json)
-- [JSONStructure](json-structure/groups-group-structure.json)
-- [Example](examples/groups-group-example.json)
-- [NaftikoCapability](capabilities/shared/active-directory-groups.yaml)
+#### JSON-LD (1)
 
----
+Linked-data contexts for the provider's vocabulary.
 
-### Microsoft Graph Applications and Service Principals API
-Register and manage Microsoft Entra applications and their associated service principals programmatically. Configure app permissions, OAuth2 permission grants, app role assignments, certificates, federated identity credentials, and app consent policies.
+- [Active Directory Context](https://apis.io/jsonld/active-directory/active-directory-context/)
 
-**Human URL:** [https://learn.microsoft.com/en-us/graph/api/resources/applications-api-overview](https://learn.microsoft.com/en-us/graph/api/resources/applications-api-overview)
+#### Vocabulary (1)
 
-#### Tags:
+The provider's domain terms, defined.
 
- - Applications, Identity Management, OAuth2, Service Principals
+- [Active Directory Vocabulary](https://apis.io/vocabularies/active-directory/active-directory-vocabulary/)
 
-#### Properties
+#### Examples (3)
 
-- [Documentation](https://learn.microsoft.com/en-us/graph/api/resources/applications-api-overview)
-- [OpenAPI](openapi/active-directory-applications-openapi.yaml)
-- [JSONSchema](json-schema/applications-application-schema.json)
-- [JSONSchema](json-schema/applications-service-principal-schema.json)
-- [JSONStructure](json-structure/applications-application-structure.json)
-- [Example](examples/applications-application-example.json)
-- [NaftikoCapability](capabilities/shared/active-directory-applications.yaml)
+Example requests and responses.
 
----
+- [Applications Application Example](https://apis.io/examples/active-directory/applications-application-example/)
+- [Groups Group Example](https://apis.io/examples/active-directory/groups-group-example/)
+- [Users User Example](https://apis.io/examples/active-directory/users-user-example/)
 
-### Microsoft Graph Devices API
-Manage devices registered or joined to Microsoft Entra ID, including Entra joined, Entra registered, and hybrid Azure AD joined devices. Retrieve BitLocker recovery keys and Local Admin Password Solution (LAPS) credentials for managed devices.
+#### Collections (10)
 
-**Human URL:** [https://learn.microsoft.com/en-us/graph/api/resources/device](https://learn.microsoft.com/en-us/graph/api/resources/device)
+Postman and Open Collection request collections.
 
-#### Tags:
+- [Microsoft Graph Applications and Service Principals App Role Assignments API](https://apis.io/collections/active-directory/open-active-directory-app-role-assignments-api/)
+- [Microsoft Graph and Service Principals App Role Assignments Applications API](https://apis.io/collections/active-directory/open-active-directory-applications-api/)
+- [Microsoft Graph Applications and Service Principals App Role Assignments Groups API](https://apis.io/collections/active-directory/open-active-directory-groups-api/)
+- [Microsoft Graph Applications and Service Principals App Role Assignments Members API](https://apis.io/collections/active-directory/open-active-directory-members-api/)
+- [Microsoft Graph Applications and Service Principals App Role Assignments Owners API](https://apis.io/collections/active-directory/open-active-directory-owners-api/)
+- [Microsoft Graph Applications and App Role Assignments Service Principals API](https://apis.io/collections/active-directory/open-active-directory-service-principals-api/)
+- [Microsoft Graph Applications and Service Principals App Role Assignments Users API](https://apis.io/collections/active-directory/open-active-directory-users-api/)
+- [Microsoft Graph Applications and Service Principals API](https://apis.io/collections/active-directory/postman-active-directory-applications/)
+- [Microsoft Graph Groups API](https://apis.io/collections/active-directory/postman-active-directory-groups/)
+- [Microsoft Graph Users API](https://apis.io/collections/active-directory/postman-active-directory-users/)
 
- - Devices, Endpoint Management, Identity Management
+#### Governance rules (2)
 
-#### Properties
+Spectral rulesets for the provider's contracts.
 
-- [Documentation](https://learn.microsoft.com/en-us/graph/api/resources/device)
+- [Microsoft Active Directory — jsonschema rules](https://apis.io/rules/active-directory/active-directory-jsonschema-spectral-rules/)
+- [Microsoft Active Directory API Rules](https://apis.io/rules/active-directory/active-directory-spectral-rules/)
 
----
+#### Security (3)
 
-### Microsoft Graph Directory Roles and Administrative Units API
-Manage Microsoft Entra built-in and custom directory roles, role assignments, and role-scoped administrative units. Assign administrator roles to users, groups, or service principals, and create scoped role assignments via administrative units.
+Authentication, trust centre, and vulnerability disclosure.
 
-**Human URL:** [https://learn.microsoft.com/en-us/graph/api/resources/directoryrole](https://learn.microsoft.com/en-us/graph/api/resources/directoryrole)
+- [Active Directory Authentication](https://apis.io/security/active-directory/active-directory-authentication/)
+- [Active Directory Domain Security](https://apis.io/security/active-directory/active-directory-domain-security/)
+- [Active Directory Vulnerability Disclosure](https://apis.io/security/active-directory/active-directory-vulnerability-disclosure/)
 
-#### Tags:
+#### OAuth scopes (1)
 
- - Authorization, Directory Services, Role Management
+The permissions the API asks for.
 
-#### Properties
+- [Active Directory Scopes](https://apis.io/scopes/active-directory/active-directory-scopes/)
 
-- [Documentation](https://learn.microsoft.com/en-us/graph/api/resources/directoryrole)
+#### Plans and pricing (2)
 
----
+Published plans, tiers and prices.
 
-### Microsoft Graph Conditional Access API
-Create and manage Microsoft Entra Conditional Access policies that enforce access controls based on user, location, device, and risk signals. Configure named locations, authentication context class references, and evaluate policy impact using what-if analysis.
+- [Active Directory Plans Pricing](https://apis.io/plans/active-directory/active-directory-plans-pricing/)
+- [Active Directory Price Estimates](https://apis.io/plans/active-directory/active-directory-price-estimates/)
 
-**Human URL:** [https://learn.microsoft.com/en-us/graph/api/resources/conditionalaccesspolicy](https://learn.microsoft.com/en-us/graph/api/resources/conditionalaccesspolicy)
+#### Rate limits (1)
 
-#### Tags:
+Published request limits.
 
- - Authorization, Conditional Access, Security, Zero Trust
+- [Active Directory Rate Limits](https://apis.io/rate-limits/active-directory/active-directory-rate-limits/)
 
-#### Properties
+#### FinOps (1)
 
-- [Documentation](https://learn.microsoft.com/en-us/graph/api/resources/conditionalaccesspolicy)
+What the API costs to run, by operation.
 
----
+- [Active Directory Finops](https://apis.io/finops/active-directory/active-directory-finops/)
 
-### Microsoft Graph Identity Governance API
-Manage Microsoft Entra ID Governance features including access reviews, entitlement management (access packages, catalogs, and policies), Privileged Identity Management (PIM) for just-in-time role activation, and lifecycle workflows for joiner/mover/leaver employee identity lifecycle automation.
+## Where to find this API
 
-**Human URL:** [https://learn.microsoft.com/en-us/graph/api/resources/identitygovernance-overview](https://learn.microsoft.com/en-us/graph/api/resources/identitygovernance-overview)
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
 
-#### Tags:
-
- - Governance, Identity Management, Lifecycle Management, Privileged Identity Management
-
-#### Properties
-
-- [Documentation](https://learn.microsoft.com/en-us/graph/api/resources/identitygovernance-overview)
-
----
-
-### Microsoft Graph Identity Protection API
-Detect, investigate, and remediate identity-based risks using Microsoft Entra ID Protection. Access risk detections, risky users, risky service principals, and risk events, and feed data into SIEM tools for security correlation and incident response.
-
-**Human URL:** [https://learn.microsoft.com/en-us/graph/api/resources/identityprotection-overview](https://learn.microsoft.com/en-us/graph/api/resources/identityprotection-overview)
-
-#### Tags:
-
- - Identity Protection, Risk Management, Security
-
-#### Properties
-
-- [Documentation](https://learn.microsoft.com/en-us/graph/api/resources/identityprotection-overview)
-
----
-
-### Microsoft Graph Authentication Methods API
-Manage authentication methods registered for users in Microsoft Entra ID, including FIDO2 security keys, Microsoft Authenticator, phone (SMS/voice call), email OTP, Windows Hello for Business, and temporary access passes. Configure authentication method policies and authentication strength requirements.
-
-**Human URL:** [https://learn.microsoft.com/en-us/graph/api/resources/authenticationmethods-overview](https://learn.microsoft.com/en-us/graph/api/resources/authenticationmethods-overview)
-
-#### Tags:
-
- - Authentication, MFA, Passwordless, Security
-
-#### Properties
-
-- [Documentation](https://learn.microsoft.com/en-us/graph/api/resources/authenticationmethods-overview)
-
----
-
-### Microsoft Graph Identity and Access Reports API
-Access audit logs, sign-in logs, provisioning logs, and identity-related reports for monitoring, compliance, and troubleshooting. Stream logs to Azure Monitor and Log Analytics or to third-party SIEM tools for security operations.
-
-**Human URL:** [https://learn.microsoft.com/en-us/graph/api/resources/report-identity-access](https://learn.microsoft.com/en-us/graph/api/resources/report-identity-access)
-
-#### Tags:
-
- - Audit Logs, Compliance, Monitoring, Reports
-
-#### Properties
-
-- [Documentation](https://learn.microsoft.com/en-us/graph/api/resources/report-identity-access)
-
-## Common Properties
-
-- [Portal](https://developer.microsoft.com/en-us/graph)
-- [GettingStarted](https://learn.microsoft.com/en-us/graph/get-started)
+- [Website](https://www.microsoft.com/)
 - [Documentation](https://learn.microsoft.com/en-us/graph/overview)
-- [Authentication](https://learn.microsoft.com/en-us/graph/auth/auth-concepts)
-- [APIReference](https://learn.microsoft.com/en-us/graph/api/overview)
-- [RateLimits](https://learn.microsoft.com/en-us/graph/throttling)
-- [SDK](https://learn.microsoft.com/en-us/graph/sdks/sdks-overview)
-- [CLI](https://learn.microsoft.com/en-us/cli/azure/ad)
-- [Blog](https://devblogs.microsoft.com/microsoft365dev/)
-- [StatusPage](https://azure.status.microsoft.com/)
-- [Support](https://developer.microsoft.com/en-us/graph/support)
-- [TermsOfService](https://learn.microsoft.com/en-us/legal/microsoft-apis/terms-of-use)
-- [PrivacyPolicy](https://privacy.microsoft.com/privacystatement)
+- [Getting started](https://learn.microsoft.com/en-us/graph/get-started)
+- [API reference](https://learn.microsoft.com/en-us/graph/api/overview)
 - [Pricing](https://www.microsoft.com/en-us/security/business/microsoft-entra-pricing)
-- [ChangeLog](https://learn.microsoft.com/en-us/graph/changelog)
-- [GitHubOrganization](https://github.com/microsoftgraph)
-- [GitHubRepository](https://github.com/microsoftgraph/microsoft-graph-openapi)
-- [StackOverflow](https://stackoverflow.com/questions/tagged/microsoft-graph)
-- [Training](https://learn.microsoft.com/en-us/training/paths/m365-msgraph-associate/)
-- [SpectralRules](rules/active-directory-spectral-rules.yml)
-- [NaftikoCapability](capabilities/identity-management-operations.yaml)
-- [Vocabulary](vocabulary/active-directory-vocabulary.yaml)
-- [JSON-LD](json-ld/active-directory-context.jsonld)
+- [Support](https://developer.microsoft.com/en-us/graph/support)
+- [Changelog](https://learn.microsoft.com/en-us/graph/changelog)
+- [Blog](https://devblogs.microsoft.com/microsoft365dev/)
+- [Terms of service](https://learn.microsoft.com/en-us/legal/microsoft-apis/terms-of-use)
+- [Privacy policy](https://privacy.microsoft.com/privacystatement)
+- [GitHub](https://github.com/microsoftgraph)
+- [Status](https://azure.status.microsoft.com/)
 
-## Features
+## API Evangelist rating
 
-| Name | Description |
-|------|-------------|
-| Unified Identity API | Single REST endpoint (graph.microsoft.com) for all Microsoft Entra identity and directory operations. |
-| User Lifecycle Management | Full CRUD operations for user accounts including bulk operations, license assignment, and guest management. |
-| Group Management | Create and manage security groups, Microsoft 365 groups, and dynamic membership groups. |
-| Application Registration | Programmatic app registration, permission configuration, and service principal management. |
-| Conditional Access Automation | Create, update, and evaluate Conditional Access policies via API for Zero Trust enforcement. |
-| Privileged Identity Management | Just-in-time role activation, time-bound access, and PIM policy management via API. |
-| Identity Protection | Access risk signals, risky users, and risk detections for automated threat response. |
-| Authentication Method Management | Manage MFA and passwordless authentication methods registered for users. |
-| Audit and Sign-in Logs | Programmatic access to audit logs, sign-in logs, and provisioning logs for SIEM integration. |
-| Identity Governance | Access reviews, entitlement management, and lifecycle workflows for automated IAM. |
+**Kin Score 61.8** — strong · rubric 0.25.0 · scored 2026-10-23
 
-## Use Cases
+| Facet | Score |
+|---|---|
+| Discoverability | 69.6 |
+| Contract quality | 70.5 |
+| Contract governance | 27.3 |
+| Operational transparency | 28.9 |
+| Developer ergonomics | 72.6 |
+| Access clarity | 63.2 |
 
-| Name | Description |
-|------|-------------|
-| User Provisioning Automation | Automate user account creation, attribute updates, and deprovisioning for HR-driven identity lifecycle. |
-| Zero Trust Policy Enforcement | Programmatically deploy and manage Conditional Access policies across the organization. |
-| SIEM Integration | Stream audit logs and sign-in events to security information and event management systems. |
-| Application Access Management | Automate app registration, permission grants, and app role assignments for developer self-service. |
-| Identity Risk Remediation | Detect and respond to risky sign-ins and compromised accounts via Identity Protection APIs. |
-| Compliance Reporting | Generate access reviews, entitlement reports, and audit logs for regulatory compliance. |
-| Privileged Access Governance | Enforce just-in-time privileged access and audit role assignments via PIM APIs. |
+**Agent readiness 28.9** — agent-ready
 
-## Integrations
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | negotiable (partial credit) |
+| Idempotency | — |
+| Error Semantics | — |
+| OpenAPI Examples | partial |
+| Rate Limit Signal | documented (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | documented (partial credit) |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+| Pagination Ratio | na |
+| Operation Distinctiveness | distinct |
 
-| Name | Description |
-|------|-------------|
-| Azure Active Directory | Microsoft Entra ID (formerly Azure AD) is the cloud identity backbone accessed via Microsoft Graph. |
-| Microsoft 365 | Microsoft Graph provides unified access to Microsoft 365 user data alongside identity operations. |
-| Azure Monitor | Stream Microsoft Entra sign-in and audit logs to Azure Monitor Log Analytics for analysis. |
-| Microsoft Sentinel | Feed identity risk signals and audit logs into Microsoft Sentinel SIEM for threat hunting. |
-| Intune | Microsoft Graph Intune APIs integrate device management with identity policies. |
-| SCIM Providers | Automate user provisioning to SaaS applications using Microsoft Entra SCIM provisioning. |
-| SAML and OIDC Applications | Register and manage federated applications using SAML 2.0 and OpenID Connect via Microsoft Graph. |
+**Regulatory alignment 40.2** — Horizontal (data, software, accessibility, platform)
 
-## Artifacts
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/active-directory/](https://apis.io/providers/active-directory/).
 
-Machine-readable API specifications organized by format.
+## How this profile is made
 
-### OpenAPI
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
 
-- [Microsoft Graph Users API](openapi/active-directory-users-openapi.yaml)
-- [Microsoft Graph Groups API](openapi/active-directory-groups-openapi.yaml)
-- [Microsoft Graph Applications and Service Principals API](openapi/active-directory-applications-openapi.yaml)
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Microsoft Active Directory: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
 
-### JSON Schema
+## Open an issue
 
-- [User Schema](json-schema/users-user-schema.json)
-- [Password Profile Schema](json-schema/users-password-profile-schema.json)
-- [Group Schema](json-schema/groups-group-schema.json)
-- [Application Schema](json-schema/applications-application-schema.json)
-- [Service Principal Schema](json-schema/applications-service-principal-schema.json)
-
-### JSON Structure
-
-- [User Structure](json-structure/users-user-structure.json)
-- [Group Structure](json-structure/groups-group-structure.json)
-- [Application Structure](json-structure/applications-application-structure.json)
-
-### JSON-LD
-
-- [Active Directory Context](json-ld/active-directory-context.jsonld)
-
-### Examples
-
-- [User Example](examples/users-user-example.json)
-- [Group Example](examples/groups-group-example.json)
-- [Application Example](examples/applications-application-example.json)
-
-## Capabilities
-
-Naftiko capabilities organized as shared per-API definitions composed into customer-facing workflows.
-
-### Shared Per-API Definitions
-
-- [Active Directory Users](capabilities/shared/active-directory-users.yaml) — 5 operations for user lifecycle management
-- [Active Directory Groups](capabilities/shared/active-directory-groups.yaml) — 3 operations for group management
-- [Active Directory Applications](capabilities/shared/active-directory-applications.yaml) — 4 operations for application and service principal management
-
-### Workflow Capabilities
-
-| Workflow | APIs Combined | Tools | Persona |
-|----------|--------------|-------|---------|
-| [Identity Management Operations](capabilities/identity-management-operations.yaml) | Users, Groups, Applications | 10 | IT Administrator, Identity Engineer, Security Analyst |
-
-## Vocabulary
-
-- [Active Directory Vocabulary](vocabulary/active-directory-vocabulary.yaml) — Unified taxonomy mapping 12 resources, 9 actions, 1 workflow, and 3 personas across operational (OpenAPI) and capability (Naftiko) dimensions
-
-## Rules
-
-- [Active Directory Spectral Rules](rules/active-directory-spectral-rules.yml) — 30+ rules across 10 categories enforcing Microsoft Graph API conventions
-
-## Maintainers
-
-**FN:** Kin Lane
-
-**Email:** kin@apievangelist.com
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/active-directory/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
