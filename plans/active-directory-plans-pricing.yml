@@ -1,0 +1,187 @@
+# Pricing transcribed from the provider's own page — see provenance. Numbers are quoted, not derived.
+generated: '2026-09-20'
+method: searched
+source: https://www.microsoft.com/en-us/security/business/microsoft-entra-pricing
+sources:
+- https://www.microsoft.com/en-us/security/business/microsoft-entra-pricing
+- https://azure.microsoft.com/en-us/pricing/details/active-directory/
+provenance:
+  tool: planning/api-economics/harvest_pricing.py
+  run: 20260920T120546
+  grounding: every price_text was found verbatim in the fetched page text
+audience: business-product
+pricing_basis: per-seat
+delivery:
+  delivery: managed
+  method: page
+  read: '2026-09-20'
+  managed_tier: Microsoft Entra ID P1
+published: true
+note: Per-user/month license pricing for Entra plans, standalones, and add-ons; External ID and Domain
+  Services pricing not shown on this page.
+plan_count: 11
+currency: USD
+plans:
+- name: Microsoft Entra ID P1
+  price_text: $7.00 user/month, paid yearly (annual commitment)
+  price: 7.0
+  currency: USD
+  period: month
+  unit: user
+  included_quota: Available as a standalone or included with Microsoft 365 E3 for enterprise customers
+    and Microsoft 365 Business Premium for small to medium businesses.
+- name: Microsoft Entra ID P2
+  price_text: $10.00 user/month, paid yearly (annual commitment)
+  price: 10.0
+  currency: USD
+  period: month
+  unit: user
+  included_quota: Available as a standalone or included with Microsoft 365 E5 for enterprise customers.
+- name: Microsoft Entra Suite
+  price_text: $12.00 user/month, paid yearly (annual commitment)
+  price: 12.0
+  currency: USD
+  period: month
+  unit: user
+  included_quota: A subscription to Microsoft Entra ID P1 or a package that includes Microsoft Entra ID
+    P1 is required.
+- name: Microsoft Entra ID Free
+  price_text: Microsoft Entra ID Free is included with Microsoft cloud subscriptions, such as Microsoft
+    Azure and Microsoft 365.
+  period: none
+  unit: user
+  included_quota: Multifactor authentication, unlimited SSO across any SaaS app, basic reports, self-service
+    password change for cloud users
+- name: Microsoft Entra Internet Access
+  price_text: $5.00 user/month, paid yearly (annual commitment)
+  price: 5.0
+  currency: USD
+  period: month
+  unit: user
+- name: Microsoft Entra Private Access
+  price_text: $5.00 user/month, paid yearly (annual commitment)
+  price: 5.0
+  currency: USD
+  period: month
+  unit: user
+- name: Microsoft Entra ID Governance
+  price_text: $7.00 user/month, paid yearly (annual commitment)
+  price: 7.0
+  currency: USD
+  period: month
+  unit: user
+  included_quota: Available for Microsoft Entra ID P1 and P2 customers.
+- name: Microsoft Entra Verified ID
+  price_text: Verified ID is included with any Microsoft Entra ID subscription.
+  period: none
+  included_quota: Face Check is a premium feature included in the Microsoft Entra Suite or purchasable
+    separately.
+- name: Microsoft Entra External ID
+  price_text: See pricing
+  period: none
+  unit: monthly active user
+  included_quota: The External ID core features are free for your first 50,000 monthly active users.
+- name: Microsoft Entra Workload ID
+  price_text: $3.00 workload identity/month, paid yearly (annual commitment)
+  price: 3.0
+  currency: USD
+  period: month
+  unit: workload identity
+- name: Microsoft Entra Domain Services
+  price_text: Contact Sales
+  period: none
+x-canonical:
+  generated: '2026-11-01'
+  vocabulary: engine/economics/plans-canonical.yml
+  models:
+  - seat
+  - subscription
+  units:
+  - seat
+  plans:
+  - name: Microsoft Entra ID P1
+    access: other
+    model: seat
+    model_how: derived
+    units:
+    - seat
+    periods:
+    - month
+  - name: Microsoft Entra ID P2
+    access: other
+    model: seat
+    model_how: derived
+    units:
+    - seat
+    periods:
+    - month
+  - name: Microsoft Entra Suite
+    access: other
+    model: seat
+    model_how: derived
+    units:
+    - seat
+    periods:
+    - month
+  - name: Microsoft Entra ID Free
+    access: other
+    model: unstated
+    model_how: derived
+    units:
+    - seat
+    periods:
+    - none
+  - name: Microsoft Entra Internet Access
+    access: other
+    model: seat
+    model_how: derived
+    units:
+    - seat
+    periods:
+    - month
+  - name: Microsoft Entra Private Access
+    access: other
+    model: seat
+    model_how: derived
+    units:
+    - seat
+    periods:
+    - month
+  - name: Microsoft Entra ID Governance
+    access: other
+    model: seat
+    model_how: derived
+    units:
+    - seat
+    periods:
+    - month
+  - name: Microsoft Entra Verified ID
+    access: other
+    model: unstated
+    model_how: derived
+    units: []
+    periods:
+    - none
+  - name: Microsoft Entra External ID
+    access: other
+    model: unstated
+    model_how: derived
+    units:
+    - seat
+    periods:
+    - none
+  - name: Microsoft Entra Workload ID
+    access: other
+    model: subscription
+    model_how: derived
+    units:
+    - other
+    periods:
+    - month
+  - name: Microsoft Entra Domain Services
+    access: other
+    model: unstated
+    model_how: derived
+    units: []
+    periods:
+    - none
