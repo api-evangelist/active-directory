@@ -33,12 +33,17 @@ accessModel:
   trial: false
   try_now: true
   public: false
+  gated: none
+  gated_source:
+  - onboarding
   label: Freemium · Self-serve signup
   confidence: high
   source:
   - plans
   - authentication
-  generated: '2026-07-22'
+  - rate-limits
+  - security
+  generated: '2026-11-02'
   method: derived
 image: https://learn.microsoft.com/en-us/entra/media/index/active-directory.svg
 created: '2024-01-01'
