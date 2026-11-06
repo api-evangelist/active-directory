@@ -50,6 +50,9 @@ artifacts:
   capabilities/active-directory-capability-edges.yml:
     method: unknown
     evidence: no authorship recorded
+  changelog/active-directory-changelog.yml:
+    method: searched
+    evidence: declared in the artifact
   collections/active-directory-app-role-assignments-api.opencollection.json:
     method: derived
     evidence: openapi/active-directory-app-role-assignments-api
@@ -92,6 +95,18 @@ artifacts:
   collections/active-directory-users-api.postman_collection.json:
     method: derived
     evidence: openapi/active-directory-users-api
+  conformance/active-directory-conformance.yml:
+    method: derived
+    evidence: declared in the artifact
+  conventions/active-directory-conventions.yml:
+    method: searched
+    evidence: declared in the artifact
+  data-model/active-directory-data-model.yml:
+    method: derived
+    evidence: declared in the artifact
+  errors/active-directory-problem-types.yml:
+    method: searched
+    evidence: declared in the artifact
   examples/applications-application-example.json:
     method: unknown
     evidence: no authorship recorded
@@ -107,6 +122,9 @@ artifacts:
   front-door-ai/2026-09-17.yml:
     method: unknown
     evidence: no authorship recorded
+  hosts/active-directory-hosts.yml:
+    method: derived
+    evidence: declared in the artifact
   integrations/_index.yml:
     method: generated
     evidence: carries an API Evangelist house phrase
@@ -212,6 +230,21 @@ artifacts:
   kin/score-2026-11-02T082323.yml:
     method: generated
     evidence: Kin Score snapshot written by score.rb
+  lifecycle/active-directory-lifecycle.yml:
+    method: searched
+    evidence: declared in the artifact
+  llms/active-directory-llms-provenance.yml:
+    method: unknown
+    evidence: no authorship recorded
+  llms/active-directory-llms.txt:
+    method: unknown
+    evidence: no authorship recorded
+  mcp/active-directory-mcp.yml:
+    method: searched
+    evidence: declared in the artifact
+  mcp/active-directory-tool-crosswalk.yml:
+    method: derived
+    evidence: declared in the artifact
   openapi/_original/active-directory-applications-openapi.yaml:
     method: harvested
     evidence: found in openapi/_original/; the fetch URL and bytes were not recorded, so byte-identity
@@ -248,6 +281,12 @@ artifacts:
   openapi/active-directory-users-api-openapi.yml:
     method: derived
     evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
+  packages/active-directory-packages.yml:
+    method: searched
+    evidence: declared in the artifact
+  patterns/active-directory-patterns.yml:
+    method: derived
+    evidence: declared in the artifact
   plans/active-directory-plans-pricing.yml:
     method: searched
     evidence: declared in the artifact
@@ -266,7 +305,13 @@ artifacts:
   rate-limits/active-directory-rate-limits.yml:
     method: searched
     evidence: declared in the artifact
+  regulatory/active-directory-regulatory-posture.yml:
+    method: unknown
+    evidence: no authorship recorded
   rules/active-directory-jsonschema-spectral-rules.yml:
+    method: generated
+    evidence: declared in the artifact
+  rules/active-directory-rules.yml:
     method: generated
     evidence: declared in the artifact
   rules/active-directory-spectral-rules.yml:
@@ -278,12 +323,36 @@ artifacts:
   security/active-directory-domain-security.yml:
     method: unknown
     evidence: no authorship recorded
+  security/active-directory-trust-center.yml:
+    method: searched
+    evidence: declared in the artifact
   security/active-directory-vulnerability-disclosure.yml:
     method: searched
     evidence: declared in the artifact
+  skills/_index.yml:
+    method: generated
+    evidence: declared in the artifact
+  skills/active-directory-offboard-user.md:
+    method: unknown
+    evidence: no authorship recorded
+  skills/active-directory-onboard-user.md:
+    method: unknown
+    evidence: no authorship recorded
   sla/active-directory-sla.yml:
     method: generated
     evidence: declared in the artifact
+  vendors/active-directory-vendors.yml:
+    method: unknown
+    evidence: no authorship recorded
   vocabulary/active-directory-vocabulary.yaml:
+    method: unknown
+    evidence: no authorship recorded
+  vocabulary/active-directory-vocabulary.yml:
+    method: derived
+    evidence: declared in the artifact
+  well-known/active-directory-security.txt:
+    method: unknown
+    evidence: no authorship recorded
+  well-known/active-directory-well-known.yml:
     method: unknown
     evidence: no authorship recorded

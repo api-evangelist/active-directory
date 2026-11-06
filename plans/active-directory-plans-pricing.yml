@@ -1,7 +1,7 @@
-# Pricing transcribed from the provider's own page — see provenance. Numbers are quoted, not derived.
 generated: '2026-09-20'
 method: searched
 source: https://www.microsoft.com/en-us/security/business/microsoft-entra-pricing
+name: Microsoft Active Directory API Plans
 sources:
 - https://www.microsoft.com/en-us/security/business/microsoft-entra-pricing
 - https://azure.microsoft.com/en-us/pricing/details/active-directory/
@@ -17,8 +17,8 @@ delivery:
   read: '2026-09-20'
   managed_tier: Microsoft Entra ID P1
 published: true
-note: Per-user/month license pricing for Entra plans, standalones, and add-ons; External ID and Domain
-  Services pricing not shown on this page.
+note: 'Per-user/month license pricing for Entra plans, standalones, and add-ons; External ID and Domain Services pricing not shown on this page. | 2026-11-05: check-economics could not confirm the quotes;
+  the source page answers our fetcher with 403 (148 bytes) and is JS-rendered, so quotes were kept as transcribed 2026-09-20.'
 plan_count: 11
 currency: USD
 plans:
@@ -28,8 +28,7 @@ plans:
   currency: USD
   period: month
   unit: user
-  included_quota: Available as a standalone or included with Microsoft 365 E3 for enterprise customers
-    and Microsoft 365 Business Premium for small to medium businesses.
+  included_quota: Available as a standalone or included with Microsoft 365 E3 for enterprise customers and Microsoft 365 Business Premium for small to medium businesses.
 - name: Microsoft Entra ID P2
   price_text: $10.00 user/month, paid yearly (annual commitment)
   price: 10.0
@@ -43,15 +42,12 @@ plans:
   currency: USD
   period: month
   unit: user
-  included_quota: A subscription to Microsoft Entra ID P1 or a package that includes Microsoft Entra ID
-    P1 is required.
+  included_quota: A subscription to Microsoft Entra ID P1 or a package that includes Microsoft Entra ID P1 is required.
 - name: Microsoft Entra ID Free
-  price_text: Microsoft Entra ID Free is included with Microsoft cloud subscriptions, such as Microsoft
-    Azure and Microsoft 365.
+  price_text: Microsoft Entra ID Free is included with Microsoft cloud subscriptions, such as Microsoft Azure and Microsoft 365.
   period: none
   unit: user
-  included_quota: Multifactor authentication, unlimited SSO across any SaaS app, basic reports, self-service
-    password change for cloud users
+  included_quota: Multifactor authentication, unlimited SSO across any SaaS app, basic reports, self-service password change for cloud users
 - name: Microsoft Entra Internet Access
   price_text: $5.00 user/month, paid yearly (annual commitment)
   price: 5.0
@@ -74,8 +70,7 @@ plans:
 - name: Microsoft Entra Verified ID
   price_text: Verified ID is included with any Microsoft Entra ID subscription.
   period: none
-  included_quota: Face Check is a premium feature included in the Microsoft Entra Suite or purchasable
-    separately.
+  included_quota: Face Check is a premium feature included in the Microsoft Entra Suite or purchasable separately.
 - name: Microsoft Entra External ID
   price_text: See pricing
   period: none
@@ -91,7 +86,7 @@ plans:
   price_text: Contact Sales
   period: none
 x-canonical:
-  generated: '2026-11-02'
+  generated: '2026-11-06'
   vocabulary: engine/economics/plans-canonical.yml
   models:
   - seat
