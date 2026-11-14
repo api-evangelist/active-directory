@@ -5,6 +5,9 @@ artifacts:
   agentic-access/active-directory-agentic-access.yml:
     method: generated
     evidence: declared in the artifact
+  ai-preferences/active-directory-ai-preferences.yml:
+    method: harvested
+    evidence: declared in the artifact
   arazzo/active-directory-audit-user-group-memberships-workflow.yml:
     method: derived
     evidence: Arazzo whose sourceDescriptions are our split specs (../openapi/)
@@ -48,6 +51,12 @@ artifacts:
     method: derived
     evidence: declared in the artifact
   capabilities/active-directory-capability-edges.yml:
+    method: unknown
+    evidence: no authorship recorded
+  certification/observations-2026-11-11.jsonl:
+    method: unknown
+    evidence: no authorship recorded
+  certification/status.yml:
     method: unknown
     evidence: no authorship recorded
   changelog/active-directory-changelog.yml:
@@ -101,8 +110,17 @@ artifacts:
   conventions/active-directory-conventions.yml:
     method: searched
     evidence: declared in the artifact
+  data-license/active-directory-data-license.yml:
+    method: harvested
+    evidence: declared in the artifact
   data-model/active-directory-data-model.yml:
     method: derived
+    evidence: declared in the artifact
+  deprecation/active-directory-deprecation-policy.yml:
+    method: harvested
+    evidence: declared in the artifact
+  eligibility/active-directory-eligibility.yml:
+    method: harvested
     evidence: declared in the artifact
   errors/active-directory-problem-types.yml:
     method: searched
@@ -134,6 +152,9 @@ artifacts:
   json-ld/active-directory-context.jsonld:
     method: unknown
     evidence: no authorship recorded
+  json-schema/active-directory-app-role-assignment-schema.json:
+    method: unknown
+    evidence: no authorship recorded
   json-schema/applications-application-schema.json:
     method: unknown
     evidence: no authorship recorded
@@ -161,7 +182,7 @@ artifacts:
   kin/checks-2026-10-23T222754.yml:
     method: generated
     evidence: Kin Score snapshot written by score.rb
-  kin/checks-2026-11-02T082323.yml:
+  kin/checks-2026-11-06T143934.yml:
     method: generated
     evidence: Kin Score snapshot written by score.rb
   kin/score-2026-09-23T000603.yml:
@@ -228,6 +249,9 @@ artifacts:
     method: generated
     evidence: Kin Score snapshot written by score.rb
   kin/score-2026-11-02T082323.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-11-06T143934.yml:
     method: generated
     evidence: Kin Score snapshot written by score.rb
   lifecycle/active-directory-lifecycle.yml:
@@ -302,6 +326,9 @@ artifacts:
   postman/active-directory-users.postman_collection.json:
     method: derived
     evidence: openapi/active-directory-users
+  privacy/active-directory-privacy-policy.yml:
+    method: harvested
+    evidence: declared in the artifact
   rate-limits/active-directory-rate-limits.yml:
     method: searched
     evidence: declared in the artifact
@@ -340,6 +367,9 @@ artifacts:
     evidence: no authorship recorded
   sla/active-directory-sla.yml:
     method: generated
+    evidence: declared in the artifact
+  terms/active-directory-terms-of-service.yml:
+    method: harvested
     evidence: declared in the artifact
   vendors/active-directory-vendors.yml:
     method: unknown

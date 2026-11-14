@@ -46,7 +46,7 @@ accessModel:
   - authentication
   - rate-limits
   - security
-  generated: '2026-11-06'
+  generated: '2026-11-13'
   method: derived
 image: https://learn.microsoft.com/en-us/entra/media/index/active-directory.svg
 
@@ -289,11 +289,25 @@ common:
     description: Automate user provisioning to SaaS applications using Microsoft Entra SCIM provisioning.
   - name: SAML and OIDC Applications
     description: Register and manage federated applications using SAML 2.0 and OpenID Connect via Microsoft Graph.
+- type: UsageTerms
+  url: terms/active-directory-terms-of-service.yml
+- type: DataProcessing
+  url: privacy/active-directory-privacy-policy.yml
+- type: DeprecationSchedule
+  url: deprecation/active-directory-deprecation-policy.yml
+- type: Eligibility
+  url: eligibility/active-directory-eligibility.yml
+- type: AIPreferences
+  url: ai-preferences/active-directory-ai-preferences.yml
+- type: DataLicense
+  url: data-license/active-directory-data-license.yml
 
 apis:
 - name: Microsoft Graph Devices API
-  description: Manage devices registered or joined to Microsoft Entra ID, including Entra joined, Entra registered, and hybrid Azure AD joined
-    devices. Retrieve BitLocker recovery keys and Local Admin Password Solution (LAPS) credentials for managed devices.
+  description: >-
+    Manage devices registered or joined to Microsoft Entra ID, including Entra joined, Entra registered,
+    and hybrid Azure AD joined devices. Retrieve BitLocker recovery keys and Local Admin Password Solution
+    (LAPS) credentials for managed devices.
   humanURL: https://learn.microsoft.com/en-us/graph/api/resources/device
   baseURL: https://graph.microsoft.com/v1.0
   tags:
@@ -309,8 +323,10 @@ apis:
     url: https://learn.microsoft.com/en-us/graph/api/resources/device
   aid: active-directory:microsoft-graph-devices-api
 - name: Microsoft Graph Directory Roles and Administrative Units API
-  description: Manage Microsoft Entra built-in and custom directory roles, role assignments, and role-scoped administrative units. Assign administrator
-    roles to users, groups, or service principals, and create scoped role assignments via administrative units.
+  description: >-
+    Manage Microsoft Entra built-in and custom directory roles, role assignments, and role-scoped administrative
+    units. Assign administrator roles to users, groups, or service principals, and create scoped role
+    assignments via administrative units.
   humanURL: https://learn.microsoft.com/en-us/graph/api/resources/directoryrole
   baseURL: https://graph.microsoft.com/v1.0
   tags:
@@ -322,8 +338,10 @@ apis:
     url: https://learn.microsoft.com/en-us/graph/api/resources/directoryrole
   aid: active-directory:microsoft-graph-directory-roles-and-administrative-units-api
 - name: Microsoft Graph Conditional Access API
-  description: Create and manage Microsoft Entra Conditional Access policies that enforce access controls based on user, location, device, and
-    risk signals. Configure named locations, authentication context class references, and evaluate policy impact using what-if analysis.
+  description: >-
+    Create and manage Microsoft Entra Conditional Access policies that enforce access controls based on
+    user, location, device, and risk signals. Configure named locations, authentication context class
+    references, and evaluate policy impact using what-if analysis.
   humanURL: https://learn.microsoft.com/en-us/graph/api/resources/conditionalaccesspolicy
   baseURL: https://graph.microsoft.com/v1.0
   tags:
@@ -336,9 +354,10 @@ apis:
     url: https://learn.microsoft.com/en-us/graph/api/resources/conditionalaccesspolicy
   aid: active-directory:microsoft-graph-conditional-access-api
 - name: Microsoft Graph Identity Governance API
-  description: Manage Microsoft Entra ID Governance features including access reviews, entitlement management (access packages, catalogs, and
-    policies), Privileged Identity Management (PIM) for just-in-time role activation, and lifecycle workflows for joiner/mover/leaver employee
-    identity lifecycle automation.
+  description: >-
+    Manage Microsoft Entra ID Governance features including access reviews, entitlement management (access
+    packages, catalogs, and policies), Privileged Identity Management (PIM) for just-in-time role activation,
+    and lifecycle workflows for joiner/mover/leaver employee identity lifecycle automation.
   humanURL: https://learn.microsoft.com/en-us/graph/api/resources/identitygovernance-overview
   baseURL: https://graph.microsoft.com/v1.0
   tags:
@@ -356,8 +375,10 @@ apis:
     url: https://learn.microsoft.com/en-us/graph/api/resources/identitygovernance-overview
   aid: active-directory:microsoft-graph-identity-governance-api
 - name: Microsoft Graph Identity Protection API
-  description: Detect, investigate, and remediate identity-based risks using Microsoft Entra ID Protection. Access risk detections, risky users,
-    risky service principals, and risk events, and feed data into SIEM tools for security correlation and incident response.
+  description: >-
+    Detect, investigate, and remediate identity-based risks using Microsoft Entra ID Protection. Access
+    risk detections, risky users, risky service principals, and risk events, and feed data into SIEM tools
+    for security correlation and incident response.
   humanURL: https://learn.microsoft.com/en-us/graph/api/resources/identityprotection-overview
   baseURL: https://graph.microsoft.com/v1.0
   tags:
@@ -369,9 +390,10 @@ apis:
     url: https://learn.microsoft.com/en-us/graph/api/resources/identityprotection-overview
   aid: active-directory:microsoft-graph-identity-protection-api
 - name: Microsoft Graph Authentication Methods API
-  description: Manage authentication methods registered for users in Microsoft Entra ID, including FIDO2 security keys, Microsoft Authenticator,
-    phone (SMS/voice call), email OTP, Windows Hello for Business, and temporary access passes. Configure authentication method policies and authentication
-    strength requirements.
+  description: >-
+    Manage authentication methods registered for users in Microsoft Entra ID, including FIDO2 security
+    keys, Microsoft Authenticator, phone (SMS/voice call), email OTP, Windows Hello for Business, and
+    temporary access passes. Configure authentication method policies and authentication strength requirements.
   humanURL: https://learn.microsoft.com/en-us/graph/api/resources/authenticationmethods-overview
   baseURL: https://graph.microsoft.com/v1.0
   tags:
@@ -384,8 +406,10 @@ apis:
     url: https://learn.microsoft.com/en-us/graph/api/resources/authenticationmethods-overview
   aid: active-directory:microsoft-graph-authentication-methods-api
 - name: Microsoft Graph Identity and Access Reports API
-  description: Access audit logs, sign-in logs, provisioning logs, and identity-related reports for monitoring, compliance, and troubleshooting.
-    Stream logs to Azure Monitor and Log Analytics or to third-party SIEM tools for security operations.
+  description: >-
+    Access audit logs, sign-in logs, provisioning logs, and identity-related reports for monitoring, compliance,
+    and troubleshooting. Stream logs to Azure Monitor and Log Analytics or to third-party SIEM tools for
+    security operations.
   humanURL: https://learn.microsoft.com/en-us/graph/api/resources/report-identity-access
   baseURL: https://graph.microsoft.com/v1.0
   tags:
@@ -399,7 +423,8 @@ apis:
   aid: active-directory:microsoft-graph-identity-and-access-reports-api
 - aid: active-directory:active-directory-app-role-assignments-api
   name: Microsoft Active Directory App Role Assignments API
-  description: The App Role Assignments API from Microsoft Active Directory — 1 operation(s) for app role assignments.
+  description: >-
+    The App Role Assignments API from Microsoft Active Directory — 1 operation(s) for app role assignments.
   humanURL: https://learn.microsoft.com/en-us/graph/api/resources/users
   baseURL: https://graph.microsoft.com/v1.0
   tags:
@@ -447,46 +472,6 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/active-directory-applications-api-openapi.yml
-  - type: Documentation
-    url: https://learn.microsoft.com/en-us/graph/api/resources/users
-  - type: JSONSchema
-    url: json-schema/users-user-schema.json
-  - type: JSONSchema
-    url: json-schema/users-password-profile-schema.json
-  - type: JSONStructure
-    url: json-structure/users-user-structure.json
-  - type: Examples
-    url: examples/users-user-example.json
-  - type: Documentation
-    url: https://learn.microsoft.com/en-us/graph/api/resources/groups-overview
-  - type: JSONSchema
-    url: json-schema/groups-group-schema.json
-  - type: JSONStructure
-    url: json-structure/groups-group-structure.json
-  - type: Examples
-    url: examples/groups-group-example.json
-  - type: Documentation
-    url: https://learn.microsoft.com/en-us/graph/api/resources/applications-api-overview
-  - type: JSONSchema
-    url: json-schema/applications-application-schema.json
-  - type: JSONSchema
-    url: json-schema/applications-service-principal-schema.json
-  - type: JSONStructure
-    url: json-structure/applications-application-structure.json
-  - type: Examples
-    url: examples/applications-application-example.json
-- aid: active-directory:active-directory-groups-api
-  name: Microsoft Active Directory Groups API
-  description: The Groups API from Microsoft Active Directory — 6 operation(s) for groups.
-  humanURL: https://learn.microsoft.com/en-us/graph/api/resources/users
-  baseURL: https://graph.microsoft.com/v1.0
-  tags:
-  - Group
-  tags_raw:
-  - Groups
-  properties:
-  - type: OpenAPI
-    url: openapi/active-directory-groups-api-openapi.yml
   - type: Documentation
     url: https://learn.microsoft.com/en-us/graph/api/resources/users
   - type: JSONSchema
@@ -593,7 +578,8 @@ apis:
     url: examples/applications-application-example.json
 - aid: active-directory:active-directory-service-principals-api
   name: Microsoft Active Directory Service Principals API
-  description: The Service Principals API from Microsoft Active Directory — 3 operation(s) for service principals.
+  description: >-
+    The Service Principals API from Microsoft Active Directory — 3 operation(s) for service principals.
   humanURL: https://learn.microsoft.com/en-us/graph/api/resources/users
   baseURL: https://graph.microsoft.com/v1.0
   tags:
@@ -670,8 +656,10 @@ apis:
   - type: Examples
     url: examples/applications-application-example.json
 - name: LDAP Protocol Interface
-  description: Lightweight Directory Access Protocol interface for querying and modifying Active Directory.
-  humanURL: https://docs.microsoft.com/en-us/previous-versions/windows/desktop/ldap/lightweight-directory-access-protocol-ldap-api
+  description: >-
+    Lightweight Directory Access Protocol interface for querying and modifying Active Directory.
+  humanURL: >-
+    https://docs.microsoft.com/en-us/previous-versions/windows/desktop/ldap/lightweight-directory-access-protocol-ldap-api
   baseURL: ldap://[domain-controller]:389
   tags:
   - Directory
@@ -687,7 +675,8 @@ apis:
   - type: Protocol Specification
     url: https://datatracker.ietf.org/doc/html/rfc4511
   - type: Examples
-    url: https://docs.microsoft.com/en-us/windows/win32/ad/example-code-for-searching-active-directory
+    url: >-
+      https://docs.microsoft.com/en-us/windows/win32/ad/example-code-for-searching-active-directory
   aid: active-directory:ldap-protocol-interface
 - name: PowerShell Active Directory Module
   description: PowerShell cmdlets for managing Active Directory Domain Services.
@@ -708,7 +697,8 @@ apis:
   - type: GettingStarted
     url: https://docs.microsoft.com/en-us/powershell/module/activedirectory/get-aduser
   - type: Examples
-    url: https://docs.microsoft.com/en-us/powershell/scripting/samples/sample-scripts-for-administration
+    url: >-
+      https://docs.microsoft.com/en-us/powershell/scripting/samples/sample-scripts-for-administration
   aid: active-directory:powershell-active-directory-module
 - name: Azure AD Graph API (Deprecated)
   description: Legacy REST API for Azure Active Directory (being replaced by Microsoft Graph).
@@ -734,7 +724,8 @@ apis:
   aid: active-directory:azure-ad-graph-api-deprecated
 - aid: microsoft-active-directory:microsoft-active-directory-directory-roles-api
   name: Microsoft Active Directory Roles API
-  description: The Directory Roles API from Microsoft Active Directory — 2 operation(s) for directory roles.
+  description: >-
+    The Directory Roles API from Microsoft Active Directory — 2 operation(s) for directory roles.
   humanURL: https://docs.microsoft.com/en-us/graph/overview
   baseURL: https://graph.microsoft.com
   tags:
@@ -752,14 +743,16 @@ apis:
     url: https://azure.microsoft.com/en-us/pricing/details/active-directory/
 - name: Azure AD Authentication Library (ADAL)
   description: Authentication library for Azure AD (being replaced by MSAL).
-  humanURL: https://docs.microsoft.com/en-us/azure/active-directory/develop/active-directory-authentication-libraries
+  humanURL: >-
+    https://docs.microsoft.com/en-us/azure/active-directory/develop/active-directory-authentication-libraries
   tags:
   - Authentication
   - Legacy
   - Library
   properties:
   - type: Documentation
-    url: https://docs.microsoft.com/en-us/azure/active-directory/develop/active-directory-authentication-libraries
+    url: >-
+      https://docs.microsoft.com/en-us/azure/active-directory/develop/active-directory-authentication-libraries
   - type: GitHubRepository
     url: https://github.com/AzureAD/azure-activedirectory-library-for-dotnet
   aid: active-directory:azure-ad-authentication-library-adal
@@ -801,8 +794,10 @@ apis:
     title: MSAL Documentation
   aid: active-directory:microsoft-authentication-library-msal
 - name: Microsoft Identity Platform
-  description: The Microsoft identity platform provides authentication and authorization services using standards-compliant implementations of
-    OAuth 2.0 and OpenID Connect, enabling developers to build applications that sign in users and access secured APIs.
+  description: >-
+    The Microsoft identity platform provides authentication and authorization services using standards-compliant
+    implementations of OAuth 2.0 and OpenID Connect, enabling developers to build applications that sign
+    in users and access secured APIs.
   humanURL: https://learn.microsoft.com/en-us/entra/identity-platform/
   baseURL: https://login.microsoftonline.com
   tags:
@@ -839,8 +834,9 @@ apis:
     url: https://learn.microsoft.com/en-us/entra/identity-platform/quickstart-web-app-sign-in
   aid: active-directory:microsoft-identity-platform
 - name: Microsoft Entra Verified ID API
-  description: Microsoft Entra Verified ID is a managed verifiable credentials service that enables organizations to issue, manage, and verify
-    decentralized identity credentials based on W3C standards.
+  description: >-
+    Microsoft Entra Verified ID is a managed verifiable credentials service that enables organizations
+    to issue, manage, and verify decentralized identity credentials based on W3C standards.
   humanURL: https://learn.microsoft.com/en-us/entra/verified-id/
   baseURL: https://verifiedid.did.msidentity.com
   tags:
@@ -861,11 +857,13 @@ apis:
     url: https://learn.microsoft.com/en-us/entra/verified-id/decentralized-identifier-overview
     title: Overview
   - type: GettingStarted
-    url: https://learn.microsoft.com/en-us/entra/verified-id/verifiable-credentials-configure-tenant
+    url: >-
+      https://learn.microsoft.com/en-us/entra/verified-id/verifiable-credentials-configure-tenant
   aid: active-directory:microsoft-entra-verified-id-api
 - name: Microsoft Entra ID Governance API
-  description: Microsoft Entra ID Governance APIs in Microsoft Graph enable automated access reviews, entitlement management, lifecycle workflows,
-    and privileged identity management for identity governance scenarios.
+  description: >-
+    Microsoft Entra ID Governance APIs in Microsoft Graph enable automated access reviews, entitlement
+    management, lifecycle workflows, and privileged identity management for identity governance scenarios.
   humanURL: https://learn.microsoft.com/en-us/entra/id-governance/identity-governance-overview
   baseURL: https://graph.microsoft.com
   tags:
@@ -878,7 +876,8 @@ apis:
   - type: Documentation
     url: https://learn.microsoft.com/en-us/entra/id-governance/identity-governance-overview
   - type: APIReference
-    url: https://learn.microsoft.com/en-us/graph/api/resources/identitygovernance-overview?view=graph-rest-1.0
+    url: >-
+      https://learn.microsoft.com/en-us/graph/api/resources/identitygovernance-overview?view=graph-rest-1.0
   - type: Documentation
     url: https://learn.microsoft.com/en-us/entra/id-governance/deploy-access-reviews
     title: Access Reviews
@@ -889,9 +888,11 @@ apis:
     url: https://learn.microsoft.com/en-us/entra/id-governance/licensing-fundamentals
   aid: active-directory:microsoft-entra-id-governance-api
 - name: Microsoft Entra SCIM Provisioning API
-  description: Microsoft Entra ID supports SCIM 2.0 protocol for automatic user and group provisioning to cloud applications, enabling automated
-    identity lifecycle management through standardized REST APIs.
-  humanURL: https://learn.microsoft.com/en-us/entra/identity/app-provisioning/use-scim-to-provision-users-and-groups
+  description: >-
+    Microsoft Entra ID supports SCIM 2.0 protocol for automatic user and group provisioning to cloud applications,
+    enabling automated identity lifecycle management through standardized REST APIs.
+  humanURL: >-
+    https://learn.microsoft.com/en-us/entra/identity/app-provisioning/use-scim-to-provision-users-and-groups
   tags:
   - Automation
   - Group Management
@@ -900,7 +901,8 @@ apis:
   - User Management
   properties:
   - type: Documentation
-    url: https://learn.microsoft.com/en-us/entra/identity/app-provisioning/use-scim-to-provision-users-and-groups
+    url: >-
+      https://learn.microsoft.com/en-us/entra/identity/app-provisioning/use-scim-to-provision-users-and-groups
   - type: Documentation
     url: https://learn.microsoft.com/en-us/entra/architecture/sync-scim
     title: Architecture Guide
@@ -908,9 +910,11 @@ apis:
     url: https://github.com/azure-ad-b2c/rest-api
   aid: active-directory:microsoft-entra-scim-provisioning-api
 - name: Microsoft Entra PowerShell
-  description: The Microsoft Entra PowerShell module provides cmdlets for managing Microsoft Entra resources programmatically, built on the Microsoft
-    Graph PowerShell SDK.
-  humanURL: https://learn.microsoft.com/en-us/powershell/entra-powershell/overview?view=entra-powershell
+  description: >-
+    The Microsoft Entra PowerShell module provides cmdlets for managing Microsoft Entra resources programmatically,
+    built on the Microsoft Graph PowerShell SDK.
+  humanURL: >-
+    https://learn.microsoft.com/en-us/powershell/entra-powershell/overview?view=entra-powershell
   tags:
   - Automation
   - CLI
@@ -920,16 +924,48 @@ apis:
   - type: Documentation
     url: https://learn.microsoft.com/en-us/powershell/entra-powershell/?view=entra-powershell
   - type: GettingStarted
-    url: https://learn.microsoft.com/en-us/powershell/entra-powershell/installation?view=entra-powershell
+    url: >-
+      https://learn.microsoft.com/en-us/powershell/entra-powershell/installation?view=entra-powershell
     title: Installation
   - type: GitHubRepository
     url: https://github.com/microsoftgraph/entra-powershell
   aid: active-directory:microsoft-entra-powershell
-
+- aid: active-directory:active-directory-groups-api
+  name: Microsoft Active Directory Groups API
+  description: The Groups API from Microsoft Active Directory — 6 operation(s) for groups.
+  humanURL: https://learn.microsoft.com/en-us/graph/api/resources/device
+  baseURL: https://graph.microsoft.com/v1.0
+  tags:
+  - Group
+  tags_raw:
+  - Groups
+  properties:
+  - type: OpenAPI
+    url: openapi/active-directory-groups-api-openapi.yml
+  - type: Documentation
+    url: https://learn.microsoft.com/en-us/graph/api/resources/users
+  - type: JSONStructure
+    url: json-structure/users-user-structure.json
+  - type: Examples
+    url: examples/users-user-example.json
+  - type: Documentation
+    url: https://learn.microsoft.com/en-us/graph/api/resources/groups-overview
+  - type: JSONStructure
+    url: json-structure/groups-group-structure.json
+  - type: Examples
+    url: examples/groups-group-example.json
+  - type: Documentation
+    url: https://learn.microsoft.com/en-us/graph/api/resources/applications-api-overview
+  - type: JSONStructure
+    url: json-structure/applications-application-structure.json
+  - type: Examples
+    url: examples/applications-application-example.json
+  - type: JSONSchema
+    url: json-schema/groups-group-schema.json
 x-aliases:
 - Microsoft Azure Active Directory
 x-enrichment:
-  date: '2026-11-05'
+  date: '2026-11-12'
   status: enriched
-  artifacts_added: 11
+  artifacts_added: 0
   pass: local-v6
