@@ -1,3 +1,4 @@
+aid: active-directory
 name: Microsoft Active Directory
 
 url: https://developer.microsoft.com/en-us/graph
@@ -46,7 +47,7 @@ accessModel:
   - authentication
   - rate-limits
   - security
-  generated: '2026-11-13'
+  generated: '2026-11-20'
   method: derived
 image: https://learn.microsoft.com/en-us/entra/media/index/active-directory.svg
 
