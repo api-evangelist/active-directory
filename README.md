@@ -83,7 +83,6 @@ Everything profiled for Microsoft Active Directory is published on APIs.io rathe
 - [Microsoft Graph Identity and Access Reports API](https://apis.io/apis/active-directory/microsoft-graph-identity-and-access-reports-api/) — Access audit logs, sign-in logs, provisioning logs, and identity-related reports for monitoring, compliance, and troubleshooting. Stream logs to Azure…
 - [Microsoft Active Directory App Role Assignments API](https://apis.io/apis/active-directory/active-directory-app-role-assignments-api/) — The App Role Assignments API from Microsoft Active Directory — 1 operation(s) for app role assignments.
 - [Microsoft Active Directory Applications API](https://apis.io/apis/active-directory/active-directory-applications-api/) — The Applications API from Microsoft Active Directory — 2 operation(s) for applications.
-- [Microsoft Active Directory Groups API](https://apis.io/apis/active-directory/active-directory-groups-api/) — The Groups API from Microsoft Active Directory — 6 operation(s) for groups.
 - [Microsoft Active Directory Members API](https://apis.io/apis/active-directory/active-directory-members-api/) — The Members API from Microsoft Active Directory — 2 operation(s) for members.
 - [Microsoft Active Directory Owners API](https://apis.io/apis/active-directory/active-directory-owners-api/) — The Owners API from Microsoft Active Directory — 1 operation(s) for owners.
 - [Microsoft Active Directory Service Principals API](https://apis.io/apis/active-directory/active-directory-service-principals-api/) — The Service Principals API from Microsoft Active Directory — 3 operation(s) for service principals.
@@ -99,6 +98,7 @@ Everything profiled for Microsoft Active Directory is published on APIs.io rathe
 - [Microsoft Entra ID Governance API](https://apis.io/apis/active-directory/microsoft-entra-id-governance-api/) — Microsoft Entra ID Governance APIs in Microsoft Graph enable automated access reviews, entitlement management, lifecycle workflows, and privileged identity…
 - [Microsoft Entra SCIM Provisioning API](https://apis.io/apis/active-directory/microsoft-entra-scim-provisioning-api/) — Microsoft Entra ID supports SCIM 2.0 protocol for automatic user and group provisioning to cloud applications, enabling automated identity lifecycle…
 - [Microsoft Entra PowerShell](https://apis.io/apis/active-directory/microsoft-entra-powershell/) — The Microsoft Entra PowerShell module provides cmdlets for managing Microsoft Entra resources programmatically, built on the Microsoft Graph PowerShell SDK.
+- [Microsoft Active Directory Groups API](https://apis.io/apis/active-directory/active-directory-groups-api/) — The Groups API from Microsoft Active Directory — 6 operation(s) for groups.
 
 ### Published properties
 
@@ -122,16 +122,23 @@ Multi-step workflows that chain operations into a business task.
 - [Active Directory Transfer User Between Groups](https://apis.io/arazzos/active-directory/active-directory-transfer-user-between-groups-workflow/)
 - [Active Directory Update Application Redirect URIs](https://apis.io/arazzos/active-directory/active-directory-update-application-redirect-uris-workflow/)
 
+#### MCP servers (1)
+
+Model Context Protocol servers that expose the API to agents.
+
+- [Microsoft MCP Server for Enterprise](https://apis.io/servers/active-directory/microsoft-mcp-server-for-enterprise/)
+
 #### Agentic access (1)
 
 Which operations an agent can call, which act, and which need a human in the loop.
 
-- [Active Directory Agentic Access](https://apis.io/agentic-access/active-directory/active-directory-agentic-access/)
+- [Microsoft Active Directory Agentic Access](https://apis.io/agentic-access/active-directory/active-directory-agentic-access/)
 
-#### JSON Schema (5)
+#### JSON Schema (6)
 
 The data models the API reads and writes.
 
+- [AppRoleAssignment](https://apis.io/schemas/active-directory/active-directory-app-role-assignment/)
 - [Application](https://apis.io/schemas/active-directory/applications-application/)
 - [ServicePrincipal](https://apis.io/schemas/active-directory/applications-service-principal/)
 - [Group](https://apis.io/schemas/active-directory/groups-group/)
@@ -181,45 +188,47 @@ Postman and Open Collection request collections.
 - [Microsoft Graph Groups API](https://apis.io/collections/active-directory/postman-active-directory-groups/)
 - [Microsoft Graph Users API](https://apis.io/collections/active-directory/postman-active-directory-users/)
 
-#### Governance rules (2)
+#### Governance rules (3)
 
 Spectral rulesets for the provider's contracts.
 
 - [Microsoft Active Directory — jsonschema rules](https://apis.io/rules/active-directory/active-directory-jsonschema-spectral-rules/)
+- [Microsoft Active Directory API Rules](https://apis.io/rules/active-directory/active-directory-rules/)
 - [Microsoft Active Directory API Rules](https://apis.io/rules/active-directory/active-directory-spectral-rules/)
 
-#### Security (3)
+#### Security (4)
 
 Authentication, trust centre, and vulnerability disclosure.
 
-- [Active Directory Authentication](https://apis.io/security/active-directory/active-directory-authentication/)
-- [Active Directory Domain Security](https://apis.io/security/active-directory/active-directory-domain-security/)
-- [Active Directory Vulnerability Disclosure](https://apis.io/security/active-directory/active-directory-vulnerability-disclosure/)
+- [Microsoft Active Directory Authentication](https://apis.io/security/active-directory/active-directory-authentication/)
+- [Microsoft Active Directory Domain Security](https://apis.io/security/active-directory/active-directory-domain-security/)
+- [Microsoft Active Directory Trust Center](https://apis.io/security/active-directory/active-directory-trust-center/)
+- [Microsoft Active Directory Vulnerability Disclosure](https://apis.io/security/active-directory/active-directory-vulnerability-disclosure/)
 
 #### OAuth scopes (1)
 
 The permissions the API asks for.
 
-- [Active Directory Scopes](https://apis.io/scopes/active-directory/active-directory-scopes/)
+- [Microsoft Active Directory Scopes](https://apis.io/scopes/active-directory/active-directory-scopes/)
 
 #### Plans and pricing (2)
 
 Published plans, tiers and prices.
 
-- [Active Directory Plans Pricing](https://apis.io/plans/active-directory/active-directory-plans-pricing/)
-- [Active Directory Price Estimates](https://apis.io/plans/active-directory/active-directory-price-estimates/)
+- [Microsoft Active Directory Plans Pricing](https://apis.io/plans/active-directory/active-directory-plans-pricing/)
+- [Microsoft Active Directory Price Estimates](https://apis.io/plans/active-directory/active-directory-price-estimates/)
 
 #### Rate limits (1)
 
 Published request limits.
 
-- [Active Directory Rate Limits](https://apis.io/rate-limits/active-directory/active-directory-rate-limits/)
+- [Microsoft Active Directory Rate Limits](https://apis.io/rate-limits/active-directory/active-directory-rate-limits/)
 
 #### FinOps (1)
 
 What the API costs to run, by operation.
 
-- [Active Directory Finops](https://apis.io/finops/active-directory/active-directory-finops/)
+- [Microsoft Active Directory Finops](https://apis.io/finops/active-directory/active-directory-finops/)
 
 ## Where to find this API
 
@@ -227,12 +236,14 @@ Links to the company's own pages. This repository publishes no copy of their spe
 
 - [Website](https://www.microsoft.com/)
 - [Documentation](https://learn.microsoft.com/en-us/graph/overview)
-- [Getting started](https://learn.microsoft.com/en-us/graph/get-started)
+- [Getting started](https://learn.microsoft.com/en-us/graph/use-the-api)
 - [API reference](https://learn.microsoft.com/en-us/graph/api/overview)
 - [Pricing](https://www.microsoft.com/en-us/security/business/microsoft-entra-pricing)
 - [Support](https://developer.microsoft.com/en-us/graph/support)
-- [Changelog](https://learn.microsoft.com/en-us/graph/changelog)
+- [Changelog](https://developer.microsoft.com/en-us/graph/changelog)
 - [Blog](https://devblogs.microsoft.com/microsoft365dev/)
+- [Security](https://www.microsoft.com/security)
+- [Compliance](https://www.microsoft.com/en-us/trust-center)
 - [Terms of service](https://learn.microsoft.com/en-us/legal/microsoft-apis/terms-of-use)
 - [Privacy policy](https://privacy.microsoft.com/privacystatement)
 - [GitHub](https://github.com/microsoftgraph)
@@ -240,32 +251,32 @@ Links to the company's own pages. This repository publishes no copy of their spe
 
 ## API Evangelist rating
 
-**Kin Score 61.8** — strong · rubric 0.25.0 · scored 2026-10-23
+**Kin Score 71.3** — exemplar · rubric 0.28.1 · scored 2026-11-21
 
 | Facet | Score |
 |---|---|
-| Discoverability | 69.6 |
+| Discoverability | 80.0 |
 | Contract quality | 70.5 |
-| Contract governance | 27.3 |
-| Operational transparency | 28.9 |
-| Developer ergonomics | 72.6 |
-| Access clarity | 63.2 |
+| Contract governance | 31.8 |
+| Operational transparency | 47.6 |
+| Developer ergonomics | 74.4 |
+| Access clarity | 85.1 |
 
-**Agent readiness 28.9** — agent-ready
+**Agent readiness 38.4** — agent-ready
 
 | Agent-readiness dimension | Result |
 |---|---|
 | Spec Presence | yes |
 | Agentic Access | derived (partial credit) |
 | Reversibility Documented | — |
-| MCP Server | — |
+| MCP Server | documented (partial credit) |
 | Auth Clarity | negotiable (partial credit) |
 | Idempotency | — |
-| Error Semantics | — |
+| Error Semantics | verified |
 | OpenAPI Examples | partial |
 | Rate Limit Signal | documented (partial credit) |
 | Event Surface Described | — |
-| Agent Skills | — |
+| Agent Skills | derived (partial credit) |
 | Well Known Catalog | — |
 | Consent Identity | — |
 | Agent Card | — |
@@ -276,8 +287,12 @@ Links to the company's own pages. This repository publishes no copy of their spe
 | Agentic Commerce | — |
 | Pagination Ratio | na |
 | Operation Distinctiveness | distinct |
+| MCP Tool Quality | na |
+| Onboarding Descriptor | — |
+| Dns Aid Index | na |
+| Markdown Negotiation | yes |
 
-**Regulatory alignment 40.2** — Horizontal (data, software, accessibility, platform)
+**Regulatory alignment 45.1** — Horizontal (data, software, accessibility, platform)
 
 The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/active-directory/](https://apis.io/providers/active-directory/).
 
